@@ -1,0 +1,57 @@
+<div class="container login" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
+    <div *ngIf="!signup" class="container" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
+        <div class="container" fxLayout="row" fxLayoutAlign="center center">
+            <span>login</span>
+        </div>
+        <div class="container" fxLayout="row" fxLayoutAlign="center center">
+            <mat-form-field>
+                <input matInput placeholder="email" [(ngModel)]="model.email" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="container" fxLayout="row" fxLayoutAlign="center center">
+            <mat-form-field>
+                <input matInput placeholder="password" [(ngModel)]="model.password" [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="container" fxLayout="row" fxLayoutAlign="center stretch">
+            <button mat-raised-button color="primary" (click)="login()">login</button>
+            <button mat-button color="accent" (click)="toggleSignup()">signup</button>
+        </div>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    </div>
+
+    <div *ngIf="signup" class="container" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <span>signup</span>
+        </div>
+        <div class="container" fxLayout="row" fxLayoutAlign="center center">
+            <mat-form-field>
+                <input matInput placeholder="first name" [(ngModel)]="model.firstname">
+            </mat-form-field>
+        </div>
+        <div class="container" fxLayout="row" fxLayoutAlign="center center">
+            <mat-form-field>
+                <input matInput placeholder="last name" [(ngModel)]="model.lastname">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-form-field>
+                <input matInput [(ngModel)]="model.email" placeholder="email" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-form-field>
+                <input matInput placeholder="password" [(ngModel)]="model.password" [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="container" fxLayout="row" fxLayoutAlign="center stretch">
+            <button mat-raised-button color="primary" (click)="signUp()">signup</button>
+            <button mat-button color="accent" (click)="toggleSignup()">already have an account</button>
+        </div>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    </div>
+</div>
