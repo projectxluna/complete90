@@ -5,9 +5,7 @@ module.exports = function (apiRoutes) {
      * get user stats 
      */
     apiRoutes.get('/user/stats', function (req, res) {
-        User.find({}, function (err, users) {
-            res.json(users);
-        });
+        
     });
 
     /**
