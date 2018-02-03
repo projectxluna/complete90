@@ -14,17 +14,33 @@ import { HomeComponent } from './components/home';
 import { AuthGuard } from './guards';
 import { DataService, AuthenticationService } from './services';
 import { MainComponent } from './components/main/main.component';
+<<<<<<< Updated upstream
 import { ForgotComponent } from './components/forgot/forgot.component';
+=======
+import { NavComponent } from './components/nav/nav.component';
+
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MainComponent,
+<<<<<<< Updated upstream
     ForgotComponent
+=======
+    NavComponent
+>>>>>>> Stashed changes
   ],
   imports: [
     BrowserModule,
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
     MaterialModule,
     FlexLayoutModule,
     HttpModule,
@@ -41,3 +57,4 @@ import { ForgotComponent } from './components/forgot/forgot.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export class AppBootstrapModule {}

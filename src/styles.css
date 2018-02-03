@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+/*@import "../node_modules/bootstrap/dist/css/bootstrap.css";*/
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
 body {
     font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
