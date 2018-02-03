@@ -14,12 +14,14 @@ import { HomeComponent } from './components/home';
 import { AuthGuard } from './guards';
 import { DataService, AuthenticationService } from './services';
 import { MainComponent } from './components/main/main.component';
+import { ForgotComponent } from './components/forgot/forgot.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MainComponent
+    MainComponent,
+    ForgotComponent
   ],
   imports: [
     BrowserModule,

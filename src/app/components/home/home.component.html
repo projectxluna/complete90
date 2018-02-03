@@ -19,6 +19,9 @@
             <button mat-raised-button color="primary" (click)="login()">login</button>
             <button mat-button color="accent" (click)="toggleSignup()">signup</button>
         </div>
+        <div class="container" fxLayout="row" fxLayoutAlign="center stretch">
+            <button mat-button color="accent" (click)="forgotPassword()">forgot password ?</button>
+        </div>
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
     </div>
 

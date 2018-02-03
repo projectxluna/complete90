@@ -1,0 +1,17 @@
+<div class="container forgot" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
+  <div *ngIf="!signup" class="container" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
+      <div class="container" fxLayout="row" fxLayoutAlign="center center">
+          <span>reset password</span>
+      </div>
+      <div class="container" fxLayout="row" fxLayoutAlign="center center">
+          <mat-form-field>
+              <input matInput placeholder="email" [(ngModel)]="model.email" [formControl]="email" required>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+      </div>
+      <div class="container" fxLayout="row" fxLayoutAlign="center stretch">
+          <button mat-button color="accent" (click)="requestPasswordresetEmail()">send</button>
+      </div>
+      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  </div>
+</div>

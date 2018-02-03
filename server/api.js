@@ -64,7 +64,7 @@ module.exports = function (app) {
         });
     });
 
-    apiRoutes.post('/forgot', function (req, res) {
+    apiRoutes.post('/forgot_pasword', function (req, res) {
         /**
          * check if we even have that email in the db
          * then generate the reset email
@@ -87,7 +87,7 @@ module.exports = function (app) {
         });
     });
 
-    apiRoutes.post('/reset', function (req, res) {
+    apiRoutes.post('/reset_password', function (req, res) {
         /**
          * check if the token passed is not expired
          * take the new password and hash

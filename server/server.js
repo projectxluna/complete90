@@ -1,19 +1,29 @@
-var express     = require('express');
-var app         = express();
-var bodyParser  = require('body-parser');
-var morgan      = require('morgan');
-var mongoose    = require('mongoose');
-var config      = require('./config');
-var path        = require('path');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var mongoose = require('mongoose');
+var config = require('./config');
+var path = require('path');
 
 var port = process.env.PORT || 9000;
 
-// connect to database
-mongoose.connect(config.database, {
-    useMongoClient: true
-});
+// mongoose config
+const options = {
+    useMongoClient: true,
+    autoIndex: false, // Don't build indexes
+    reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+    reconnectInterval: 500, // Reconnect every 500ms
+    poolSize: 10, // Maintain up to 10 socket connections
+    // If not connected, return errors immediately rather than waiting for reconnect
+    bufferMaxEntries: 0,
+    promiseLibrary: global.Promise
+};
 
-mongoose.Promise = global.Promise;
+// connect to database
+mongoose.connect(config.database, options,function (err) {
+    if (err) console.error(err);
+});
 
 // secret variable
 app.set('superSecret', config.secret);
