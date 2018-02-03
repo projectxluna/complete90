@@ -26,7 +26,12 @@ export class ForgotComponent implements OnInit {
   }
 
   requestPasswordresetEmail() {
-    
+
   }
 
+  getErrorMessage() {
+    return this.email.hasError('required') ? 'You must enter a value' :
+      this.email.hasError('email') ? 'Not a valid email' :
+        '';
+  }
 }
