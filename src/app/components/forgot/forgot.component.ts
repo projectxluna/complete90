@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../../services'
 import { AuthenticationService } from '../../services';
 import { FormControl, Validators } from '@angular/forms';
@@ -12,21 +12,65 @@ import { FormControl, Validators } from '@angular/forms';
 export class ForgotComponent implements OnInit {
   model: any = {};
   loading = false;
-  signup = false;
+  showResetPassword = false;
   hide = true;
   error = '';
+  token = null;
   email = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(
     private dataService: DataService,
     private router: Router,
+    private route: ActivatedRoute,
     private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    let token = this.route.snapshot.queryParams["token"];
+    if (token) {
+      console.log(token);
+      this.token = token;
+      this.showResetPassword = true;
+    }
   }
 
   requestPasswordresetEmail() {
+    if (!this.model.email) {
+      this.error = 'please enter a valid email!';
+      return;
+    }
+    this.loading = true;
+    this.authenticationService.forgotPassword(this.model.email)
+      .subscribe(result => {
+        if (result && result.success == true) {
+          //say something here 
+          this.router.navigate(['/home']);
+        } else {
+          this.error = result.message || 'Unkmown email address. Please try again';
+          this.loading = false;
+        }
+      });
+  }
 
+  setNewPassword() {
+    if (!this.model.newPassword && !this.model.verifyPassword) {
+      this.error = 'please enter a new password!';
+      return;
+    }
+    this.loading = true;
+    this.authenticationService.resetPassword(this.model.newPassword, this.model.verifyPassword, this.token)
+      .subscribe(result => {
+        if (result && result.success == true) {
+          //say something here 
+          this.router.navigate(['/home']);
+        } else {
+          this.error = result.message;
+          this.loading = false;
+        }
+      });
+  }
+
+  back() {
+    this.router.navigate(['/home']);
   }
 
   getErrorMessage() {
