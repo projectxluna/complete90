@@ -1,0 +1,25 @@
+div{
+	font-family: 'Montserrat';
+}
+
+.heroimage{
+	padding-top: 90px;
+/*	background-image: src('assets/heroimage.jpg');
+*/	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 800px;
+	width: 100%;
+}
+
+.impcont{
+	padding-bottom: 20px;
+}
+
+.heroimage a{
+	text-decoration: none; 
+	color: #fd1541;
+	font-size: 16px;
+	border: 1px solid white;
+	padding: 10px;
+}

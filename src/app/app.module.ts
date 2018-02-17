@@ -28,7 +28,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HomeComponent,
     MainComponent,
     ForgotComponent,
-    NavComponent
+    NavComponent,
   ],
   imports: [
     BrowserModule,

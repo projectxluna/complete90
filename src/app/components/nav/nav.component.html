@@ -1,31 +1,36 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand">
-              <img src="assets/img/ngx-bootstrap.svg" class="logo">
-            </a>
-            <span class="navbar-brand">The Complete 90</span>
-        </div>
-        <ul class="nav navbar-nav navbar-center">
-            <li class="active"><a href="#">
-              HOME <span class="sr-only">(current)</span>
-            </a></li>
-            <li><a href="#">SESSIONS</a></li>
-            <li><a href="#">PRICING/PLANS</a></li>
-            <li><a href="#">PERS. TRAINING</a></li>
-            <li><a href="#">ABOUT US</a></li>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-      		<li class="dropdown" dropdown> 
-                <a dropdownToggle role="button"> 
-                  LOGIN/REGISTER <span class="caret"></span></a>
-                <ul *dropdownMenu class="dropdown-menu"> 
-                    <li><a href="#">SIGN IN</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">REGISTER</a></li>
-                </ul>
-            </li>
-    	</ul>
+<nav class="navbar navbar-inverse navbar-centered">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+      	<img src="assets/complete90logo.png"><!--TC90-->
+      </a>
     </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	    	<ul class="nav navbar-nav navbar-centered">
+	       		<li class="active"><a href="#">HOME <span class="sr-only">(current)</span></a></li>
+	        	<li><a href="#">SESSIONS</a></li>
+		    	<li><a href="#">PRICING/PLANS</a></li>
+		    	<li><a href="#">PERS. TRAINING</a></li>
+		    	<li><a href="#">ABOUT US</a></li>
+	        	<li class="dropdown navbar-right">
+	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LOGIN/REGISTER <span class="caret"></span></a>
+	          		<ul class="dropdown-menu">
+	            		<li><a href="#">SIGN IN</a></li>
+		        		<li role="separator" class="divider"></li>
+		        		<li><a href="#">REGISTER</a></li>
+	          		</ul>
+	        	</li>		    	
+	      	</ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
+

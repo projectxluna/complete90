@@ -6,7 +6,7 @@ import { ForgotComponent } from './components/forgot';
 import { AuthGuard } from './guards';
 
 const appRoutes: Routes = [
-    { path: '', component: MainComponent, canActivate: [AuthGuard] },
+    { path: '', component: MainComponent},
     { path: 'home', component: HomeComponent},
     { path: 'forgot', component: ForgotComponent},
 
