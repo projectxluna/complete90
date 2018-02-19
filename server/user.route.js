@@ -1,6 +1,6 @@
 module.exports = function (apiRoutes) {
     const path = require('path');
-    const userHelper = require('./helpers/user.helper');
+    const userHelper = require('./helpers/user');
     var User = require('./models/user');
 
     /**

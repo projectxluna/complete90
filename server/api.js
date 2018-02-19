@@ -1,6 +1,6 @@
 module.exports = function (app) {
     var User = require('./models/user');
-    var mailer = require('./mailer');
+    var mailer = require('./helpers/mailer');
     var express = require('express');
     var jwt = require('jsonwebtoken');
     var waterfall = require('async-waterfall');
