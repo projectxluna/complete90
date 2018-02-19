@@ -17,6 +17,7 @@ var userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    coach: Boolean,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
     height           : String,

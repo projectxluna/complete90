@@ -21,4 +21,20 @@ export class DataService {
     return this.http.get('/api/', options)
       .map((response: Response) => response.json());
   }
+
+  uploadProfileFile(fileToUpload: File): Observable<boolean> {
+    const formData: FormData = new FormData();
+    formData.append('profileImg', fileToUpload, fileToUpload.name);
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+
+    return this.http
+      .post('/user/profile-img', formData, { headers: headers })
+      .map((response: Response) => {
+        if (response.json() && response.json().success) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+  }
 }
