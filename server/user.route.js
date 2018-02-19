@@ -1,13 +1,20 @@
 module.exports = function (apiRoutes) {
     const path = require('path');
-    var waterfall = require('async-waterfall');
+    const userHelper = require('./helpers/user.helper');
     var User = require('./models/user');
 
     /**
      * get user profile
      */
     apiRoutes.get('/user/me', function (req, res) {
+        User.findOne({ _id: req.decoded.userId }, function (err, user) {
+            if (err) return res.status(500).send(err);
 
+            res.json({
+                success: true,
+                profile: userHelper.exposedData(user)
+            });
+        });
     });
 
     /**
