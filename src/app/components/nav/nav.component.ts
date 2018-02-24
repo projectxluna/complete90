@@ -12,12 +12,4 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  navigateTo(location) {
-    if (!location) {
-      return;
-    }
-    this.router.navigate([location]);
-  }
-
 }
