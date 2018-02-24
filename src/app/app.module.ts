@@ -23,6 +23,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AboutusComponent } from './components/aboutus/aboutus.component';
+import { SessionsComponent } from './components/sessions/sessions.component';
+import { PricingComponent } from './components/pricing/pricing.component';
+import { TrainingComponent } from './components/training/training.component';
 
 
 
@@ -34,6 +38,10 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     ForgotComponent,
     NavComponent,
     FooterComponent,
+    AboutusComponent,
+    SessionsComponent,
+    PricingComponent,
+    TrainingComponent,
   ],
   imports: [
     BrowserModule,
