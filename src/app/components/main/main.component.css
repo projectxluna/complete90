@@ -1,11 +1,36 @@
+/*--------------------------TABLE OF CONTENTS-------------------------*/
+/*
+0. GLOBAL CCS
+1. HERO IMAGE
+2. DESCRIPTION SECTION
+3. VIDEO SHAWCASE
+4. PLAYER/COACH SECTION
+5. QUOTE SECTION
+6. MEDIA QUERIES
+
+
+
+
+*/
+
+
+/*----------------------------0. GOBAL CSSS--------------------------*/
+
 div{
 	font-family: 'Montserrat';
 }
 
+.inactiveLink{
+   pointer-events: none;
+   cursor: default;
+}
+
+
+/*----------------------------1. HERO IMAGE--------------------------*/
 .heroimage{
 	padding-top: 90px;
-/*	background-image: src('assets/heroimage.jpg');
-*/	background-repeat: no-repeat;
+	background-image: url('../../../assets/heroimage.jpg');
+	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
 	min-height: 800px;
@@ -13,6 +38,7 @@ div{
 }
 
 .impcont{
+	padding-top: 280px;
 	padding-bottom: 20px;
 }
 
@@ -23,3 +49,370 @@ div{
 	border: 1px solid white;
 	padding: 10px;
 }
+
+.heroimage a:hover{
+	text-decoration: none; 
+	color: white;
+	font-size: 16px;
+	border: 1px solid #fd1541;
+	padding: 10px;
+	background-color: #fd1541;
+}
+
+
+/*----------------------------2. DESCRIPTION SECTION--------------------------*/
+.descTitle h1{
+	color: #1e1e1e;
+	background-color: white;
+	font-weight: 700;
+	padding-top: 100px;
+	padding-bottom: 50px;
+}
+
+
+.descpic img{
+	max-width: 65%;
+}
+
+.descpara{
+	padding-bottom: 100px;
+}
+
+.descpara p{
+	color: #1e1e1e;
+	font-size: 16px;
+	line-height: 1.7em;
+	padding-bottom: 30px;
+}
+
+.offerTitle a{
+	text-decoration: none;
+	color: white;
+	background-color: #fd1541;
+	padding: 5px;
+}
+
+.offerTitle p{
+	padding-bottom: 0px;
+}
+
+.readMore a{
+	color: #fd1541;
+	text-decoration: none;
+}
+
+
+/*----------------------------3. VIDEO SHOWCASE--------------------------------*/
+
+
+.vidShowcasebg{
+	background-color: #f4f5fb;
+	padding-top: 150px;
+	padding-bottom: 150px;
+}
+
+.mainVideo{
+	background-color: white;
+	color: #1e1e1e;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.mainVideo h1{
+	font-size: 18px;
+	font-weight: 700;
+	padding-left: 30px;
+}
+
+.mainVideo p{
+	font-size: 12px;
+	padding-left: 30px;
+	padding-bottom: 20px;
+	line-height: 2.0em;
+}
+
+.createSes{
+	background-color: white;
+	color: #1e1e1e;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.sesImgcont{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+
+.createSes h1{
+	font-size: 12px;
+	font-weight: 700;
+	padding-left: 5px;
+}
+
+.createSes p{
+	font-size: 10px;
+	line-height: 2.0em;
+	padding-top: 10px;
+	padding-bottom: 8px;
+	padding-left: 5px;
+}
+
+.sesLink{
+	margin-top: 15px;
+}
+
+.sesLink a{
+	font-size: 10px;
+	text-decoration: none;
+	color: white;
+	background-color: #fd1541;
+	padding: 5px;
+}
+
+
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.persTrain{
+	background-image: url('../../../assets/pers-train.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 118px;
+	width: 100%;
+}
+
+.persTrain h1{
+	color: #1e1e1e;
+	font-size: 14px;
+	line-height: 1.7em;
+}
+
+.persTrain a{
+	font-size: 12px;
+	text-decoration: none;
+	color: white;
+	background-color: #fd1541;
+	padding: 5px;
+}
+
+
+/*-----------------------4. PLAYER/COACH SECTION---------------------------*/
+.playerPromo{
+	background-color: #0e233e;
+}
+
+.coachPromo{
+	background-color: #182c4d;
+}
+
+.playerPromo a{
+	font-size: 26px;
+	text-decoration: none;
+	color: white;
+	background-color: #fd1541;
+	padding: 7px 45px 7px 5px;
+}
+
+.playerPromo{
+	padding-top: 5px;
+	padding-left: 0 !important;
+}
+
+.playerPromoText{
+	padding-left: 0 !important;	
+}
+
+.playerPromoText h1{
+	padding-top: 170px;
+	padding-left: 95px;
+	padding-bottom: 20px;
+	font-size: 24px;
+}
+
+.playerPromo img{
+	padding-top: 15px;
+	max-width: 70%;
+}
+
+.PromoSignbtn a{
+	font-size: 12px;
+	margin-left: 95px;
+	text-decoration: none;
+	background-color: transparent;
+	border: 1px solid #fd1541;
+	padding: 7px 25px 7px 25px;
+}
+
+.PromoSignbtn a:hover{
+	color: white;
+	text-decoration: none;
+	background-color: #fd1541;
+	border: 1px solid #fd1541;
+}
+
+
+
+.coachPromo a{
+	font-size: 26px;
+	text-decoration: none;
+	color: white;
+	background-color: #fd1541;
+	padding: 7px 45px 7px 5px;
+}
+
+.coachPromo{
+	padding-top: 5px;
+	padding-left: 0 !important;
+}
+
+.coachPromoText{
+	padding-left: 0 !important;	
+}
+
+.coachPromoText h1{
+	padding-top: 170px;
+	padding-left: 95px;
+	padding-bottom: 20px;
+	font-size: 24px;
+}
+
+.coachPromo img{
+	padding-top: 15px;
+	max-width: 100%;
+}
+
+.coachPromo .PromoSignbtn a{
+	font-size: 12px;
+	margin-left: 95px;
+	text-decoration: none;
+	background-color: transparent;
+	border: 1px solid #fd1541;
+	padding: 7px 25px 7px 25px;
+}
+
+.coachPromo .PromoSignbtn a:hover{
+	color: white;
+	text-decoration: none;
+	background-color: #fd1541;
+	border: 1px solid #fd1541;
+}
+
+
+
+
+
+
+/*----------------------------5. QUOTE SECTION---------------------------*/
+.quoteStyle h1{
+	padding-top: 40px;
+	padding-bottom: 40px;
+	font-size: 24px;
+	color: #484848;
+}
+
+
+
+
+
+/* ----------------------------6. MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1024px) {
+
+	.impcont{
+		padding-top: 140px;
+		padding-bottom: 20px;
+	}
+
+	.descpara p{
+		color: #1e1e1e;
+		font-size: 14px;
+		line-height: 1.7em;
+		padding-bottom: 30px;
+	}
+
+	.createSes{
+		margin-top: 60px;
+
+	}
+
+	.offerTitle a{
+		font-size: 14px;
+	}
+
+
+	.persTrain h1{
+		padding-top: 20px;
+	}
+
+	.coachPromo img{
+		padding-top: 15px;
+		max-width: 100%;
+	}
+}
+
+
+
+
+@media (max-width: 768px) {
+
+	.impcont{
+		padding-top: 100px;
+		padding-bottom: 20px;
+	}
+
+
+}
+
+
+
+@media (max-width: 414px) {
+
+	.impcont{
+		padding-top: 40px;
+		padding-bottom: 20px;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,8 @@
 .navbar{
 	font-family: 'Montserrat';
 	/*background-color:transparent;*/
-	background-color: #0000003d;
-
+	background-color: #0000007a;
+	margin-bottom: 0px;
 }
 
 .navbar-nav>li>a {
@@ -16,6 +16,8 @@
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
     border-bottom: 1px solid #ffffff63;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .navbar-inverse {
@@ -29,20 +31,74 @@
 }
 
 .navbar-brand img{
-	max-height: 100%;
+	max-height: 210%;
 }
 
 
-.navbar-centered .navbar-nav {
-        float: none;
-        text-align: center;
-    }
-    .navbar-centered .navbar-nav > li {
-        float: none;
-    }
-    .navbar-centered .nav > li {
-        display: inline;
-    }
-    .navbar-centered .nav > li > a {
-        display: inline-block;
-    }
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+    color: #f8c809;
+    background-color: transparent;
+}
+
+
+
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1024px) {
+
+	.navbar-toggle {
+	    position: relative;
+	    float: right;
+	    padding: 9px 10px;
+	    margin-top: 18px;
+	    margin-right: 15px;
+	    margin-bottom: 18px;
+	    background-color: transparent;
+	    background-image: none;
+	    border: 1px solid transparent;
+	    border-radius: 4px;
+	}
+
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+	.navbar .dropdown-menu{
+		text-align: center;
+	}
+
+	.navbar-centered[_ngcontent-c1] .nav[_ngcontent-c1] > li[_ngcontent-c1] > a[_ngcontent-c1] {
+     display: block;
+     text-align: center; 
+	}
+
+	.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+	    color: white;
+	}
+
+
+}
+
+
+
+
+
+
+@media (max-width: 414px) {
+
+}
