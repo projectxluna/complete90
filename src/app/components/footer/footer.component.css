@@ -1,0 +1,57 @@
+footer{
+	font-family: 'Montserrat';
+	background-color: #0b1c38;
+	font-size: 12px;
+}
+
+.footernav ul{
+	list-style-type: none;
+	display: inline-flex;
+	text-decoration: none;
+	color: white;
+
+}
+
+.footernavLinks li{
+	padding: 35px 20px 15px 35px;
+}
+
+.footernavSocial li{
+	padding: 0px 7px 35px 25px;
+}
+
+li a{
+	text-decoration: none;
+	color: white;
+}
+
+
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1024px) {
+
+
+
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+
+
+
+}
+
+
+
+
+
+
+@media (max-width: 414px) {
+
+}

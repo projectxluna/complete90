@@ -20,6 +20,10 @@ import { NavComponent } from './components/nav/nav.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FooterComponent } from './components/footer/footer.component';
+
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 
 
 @NgModule({
@@ -28,7 +32,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HomeComponent,
     MainComponent,
     ForgotComponent,
-    NavComponent
+    NavComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFontAwesomeModule,
     routing
   ],
   providers: [
