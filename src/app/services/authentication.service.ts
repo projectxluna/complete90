@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
@@ -44,5 +44,19 @@ export class AuthenticationService {
     // clear token from local storage to log user out
     this.token = null;
     localStorage.removeItem('token');
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post('/api/forgot_pasword', { email: email })
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  resetPassword(newPassword: string, verifyPassword: string, token: string): Observable<any> {
+    return this.http.post('/api/reset_password', { newPassword: newPassword, verifyPassword: verifyPassword, token: token })
+      .map((response: Response) => {
+        return response.json();
+      });
   }
 }

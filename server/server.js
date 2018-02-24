@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var fileUpload = require('express-fileupload');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var config = require('./config');
@@ -32,9 +33,12 @@ app.set('superSecret', config.secret);
 app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(fileUpload());
 
 // Angular DIST output folder
 app.use(express.static(path.join(__dirname, '/../dist')));
+
+app.use(express.static(path.join(__dirname, '/../public')));
 
 // API location
 require('./api.js')(app);

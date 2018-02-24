@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 notes
 server/config.js
+public/imgs/profile/*.jpg

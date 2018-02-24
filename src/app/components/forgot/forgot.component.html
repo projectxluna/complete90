@@ -1,5 +1,5 @@
 <div class="container forgot" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
-  <div *ngIf="!signup" class="container" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
+  <div *ngIf="!showResetPassword" class="container" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
       <div class="container" fxLayout="row" fxLayoutAlign="center center">
           <span>reset password</span>
       </div>
@@ -10,8 +10,31 @@
           </mat-form-field>
       </div>
       <div class="container" fxLayout="row" fxLayoutAlign="center stretch">
-          <button mat-button color="accent" (click)="requestPasswordresetEmail()">send</button>
+        <button mat-button color="accent" (click)="back()">back</button>
+        <button mat-button color="primary" (click)="requestPasswordresetEmail()">send</button>
       </div>
       <div *ngIf="error" class="alert alert-danger">{{error}}</div>
   </div>
+  <div *ngIf="showResetPassword" class="container" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
+    <div class="container" fxLayout="row" fxLayoutAlign="center center">
+        <span>create new password</span>
+    </div>
+    <div class="container" fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field>
+            <input matInput placeholder="new password" [(ngModel)]="model.newPassword" [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="container" fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field>
+            <input matInput placeholder="confirm new password" [(ngModel)]="model.verifyPassword" [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="container" fxLayout="row" fxLayoutAlign="center stretch">
+      <button mat-button color="accent" (click)="back()">back</button>
+      <button mat-button color="primary" (click)="setNewPassword()">send</button>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+</div>
 </div>

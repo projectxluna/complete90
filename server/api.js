@@ -1,7 +1,10 @@
 module.exports = function (app) {
     var User = require('./models/user');
+    var mailer = require('./helpers/mailer');
     var express = require('express');
     var jwt = require('jsonwebtoken');
+    var waterfall = require('async-waterfall');
+    var crypto = require('crypto');
     var apiRoutes = express.Router();
 
     // un-authenticated routes
@@ -45,44 +48,88 @@ module.exports = function (app) {
         newUser.email = req.body.email;
         newUser.password = newUser.generateHash(req.body.password);
 
-        newUser.save().then(function (user) {
-            res.json({
-                success: true
-            });
-        }).catch(function (err) {
-            if (!err) {
+        newUser.save(function (err, user) {
+            if (err) {
                 return res.json({
                     success: false,
-                    message: "Signup failed. Please try again"
+                    message: err.errmsg,
+                    code: err.code
                 });
             }
-            return res.json({
-                success: false,
-                message: err.errmsg,
-                code: err.code
+            res.json({
+                success: true
             });
         });
     });
 
     apiRoutes.post('/forgot_pasword', function (req, res) {
-        /**
-         * check if we even have that email in the db
-         * then generate the reset email
-         */
-        User.findOne({
-            'local.email': req.body.email
-        }, function (err, user) {
+        waterfall([
+            /**
+             * check if we even have that email in the db
+             * then generate the reset email
+             * */
+            function (next) {
+                User.findOne({
+                    'email': req.body.email
+                }, function (err, user) {
+                    if (user) {
+                        next(err, user)
+                    } else {
+                        next('Email not found');
+                    }
+                });
+            },
+            function (user, next) {
+                // create the random token
+                crypto.randomBytes(20, function (err, buffer) {
+                    var token = buffer.toString('hex');
+                    next(err, user, token);
+                });
+            },
+            function (user, token, next) {
+                User.findByIdAndUpdate(
+                    { _id: user._id },
+                    {
+                        resetPasswordToken: token,
+                        resetPasswordExpires: Date.now() + 86400000
+                    },
+                    {
+                        upsert: true,
+                        new: true
+                    },
+                    function (err, new_user) {
+                        next(err, token, new_user);
+                    });
+            },
+            function (token, user, next) {
+                var data = {
+                    to: user.email,
+                    from: mailer.email,
+                    template: 'forgot-password-email',
+                    subject: 'Password help has arrived!',
+                    context: {
+                        url: 'http://localhost:9000/forgot?token=' + token,
+                        name: user.name.split(' ')[0]
+                    }
+                };
+
+                mailer.smtpTransport().sendMail(data, function (err) {
+                    if (!err) {
+                        return res.json({
+                            success: true,
+                            message: 'Kindly check your email for further instructions'
+                        });
+                    } else {
+                        return next(err);
+                    }
+                });
+            }
+        ], function (err, result) {
             if (err) {
                 return res.json({
                     success: false,
                     message: err
                 });
-            }
-            if (!user) {
-                res.json({ success: false, message: 'Email not recognized' });
-            } else if (user) {
-                // do the work
-                res.json({ success: true, message: 'check your email' });
             }
         });
     });
@@ -93,19 +140,52 @@ module.exports = function (app) {
          * take the new password and hash
          */
         User.findOne({
-            'local.email': req.body.email
+            resetPasswordToken: req.body.token,
+            resetPasswordExpires: {
+                $gt: Date.now()
+            }
         }, function (err, user) {
             if (err) {
-                return res.json({
+                return res.status(422).send({
                     success: false,
                     message: err
                 });
             }
             if (!user) {
-                res.json({ success: false, message: 'Email not recognized' });
+                res.status(400).send({ success: false, message: 'Password reset token is invalid or has expired' });
             } else if (user) {
-                // do the work
-                res.json({ success: true, message: 'new password' });
+                if (req.body.newPassword === req.body.verifyPassword) {
+                    user.password = user.generateHash(req.body.newPassword);
+                    user.resetPasswordToken = undefined;
+                    user.resetPasswordExpires = undefined;
+                    user.save(function (err) {
+                        if (err) {
+                            return res.status(422).send({
+                                message: err
+                            });
+                        } else {
+                            var data = {
+                                to: user.email,
+                                from: mailer.email,
+                                template: 'reset-password-email',
+                                subject: 'Password Reset Confirmation',
+                                context: {
+                                    name: user.name.split(' ')[0]
+                                }
+                            };
+
+                            mailer.smtpTransport().sendMail(data, function (err) {
+                                if (!err) {
+                                    return res.json({ success: true});
+                                } else {
+                                    return res.status(422).send({
+                                        message: err
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
     });
