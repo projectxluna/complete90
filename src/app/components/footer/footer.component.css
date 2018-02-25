@@ -9,15 +9,18 @@ footer{
 	display: inline-flex;
 	text-decoration: none;
 	color: white;
-
 }
 
 .footernavLinks li{
-	padding: 35px 20px 15px 35px;
+	padding: 35px 20px 15px 20px;
 }
 
 .footernavSocial li{
-	padding: 0px 7px 35px 25px;
+	padding: 0px 25px 35px 25px;
+}
+
+.footernavSocial ul{
+	align-content: center;
 }
 
 li a{
@@ -42,7 +45,14 @@ li a{
 
 @media (max-width: 768px) {
 
+	.footernavLinks li{
+		padding: 35px 5px 15px 5px;
+	}
 
+	.footernav ul{
+		/*display: inline-block;*/
+		font-size: 10px;
+	}
 
 
 }
