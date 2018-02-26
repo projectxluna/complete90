@@ -51,14 +51,14 @@
 
 		<div class="faq1 col-lg-10" id="q1">
 				<b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra sem in nulla faucibus venenatis?</b>
-				<a (click)="toggleExpand()"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a>
+				<a (click)="toggleExpand('q1')"><i class="fa fa-plus-circle fa-2x" [ngClass]="{'fa-minus-circle faq1': expandedQ1}" aria-hidden="true"></i></a>
 				<p id="q1des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra sem in nulla faucibus venenatis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra sem in nulla faucibus venenatis.
 				</p>
 		</div>
 
 		<div class="faq col-lg-10">
 				<b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra sem in nulla faucibus venenatis?</b>
-				<a href=""><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></a>
+				<a (click)="toggleExpand('q2')"><i class="fa fa-plus-circle fa-2x" [ngClass]="{'fa-minus-circle faq1': expandedQ2}" aria-hidden="true"></i></a>
 				<p id="q2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra sem in nulla faucibus venenatis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra sem in nulla faucibus venenatis.
 				</p>
 		</div>		
