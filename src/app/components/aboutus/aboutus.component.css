@@ -4,6 +4,8 @@
 1. BANNER IMAGE
 2. ABOUT FOUNDER
 3. FAQ SECTION
+4. PLAYER/COACH SECTION
+5. QUOTE SECTION
 
 
 */
@@ -59,9 +61,11 @@ div{
 
 .aboutDesc h1{
 	font-size: 30px;
+	color: #252525;
 }
 
 .aboutDesc h3{
+	color: #252525;
 	font-size: 20px;
 	padding-bottom: 40px;
 	border-bottom: 1px solid #00000024;
@@ -80,7 +84,7 @@ div{
 /*-------------------------------3. FAQ SECTION----------------------------*/
 
 .faqBG{
-	background-color: #f4f5fb;
+	background-color: #fbfbff;
 	color: #1e1e1e;
 }
 
@@ -103,12 +107,12 @@ div{
 
 .faq1{
 	padding-top: 60px;
-	padding-bottom: 40px;
+	padding-bottom: 80px;
 }
 
 .faq{
 	padding-top: 0px;
-	padding-bottom: 40px;
+	padding-bottom: 80px;
 }
 
 .faqBG i{
@@ -120,6 +124,134 @@ div{
 	padding-top: 20px;
 }
 
+.q1show{
+	display: block;
+}
+
+.q1hide{
+	display: none;
+}
+
+
+.faqSpace{
+	padding-bottom: 80px;
+}
+
+
+
+/*-----------------------4. PLAYER/COACH SECTION---------------------------*/
+.playerPromo{
+	background-color: #0e233e;
+}
+
+.coachPromo{
+	background-color: #182c4d;
+}
+
+.playerPromo a{
+	font-size: 26px;
+	text-decoration: none;
+	color: white;
+	background-color: #fd1541;
+	padding: 7px 45px 7px 5px;
+}
+
+.playerPromo{
+	padding-top: 5px;
+	padding-left: 0 !important;
+}
+
+.playerPromoText{
+	padding-left: 0 !important;	
+}
+
+.playerPromoText h1{
+	padding-top: 170px;
+	padding-left: 95px;
+	padding-bottom: 20px;
+	font-size: 24px;
+}
+
+.playerPromo img{
+	padding-top: 15px;
+	max-width: 70%;
+}
+
+.PromoSignbtn a{
+	font-size: 12px;
+	margin-left: 95px;
+	text-decoration: none;
+	background-color: transparent;
+	border: 1px solid #fd1541;
+	padding: 7px 25px 7px 25px;
+}
+
+.PromoSignbtn a:hover{
+	color: white;
+	text-decoration: none;
+	background-color: #fd1541;
+	border: 1px solid #fd1541;
+}
+
+
+
+.coachPromo a{
+	font-size: 26px;
+	text-decoration: none;
+	color: white;
+	background-color: #fd1541;
+	padding: 7px 45px 7px 5px;
+}
+
+.coachPromo{
+	padding-top: 5px;
+	padding-left: 0 !important;
+}
+
+.coachPromoText{
+	padding-left: 0 !important;	
+}
+
+.coachPromoText h1{
+	padding-top: 170px;
+	padding-left: 95px;
+	padding-bottom: 20px;
+	font-size: 24px;
+}
+
+.coachPromo img{
+	padding-top: 15px;
+	max-width: 100%;
+}
+
+.coachPromo .PromoSignbtn a{
+	font-size: 12px;
+	margin-left: 95px;
+	text-decoration: none;
+	background-color: transparent;
+	border: 1px solid #fd1541;
+	padding: 7px 25px 7px 25px;
+}
+
+.coachPromo .PromoSignbtn a:hover{
+	color: white;
+	text-decoration: none;
+	background-color: #fd1541;
+	border: 1px solid #fd1541;
+}
+
+
+
+
+
+
+/*----------------------------5. QUOTE SECTION---------------------------*/
+.quoteStyle h1{
+	padding-top: 40px;
+	padding-bottom: 40px;
+	font-size: 20px;
+	color: #484848;
+}
 
 
 
@@ -162,6 +294,15 @@ div{
 		padding-bottom: 22px;
 	}
 
+	.persTrain h1{
+		padding-top: 20px;
+	}
+
+	.coachPromo img{
+		padding-top: 15px;
+		max-width: 100%;
+	}	
+
 
 }
 
@@ -171,6 +312,10 @@ div{
 
 
 @media (max-width: 768px) {
+	
+	.impcont h1{
+		font-size: 26px;
+	}	
 
 	.aboutNum h2{
 		background-color: #fd1541;
