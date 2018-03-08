@@ -106,7 +106,7 @@ div{
 
 
 .vidShowcasebg{
-	background-color: #f4f5fb;
+	background-color: #fbfbff;
 	padding-top: 150px;
 	padding-bottom: 150px;
 }
@@ -327,7 +327,7 @@ div{
 .quoteStyle h1{
 	padding-top: 40px;
 	padding-bottom: 40px;
-	font-size: 24px;
+	font-size: 20px;
 	color: #484848;
 }
 
@@ -380,6 +380,10 @@ div{
 		padding-top: 100px;
 		padding-bottom: 20px;
 	}
+
+	.impcont h1{
+		font-size: 26px;
+	}	
 
 
 }
