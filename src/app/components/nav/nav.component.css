@@ -49,7 +49,20 @@
     background-color: transparent;
 }
 
+.avatar {
+    /* make a square container */
+    width: 30px;
+    height: 30px;
 
+    /* fill the container, preserving aspect ratio, and cropping to fit */
+    background-size: cover;
+
+    /* center the image vertically and horizontally */
+    background-position: top center;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+}
 
 
 /* ----------------------------MEDIA QUERIES------------------------------*/

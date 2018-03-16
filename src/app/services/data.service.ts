@@ -12,7 +12,7 @@ export class DataService {
     private authenticationService: AuthenticationService) {
   }
 
-  getUserProfile(): Observable<Object> {
+  getUserProfile(): Observable<any> {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
@@ -36,6 +36,34 @@ export class DataService {
           return true;
         } else {
           return false;
+        }
+      });
+  }
+
+  getClient(): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+    // get users from api
+    return this.http.get('api/braintree/subsribe', options)
+      .map((response: Response) => {
+        if (response.json() && response.json().success) {
+          return response.json();
+        } else {
+          return null;
+        }
+      });
+  }
+
+  subscribe(payload, planId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+    // get users from api
+    return this.http.post('api/braintree/subsribe', { nonce: payload.nonce, planId: planId }, options)
+      .map((response: Response) => {
+        if (response.json() && response.json().success) {
+          return response.json();
+        } else {
+          return null;
         }
       });
   }

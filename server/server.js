@@ -36,9 +36,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(fileUpload());
 
 // Angular DIST output folder
+app.use('/public', express.static(path.join(__dirname, '/../public')));
 app.use(express.static(path.join(__dirname, '/../dist')));
-
-app.use(express.static(path.join(__dirname, '/../public')));
 
 // API location
 require('./api.js')(app);

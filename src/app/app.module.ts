@@ -9,7 +9,7 @@ import { MaterialModule } from './modules/material.module';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-import { HomeComponent } from './components/home';
+import { LoginSignupComponent } from './components/loginsignup';
 
 import { AuthGuard } from './guards';
 import { DataService, AuthenticationService } from './services';
@@ -27,13 +27,14 @@ import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { SessionsComponent } from './components/sessions/sessions.component';
 import { PricingComponent } from './components/pricing/pricing.component';
 import { TrainingComponent } from './components/training/training.component';
+import { PaymentComponent } from './components/pricing/payment/payment.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    LoginSignupComponent,
     MainComponent,
     ForgotComponent,
     NavComponent,
@@ -42,6 +43,7 @@ import { TrainingComponent } from './components/training/training.component';
     SessionsComponent,
     PricingComponent,
     TrainingComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

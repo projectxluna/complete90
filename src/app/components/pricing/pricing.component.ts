@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PricingComponent implements OnInit {
 
+  isYearly = true;
   constructor() { }
 
   ngOnInit() {
   }
 
+  toggleCycle() {
+    this.isYearly = !this.isYearly;
+  }
 }

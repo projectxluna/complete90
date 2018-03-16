@@ -29,6 +29,8 @@
     "angular-font-awesome": "^3.1.2",
     "async-waterfall": "^0.1.5",
     "bootstrap": "^3.3.7",
+    "braintree": "^2.7.0",
+    "braintree-web-drop-in": "^1.9.4",
     "core-js": "^2.4.1",
     "express-fileupload": "^0.4.0",
     "express-session": "^1.15.6",

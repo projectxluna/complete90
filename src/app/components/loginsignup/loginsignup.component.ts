@@ -6,10 +6,10 @@ import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'home.component.html',
-    styleUrls: ['home.component.css']
+    templateUrl: 'loginsignup.component.html',
+    styleUrls: ['loginsignup.component.css']
 })
-export class HomeComponent implements OnInit {
+export class LoginSignupComponent implements OnInit {
     model: any = {};
     loading = false;
     signup = false;
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         // reset login status
-        this.authenticationService.logout();
+        //this.authenticationService.logout();
     }
 
     toggleSignup() {

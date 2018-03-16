@@ -22,8 +22,8 @@
 	<div class="container">
 		<div class="col-lg-4 col-lg-offset-4">
 			<ul class="nav nav-pills text-center">
-			  <li role="presentation" class="active"><a>MONTHLY</a></li>
-			  <li role="presentation"><a>YEARLY</a></li>
+			  <li role="presentation" (click)="toggleCycle()" [ngClass]="{'active': !isYearly}"><a>MONTHLY</a></li>
+			  <li role="presentation" (click)="toggleCycle()" [ngClass]="{'active': isYearly}"><a>YEARLY</a></li>
 			</ul>
 		</div>
 	</div>
