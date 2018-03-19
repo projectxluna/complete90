@@ -1,77 +1,72 @@
-<div class="container login" >
-    <div *ngIf="!signup" class="container" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
-        <!-- <div class="container" fxLayout="row" fxLayoutAlign="center center">
-            <span>login</span>
-        </div>
-        <div class="container" fxLayout="row" fxLayoutAlign="center center">
-            <mat-form-field>
-                <input matInput placeholder="email" [(ngModel)]="model.email" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="container" fxLayout="row" fxLayoutAlign="center center">
-            <mat-form-field>
-                <input matInput placeholder="password" [(ngModel)]="model.password" [type]="hide ? 'password' : 'text'">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </mat-form-field>
-        </div>
-        <div class="container" fxLayout="row" fxLayoutAlign="center stretch">
-            <button mat-raised-button color="primary" (click)="login()">login</button>
-            <button mat-button color="accent" (click)="toggleSignup()">signup</button>
-        </div>
-        <div class="container" fxLayout="row" fxLayoutAlign="center stretch">
-            <button mat-button color="accent" (click)="forgotPassword()">forgot password ?</button>
-        </div> -->
-        <form>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-    </div>
+<div class="loginbg">
 
-    <div *ngIf="signup" class="container" fxLayout="column" fxLayoutAlign="center none" style="height: 100vh;">
-        <div fxLayout="row" fxLayoutAlign="center center">
-            <span>signup</span>
+    <!-- LOGIN FORM -->
+    <div class="container" >
+        <div *ngIf="!signup" class="container login">
+
+            <form class="col-lg-12">
+                <div class="loginTitle col-lg-6 col-lg-offset-3 text-center">
+                    <span>Login</span>
+                </div>
+
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <!-- <label for="exampleInputEmail1">Email address</label> -->
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <!-- <label for="exampleInputPassword1">Password</label> -->
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
+                    <!-- <a (click)="hide = !hide"><i class="fa fa-eye" aria-hidden="true">&nbsp;{{hide ? 'visibility' : 'visibility_off'}}</i></a> -->
+                </div>
+                <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <button type="submit" class="btn btn-primary" id="btn1">Login</button>
+                    <button class="btn btn-primary" id="btn2" (click)="toggleSignup()">Signup</button>
+                </div>
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your personal information with anyone else.</small>
+                </div>                
+
+            </form>
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
         </div>
-        <div class="container" fxLayout="row" fxLayoutAlign="center center">
-            <mat-form-field>
-                <input matInput placeholder="first name" [(ngModel)]="model.firstname">
-            </mat-form-field>
+
+        <!-- SIGN UP FORM -->
+        <div *ngIf="signup" class="container signup">
+
+            <form class="col-lg-12">
+                <div class="loginTitle col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <span>Signup</span>
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <input class="form-control" id="Fname" placeholder="First Name">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <input class="form-control" id="Lname" placeholder="Last Name">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <!-- <label for="exampleInputEmail1">Email address</label> -->
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <!-- <label for="exampleInputPassword1">Password</label> -->
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
+                    <!-- <a (click)="hide = !hide"><i class="fa fa-eye" aria-hidden="true">&nbsp;{{hide ? 'visibility' : 'visibility_off'}}</i></a> -->
+                </div>
+                <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <button type="submit" class="btn btn-primary" id="btn1">Submit</button>
+                    <button class="btn btn-primary" id="btn2" (click)="toggleSignup()">Already have an account</button>
+                </div>
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center ">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your personal information with anyone else.</small>
+                </div>
+
+            </form>
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
         </div>
-        <div class="container" fxLayout="row" fxLayoutAlign="center center">
-            <mat-form-field>
-                <input matInput placeholder="last name" [(ngModel)]="model.lastname">
-            </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="center center">
-            <mat-form-field>
-                <input matInput [(ngModel)]="model.email" placeholder="email" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="center center">
-            <mat-form-field>
-                <input matInput placeholder="password" [(ngModel)]="model.password" [type]="hide ? 'password' : 'text'">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </mat-form-field>
-        </div>
-        <div class="container" fxLayout="row" fxLayoutAlign="center stretch">
-            <button mat-raised-button color="primary" (click)="signUp()">signup</button>
-            <button mat-button color="accent" (click)="toggleSignup()">already have an account</button>
-        </div>
-        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
     </div>
 </div>
