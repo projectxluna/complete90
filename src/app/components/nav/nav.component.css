@@ -15,7 +15,7 @@
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-bottom: 1px solid #ffffff63;
+    /*border-bottom: 1px solid #ffffff63;*/
     padding-top: 10px;
     padding-bottom: 10px;
 }

@@ -1,0 +1,129 @@
+/*--------------------------TABLE OF CONTENTS-------------------------*/
+/*
+0. GLOBAL CCS
+1. BACKGROUND
+2. LOGIN DIV
+
+
+
+
+
+
+*/
+
+/*----------------------------0. GOBAL CSSS--------------------------*/
+
+div{
+	font-family: 'Montserrat';
+}
+
+.inactiveLink{
+   pointer-events: none;
+   cursor: default;
+}
+
+input, select, textarea{
+    color: white;
+}
+
+textarea:focus, input:focus {
+    color: white;
+}
+
+form, span{
+	font-size: 16px;
+}
+
+/*----------------------------1. BACKGROUND--------------------------*/
+.loginbg{
+	background-image: url('../../../assets/login-bg.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;	
+}
+
+
+
+
+
+
+
+/*----------------------------2. LOGIN DIV--------------------------*/
+.login, .signup{
+	padding-top: 290px;
+	padding-bottom: 290px;
+	height: 100vh;
+}
+
+.loginTitle{
+	padding-bottom: 50px;
+}
+
+.formbts{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.loginbg input{
+	border: none; 
+	border-width: 0; 
+	box-shadow: none;
+	border-bottom: 1px solid #fd1541;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.loginbg i{
+	color: #777;
+}
+
+#btn1{
+	background-color: #fd1541;
+	border-radius: 0px;
+	border:none;
+}
+
+#btn2{
+	background-color: transparent;
+	border: 1px solid #fd1541;
+	/*border-radius: 0px;*/
+	border:none;	
+}
+
+
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1024px) {
+
+
+
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+
+
+}
+
+
+
+
+
+
+@media (max-width: 414px) {
+
+	.login, .signup{
+		padding-top: 170px;
+		padding-bottom: 170px;
+		height: 100vh;
+	}
+
+
+}
