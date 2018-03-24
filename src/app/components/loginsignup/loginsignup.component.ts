@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../../services'
+import { DataService, RoutingState } from '../../services'
 import { AuthenticationService } from '../../services';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -16,15 +16,18 @@ export class LoginSignupComponent implements OnInit {
     hide = true;
     error = '';
     email = new FormControl('', [Validators.required, Validators.email]);
+    previousRoute: string;
 
     constructor(
         private dataService: DataService, 
         private router: Router,
-        private authenticationService: AuthenticationService) { }
+        private authenticationService: AuthenticationService,
+        private routingState: RoutingState) { }
 
     ngOnInit() {
         // reset login status
         //this.authenticationService.logout();
+        this.previousRoute = this.routingState.getPreviousUrl();
     }
 
     toggleSignup() {
@@ -78,7 +81,11 @@ export class LoginSignupComponent implements OnInit {
         this.authenticationService.login(this.model.email, this.model.password)
             .subscribe(result => {
                 if (result === true) {
-                    this.router.navigate(['/dashboard']);
+                    if (this.previousRoute !== '/') {
+                        this.router.navigate([this.previousRoute]);   
+                    } else {
+                        this.router.navigate(['/dashboard']);
+                    }
                 } else {
                     this.error = 'username or password is incorrect';
                     this.loading = false;
