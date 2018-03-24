@@ -52,7 +52,14 @@ export class LoginSignupComponent implements OnInit {
                     this.signup = false;
                     this.loading = false;
                 } else if (result && result.success !== true) {
-                    this.error = result.message
+                    switch(result.code) {
+                        case 11000:
+                            this.error = 'Your email is already in use. Please click forgot password or use a different email';
+                            break;
+                        default:
+                            this.error = result.message
+                            break;
+                    }
                     this.loading = false;
                 } else {
                     this.error = 'please try again. something went wrong';
