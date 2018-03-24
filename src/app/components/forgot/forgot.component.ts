@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DataService } from '../../services'
+import { DataService, RoutingState } from '../../services'
 import { AuthenticationService } from '../../services';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -17,14 +17,18 @@ export class ForgotComponent implements OnInit {
   error = '';
   token = null;
   email = new FormControl('', [Validators.required, Validators.email]);
+  previousRoute: string;
 
   constructor(
     private dataService: DataService,
     private router: Router,
     private route: ActivatedRoute,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private routingState: RoutingState) { }
 
   ngOnInit() {
+    this.previousRoute = this.routingState.getPreviousUrl();
+
     let token = this.route.snapshot.queryParams["token"];
     if (token) {
       console.log(token);
@@ -43,7 +47,7 @@ export class ForgotComponent implements OnInit {
       .subscribe(result => {
         if (result && result.success == true) {
           //say something here 
-          this.router.navigate(['/home']);
+          this.router.navigate([this.previousRoute]);
         } else {
           this.error = result.message || 'Unkmown email address. Please try again';
           this.loading = false;
@@ -70,7 +74,7 @@ export class ForgotComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['/home']);
+    this.router.navigate([this.previousRoute]);
   }
 
   getErrorMessage() {

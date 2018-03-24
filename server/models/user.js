@@ -23,7 +23,14 @@ var userSchema = mongoose.Schema({
     height           : String,
     position         : String,
     foot             : String,
-    avatarURL        : String          
+    avatarURL        : String,
+    braintree : {
+        customer: {
+            id: String,
+            paymentMethods: [],
+            subscription: String
+        }
+    }         
 },
 {
     timestamps: true,

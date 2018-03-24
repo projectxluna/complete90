@@ -71,7 +71,7 @@ export class LoginSignupComponent implements OnInit {
         this.authenticationService.login(this.model.email, this.model.password)
             .subscribe(result => {
                 if (result === true) {
-                    this.router.navigate(['/']);
+                    this.router.navigate(['/dashboard']);
                 } else {
                     this.error = 'username or password is incorrect';
                     this.loading = false;

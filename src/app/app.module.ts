@@ -12,7 +12,7 @@ import { routing } from './app.routing';
 import { LoginSignupComponent } from './components/loginsignup';
 
 import { AuthGuard } from './guards';
-import { DataService, AuthenticationService } from './services';
+import { DataService, AuthenticationService, RoutingState } from './services';
 import { MainComponent } from './components/main/main.component';
 import { ForgotComponent } from './components/forgot/forgot.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -28,6 +28,7 @@ import { SessionsComponent } from './components/sessions/sessions.component';
 import { PricingComponent } from './components/pricing/pricing.component';
 import { TrainingComponent } from './components/training/training.component';
 import { PaymentComponent } from './components/pricing/payment/payment.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 
@@ -44,6 +45,7 @@ import { PaymentComponent } from './components/pricing/payment/payment.component
     PricingComponent,
     TrainingComponent,
     PaymentComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { PaymentComponent } from './components/pricing/payment/payment.component
   providers: [
     AuthGuard,
     DataService,
-    AuthenticationService
+    AuthenticationService,
+    RoutingState
   ],
   bootstrap: [AppComponent]
 })

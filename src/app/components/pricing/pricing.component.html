@@ -36,7 +36,7 @@
 			<h1>${{ playerPrice }}</h1>
 			<h5 *ngIf="!isYearly">monthly</h5>
 			<h5 *ngIf="isYearly">yearly</h5>
-			<button>SELECT</button>
+			<button (click)="selectPlan('player')">SELECT</button>
 		</div>
 
 		<!-- COACH PRICING -->
@@ -48,8 +48,8 @@
 			<h1>$ {{ coachPrice }}</h1>
 			<h5 *ngIf="!isYearly">monthly</h5>
 			<h5 *ngIf="isYearly">yearly</h5>
-			<button>SELECT</button>
-		</div>	
+			<button (click)="selectPlan('coach')">SELECT</button>
+		</div>
 	</div>
 </div>
 <!-- PRICING SECTION END -->

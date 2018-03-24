@@ -1,72 +1,68 @@
 <div class="loginbg">
 
-    <!-- LOGIN FORM -->
-    <div class="container" >
-        <div *ngIf="!signup" class="container login">
-
-            <form class="col-lg-12">
-                <div class="loginTitle col-lg-6 col-lg-offset-3 text-center">
-                    <span>Login</span>
-                </div>
-
-                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <!-- <label for="exampleInputEmail1">Email address</label> -->
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                </div>
-                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <!-- <label for="exampleInputPassword1">Password</label> -->
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
-                    <!-- <a (click)="hide = !hide"><i class="fa fa-eye" aria-hidden="true">&nbsp;{{hide ? 'visibility' : 'visibility_off'}}</i></a> -->
-                </div>
-                <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <button type="submit" class="btn btn-primary" id="btn1">Login</button>
-                    <button class="btn btn-primary" id="btn2" (click)="toggleSignup()">Signup</button>
-                </div>
-
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your personal information with anyone else.</small>
-                </div>                
-
-            </form>
-            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-
-        </div>
-
-        <!-- SIGN UP FORM -->
-        <div *ngIf="signup" class="container signup">
-
-            <form class="col-lg-12">
-                <div class="loginTitle col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <span>Signup</span>
-                </div>
-                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <input class="form-control" id="Fname" placeholder="First Name">
-                </div>
-                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <input class="form-control" id="Lname" placeholder="Last Name">
-                </div>
-                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <!-- <label for="exampleInputEmail1">Email address</label> -->
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                </div>
-                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <!-- <label for="exampleInputPassword1">Password</label> -->
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
-                    <!-- <a (click)="hide = !hide"><i class="fa fa-eye" aria-hidden="true">&nbsp;{{hide ? 'visibility' : 'visibility_off'}}</i></a> -->
-                </div>
-                <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <button type="submit" class="btn btn-primary" id="btn1">Submit</button>
-                    <button class="btn btn-primary" id="btn2" (click)="toggleSignup()">Already have an account</button>
-                </div>
-
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center ">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your personal information with anyone else.</small>
-                </div>
-
-            </form>
-            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        <!-- LOGIN FORM -->
+        <div class="container" >
+            <div *ngIf="!signup" class="container login">
+    
+                <form class="col-lg-12">
+                    <div class="loginTitle col-lg-6 col-lg-offset-3 text-center">
+                        <span>Login</span>
+                    </div>
+                    <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <input type="email" [(ngModel)]="model.email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <input type="password" [(ngModel)]="model.password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
+                        <!-- <a (click)="hide = !hide"><i class="fa fa-eye" aria-hidden="true">&nbsp;{{hide ? 'visibility' : 'visibility_off'}}</i></a> -->
+                    </div>
+                    <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <button type="submit" class="btn btn-primary" id="btn1" (click)="login()">Login</button>
+                        <button class="btn btn-primary" id="btn2" (click)="toggleSignup()">Signup</button>
+                    </div>
+                    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <a class="form-text text-muted" id="" (click)="forgotPassword()">forgot password ?</a>
+                    </div>     
+                    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your personal information with anyone else.</small>
+                    </div>                
+                </form>
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+            </div>
+    
+            <!-- SIGN UP FORM -->
+            <div *ngIf="signup" class="container signup">
+                <form class="col-lg-12">
+                    <div class="loginTitle col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <span>Signup</span>
+                    </div>
+                    <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <input class="form-control" id="Fname" placeholder="First Name" [(ngModel)]="model.firstname" name="firstname">
+                    </div>
+                    <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <input class="form-control" id="Lname" placeholder="Last Name" [(ngModel)]="model.lastname" name="lastname">
+                    </div>
+                    <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <!-- <label for="exampleInputEmail1">Email address</label> -->
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+                        [(ngModel)]="model.email" name="email">
+                    </div>
+                    <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <!-- <label for="exampleInputPassword1">Password</label> -->
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="model.password" name="password">
+                        <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
+                        <!-- <a (click)="hide = !hide"><i class="fa fa-eye" aria-hidden="true">&nbsp;{{hide ? 'visibility' : 'visibility_off'}}</i></a> -->
+                    </div>
+                    <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <button type="submit" class="btn btn-primary" id="btn1" (click)="signUp()">Submit</button>
+                        <button class="btn btn-primary" id="btn2" (click)="toggleSignup()">Already have an account</button>
+                    </div>
+                    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center ">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your personal information with anyone else.</small>
+                    </div>
+                </form>
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+            </div>
         </div>
     </div>
-</div>
+    

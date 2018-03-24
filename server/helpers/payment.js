@@ -33,26 +33,32 @@ var paymentController = {
             }
         });
     },
-    createSubscription: function (nonce, user, callback) {
+    createSubscription: function (nonce, user, planId, callback) {
         gateway.customer.create({
             firstName: user.firstName,
             lastName: user.lastName,
             paymentMethodNonce: nonce
         }, function (err, result) {
+            if (err) return callback(err);
             if (result.success) {
+                console.log(result);
                 var response = {};
-                response.customer = result;
+                response.customer = result.customer;
                 var token = result.customer.paymentMethods[0].token;
                 gateway.subscription.create({
                     paymentMethodToken: token,
                     planId: plan
                 }, function (err, result) {
+                    if (err) callback(err);
                     response.subscription = result;
-                    callback(response);
+                    callback(undefined, response);
                 });
-            } else {
-                callback(undefined);
             }
+        });
+    },
+    cancelSubsription: function (subscriptionId, callback) {
+        gateway.subscription.cancel(subscriptionId, function (err, result) {
+            callback(err, result);
         });
     }
     

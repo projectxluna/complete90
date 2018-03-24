@@ -6,6 +6,7 @@ module.exports = function (app) {
     var waterfall = require('async-waterfall');
     var crypto = require('crypto');
     var apiRoutes = express.Router();
+    var Auth = require('./helpers/auth');
 
     // un-authenticated routes
     apiRoutes.post('/login', function (req, res) {
@@ -190,45 +191,15 @@ module.exports = function (app) {
         });
     });
 
-    //un-authenticated route for braintree
-    require('./braintree.route')(apiRoutes);
-
-    //authentication middleware
-    apiRoutes.use(function (req, res, next) {
-        // check header or url parameters or post parameters for token
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-        // decode token
-        if (token) {
-            // verifies secret and checks exp
-            jwt.verify(token, app.get('superSecret'), function (err, decoded) {
-                if (err) {
-                    return res.json({ success: false, message: 'Failed to authenticate token.' });
-                } else {
-                    // if everything is good, save to request for use in other routes
-                    req.decoded = decoded;
-                    next();
-                }
-            });
-        } else {
-            // if there is no token
-            // return an error
-            return res.status(403).send({
-                success: false,
-                message: 'No token provided.'
-            });
-        }
-    });
-
     // authenticated routes
-    apiRoutes.get('/', function (req, res) {
+    apiRoutes.get('/', Auth.isAuthenticated, function (req, res) {
         res.json({
             success: true,
             message: 'Welcome to the complete 90',
             version: process.env.npm_package_version
         });
     });
-
+    require('./braintree.route')(apiRoutes);
     require('./user.route')(apiRoutes);
     app.use('/api', apiRoutes);
 };

@@ -1,18 +1,16 @@
 <div class="container" style="padding-top:100px;">
 	<form>
-		<div class="btn-group" dropdown>
-			<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-				{{ getPlanString(selectedPlan) }}<span class="caret"></span>
-			</button>
-			<ul *dropdownMenu class="dropdown-menu" role="menu">
-				<li *ngFor="let plan of plans" role="menuitem">
-					<a class="dropdown-item" (click)="setPlan(plan)">{{ getPlanString(plan) }}</a>
-				</li>
-			</ul>
+		<div class="plan">
+			<div class="summary">
+				<ul>
+					<li>Name: {{ selectedPlan.name }}</li>
+					<li>Price: ${{ selectedPlan.price }}</li>
+				</ul>
+			</div>
 		</div>
 
 		<div id="dropin-container"></div>
 		
-		<button type="submit" class="btn btn-primary" (click)="submitPay()">Add Card</button>
+		<button type="submit" class="btn btn-primary" (click)="addCard()">Pay Now</button>
 	</form>
 </div>

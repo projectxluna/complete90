@@ -1,12 +1,13 @@
 module.exports = function (apiRoutes) {
     const path = require('path');
     const userHelper = require('./helpers/user');
+    var Auth = require('./helpers/auth');
     var User = require('./models/user');
 
     /**
      * get user profile
      */
-    apiRoutes.get('/user/me', function (req, res) {
+    apiRoutes.get('/user/me', Auth.isAuthenticated, function (req, res) {
         User.findOne({ _id: req.decoded.userId }, function (err, user) {
             if (err) return res.status(500).send(err);
 
@@ -20,35 +21,35 @@ module.exports = function (apiRoutes) {
     /**
      * get user stats 
      */
-    apiRoutes.get('/user/stats', function (req, res) {
+    apiRoutes.get('/user/stats', Auth.isAuthenticated, function (req, res) {
 
     });
 
     /**
      * get created training plans
      */
-    apiRoutes.get('/user/plans', function (req, res) {
+    apiRoutes.get('/user/plans', Auth.isAuthenticated, function (req, res) {
 
     });
 
     /**
      * create new plan(s)
      */
-    apiRoutes.post('/user/plans', function (req, res) {
+    apiRoutes.post('/user/plans', Auth.isAuthenticated, function (req, res) {
 
     });
 
     /**
      * modify a training plan(s)
      */
-    apiRoutes.put('/user/plans', function (req, res) {
+    apiRoutes.put('/user/plans', Auth.isAuthenticated, function (req, res) {
 
     });
 
     /**
      * upload user image
      */
-    apiRoutes.post('/user/profile-img', function (req, res) {
+    apiRoutes.post('/user/profile-img', Auth.isAuthenticated, function (req, res) {
         if (!req.files) return res.status(400).send('No files were uploaded.');
 
         let profileImg = req.files.profileImg;

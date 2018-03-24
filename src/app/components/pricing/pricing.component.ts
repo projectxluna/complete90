@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pricing',
@@ -13,7 +14,8 @@ export class PricingComponent implements OnInit {
   coachPrice = '300.00';
   plans = {};
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,
+    private router: Router) {
     this.dataService.getClient().subscribe((res) => {
       if (res) {
         this.processPlans(res.plans);
@@ -25,22 +27,31 @@ export class PricingComponent implements OnInit {
   }
 
   setCycle(cycle) {
-    if (cycle && cycle === 'yearly') {
-      this.coachPrice = this.plans['coach-yearly'].price || '300.0';
-      this.playerPrice = this.plans['player-yearly'].price || '240.0';
-
-      this.isYearly = true;
-    } else if (cycle && cycle === 'monthly') {
-      this.coachPrice = this.plans['coach-monthly'].price || '34.99';
-      this.playerPrice = this.plans['player-monthly'].price || '29.99';
-
-      this.isYearly = false;
-    }
+    this.coachPrice = this.plans['coach-'+cycle].price || '300.0';
+    this.playerPrice = this.plans['player-'+cycle].price || '240.0';
+    
+    this.isYearly = cycle === 'yearly';
   }
 
   processPlans(plans) {
     plans.forEach(f => {
       this.plans[f.id] = f;
     });
+  }
+
+  selectPlan(type) {
+    let id = '';
+
+    if (type && type === 'player' && this.isYearly) {
+      id = 'player-yearly'
+    } else if (type && type === 'coach' && this.isYearly) {
+      id = 'coach-yearly';
+    } else if (type && type === 'player' && !this.isYearly) {
+      id = 'player-monthly';
+    } else if (type && type === 'coach' && !this.isYearly) {
+      id = 'coach-monthly';
+    }
+
+    this.router.navigate(['/paynow'], { queryParams: { id: id }});
   }
 }

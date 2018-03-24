@@ -10,6 +10,7 @@ import { TrainingComponent } from './components/training';
 import { PricingComponent } from './components/pricing';
 import { SessionsComponent } from './components/sessions';
 import { PaymentComponent } from './components/pricing/payment';
+import { DashboardComponent } from './components/dashboard';
 
 const appRoutes: Routes = [
     { path: '', component: MainComponent },
@@ -18,8 +19,9 @@ const appRoutes: Routes = [
     { path: 'about', component: AboutusComponent },
     { path: 'training', component: TrainingComponent },
     { path: 'pricing', component: PricingComponent },
+    { path: 'paynow', component: PaymentComponent, canActivate: [AuthGuard] },
     { path: 'sessions', component: SessionsComponent },
-    { path: 'paynow', component: PaymentComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

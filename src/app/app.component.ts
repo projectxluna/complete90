@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { RoutingState } from './services';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,7 @@ import { Component, ViewChild } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {
+  constructor(routingState: RoutingState) {
+    routingState.loadRouting();
   }
 }

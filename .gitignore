@@ -43,3 +43,4 @@ Thumbs.db
 notes
 server/config.js
 public/imgs/profile/*.jpg
+package-lock.json
