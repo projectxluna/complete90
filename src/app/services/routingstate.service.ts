@@ -6,9 +6,7 @@ import { filter } from "rxjs/operators";
 export class RoutingState {
     private history = [];
 
-    constructor(
-        private router: Router
-    ) { }
+    constructor(private router: Router) { }
 
     public loadRouting(): void {
         this.router.events
