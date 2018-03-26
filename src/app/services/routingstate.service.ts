@@ -23,6 +23,6 @@ export class RoutingState {
     }
 
     public getPreviousUrl(): string {
-        return this.history[this.history.length - 2] || '/index';
+        return this.history[this.history.length - 2] || '/';
     }
 }

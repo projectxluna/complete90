@@ -29,6 +29,7 @@ import { PricingComponent } from './components/pricing/pricing.component';
 import { TrainingComponent } from './components/training/training.component';
 import { PaymentComponent } from './components/pricing/payment/payment.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 
@@ -46,6 +47,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     TrainingComponent,
     PaymentComponent,
     DashboardComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
