@@ -11,7 +11,8 @@ var paymentController = {
     getClientToken: function (callback) {
         gateway.clientToken.generate({}, function (err, response) {
             if (err) {
-                callback(err)
+                callback(err);
+                return;
             }
             if (response.clientToken) {
                 callback(response.clientToken)
@@ -24,7 +25,8 @@ var paymentController = {
     getPlansAvailable: function (callback) {
         gateway.plan.all(function (err, response) {
             if (err) {
-                callback(err)
+                callback(err);
+                return;
             }
             if (response.plans) {
                 callback(response.plans)
@@ -33,23 +35,32 @@ var paymentController = {
             }
         });
     },
-    createSubscription: function (nonce, user, planId, callback) {
+    createSubscription: function (paymentMethod, user, planId, callback) {
+        var name = user.name.split(' ')
+        //create the customer
         gateway.customer.create({
-            firstName: user.firstName,
-            lastName: user.lastName,
-            paymentMethodNonce: nonce
+            firstName: name[0],
+            lastName: name[1],
+            email: user.email,
+            paymentMethodNonce: paymentMethod.nonce
         }, function (err, result) {
-            if (err) return callback(err);
+            if (err) {
+                callback(err);
+                return;
+            }
+            
             if (result.success) {
-                console.log(result);
                 var response = {};
                 response.customer = result.customer;
                 var token = result.customer.paymentMethods[0].token;
                 gateway.subscription.create({
                     paymentMethodToken: token,
-                    planId: plan
+                    planId: planId
                 }, function (err, result) {
-                    if (err) callback(err);
+                    if (err) {
+                        callback(err);
+                        return;
+                    }
                     response.subscription = result;
                     callback(undefined, response);
                 });
@@ -60,7 +71,12 @@ var paymentController = {
         gateway.subscription.cancel(subscriptionId, function (err, result) {
             callback(err, result);
         });
+    },
+    removePaymentCard: function (customerId, callback) {
+        gateway.customer.delete(customerId, function (err) {
+            callback(err);
+        });
     }
-    
+
 }
 module.exports = paymentController;

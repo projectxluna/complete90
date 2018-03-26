@@ -11,23 +11,27 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PaymentComponent implements OnInit {
 
+  error = '';
   plans = {};
   selectedPlan = {
     name: '',
     price: 0
   };
-  static id;
 
+  static id;
   static dropinInstance;
   static canSubmitPayment = false;
-
   static _dataService;
+  static _error;
+  static _router;
+
   constructor(private dataService: DataService,
     private authenticationService: AuthenticationService,
     private router: Router,
     private route: ActivatedRoute) {
       PaymentComponent._dataService = dataService;
-      
+      PaymentComponent._router = router;
+
       // Get our braintree token and avaialable plans
       this.dataService.getClient().subscribe((res) => {
         if (res) {
@@ -40,7 +44,7 @@ export class PaymentComponent implements OnInit {
           }, function (err, dropinInstance) {
             if (err) {
               // Handle any errors that might've occurred when creating Drop-in
-              console.error(err);
+              PaymentComponent._router.navigate(['/pricing']);
               return;
             }
             PaymentComponent.canSubmitPayment = true;
@@ -51,7 +55,12 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
-    PaymentComponent.id =  this.route.snapshot.queryParams["id"];
+    let planId = this.route.snapshot.queryParams["id"];
+    if (!planId || planId === '') {
+      this.router.navigate(['/pricing']);
+      return;
+    } 
+    PaymentComponent.id = planId;
   }
 
   processPlans(plans) {
@@ -69,12 +78,15 @@ export class PaymentComponent implements OnInit {
           // Handle errors in requesting payment method
           return;
         }
-        
         // Send payload.nonce to your server
         PaymentComponent._dataService.beginSubscription(payload, PaymentComponent.id).subscribe((res) => {
-          console.log(res);
+          if (res && res.success) {
+            PaymentComponent._router.navigate(['/dashboard']);
+          } else {
+            // sorry we are unable to process your transaction right now
+            PaymentComponent._error = 'sorry we are unable to process your transaction right now';
+          }
         });
-        PaymentComponent.canSubmitPayment = true;
       });
     }
   } 
