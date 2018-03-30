@@ -34,6 +34,13 @@ form, span{
 	font-size: 16px;
 }
 
+.alert-danger {
+    color: #fd1541;
+    background-color: transparent;
+    border-color: transparent;
+    text-align: center;
+}
+
 /*----------------------------1. BACKGROUND--------------------------*/
 .loginbg{
 	background-image: url('../../../assets/login-bg.jpg');
