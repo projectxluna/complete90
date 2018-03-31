@@ -56,7 +56,7 @@ export class DataService {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
     // get users from api
-    return this.http.post('api/braintree/subsribe', { nonce: payload.nonce, planId: planId }, options)
+    return this.http.post('api/braintree/subsribe', { paymentPayload: payload, planId: planId }, options)
       .map((response: Response) => {
         if (response.json() && response.json().success) {
           return response.json();

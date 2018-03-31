@@ -36,26 +36,37 @@ module.exports = function (apiRoutes) {
      */
     apiRoutes.post('/braintree/subsribe', Auth.isAuthenticated, function (req, res) {
         var userId = req.decoded.userId
-        var paymentMethodNonce = req.nonce;
-        var planId = req.planId;
+        var paymentPayload = req.body.paymentPayload;
+        var planId = req.body.planId;
 
         User.findById(userId, function (err, user) {
-            Payments.createSubscription(paymentMethodNonce, user, planId, function (err, result) {
+            Payments.createSubscription(paymentPayload, user, planId, function (err, result) {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                user.braintree.customer.id = result.customer.id;
-                user.braintree.customer.paymentMethods = result.customer.paymentMethods;
-                user.braintree.customer.subscription = result.subscription;
+                if (result.subscription.success) {
+                    delete result.subscription.descriptor;
+                    delete result.subscription.transactions;
+                    delete result.subscription.statusHistory;
+                    delete result.subscription.getGateway;
+                    delete result.subscription.success;
 
-                user.save(function (err, user) {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-                    res.json({
-                        success: true
-                    });
-                });
+                    user.braintree.id = result.customer.id;
+                    user.braintree.paymentMethods = result.customer.paymentMethods;
+                    user.braintree.creditCards = result.customer.creditCards;
+                    user.subscription = result.subscription;
+
+                    user.save()
+                        .then(function (user) {
+                            res.json({
+                                success: true
+                            });
+                        }).catch(function (err) {
+                            if (err) {
+                                return res.status(500).send(err);
+                            }
+                        });
+                }
             });
         });
     });

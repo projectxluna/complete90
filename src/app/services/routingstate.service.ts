@@ -6,9 +6,7 @@ import { filter } from "rxjs/operators";
 export class RoutingState {
     private history = [];
 
-    constructor(
-        private router: Router
-    ) { }
+    constructor(private router: Router) { }
 
     public loadRouting(): void {
         this.router.events
@@ -23,6 +21,6 @@ export class RoutingState {
     }
 
     public getPreviousUrl(): string {
-        return this.history[this.history.length - 2] || '/index';
+        return this.history[this.history.length - 2] || '/';
     }
 }

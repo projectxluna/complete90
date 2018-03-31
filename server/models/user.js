@@ -20,17 +20,16 @@ var userSchema = mongoose.Schema({
     coach: Boolean,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    height           : String,
-    position         : String,
-    foot             : String,
-    avatarURL        : String,
-    braintree : {
-        customer: {
-            id: String,
-            paymentMethods: [],
-            subscription: String
-        }
-    }         
+    height: String,
+    position: String,
+    foot: String,
+    avatarURL: String,
+    braintree: {
+        id: String,
+        paymentMethods : [],
+        creditCards: [],
+    },
+    subscription: {}
 },
 {
     timestamps: true,
