@@ -57,6 +57,13 @@ export class AuthenticationService {
       });
   }
 
+  changePassword(oldPassword: string, newPassword: string, verifyPassword: string, token: string): Observable<any> {
+    return this.http.post('/api/reset_password', { newPassword: newPassword, verifyPassword: verifyPassword, token: token })
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   resetPassword(newPassword: string, verifyPassword: string, token: string): Observable<any> {
     return this.http.post('/api/reset_password', { newPassword: newPassword, verifyPassword: verifyPassword, token: token })
       .map((response: Response) => {

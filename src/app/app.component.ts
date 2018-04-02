@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { RoutingState } from './services';
+import { RoutingState, DataService } from './services';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -19,6 +19,6 @@ export class AppComponent implements OnInit {
   }
 
   constructor(routingState: RoutingState, private router: Router) {
-    routingState.loadRouting();
+      routingState.loadRouting();
   }
 }

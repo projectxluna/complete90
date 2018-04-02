@@ -9,7 +9,7 @@ import { AuthenticationService } from '../../services';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-
+  me;
   avatarUrl = "/public/imgs/profile/default.jpg";
 
   constructor(
@@ -17,8 +17,9 @@ export class NavComponent implements OnInit {
     private dataService: DataService,
     private authenticationService: AuthenticationService) {
     // get the avatar url
-    this.dataService.getUserProfile().subscribe(result => {
+    this.dataService.getMe().subscribe(result => {
       if (result && result.success == true) {
+        this.me = result;
         this.avatarUrl = result.profile.avatarURL;
       }
     });
@@ -31,6 +32,13 @@ export class NavComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  hasSubscription() {
+    if (!this.me || !this.me.profile.subscription) {
+      return false;
+    }
+    return true;
   }
 
   logout() {

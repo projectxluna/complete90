@@ -9,14 +9,10 @@
     </div>
 <!-- HERO IMAGE END-->
 
-
 <!-- DASHBOARD TILES -->
 	<div class="padding">
-
-
 		<!-- QUICK STATS TILES -->
 		<div class="row">
-
 			<div class="col-xs-12 col-sm-4">
 				<div class="box p-a stat1">
 					<div class="pull-left m-r">
@@ -62,11 +58,8 @@
 		</div>
 		<!-- QUICK STATS SECTION END-->
 
-
-
 		<!-- PROFILE & SUGGESTED TILES -->
 		<div class="row" id="mainTiles">
-
 			<div class="col-sm-12 col-md-6">
 				<div class="box p-a">
 					<div class="box-header">
@@ -91,7 +84,7 @@
 					<div class="col-md-12 text-center">
 						<img src="assets/player-pic.png" class="profilePic">
 						<div class="profileName">
-							<h3>NAME</h3>
+							<h3>{{ getMe().profile.name }}</h3>
 						</div>
 					</div>
 					<ul class="list">
@@ -101,7 +94,6 @@
 					</ul>
 				</div>
 			</div>
-
 
 			<div class="col-sm-12 col-md-6">
 				<div class="box p-a">
@@ -152,10 +144,8 @@
 		</div>
 		<!-- PROFILE & SUGGESTED TILES END-->
 
-
 		<!-- SETTINGS TILES -->
 		<div class="row mainTiles" id="">
-
 			<div class="col-xs-12 col-md-4">
 				<div class="box p-a">
 					<div class="box-header">
@@ -166,17 +156,17 @@
 				        <ul class="nav">
 							<li class="nav-item inline">
 		            			<a class="nav-link">
-		              				<i class="fa fa-plus" aria-hidden="true"></i>
+		              				<i class="fa fa-plus" aria-hidden="true" (click)="toggleSecurity()"></i>
 		            			</a>
 		          			</li>
 				        </ul>
 				    </div>
 
-				    <div class="desc-p">
+				    <div *ngIf="securityActive" class="desc-p">
 				    	<small>Use the form below if you wish to update your password</small>
 					</div>
 
-				    <form class="form-p">
+				    <form *ngIf="securityActive" class="form-p">
 				    	<div class="form-group">
 				    		<input type="password" name="oldpass" placeholder="Old Password">
 				    	</div>
@@ -205,17 +195,17 @@
 				        <ul class="nav">
 							<li class="nav-item inline">
 		            			<a class="nav-link">
-		              				<i class="fa fa-plus" aria-hidden="true"></i>
+		              				<i class="fa fa-plus" aria-hidden="true" (click)="togglePayment()"></i>
 		            			</a>
 		          			</li>
 				        </ul>
 				    </div>
 
-				    <div class="desc-p">
+				    <div *ngIf="paymentActive" class="desc-p">
 				    	<small>Current payment method</small>
 					</div>
 
-					<div class="desc-p currentPaybg">
+					<div *ngIf="paymentActive" class="desc-p currentPaybg">
 						<div class="row m-0">
 							<div class="col-lg-3 col-xs-3 text-center">
 								<h6>Payment</h6>
@@ -244,15 +234,13 @@
 
 					</div>
 
-				    <div class="desc-p updateBtn">
+				    <div *ngIf="paymentActive" class="desc-p updateBtn">
 				    	<small>Update your PayPal® payment info</small>
 					</div>	
 
-					<div class="desc-p">
+					<div *ngIf="paymentActive" class="desc-p">
 						<button class="paypalBtn">UPDATE PAYPAL</button>
 					</div>				
-
-
 				</div>
 			</div>
 
@@ -266,17 +254,17 @@
 				        <ul class="nav">
 							<li class="nav-item inline">
 		            			<a class="nav-link">
-		              				<i class="fa fa-plus" aria-hidden="true"></i>
+		              				<i class="fa fa-plus" aria-hidden="true" (click)="toggleNotification()"></i>
 		            			</a>
 		          			</li>
 				        </ul>
 				    </div>
 
-				    <div class="desc-p">
+				    <div *ngIf="notificationActive" class="desc-p">
 				    	<small>Below are your notification preferences</small>
 					</div>
 
-					<div class="desc-p">
+					<div *ngIf="notificationActive" class="desc-p">
 						<div class="row m-0">
 							
 							<div class="form-group2 col-xs-1 no-pa">
@@ -304,21 +292,10 @@
 						</div>
 
 					</div>
-
-
-
-
 				</div>
 			</div>			
-
-
-
 		</div>		
 		<!-- SETTINGS TILES END -->
-
-
-
-
 	</div>
 <!-- DASHBOARD TILES END-->
 

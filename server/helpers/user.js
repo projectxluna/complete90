@@ -9,6 +9,7 @@
                 name: user.name,
                 email: user.email,
                 coach: user.coach,
+                subscription: user.braintree.subscription,
                 avatarURL: user.avatarURL
             }
             if (!user.coach) {

@@ -28,8 +28,8 @@ var userSchema = mongoose.Schema({
         id: String,
         paymentMethods : [],
         creditCards: [],
-    },
-    subscription: {}
+        subscription: {}
+    }
 },
 {
     timestamps: true,

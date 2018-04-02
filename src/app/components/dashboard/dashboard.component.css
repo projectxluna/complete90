@@ -315,49 +315,6 @@ input{
 	padding-left: 0px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
 @media (max-width: 1024px) {
@@ -373,11 +330,6 @@ input{
 
 }
 
-
-
-
-
-
 @media (max-width: 768px) {
 
 	.vidName{
@@ -385,11 +337,6 @@ input{
 	}
 
 }
-
-
-
-
-
 
 @media (max-width: 414px) {
 
