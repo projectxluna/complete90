@@ -13,8 +13,8 @@ export class DataService {
     private authenticationService: AuthenticationService) {
   }
 
-  getUserProfile(cache: boolean = false): Observable<any> {
-    if (!cache && this.cachedProfile) {
+  getUserProfile(cache: boolean = true): Observable<any> {
+    if (cache && this.cachedProfile) {
       console.log('cache hit on user profile');
       return Observable.create((observer) => {
         observer.next(this.cachedProfile);
