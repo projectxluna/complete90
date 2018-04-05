@@ -218,29 +218,21 @@
 							</div>							
 						</div>
 
-						<div class="row m-0">
+						<div *ngFor="let card of profile.creditCards" class="row m-0">
 							<div class="col-lg-3 col-xs-3 text-center">
-								<!-- <i class="fa fa-cc-visa fa-2x" aria-hidden="true"></i> -->
-								<i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i>
-								<!-- <i class="fa fa-cc-mastercard fa-2x" aria-hidden="true"></i> -->
+								<i *ngIf="card.cardType === 'Visa'" class="fa fa-cc-visa fa-2x" aria-hidden="true"></i>
+								<i *ngIf="card.cardType === 'Paypal'" class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i>
+								<i *ngIf="card.cardType === 'Master'" class="fa fa-cc-mastercard fa-2x" aria-hidden="true"></i>
 							</div>
 							<div class="col-lg-6 col-xs-6 text-center">
-								<h5 class="ccFile">**** **** **** **45</h5>
+								<h5 class="ccFile">**** **** **** {{ card.last4 }}</h5>
 							</div>
 							<div class="col-lg-3 col-xs-3 text-center">
-								<h5 class="ccFile">12/20</h5>
+								<h5 class="ccFile">{{ card.expirationDate }}</h5>
 							</div>							
 						</div>
 
-					</div>
-
-				    <div *ngIf="paymentActive" class="desc-p updateBtn">
-				    	<small>Update your PayPal® payment info</small>
-					</div>	
-
-					<div *ngIf="paymentActive" class="desc-p">
-						<button class="paypalBtn">UPDATE PAYPAL</button>
-					</div>				
+					</div>			
 				</div>
 			</div>
 

@@ -14,7 +14,8 @@ export class DashboardComponent implements OnInit {
   paymentActive = false;
   profile = {
     name: '',
-    subscription: undefined
+    subscription: undefined,
+    creditCards: []
   };
   model: any = {};
   loading: boolean = false;
