@@ -5,8 +5,9 @@
         const hbs = require('nodemailer-express-handlebars');
         const nodemailer = require('nodemailer');
         const path = require('path');
-        const email = process.env.MAILER_EMAIL_ID || 'emailhere@gmail.com';
-        const pass = process.env.MAILER_PASSWORD || 'passwordhere'; //remember to turn off secure app in gmail
+        const env = require('./env.json');
+        const email = env.MAILER_EMAIL_ID;
+        const pass = env.MAILER_PASSWORD //remember to turn off secure app in gmail
 
         var smtpTransport = nodemailer.createTransport({
             service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',

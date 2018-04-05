@@ -5,7 +5,8 @@ import { Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [DataService]
 })
 export class AppComponent implements OnInit {
 
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  constructor(routingState: RoutingState, private router: Router) {
+  constructor(routingState: RoutingState, private router: Router, public dataService: DataService) {
       routingState.loadRouting();
   }
 }

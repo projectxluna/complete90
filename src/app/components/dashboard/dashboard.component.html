@@ -49,7 +49,7 @@
 						</span>
 					</div>
 					<div class="clear">
-						<h1 class="m-0">300 days</h1>
+						<h1 class="m-0">{{ getSubscriptionLeft() }} days</h1>
 						<h2 class="m-0">Left of membership </h2>
 					</div>
 				</div>
@@ -84,7 +84,7 @@
 					<div class="col-md-12 text-center">
 						<img src="assets/player-pic.png" class="profilePic">
 						<div class="profileName">
-							<h3>{{ getMe().profile.name }}</h3>
+							<h3>{{ profile.name }}</h3>
 						</div>
 					</div>
 					<ul class="list">
@@ -168,18 +168,18 @@
 
 				    <form *ngIf="securityActive" class="form-p">
 				    	<div class="form-group">
-				    		<input type="password" name="oldpass" placeholder="Old Password">
+							<input type="password" [(ngModel)]="model.oldPassword" name="oldpass" class="form-control" placeholder="Old Password">
 				    	</div>
 
 				    	<div class="form-group">
-				    		<input type="password" name="newpass" placeholder="New Password">
+							<input type="password" [(ngModel)]="model.newPassword" name="newpass" class="form-control" placeholder="New Password">
 				    	</div>				    	
 
 				    	<div class="form-group">
-				    		<input type="password" name="newpassCon" placeholder="Confirm New Password">
+							<input type="password" [(ngModel)]="model.verifyPassword" name="newpassCon" class="form-control" placeholder="Confirm New Password">
 				    	</div>				    	
 
-				    	<button class="savePassbtn">SAVE</button>
+				    	<button (click)="updatePassword()" class="savePassbtn">SAVE</button>
 				    </form>
 
 				</div>

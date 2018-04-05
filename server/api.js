@@ -177,7 +177,7 @@ module.exports = function (app) {
 
                             mailer.smtpTransport().sendMail(data, function (err) {
                                 if (!err) {
-                                    return res.json({ success: true});
+                                    return res.json({ success: true });
                                 } else {
                                     return res.status(422).send({
                                         message: err
@@ -188,6 +188,50 @@ module.exports = function (app) {
                     });
                 }
             }
+        });
+    });
+
+    apiRoutes.post('/update_password', Auth.isAuthenticated, function (req, res) {
+        User.findOne({ _id: req.decoded.userId }, function (err, user) {
+            if (err) return res.status(500).send(err);
+
+            let oldPassword = req.body.oldPassword;
+            let newPassword = req.body.newPassword;
+            let verifyPassword = req.body.verifyPassword;
+
+            if (req.body.newPassword !== req.body.verifyPassword || !user.validPassword(oldPassword)) {
+                res.json({ success: false, message: 'Failed to update password' });
+            }
+
+            user.password = user.generateHash(newPassword);
+            user.save(function (err) {
+                if (err) {
+                    return res.status(422).send({
+                        message: err
+                    });
+                } else {
+                    return res.json({ success: true });
+                    // var data = {
+                    //     to: user.email,
+                    //     from: mailer.email,
+                    //     template: 'reset-password-email',
+                    //     subject: 'Password Reset Confirmation',
+                    //     context: {
+                    //         name: user.name.split(' ')[0]
+                    //     }
+                    // };
+
+                    // mailer.smtpTransport().sendMail(data, function (err) {
+                    //     if (!err) {
+                    //         return res.json({ success: true });
+                    //     } else {
+                    //         return res.status(422).send({
+                    //             message: err
+                    //         });
+                    //     }
+                    // });
+                }
+            });
         });
     });
 

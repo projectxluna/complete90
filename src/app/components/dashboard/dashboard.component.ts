@@ -12,28 +12,33 @@ export class DashboardComponent implements OnInit {
   securityActive = false;
   notificationActive = false;
   paymentActive = false;
-  me;
+  profile = {
+    name: '',
+    subscription: undefined
+  };
+  model: any = {};
+  loading: boolean = false;
 
   constructor(private router: Router,
     private dataService: DataService,
     private authenticationService: AuthenticationService) {
-      dataService.getMe().subscribe(result => {
-        if (result && result.success) {
-          this.me = result;
-        } else {
-          //logout and show login page
-        }
-      });
-    }
-  
-  getMe() {
-    if (!this.me) {
-      return;
-      // logout and show login page
-    }
-    return this.me;
+    dataService.getUserProfile().subscribe((user) => {
+      this.profile = user.profile;
+    });
   }
+
   ngOnInit() {
+  }
+
+  getSubscriptionLeft() {
+    if (!this.profile.subscription) {
+      return 0;
+    }
+    var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    var firstDate = new Date(this.profile.subscription.nextBillingDate);
+    var secondDate = new Date();
+
+    return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
   }
 
   toggleSecurity() {
@@ -46,5 +51,24 @@ export class DashboardComponent implements OnInit {
 
   toggleNotification() {
     this.notificationActive = !this.notificationActive;
+  }
+
+  updatePassword() {
+    if (!this.model.oldPassword || !this.model.newPassword || !this.model.verifyPassword) {
+      // 'make sure all required fields are completed!';
+      console.log('make sure all required fields are completed!');
+      return;
+    }
+    this.loading = true;
+
+    this.authenticationService.changePassword(this.model.oldPassword, this.model.newPassword, this.model.verifyPassword)
+      .subscribe(result => {
+        if (result && result.success == true) {
+          this.loading = false;
+        } else {
+          //'please try again. something went wrong';
+          this.loading = false;
+        }
+      });
   }
 }
