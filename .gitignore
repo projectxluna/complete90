@@ -45,5 +45,5 @@ server/config.js
 public/imgs/profile/*.jpg
 package-lock.json
 server/helpers/pk-APKAJMPYCKBXNVYFUIHA.pem
-server/helpers/env.json
 video_structure.json
+server/helpers/env.json
