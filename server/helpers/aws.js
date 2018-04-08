@@ -19,53 +19,6 @@ var awsController = {
                 expireTime: expireAt
             }
         );
-    },
-    listCategories: function (callback) {
-        s3 = new AWS.S3({ apiVersion: '2006-03-01' });
-
-        var bucketParams = {
-            Bucket: 'complete90',
-            Prefix: 'videos/',
-            Delimiter: '/',
-        };
-
-        s3.listObjectsV2(bucketParams, function (err, data) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(undefined, data.CommonPrefixes)
-            }
-        });
-    },
-    listVideos: function (config, callback) {
-        if (!config || !config.categories || config.categories.length < 1) {
-            return;
-        }
-        let categories = config.categories;
-        let result = {};
-
-        s3 = new AWS.S3({ apiVersion: '2006-03-01' });
-        categories.forEach(dir => {
-            var bucketParams = {
-                Bucket: 'complete90',
-                Prefix: dir.Prefix,
-                Delimiter: '/',
-            };
-
-            s3.listObjectsV2(bucketParams, function (err, data) {
-                if (err) {
-                    callback(err);
-                } else {
-                    if (data.Contents.length > 0) {
-                        let k = data.Contents[0].Key.split('/')[1];
-                        result[k] = data.Contents.filter(x => x.Key !== dir.Prefix);
-                    }
-                }
-                if(Object.keys(result).length == categories.length) {
-                    callback(undefined, result);
-                }
-            });
-        });
     }
 }
 module.exports = awsController;
