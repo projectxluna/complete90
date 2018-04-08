@@ -10,7 +10,9 @@ import { AuthenticationService } from '../../services';
 })
 export class NavComponent implements OnInit {
   avatarUrl = "/public/imgs/profile/default.jpg";
-  userProfile;
+  userProfile = {
+    subscription: undefined,
+  };
 
   constructor(
     private router: Router,
@@ -30,13 +32,6 @@ export class NavComponent implements OnInit {
       return true;
     }
     return false;
-  }
-
-  hasSubscription() {
-    if (!this.userProfile || !this.userProfile.subscription) {
-      return false;
-    }
-    return true;
   }
 
   logout() {

@@ -244,6 +244,8 @@ module.exports = function (app) {
         });
     });
     require('./braintree.route')(apiRoutes);
+    require('./contents.route')(apiRoutes);
     require('./user.route')(apiRoutes);
+
     app.use('/api', apiRoutes);
 };
