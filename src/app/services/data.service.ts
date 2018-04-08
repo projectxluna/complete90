@@ -6,20 +6,31 @@ import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class DataService {
+  cachedProfile;
 
   constructor(
     private http: Http,
     private authenticationService: AuthenticationService) {
   }
 
-  getUserProfile(): Observable<any> {
+  getUserProfile(cache: boolean = true): Observable<any> {
+    if (cache && this.cachedProfile) {
+      console.log('cache hit on user profile');
+      return Observable.create((observer) => {
+        observer.next(this.cachedProfile);
+      });
+    }
+
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
 
     // get users from api
     return this.http.get('/api/user/me', options)
-      .map((response: Response) => response.json());
+      .map((response: Response) => {
+        this.cachedProfile = response.json();
+        return this.cachedProfile;
+      });
   }
 
   uploadProfileImage(fileToUpload: File): Observable<boolean> {

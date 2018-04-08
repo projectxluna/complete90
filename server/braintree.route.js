@@ -45,16 +45,27 @@ module.exports = function (apiRoutes) {
                     return res.status(500).send(err);
                 }
                 if (result.subscription.success) {
-                    delete result.subscription.descriptor;
-                    delete result.subscription.transactions;
-                    delete result.subscription.statusHistory;
-                    delete result.subscription.getGateway;
-                    delete result.subscription.success;
+                    let sub = {
+                        createdAt: result.subscription['subscription'].createdAt,
+                        billingDayOfMonth: result.subscription['subscription'].billingDayOfMonth,
+                        billingPeriodEndDate: result.subscription['subscription'].billingPeriodEndDate,
+                        updatedAt: result.subscription['subscription'].updatedAt,
+                        currentBillingCycle: result.subscription['subscription'].currentBillingCycle,
+                        firstBillingDate: result.subscription['subscription'].firstBillingDate,
+                        id: result.subscription['subscription'].id,   
+                        merchantAccountId: result.subscription['subscription'].merchantAccountId,
+                        neverExpires: result.subscription['subscription'].neverExpires,
+                        nextBillAmount: result.subscription['subscription'].nextBillAmount,
+                        nextBillingDate: result.subscription['subscription'].nextBillingDate,
+                        paidThroughDate: result.subscription['subscription'].paidThroughDate,
+                        planId: result.subscription['subscription'].planId,
+                        status: result.subscription['subscription'].status,
+                    }
 
                     user.braintree.id = result.customer.id;
                     user.braintree.paymentMethods = result.customer.paymentMethods;
                     user.braintree.creditCards = result.customer.creditCards;
-                    user.subscription = result.subscription;
+                    user.braintree.subscription = sub;
 
                     user.save()
                         .then(function (user) {

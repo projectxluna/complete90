@@ -1,0 +1,361 @@
+/*--------------------------TABLE OF CONTENTS-------------------------*/
+/*
+0. GLOBAL CCS
+1. BANNER IMAGE
+2. QUICK STATS TILES
+3. PROFILE & SUGGESTED TILES
+4. SETTING TILES
+
+*/
+
+/*----------------------------0. GOBAL CSSS--------------------------*/
+
+div{
+	font-family: 'Montserrat';
+	/*font-family: 'Roboto', sans-serif;*/
+}
+
+.inactiveLink{
+   pointer-events: none;
+   cursor: default;
+}
+
+.rounded, .circle {
+    border-radius: 500px;
+}
+
+h4{
+	font-size: 14px;
+	padding-bottom: 10px;
+}
+
+h3{
+	font-size: 18px;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+input{
+	width: 250px;
+}
+
+.desc-p{
+	padding: 1rem;
+}
+
+.fa-plus, .fa-pencil{
+	color: #fd1541;
+}
+
+.box h3{
+	color: #0000008a;
+}
+
+
+/*----------------------------1. BANNER IMAGE--------------------------*/
+.bannerimage{
+	padding-top: 120px;
+	background-image: url('../../../assets/aboutus-banner.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 250px;
+	width: 100%;
+	color: white;
+}
+
+
+/*----------------------------2. QUICK STATS TILES--------------------------*/
+.padding{
+	padding: 24px;
+	background-color: #f9f9f9;
+}
+
+.box, .box-color {
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 1.5rem;
+    color: #00000066;
+    border: 1px solid #f7f7f7;
+}
+
+.p-a {
+    padding: 16px !important;
+}
+
+.m-r {
+    margin-right: 1rem !important;
+}
+
+.m-0 {
+    margin: 0 0!important;
+}
+
+.clear {
+    display: block;
+    overflow: hidden;
+}
+
+.stat1, .stat2, .stat3{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	/*color: #00000066;*/
+}
+
+.stat1 h1, .stat2 h1, .stat3 h1{
+	font-size: 22px;
+/*	margin-top: 10px;
+	margin-bottom: 0px;*/
+}
+
+.stat1 h2, .stat2 h2, .stat3 h2{
+	font-size: 18px;
+	/*margin-top: 5px;*/
+}
+
+.w-48 {
+    width: 48px;
+    height: 48px;
+    line-height: 58px;
+    display: inline-block;
+    text-align: center;
+}
+
+.accent {
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #a88add;
+}
+
+.accent2 {
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #0cc2aa;
+}
+
+.accent3 {
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #fcc100;
+}
+
+/*------------------------3. PROFILE & SUGGESTED TILES---------------------*/
+.box-header {
+    position: relative;
+    padding: 1rem;
+}
+
+.box-body {
+    padding: 1rem;
+}
+
+.box-tool {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 1rem;
+}
+
+.box-header h3 {
+    font-size: 20px;
+}
+
+.img-circle {
+    border-radius: 100%;
+}
+
+.profilePic{
+	max-width: 40%;
+}
+
+.listProfile {
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 3px;
+}
+
+.list-item {
+    display: block;
+    position: relative;
+    padding: 12px 16px;
+}
+
+.list li{
+	padding-bottom: 10px;
+}
+
+.profileName{
+	padding-bottom: 20px;
+}
+
+.suggestedHeader{
+	padding-bottom: 30px;
+}
+
+.listVids{
+	padding-left: 0px;
+	padding-top: 22px;
+	padding-bottom: 22px;
+}
+
+.listVids li{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.listVids h4{
+	font-size: 14px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#vidBG{
+	background-color: #f9f9f9;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.vidLink{
+	/*color: red;*/
+	text-decoration: none;
+}
+
+.vidPic{
+	max-width: 80%;
+}
+
+.vidName{
+	padding-top: 44px;
+}
+
+#seeMorebtn{
+	color: #fd1541;
+}
+
+
+/*------------------------4. SETTINGS TILES--------------------------*/
+
+.form-p{
+	padding: 1rem;
+	padding-top: 30px;
+}
+
+.form-group{
+	width: 90px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.form-group input{
+	border: 0px;
+	border-bottom: 1px solid #fd1541;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.form-group input:focus{
+	outline: none;
+}
+
+.savePassbtn{
+	color: white;
+	background-color: #5cda57;
+	border: 0px;
+	padding: 7px 22px;
+}
+
+.currentPaybg{
+	background-color: #f9f9f9;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+.ccFile{
+	color: #000000a8;
+}
+
+.fa-cc-visa{
+	color: #1a1f71;
+}
+
+.fa-cc-paypal{
+	color: #009cde;
+}
+
+.fa-cc-mastercard{
+	color: #f79f1a;
+}
+
+.fa-2x {
+    font-size: 2.4em;
+}
+
+.updateBtn{
+	padding-top: 30px;
+}
+
+.paypalBtn{
+	background-color: #009cde;
+	border: 0px;
+	color: white;
+	padding: 7px 22px;
+}
+
+.no-pa{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1024px) {
+	.listVids{
+		padding-left: 0px;
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+
+	.vidName{
+		padding-top: 24px;
+	}
+
+}
+
+@media (max-width: 768px) {
+
+	.vidName{
+		padding-top: 53px;
+	}
+
+}
+
+@media (max-width: 414px) {
+
+	.vidName{
+		padding-top: 14px;
+	}
+
+	.box-header h3 {
+	    font-size: 16px;
+	}
+
+	.nav>li>a {
+	    position: relative;
+	    display: block;
+	    padding: 5px 10px;
+	}
+
+	input{
+		width: 270px;
+	}
+
+}

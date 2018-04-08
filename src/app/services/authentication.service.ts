@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
@@ -52,6 +52,17 @@ export class AuthenticationService {
 
   forgotPassword(email: string): Observable<any> {
     return this.http.post('/api/forgot_pasword', { email: email })
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  changePassword(oldPassword: string, newPassword: string, verifyPassword: string): Observable<any> {
+    // add authorization header with jwt token
+    let headers = new Headers({ 'x-access-token': this.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/update_password', { oldPassword: oldPassword, newPassword: newPassword, verifyPassword: verifyPassword }, options)
       .map((response: Response) => {
         return response.json();
       });

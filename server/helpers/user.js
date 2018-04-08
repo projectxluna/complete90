@@ -9,6 +9,8 @@
                 name: user.name,
                 email: user.email,
                 coach: user.coach,
+                subscription: user.braintree.subscription,
+                creditCards: user.braintree.creditCards,
                 avatarURL: user.avatarURL
             }
             if (!user.coach) {

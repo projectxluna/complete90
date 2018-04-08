@@ -1,11 +1,12 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { RoutingState } from './services';
+import { RoutingState, DataService } from './services';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [DataService]
 })
 export class AppComponent implements OnInit {
 
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  constructor(routingState: RoutingState, private router: Router) {
-    routingState.loadRouting();
+  constructor(routingState: RoutingState, private router: Router, public dataService: DataService) {
+      routingState.loadRouting();
   }
 }

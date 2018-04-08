@@ -9,28 +9,34 @@ import { AuthenticationService } from '../../services';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-
   avatarUrl = "/public/imgs/profile/default.jpg";
+  userProfile;
 
   constructor(
     private router: Router,
     private dataService: DataService,
     private authenticationService: AuthenticationService) {
-    // get the avatar url
-    this.dataService.getUserProfile().subscribe(result => {
-      if (result && result.success == true) {
-        this.avatarUrl = result.profile.avatarURL;
-      }
-    });
+      dataService.getUserProfile().subscribe((user) => {
+        this.avatarUrl = user.profile.avatarURL;
+        this.userProfile = user.profile;
+      });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   isLoggedIn() {
-    if (localStorage.getItem('token')) {
+    if (this.authenticationService.token) {
       return true;
     }
     return false;
+  }
+
+  hasSubscription() {
+    if (!this.userProfile || !this.userProfile.subscription) {
+      return false;
+    }
+    return true;
   }
 
   logout() {
