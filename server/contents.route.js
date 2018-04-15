@@ -6,6 +6,13 @@ module.exports = function (apiRoutes) {
     var AWS = require('./helpers/aws');
 
     /**
+     * get free sessins
+     */
+    apiRoutes.get('/free-sessions', function (req, res) {
+
+    });
+
+    /**
      * get all sessions
      */
     apiRoutes.get('/sessions', Auth.isAuthenticated, function (req, res) {
@@ -20,22 +27,23 @@ module.exports = function (apiRoutes) {
             }
             res.json({
                 success: true,
-                sessions: result
+                content: result
             });
         });
     });
 
     // load sessions json structure
     function loadSessions(callback) {
-        let resourceLocation = env.VIDEO_STRUCTURE || 'https://s3.us-east-2.amazonaws.com/complete90/config/video_structure.json';
+        callback(null, JSON.stringify(require('../video_structure.json')));
+        // let resourceLocation = env.VIDEO_STRUCTURE || 'https://s3.us-east-2.amazonaws.com/complete90/config/video_structure.json';
 
-        request(resourceLocation, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                callback(null, body);
-            } else {
-                callback(error);
-            }
-        });
+        // request(resourceLocation, function (error, response, body) {
+        //     if (!error && response.statusCode == 200) {
+        //         callback(null, body);
+        //     } else {
+        //         callback(error);
+        //     }
+        // });
     }
 
     // traverse json structure and sign all paid video url
@@ -44,21 +52,15 @@ module.exports = function (apiRoutes) {
             callback(null, contentStructure);
         }
         contentStructure = JSON.parse(contentStructure);
-
-        for (var key in contentStructure) {
-            if (!contentStructure.hasOwnProperty(key)) continue;
-
-            var obj = contentStructure[key];
-
-            if (obj.content && obj.content.length > 1) {
-                for (let content of obj.content) {
-                    if (content.free) continue;
-                    try {
-                        content.link = AWS.signUrl(content.link);
-                    } catch (error) {
-                        console.log(error);
-                        delete content; // delete any content link that cant be signed
-                    }
+    
+        for (let session of contentStructure.sessions) {
+            for (let content of session.content) {
+                if (content.free) continue;
+                try {
+                    content.link = AWS.signUrl(content.link);
+                } catch (error) {
+                    console.log(error);
+                    // delete any content link that cant be signed
                 }
             }
         }

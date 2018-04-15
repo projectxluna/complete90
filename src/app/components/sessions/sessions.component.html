@@ -19,49 +19,37 @@
 			<!-- FILTER 1 -->
 			<div class="btn-group">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    FILTER 1 <span class="caret"></span>
+					<span *ngIf="selectedFilter.tag === ''">Tags</span>
+					<span *ngIf="selectedFilter.tag !== ''">{{ selectedFilter.tag }}</span>
+					<span class="caret"></span>
 				</button>
-				 <ul class="dropdown-menu">
-				 	<li><a>Action</a></li>
-				    <li><a>Another action</a></li>
-				    <li><a>Something else here</a></li>
-				  </ul>		  
+				<ul class="dropdown-menu">
+					<li *ngFor="let tag of filters.tags" (click)="selectTag(tag)"><a>{{ tag }}</a></li>
+				</ul>		  
 			</div>
 
 			<!-- FILTER 2 -->
 			<div class="btn-group">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    FILTER 2 <span class="caret"></span>
+					<span *ngIf="selectedFilter.category === ''">Categories</span>
+					<span *ngIf="selectedFilter.category !== ''">{{ selectedFilter.category }}</span>
+					<span class="caret"></span>
 				</button>
-				 <ul class="dropdown-menu">
-				 	<li><a>Action</a></li>
-				    <li><a>Another action</a></li>
-				    <li><a href="">Something else here</a></li>
-				  </ul>	  
-			</div>
-
-			<!-- FILTER 3 -->
-			<div class="btn-group">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    FILTER 3 <span class="caret"></span>
-				</button>
-				 <ul class="dropdown-menu">
-				 	<li><a>Action</a></li>
-				    <li><a>Another action</a></li>
-				    <li><a>Something else here</a></li>
-				  </ul>	  
+				<ul class="dropdown-menu">
+					<li *ngFor="let category of filters.categories" (click)="selectCategory(category)"><a>{{ category }}</a></li>
+				</ul>	  
 			</div>
 
 			<!-- FILTER: SKILL LEVEL -->
 			<div class="btn-group">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    SKILL LEVEL <span class="caret"></span>
+					<span *ngIf="selectedFilter.skillLevel === ''">Skill Level</span>
+					<span *ngIf="selectedFilter.skillLevel !== ''">{{ selectedFilter.skillLevel }}</span>
+					<span class="caret"></span>
 				</button>
-				 <ul class="dropdown-menu">
-				 	<li><a>BEGINNER</a></li>
-				    <li><a>INTERMEDIATE</a></li>
-				    <li><a>EXPERT</a></li>
-				  </ul>	  
+				<ul class="dropdown-menu">
+					<li *ngFor="let skillLevel of filters.skillLevel" (click)="selectSkillLevel(skillLevel)"><a>{{ skillLevel }}</a></li>
+				</ul>
 			</div>
 
 
@@ -243,29 +231,5 @@
 
 </div>
 <!-- VIDEO CONTENT END -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -36,7 +36,7 @@ export class DataService {
 
   getSessions(cache: boolean = true): Observable<any> {
     if (cache && this.cachedSessions) {
-      console.log('cache hit on user profile');
+      console.log('cache hit on sessions');
       return Observable.create((observer) => {
         observer.next(this.cachedSessions);
       });
