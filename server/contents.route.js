@@ -6,10 +6,22 @@ module.exports = function (apiRoutes) {
     var AWS = require('./helpers/aws');
 
     /**
-     * get free sessins
+     * get free sessions
      */
     apiRoutes.get('/free-sessions', function (req, res) {
-
+        waterfall([
+            loadFreeSession
+        ], function (err, result) {
+            if (err) {
+                return res.status(422).send({
+                    message: err
+                });
+            }
+            res.json({
+                success: true,
+                content: result
+            });
+        });
     });
 
     /**
@@ -32,6 +44,19 @@ module.exports = function (apiRoutes) {
         });
     });
 
+    // load free sessions
+    function loadFreeSession(callback) {
+        let contentStructure = require('../video_structure.json');
+        let freeSessions = [];
+
+        for (let session of contentStructure.sessions) {
+            if (session.free) {
+                freeSessions.push(session);
+            }
+        }
+        callback(null, freeSessions);
+    }
+
     // load sessions json structure
     function loadSessions(callback) {
         callback(null, JSON.stringify(require('../video_structure.json')));
@@ -53,9 +78,10 @@ module.exports = function (apiRoutes) {
         }
         contentStructure = JSON.parse(contentStructure);
     
+        let content = [];
         for (let session of contentStructure.sessions) {
+            if (session.free) continue;
             for (let content of session.content) {
-                if (content.free) continue;
                 try {
                     content.link = AWS.signUrl(content.link);
                 } catch (error) {
@@ -63,8 +89,9 @@ module.exports = function (apiRoutes) {
                     // delete any content link that cant be signed
                 }
             }
+            content.push(session);
         }
-        callback(null, contentStructure);
+        callback(null, content);
     }
 
     // should test integrity of data structure returned

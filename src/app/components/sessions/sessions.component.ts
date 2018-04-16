@@ -25,22 +25,15 @@ export class SessionsComponent implements OnInit {
 
   constructor(private dataService: DataService) {
     dataService.getSessions().subscribe((response) => {
-      if (response.success) {
-        this.sessions = response.sessions;
+      if (!response.success) return;
+      console.log('paid sessions', response.content);
+      this.collectTagsAndCategories(response.content)
+    });
 
-        let tags = [];
-        for (let session of response.content.sessions) {
-          this.filters.categories.push(session.name);
-
-          for (let content of session.content) {
-            if (content.tags) tags.push(...content.tags);
-          }
-        }
-
-        this.filters.tags = tags.filter(function (value, index, self) {
-          return self.indexOf(value) === index;
-        });
-      }
+    dataService.getFreeSessions().subscribe((response) => {
+      if (!response.success) return;
+      console.log('free sessions', response.content);
+      this.collectTagsAndCategories(response.content)
     });
   }
 
@@ -57,6 +50,21 @@ export class SessionsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  collectTagsAndCategories(sessions) {
+    let tags = [];
+    for (let session of sessions) {
+      this.filters.categories.push(session.name);
+
+      for (let content of session.content) {
+        if (content.tags) tags.push(...content.tags);
+      }
+    }
+
+    this.filters.tags = tags.filter(function (value, index, self) {
+      return self.indexOf(value) === index;
+    });
   }
 
 }

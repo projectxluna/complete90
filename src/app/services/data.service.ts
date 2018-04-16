@@ -8,6 +8,7 @@ import { AuthenticationService } from './authentication.service';
 export class DataService {
   cachedProfile;
   cachedSessions;
+  cachedFreeSession;
 
   constructor(
     private http: Http,
@@ -31,6 +32,22 @@ export class DataService {
       .map((response: Response) => {
         this.cachedProfile = response.json();
         return this.cachedProfile;
+      });
+  }
+
+  getFreeSessions(cache: boolean = true): Observable<any> {
+    if (cache && this.cachedFreeSession) {
+      console.log('cache hit on free sessions');
+      return Observable.create((observer) => {
+        observer.next(this.cachedFreeSession);
+      });
+    }
+
+    // get sessions from api
+    return this.http.get('/api/free-sessions')
+      .map((response: Response) => {
+        this.cachedFreeSession = response.json();
+        return this.cachedFreeSession;
       });
   }
 
