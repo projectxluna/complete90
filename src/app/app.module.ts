@@ -30,6 +30,7 @@ import { TrainingComponent } from './components/training/training.component';
 import { PaymentComponent } from './components/pricing/payment/payment.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { EventsComponent } from './components/events/events.component';
 
 
 
@@ -48,6 +49,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     PaymentComponent,
     DashboardComponent,
     SettingsComponent,
+    EventsComponent,
   ],
   imports: [
     BrowserModule,

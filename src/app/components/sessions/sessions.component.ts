@@ -53,7 +53,7 @@ export class SessionsComponent implements OnInit {
   }
 
   collectTagsAndCategories(sessions) {
-    let tags = [];
+    let tags = this.filters.tags;
     for (let session of sessions) {
       this.filters.categories.push(session.name);
 
