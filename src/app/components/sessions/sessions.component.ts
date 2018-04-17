@@ -20,20 +20,20 @@ export class SessionsComponent implements OnInit {
     skillLevel: ''
   }
 
-  sessions = {
-  }
+  sessions = [];
 
   constructor(private dataService: DataService) {
-    dataService.getSessions().subscribe((response) => {
-      if (!response.success) return;
-      console.log('paid sessions', response.content);
-      this.collectTagsAndCategories(response.content)
-    });
-
+    // get free content
     dataService.getFreeSessions().subscribe((response) => {
       if (!response.success) return;
-      console.log('free sessions', response.content);
+      this.collectTagsAndCategories(response.content);
+      this.sessions.push(...response.content);
+    });
+
+    dataService.getSessions().subscribe((response) => {
+      if (!response.success) return;
       this.collectTagsAndCategories(response.content)
+      this.sessions.push(...response.content);
     });
   }
 
