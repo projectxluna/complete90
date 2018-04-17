@@ -4,7 +4,7 @@
 1. BANNER IMAGE
 2. FILTERS SECTION
 3. VIDEO CONTENT
-4. 
+4. CUSTOM SESSION BANNER
 
 
 
@@ -22,6 +22,20 @@ div{
    cursor: default;
 }
 
+.btn{
+	border-radius: 0px;
+	outline:0;
+}
+
+button:focus{
+	outline:0;
+}
+
+.modal-content  {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
+}
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
@@ -39,15 +53,33 @@ div{
 /*----------------------------2. FILTERS SECTION--------------------------*/
 .filterCont{
 	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+#savedCont{
+	background-color: #fd1541;
+	padding-top: 4px;
+    padding-bottom: 4px;
+    border: 0px;	
+}
+
+
+.clearFilter{
+	margin-top: 30px;
+}
+
+.createDesc{
+	color: #333333;
 	padding-bottom: 80px;
 }
 
 #createSesBtn{
 	background-color: #fd1541;
-	 padding-top: 4px;
+	padding-top: 4px;
     padding-bottom: 4px;
     margin-left: 15px;
     border: 0px;
+    border-radius: 0px;
 }
 
 .fa-search{
@@ -61,6 +93,8 @@ div{
     float: left;
     border-color: transparent;
     border-bottom: 1px solid #0000001a;
+ 	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;   
 }
 
 .btn-default:hover {
@@ -75,8 +109,58 @@ div{
     border-color: transparent;
 }
 
+#savedSessModalTitle{
+	color: #333333;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px 25px 15px 25px;
+}
+
+.modal-header {
+    padding: 35px 15px 15px 15px;
+    border-bottom: transparent; 
+}
+
+.sessName{
+	color: #333333;
+}
+
+.viewSessbtn{
+	color: white;
+	background-color: #fd1541;
+	border: transparent;	
+}
+
+.deleteSess {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    background-color: transparent;
+    border: transparent;
+    opacity: 0.6;
+}
+
+.saved-pa{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
 
 /*----------------------------3. VIDEO CONTENT--------------------------*/
+.cont-hscroll > .row{
+ 	overflow-x: auto;
+ 	white-space: nowrap;
+}
+
+.cont-hscroll > .row > .col-lg-4, .cold-md-4{
+	display: inline-block;
+ 	float: none;
+}
+
+
 .catTitle h1{
 	color: #fd1541;
 	font-size: 18px;
@@ -90,6 +174,7 @@ div{
 	padding-bottom: 56.25%; /* 16:9 */
 	padding-top: 25px;
 	height: 0;
+	margin-top: -1px;
 }
 
 .videoWrapper iframe {
@@ -139,19 +224,71 @@ div{
 	padding-right: 0px;
 }
 
-.clearFilter{
-	margin-top: 30px;
+.add-btn-cont{
+	position: absolute;
+	z-index: 2;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
-.clearFilter button{
-	color: #00000082;
-	border: transparent;
+.add-btn{
+	padding: 5px 9px;
+	background-color: #fd1541;
+	border: 1px solid #fd1541;
 }
 
 
+/*----------------------------4. CUSTOM SESSION BANNER--------------------------*/
+.sessionBanner{
 
+}
 
+.cont-topPA{
+	padding-top: 15px;
+}
 
+.cont-topPA-close{
+	padding-top: 15px;
+}
+
+.navbar-default {
+    background-color: #fd1541;
+    border-color: transparent;
+    color: white;
+}
+
+.startSess{
+	background-color: white;
+	border-color: white;
+	font-weight: 700;
+	color: #fd1541;
+}
+
+.saveSess{
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.ma-r{
+	margin-right: 15px;
+}
+
+.closeBannerbtn{
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.fa-times{
+	color: white;
+}
+
+.closeActive{
+	display: block;
+}
+
+.closeActive1{
+	display: none;
+}
 
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
@@ -173,6 +310,13 @@ div{
 		font-size: 26px;
 	}
 
+	.navbar-default {
+	    background-color: #fd1541;
+	    border-color: transparent;
+	    color: white;
+	    font-size: 10px;
+	}
+
 
 
 }
@@ -183,5 +327,46 @@ div{
 
 
 @media (max-width: 414px) {
+
+	.navbar-default {
+	    font-size: 9px;
+	}
+
+	.ma-r{
+		margin-right: 0px;
+	}
+
+	.cont-topPA-close{
+		padding-top: 15px;
+	}
+
+	.cont-topPA{
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+
+	.mobile-center{
+	    text-align: center;
+	    margin: 0 auto;
+	    padding-bottom: 2px;
+	}
+
+	.sessName{
+		font-size: 12px;
+	}
+
+
+}
+
+@media (max-width: 375px) {
+
+	#savedCont{
+		margin-top: 20px;
+	}
+
+	.deleteSess{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
 
 }
