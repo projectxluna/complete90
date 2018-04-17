@@ -1,5 +1,5 @@
 module.exports = function (apiRoutes) {
-    const env = require('./helpers/env.json');
+    var config = require('./config').get(process.env.NODE_ENV);
     var Auth = require('./helpers/auth');
     var waterfall = require('async-waterfall');
     var request = require('request');
@@ -46,29 +46,41 @@ module.exports = function (apiRoutes) {
 
     // load free sessions
     function loadFreeSession(callback) {
-        let contentStructure = require('../video_structure.json');
-        let freeSessions = [];
+        let nodeEnv = process.env.NODE_ENV;
+        let contentStructure;
 
-        for (let session of contentStructure.sessions) {
-            if (session.free) {
-                freeSessions.push(session);
+        if (!nodeEnv || nodeEnv === 'development') {
+            contentStructure = require('../video_structure.json');
+            let freeSessions = [];
+
+            for (let session of contentStructure.sessions) {
+                if (session.free) {
+                    freeSessions.push(session);
+                }
             }
+            callback(null, freeSessions);
+        } else {
+            // make request to s3
         }
-        callback(null, freeSessions);
     }
 
     // load sessions json structure
     function loadSessions(callback) {
-        callback(null, JSON.stringify(require('../video_structure.json')));
-        // let resourceLocation = env.VIDEO_STRUCTURE || 'https://s3.us-east-2.amazonaws.com/complete90/config/video_structure.json';
+        let nodeEnv = process.env.NODE_ENV;
 
-        // request(resourceLocation, function (error, response, body) {
-        //     if (!error && response.statusCode == 200) {
-        //         callback(null, body);
-        //     } else {
-        //         callback(error);
-        //     }
-        // });
+        if (!nodeEnv || nodeEnv === 'development') {
+            callback(null, JSON.stringify(require('../video_structure.json')));
+        } else {
+            let resourceLocation = config.aws.VIDEO_STRUCTURE;
+
+            request(resourceLocation, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    callback(null, body);
+                } else {
+                    callback(error);
+                }
+            });
+        }
     }
 
     // traverse json structure and sign all paid video url
@@ -77,7 +89,7 @@ module.exports = function (apiRoutes) {
             callback(null, contentStructure);
         }
         contentStructure = JSON.parse(contentStructure);
-    
+
         let content = [];
         for (let session of contentStructure.sessions) {
             if (session.free) continue;

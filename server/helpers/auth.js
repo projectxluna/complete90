@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-var config = require('../config');
+var config = require('../config').get(process.env.NODE_ENV);
 
 var auth = {
     isAuthenticated: function (req, res, next) {
