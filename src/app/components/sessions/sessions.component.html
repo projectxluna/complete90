@@ -134,11 +134,12 @@
 				<h1>{{ session.name }}</h1>
 			</div>
 		</div>
-
-		<div class="container cont-hscroll">
+		
+		<div class="container cont-hscroll">,
 			<div class="row">
 				<!-- TRAINING VIDEO -->
-				<div class="col-lg-4 col-md-4">
+				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4">
+					<button type="button" class="btn btn-primary" (click)="openModalWithComponent(session, i)">Watch Now</button>
 					<div class="add-btn-cont col-lg-11">
 						<div class="pull-right">
 							<button class="add-btn">
@@ -148,87 +149,17 @@
 						</div>
 					</div>
 					<div class="videoWrapper">	
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/47HVAbzh-yM?showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+						<iframe width="560" height="315" frameborder="0" style="background-color: gray;"></iframe>
 					</div>
 
 					<div class="col-lg-12 videoDes">
-						<h1>DRIBBLING EXERCISE</h1>
+						<h1>{{ content.name | uppercase }}</h1>
 						<div class="row">
 							<div class="col-lg-6"><p><b>00:39</b></p></div>
 							<div class="col-lg-6"><p><b>ADDED ON 12/7/17</b></p></div>
 						</div>
 					</div>
 				</div>
-
-				<!-- TRAINING VIDEO -->
-				<div class="col-lg-4 col-md-4">
-					<div class="add-btn-cont col-lg-11">
-						<div class="pull-right">
-							<button class="add-btn">
-								<i class="fa fa-plus" aria-hidden="true"></i>
-								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
-							</button>
-						</div>
-					</div>			
-					<div class="videoWrapper">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/47HVAbzh-yM?showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-					</div>
-
-					<div class="col-lg-12 videoDes">
-						<h1>DRIBBLING EXERCISE</h1>
-						<div class="row">
-							<div class="col-lg-6"><p><b>00:39</b></p></div>
-							<div class="col-lg-6"><p><b>ADDED ON 12/7/17</b></p></div>
-						</div>
-					</div>
-				</div>
-
-				<!-- TRAINING VIDEO -->
-				<div class="col-lg-4 col-md-4">
-					<div class="add-btn-cont col-lg-11">
-						<div class="pull-right">
-							<button class="add-btn">
-								<i class="fa fa-plus" aria-hidden="true"></i>
-								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
-							</button>
-						</div>
-					</div>			
-					<div class="videoWrapper">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/47HVAbzh-yM?showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-					</div>
-
-					<div class="col-lg-12 videoDes">
-						<h1>DRIBBLING EXERCISE</h1>
-						<div class="row">
-							<div class="col-lg-6"><p><b>00:39</b></p></div>
-							<div class="col-lg-6"><p><b>ADDED ON 12/7/17</b></p></div>
-						</div>
-					</div>
-				</div>
-
-				<!-- TRAINING VIDEO -->
-				<div class="col-lg-4 col-md-4">
-					<div class="add-btn-cont col-lg-11">
-						<div class="pull-right">
-							<button class="add-btn">
-								<i class="fa fa-plus" aria-hidden="true"></i>
-								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
-							</button>
-						</div>
-					</div>			
-					<div class="videoWrapper">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/47HVAbzh-yM?showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-					</div>
-
-					<div class="col-lg-12 videoDes">
-						<h1>DRIBBLING EXERCISE</h1>
-						<div class="row">
-							<div class="col-lg-6"><p><b>00:39</b></p></div>
-							<div class="col-lg-6"><p><b>ADDED ON 12/7/17</b></p></div>
-						</div>
-					</div>
-				</div>
-
 			</div>
 		</div>
 	</div>

@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { MaterialModule } from './modules/material.module';
+import { VideogularModule }from './modules/videogular/videogular.module';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -31,6 +32,7 @@ import { PaymentComponent } from './components/pricing/payment/payment.component
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { EventsComponent } from './components/events/events.component';
+import { VideoplayerComponent } from './components/modals/videoplayer/videoplayer.component';
 
 
 
@@ -50,6 +52,7 @@ import { EventsComponent } from './components/events/events.component';
     DashboardComponent,
     SettingsComponent,
     EventsComponent,
+    VideoplayerComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { EventsComponent } from './components/events/events.component';
     ModalModule.forRoot(),
     MaterialModule,
     FlexLayoutModule,
+    VideogularModule,
     HttpModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -71,7 +75,10 @@ import { EventsComponent } from './components/events/events.component';
     AuthenticationService,
     RoutingState
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    VideoplayerComponent
+  ]
 })
 export class AppModule { }
 export class AppBootstrapModule {}

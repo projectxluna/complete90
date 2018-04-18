@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../services';
+import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { VideoplayerComponent } from '../modals/videoplayer/videoplayer.component';
 
 @Component({
   selector: 'app-sessions',
   templateUrl: './sessions.component.html',
-  styleUrls: ['./sessions.component.css']
+  styleUrls: ['./sessions.component.css'],
+  entryComponents: [VideoplayerComponent]
 })
 export class SessionsComponent implements OnInit {
 
+  @ViewChild(ModalDirective) modal: ModalDirective;
+  
   filters = {
     tags: [],
     categories: [],
@@ -21,8 +27,10 @@ export class SessionsComponent implements OnInit {
   }
 
   sessions = [];
+  bsModalRef: BsModalRef;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,
+    private modalService: BsModalService) {
     // get free content
     dataService.getFreeSessions().subscribe((response) => {
       if (!response.success) return;
@@ -65,6 +73,19 @@ export class SessionsComponent implements OnInit {
     this.filters.tags = tags.filter(function (value, index, self) {
       return self.indexOf(value) === index;
     });
+  }
+
+  openModalWithComponent(session, selectedIndex) {
+    const initialState = {
+      session,
+      selectedIndex
+    };
+    this.bsModalRef = this.modalService.show(VideoplayerComponent, { initialState, class: 'modal-lg' });
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  handler(type: string, $event: ModalDirective) {
+    // add event handling here. probably want to get back watched stats 
   }
 
 }
