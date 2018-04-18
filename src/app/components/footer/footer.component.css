@@ -16,11 +16,11 @@ footer{
 }
 
 .footernavLinks li{
-	padding: 35px 20px 15px 20px;
+	padding: 35px 20px 10px 20px;
 }
 
 .footernavSocial li{
-	padding: 0px 25px 35px 25px;
+	padding: 0px 25px 25px 25px;
 }
 
 .footernavSocial ul{
@@ -30,6 +30,16 @@ footer{
 li a{
 	text-decoration: none;
 	color: white;
+}
+
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
 }
 
 
