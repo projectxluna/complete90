@@ -62,7 +62,7 @@ input{
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
 	padding-top: 120px;
-	background-image: url('../../../assets/aboutus-banner.jpg');
+	background-image: url('../../../assets/dashboard-banner.jpg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;

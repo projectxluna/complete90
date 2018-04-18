@@ -30,7 +30,7 @@ div{
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
 	padding-top: 120px;
-	background-image: url('../../../assets/events-banner.jpg');
+	background-image: url('../../../assets/aboutus-banner.jpg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -52,9 +52,8 @@ div{
 
 /*--------------------------3. EVENTS DESCRIPTION------------------------*/
 .eventsDesc{
-	padding-top: 60px;
-	padding-bottom: 60px;
-	color: #484848;
+	padding-top: 80px;
+	color: #252525;
 	font-size: 16px;	
 }
 
@@ -62,7 +61,6 @@ div{
 .campTable{
 	color: #252525;
 	/*border: 1px solid black;*/
-	padding-bottom: 40px;
 	margin-top: 20px;
 	margin-bottom: 40px;
 }

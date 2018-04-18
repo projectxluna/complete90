@@ -66,15 +66,15 @@ div{
 	font-weight: 700;
 	padding-top: 15px;
     padding-bottom: 15px;
-    padding-left: 20px;
-    color: white;
+    /*padding-left: 20px;*/
+    color: #fd1541;
     margin-bottom: 0px;
-    background-color: #fd1541;
+    border-bottom: 1px solid #0000001a;
 }
 
 .sessionsBD p{
-	padding: 20px;
-    background-color: #fbfbff;
+	padding-top: 20px;
+    /*background-color: #fbfbff;*/
 }
 
 

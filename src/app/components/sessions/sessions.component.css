@@ -37,6 +37,22 @@ button:focus{
     border-radius: 0px !important; 
 }
 
+.blur-div{
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+/*  width: 100px;
+  height: 100px;*/
+  background-color: #ccc;	
+}
+
+.row{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
 	padding-top: 120px;
@@ -163,10 +179,21 @@ button:focus{
 
 .catTitle h1{
 	color: #fd1541;
-	font-size: 18px;
+	font-size: 20px;
 	margin-bottom: 40px;
-	padding-bottom: 5px;
+	padding-bottom: 15px;
 	border-bottom: 1px solid #0000001a;
+}
+
+.vid-thumb img{
+	max-width: 100%;
+}
+
+.fa-play-circle{
+	position: absolute;
+   	top: 26%;
+   	left: 45%;
+   	color: #333333c4;
 }
 
 .videoWrapper {
@@ -192,6 +219,10 @@ button:focus{
 .allVids{
 	padding-bottom: 100px;
 }
+
+/*.row-pa{
+	margin-bottom: 30px;
+}*/
 
 .videoDes{
 	background-color: white;
@@ -295,6 +326,12 @@ button:focus{
 
 @media (max-width: 1024px) {
 
+.fa-play-circle {
+    position: absolute;
+    top: 21%;
+    left: 44%;
+    color: #333333c4;
+}
 
 
 }
@@ -316,6 +353,20 @@ button:focus{
 	    color: white;
 	    font-size: 10px;
 	}
+
+	.cont-hscroll > .row{
+	 	overflow-x: scroll;
+	 	white-space: nowrap;
+	  	-webkit-overflow-scrolling: touch;
+	}	
+
+
+	.fa-play-circle{
+	    position: absolute;
+	    top: 28%;
+	    left: 46%;
+	    color: #333333c4;
+	}	
 
 
 
@@ -355,6 +406,13 @@ button:focus{
 		font-size: 12px;
 	}
 
+	.fa-play-circle {
+	    position: absolute;
+	    top: 21%;
+	    left: 44%;
+	    color: #333333c4;
+	}	
+
 
 }
 
@@ -368,5 +426,12 @@ button:focus{
 		padding-left: 0px;
 		padding-right: 0px;
 	}
+
+	.fa-play-circle {
+	    position: absolute;
+	    top: 19%;
+	    left: 44%;
+	    color: #333333c4;
+	}	
 
 }
