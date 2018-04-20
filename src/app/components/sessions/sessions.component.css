@@ -5,6 +5,7 @@
 2. FILTERS SECTION
 3. VIDEO CONTENT
 4. CUSTOM SESSION BANNER
+5. NAME SESSION MODAL
 
 
 
@@ -191,7 +192,7 @@ button:focus{
 
 .fa-play-circle{
 	position: absolute;
-   	top: 26%;
+   	top: 29%;
    	left: 45%;
    	color: #333333c4;
 }
@@ -220,16 +221,16 @@ button:focus{
 	padding-bottom: 100px;
 }
 
-/*.row-pa{
-	margin-bottom: 30px;
-}*/
+.row-ma{
+	margin-bottom: 40px;
+}
 
 .videoDes{
 	background-color: white;
 	color: #1e1e1e;
 	padding-left: 0px;
 	padding-right: 0px;
-	margin-bottom: 70px;
+	margin-bottom: 30px;
 	border: 1px solid #0000001a;
 }
 
@@ -321,6 +322,64 @@ button:focus{
 	display: none;
 }
 
+/*--------------------------5. NAME SESSION MODAL ------------------------*/
+.open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+    color: #fd1541;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+input{
+	margin: 0px;
+}
+
+#savedSessModalTitle{
+	color: #333333;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px 25px 15px 25px;
+}
+
+.modal-header {
+    padding: 35px 15px 15px 15px;
+    border-bottom: transparent; 
+}
+
+.nameSessForm{
+	padding-top: 15px;
+}
+
+.form-group{
+	max-width: 300px;
+	margin-left: 23%;
+	margin-bottom: 30px;
+}
+
+.nameSessForm input{
+	border: none; 
+	border-width: 0; 
+	box-shadow: none;
+	border-bottom: 1px solid #fd1541;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	background-color: rgba(0, 0, 0, 0);	
+}
+
+.saveSessName{
+	background-color: #fd1541;
+	/*border: 1px solid #fd1541;*/
+	color: white;
+	border: transparent;
+	padding: 5px 9px;
+}
+
+.saveSessBtnCont{
+	padding-bottom: 20px;
+}
+
+
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
@@ -328,7 +387,7 @@ button:focus{
 
 .fa-play-circle {
     position: absolute;
-    top: 21%;
+    top: 24%;
     left: 44%;
     color: #333333c4;
 }
@@ -342,6 +401,11 @@ button:focus{
 
 
 @media (max-width: 768px) {
+
+	.bannerimage{
+		padding-top: 120px;
+		min-height: 250px;
+	}	
 
 	.impcont h1{
 		font-size: 26px;
@@ -363,7 +427,7 @@ button:focus{
 
 	.fa-play-circle{
 	    position: absolute;
-	    top: 28%;
+	    top: 30%;
 	    left: 46%;
 	    color: #333333c4;
 	}	
@@ -382,6 +446,11 @@ button:focus{
 	.navbar-default {
 	    font-size: 9px;
 	}
+
+	.bannerimage{
+		padding-top: 90px;
+		min-height: 200px;
+	}	
 
 	.ma-r{
 		margin-right: 0px;
@@ -408,9 +477,15 @@ button:focus{
 
 	.fa-play-circle {
 	    position: absolute;
-	    top: 21%;
+	    top: 24%;
 	    left: 44%;
 	    color: #333333c4;
+	}	
+
+	.form-group {
+	    max-width: 300px;
+	    margin-left: 5%;
+	    margin-bottom: 30px;
 	}	
 
 
@@ -429,9 +504,15 @@ button:focus{
 
 	.fa-play-circle {
 	    position: absolute;
-	    top: 19%;
+	    top: 22%;
 	    left: 44%;
 	    color: #333333c4;
+	}
+
+	.form-group {
+	    max-width: 300px;
+	    margin-left: 0%;
+	    margin-bottom: 30px;
 	}	
 
 }

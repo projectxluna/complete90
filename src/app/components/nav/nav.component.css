@@ -91,6 +91,14 @@
 
 @media (max-width: 768px) {
 
+	.navbar{
+		font-family: 'Montserrat';
+		/*background-color:transparent;*/
+		background-color: #000000b8;
+		margin-bottom: 0px;
+	}
+
+
 	.navbar .dropdown-menu{
 		text-align: center;
 	}
