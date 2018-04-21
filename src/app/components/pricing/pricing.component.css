@@ -38,12 +38,29 @@ div{
 
 
 /*----------------------------2. PRICING SECTION--------------------------*/
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: #fd1540;
+    border-radius: 0px;
+}
+
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: #fd1540;
+    border-radius: 0px;
+    color: white;
+}
+
 .nav-pills > li {
     float:none;
     display:inline-block;
     *display:inline; /* ie7 fix */
      zoom:1; /* hasLayout ie7 trigger */
      font-size: 12px;
+}
+
+a{
+	color: #fd1540;
 }
 
 .nav-pills {
@@ -55,7 +72,7 @@ div{
 }
 
 .pricingTitle p{
-	color: #252525c9;
+	color: #484848;
 	padding: 100px 0px 50px 0px;
 	line-height: 2.5em;
 	font-size: 15px;
@@ -135,15 +152,13 @@ div{
 }
 
 .compareSectBG h1{
-	margin-top: 80px;
-	font-size: 20px;
-	font-weight: 700;
-	padding-top: 15px;
+    margin-top: 80px;
+    font-size: 20px;
+    padding-top: 15px;
     padding-bottom: 15px;
-    padding-left: 20px;
-    color: white;
+    color: #fd1541;
     margin-bottom: 0px;
-    background-color: #fd1541;
+    border-bottom: 1px solid #0000001a;
 }
 
 .compareSect{
@@ -156,7 +171,7 @@ div{
 
 .playerSub{
 	/*color: white;*/
-	color: #474747;
+	color: #484848;
 	padding-bottom: 50px;
 }
 

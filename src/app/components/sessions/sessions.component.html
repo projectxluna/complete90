@@ -75,42 +75,13 @@
       <div class="modal-body">
         
         <!-- 1ST SAVED SESSION -->
-        <div class="row saved-pa">
-        	<div class="col-xs-6 sessName">FOOTWORK SESSION</div>
+        <div *ngFor="let session of customSession" class="row saved-pa">
+        	<div class="col-xs-6 sessName">{{ session.name }}<span> {{ session.content.length }} Videos</span></div>
         	<div class="col-xs-5"><button class="viewSessbtn pull-right">VIEW</button></div>
         	<div class="col-xs-1 deleteSess">
-        		<button type="button" class="deleteSess"><span aria-hidden="true">&times;</span></button>
+        		<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)"><span aria-hidden="true">&times;</span></button>
         	</div>
         </div>
-
-        <!-- 1ST SAVED SESSION -->
-        <div class="row saved-pa">
-        	<div class="col-xs-6 sessName">FOOTWORK SESSION</div>
-        	<div class="col-xs-5"><button class="viewSessbtn pull-right">VIEW </button></div>
-        	<div class="col-xs-1 deleteSess">
-        		<button type="button" class="deleteSess"><span aria-hidden="true">&times;</span></button>
-        	</div>
-        </div>
-
-        <!-- 2ND SAVED SESSION -->
-        <div class="row saved-pa">
-        	<div class="col-xs-6 sessName">FOOTWORK SESSION</div>
-        	<div class="col-xs-5"><button class="viewSessbtn pull-right">VIEW</button></div>
-        	<div class="col-xs-1 deleteSess">
-        		<button type="button" class="deleteSess"><span aria-hidden="true">&times;</span></button>
-        	</div>
-        </div>
-
-        <!-- 3RD SAVED SESSION -->
-        <div class="row saved-pa">
-        	<div class="col-xs-6 sessName">FOOTWORK SESSION</div>
-        	<div class="col-xs-5"><button class="viewSessbtn pull-right">VIEW</button></div>
-        	<div class="col-xs-1 deleteSess">
-        		<button type="button" class="deleteSess"><span aria-hidden="true">&times;</span></button>
-        	</div>
-        </div>
-
-
       </div>
     </div>
   </div>
@@ -139,17 +110,18 @@
 			<div class="row">
 				<!-- TRAINING VIDEO -->
 				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4">
-					<button type="button" class="btn btn-primary" (click)="openModalWithComponent(session, i)">Watch Now</button>
 					<div class="add-btn-cont col-lg-11">
 						<div class="pull-right">
-							<button class="add-btn">
+							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
 								<i class="fa fa-plus" aria-hidden="true"></i>
 								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
 							</button>
 						</div>
 					</div>
-					<div class="videoWrapper">	
-						<iframe width="560" height="315" frameborder="0" style="background-color: gray;"></iframe>
+					<div class="vid-thumb">
+						<img src="assets/video-thumb.png">
+						<!-- PLAY BTN -->
+						<a (click)="openModalWithComponent(session, i)"><i class="fa fa-play-circle fa-3x" aria-hidden="true"></i></a>
 					</div>
 
 					<div class="col-lg-12 videoDes">
@@ -202,26 +174,4 @@
 	</nav>
 </div>
 <!-- CUSTOM SESSION BANNER END -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
