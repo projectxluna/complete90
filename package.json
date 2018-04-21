@@ -28,6 +28,8 @@
     "@angular/router": "^5.0.0",
     "angular-font-awesome": "^3.1.2",
     "async-waterfall": "^0.1.5",
+    "aws-cloudfront-sign": "^2.2.0",
+    "aws-sdk": "^2.218.1",
     "bootstrap": "^3.3.7",
     "braintree": "^2.7.0",
     "braintree-web-drop-in": "^1.9.4",
@@ -42,12 +44,14 @@
     "nodemailer-express-handlebars": "^2.0.0",
     "npm": "^5.8.0",
     "rxjs": "^5.5.2",
+    "videogular2": "^6.0.8",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.3",
     "@angular/compiler-cli": "^5.0.0",
     "@angular/language-service": "^5.0.0",
+    "@types/core-js": "^0.9.46",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",

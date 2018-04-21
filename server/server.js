@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var fileUpload = require('express-fileupload');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-var config = require('./config');
+var config = require('./config').get(process.env.NODE_ENV);
 var path = require('path');
 
 var port = process.env.PORT || 9000;

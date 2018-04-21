@@ -17,9 +17,9 @@
     <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 	    	<ul class="nav navbar-nav navbar-centered">
 	       	<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']">HOME <span class="sr-only">(current)</span></a></li>
-					 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/events']">EVENTS</a></li>
-					 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/sessions']">SESSIONS</a></li>
-					<li *ngIf="!isLoggedIn() || !hasSubscription()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/pricing']">PRICING/PLANS</a></li>
+					<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/events']">EVENTS</a></li>
+					<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/sessions']">SESSIONS</a></li>
+					<li *ngIf="!isLoggedIn() || !userProfile.subscription" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/pricing']">PRICING/PLANS</a></li>
 					<li *ngIf="isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/dashboard']">DASHBOARD</a></li>
 					<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/training']">PERS. TRAINING</a></li>
 		    	<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/about']">ABOUT US</a></li>

@@ -19,34 +19,6 @@ module.exports = function (apiRoutes) {
     });
 
     /**
-     * get user stats 
-     */
-    apiRoutes.get('/user/stats', Auth.isAuthenticated, function (req, res) {
-
-    });
-
-    /**
-     * get created training plans
-     */
-    apiRoutes.get('/user/plans', Auth.isAuthenticated, function (req, res) {
-
-    });
-
-    /**
-     * create new plan(s)
-     */
-    apiRoutes.post('/user/plans', Auth.isAuthenticated, function (req, res) {
-
-    });
-
-    /**
-     * modify a training plan(s)
-     */
-    apiRoutes.put('/user/plans', Auth.isAuthenticated, function (req, res) {
-
-    });
-
-    /**
      * upload user image
      */
     apiRoutes.post('/user/profile-img', Auth.isAuthenticated, function (req, res) {

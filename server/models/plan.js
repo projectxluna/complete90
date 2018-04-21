@@ -4,9 +4,15 @@ var bcrypt   = require('bcrypt-nodejs');
 
 // define the schema for our user model
 var planSchema = mongoose.Schema({
-    title: String,
-    author: Schema.Types.ObjectId,
-    contents: [String]
+    name: String,
+    userId: { 
+        type: mongoose.Schema.Types.ObjectId,
+        index: true
+    },
+    content: {
+        type: [String],
+        index: true
+    }
 },
 {
     timestamps: true,
@@ -14,4 +20,4 @@ var planSchema = mongoose.Schema({
 });
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Plan', plansSchema);
+module.exports = mongoose.model('Plan', planSchema);

@@ -25,13 +25,6 @@ module.exports = function (apiRoutes) {
     });
 
     /**
-     * get the payment cards
-     */
-    apiRoutes.get('/braintree/paymentmethods', Auth.isAuthenticated, function (req, res) {
-
-    });
-
-    /**
      * create new subscription
      */
     apiRoutes.post('/braintree/subsribe', Auth.isAuthenticated, function (req, res) {

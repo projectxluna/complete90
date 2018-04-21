@@ -1,10 +1,9 @@
-var env = require('./env.json');
-var braintree = require('braintree');
+var config = require('../config').get(process.env.NODE_ENV);var braintree = require('braintree');
 var gateway = braintree.connect({
     environment: braintree.Environment.Sandbox,
-    merchantId: env.BT_MERCHANT_ID,
-    publicKey: env.BT_PUBLIC_KEY,
-    privateKey: env.BT_PRIVATE_KEY
+    merchantId: config.braintree.MERCHANT_ID,
+    publicKey: config.braintree.PUBLIC_KEY,
+    privateKey: config.braintree.PRIVATE_KEY
 });
 
 var paymentController = {

@@ -1,0 +1,13 @@
+.black {
+    color: black;
+    
+}
+
+.modal-container {
+    color: black;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: row;
+}
