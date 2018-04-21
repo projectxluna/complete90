@@ -392,6 +392,10 @@ div{
 
 @media (max-width: 414px) {
 
+	.navbar-default {
+	    font-size: 9px;
+	}	
+
 	.impcont{
 		padding-top: 40px;
 		padding-bottom: 20px;

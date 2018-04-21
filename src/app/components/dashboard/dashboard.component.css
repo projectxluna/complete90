@@ -263,6 +263,10 @@ input{
 	outline: none;
 }
 
+.form-control {
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.0);
+}
+
 .savePassbtn{
 	color: white;
 	background-color: #5cda57;
@@ -332,6 +336,15 @@ input{
 
 @media (max-width: 768px) {
 
+	.bannerimage{
+		padding-top: 120px;
+		min-height: 250px;
+	}
+
+	.impcont h1{
+		font-size: 26px;
+	}	
+
 	.vidName{
 		padding-top: 53px;
 	}
@@ -339,6 +352,15 @@ input{
 }
 
 @media (max-width: 414px) {
+
+	.bannerimage{
+		padding-top: 90px;
+		min-height: 200px;
+	}
+
+	.impcont h1{
+		font-size: 26px;
+	}		
 
 	.vidName{
 		padding-top: 14px;

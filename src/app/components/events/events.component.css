@@ -5,6 +5,9 @@
 2. EVENTS TITLE
 3. EVENTS DESCRIPTION
 4. EVENTS TABLE
+5. REGISTER MODAL
+5. SPONSOR SECTION
+7. QUOTE SECTION
 
 */
 
@@ -25,6 +28,20 @@ div{
 
 .ma-l{
 	margin-left: 15px;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+button:focus{
+	outline:0;
+}
+
+.modal-content  {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
 }
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
@@ -56,6 +73,16 @@ div{
 	padding-bottom: 60px;
 	color: #484848;
 	font-size: 16px;	
+}
+
+.eventsLocation{
+	color: #252525;
+	padding-bottom: 30px;
+}
+
+.fa-map-marker{
+	color: #fd1541;
+	padding-bottom: 5px;
 }
 
 /*----------------------------4. EVENTS TABLE --------------------------*/
@@ -100,12 +127,106 @@ div{
 	background-color: transparent;
 	border: 1px solid #fd1541;
 	color: #fd1541;
+	padding: 6px 13px;
 }
 
 .registerbtn:hover{
 	background-color: #fd1541;
 	color: white;
+	padding: 6px 13px;
 }
+
+/*--------------------------5. REGISTER MODAL ------------------------*/
+.open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+    color: #fd1541;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+input{
+	margin: 0px;
+}
+
+#savedSessModalTitle{
+	color: #333333;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px 25px 15px 25px;
+}
+
+.modal-header {
+    padding: 35px 15px 15px 15px;
+    border-bottom: transparent; 
+}
+
+.registerForm{
+	padding-top: 15px;
+}
+
+.form-group{
+	max-width: 300px;
+	margin-left: 23%;
+	margin-bottom: 30px;
+}
+
+.registerForm input{
+	border: none; 
+	border-width: 0; 
+	box-shadow: none;
+	border-bottom: 1px solid #fd1541;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	background-color: rgba(0, 0, 0, 0);	
+}
+
+.registerbtnModal{
+	background-color: #fd1541;
+	/*border: 1px solid #fd1541;*/
+	color: white;
+	border: transparent;
+	padding: 5px 9px;
+}
+
+.regBtnCont{
+	padding-bottom: 20px;
+}
+
+
+/*--------------------------6. SPONSOR SECTION ------------------------*/
+.sponsorBG{
+	background-color: #fbfbff;
+}
+
+.sponLogo1 img{
+	max-width:40%;
+}
+
+.sponLogo2 img{
+	max-width:22%;
+}
+
+.sponTitle h1{
+	color: #252525;
+    font-size: 26px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.sponRow{
+	padding-bottom: 40px;
+}
+
+
+/*----------------------------7. QUOTE SECTION---------------------------*/
+.quoteStyle h1{
+	padding-top: 40px;
+	padding-bottom: 40px;
+	font-size: 20px;
+	color: #484848;
+}
+
 
 
 
@@ -124,7 +245,24 @@ div{
 
 @media (max-width: 768px) {
 
+	.bannerimage{
+		padding-top: 120px;
+		min-height: 250px;
+	}
 
+	.impcont h1{
+		font-size: 26px;
+	}
+
+	.sponLogo1 img{
+		max-width:40%;
+		padding-bottom: 60px;
+	}
+
+	.sponLogo2 img{
+		max-width: 22%;
+		padding-bottom: 30px;
+	}
 
 
 
@@ -137,6 +275,31 @@ div{
 
 @media (max-width: 414px) {
 
+	.navbar-default {
+	    font-size: 9px;
+	}	
+
+	.bannerimage{
+		padding-top: 90px;
+		min-height: 200px;
+	}
+
+	.form-group {
+	    max-width: 300px;
+	    margin-left: 5%;
+	    margin-bottom: 30px;
+	}
+
+}
+
+
+@media (max-width: 375px) {
+
+	.form-group {
+	    max-width: 300px;
+	    margin-left: 0%;
+	    margin-bottom: 30px;
+	}
 
 
 }
