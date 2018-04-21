@@ -54,8 +54,9 @@
 			<a><i class="fa fa-search" aria-hidden="true"></i></a>
 
 			<!-- CREATE SESSIONS BUTTON -->
-			<!-- <button id="createSesBtn"><b>+ CREATE SESSION</b></button> -->
-			<button id="savedCont" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">SAVED SESSIONS</button>
+<!-- 			<button id="createSesBtn"><b>+ CREATE SESSION</b></button> -->
+				<button id="savedCont" type="button" class="btn btn-primary" data-toggle="modal" data-target="#savedSessModal">SAVED SESSIONS</button>
+
 		</div>
 		<!-- <div class="clearFilter col-lg-12 text-center">
 			<button>REMOVE FILTERS</button>
@@ -64,8 +65,12 @@
 </div>
 <!-- FILTERS SECTION END -->
 
-<!-- SAVED SESSION MODal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+
+
+
+<!-- SAVED SESSION MODAl -->
+<div class="modal fade" id="savedSessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -86,12 +91,13 @@
     </div>
   </div>
 </div>
-<!-- SAVED SESSION END -->
+<!-- SAVED SESSION MODAL END -->
 
 <!-- INSTRUCTION SENTENCE -->
 <div class="container">
 	<div class="col-xs-12 text-center createDesc">
-		<small>To create your own session, simply press the red "+" button on a video to add it to the session. </small>
+		<small>To create your own session, simply press the red "+" button on a video to add it to the session. </small><br>
+		<small>Scroll horozontally to view more videos within each category! </small>
 	</div>
 </div>
 <!-- INSTRUCTION SENTENCE END -->
@@ -138,16 +144,14 @@
 </div>
 <!-- VIDEO CONTENT END -->
 
-
 <!-- CUSTOM SESSION BANNER -->
 <div class="sessionsBanner">
-	<nav class="navbar navbar-default navbar-fixed-bottom sBanner">
+	<nav class="navbar navbar-default navbar-fixed-bottom sBanner">	  
 		<div class="container-fluid">
 			<div class="row">
-
 				<div class="col-xs-1">
 				</div>
-
+				
 				<div class="cont-topPA col-xs-10">
 					<div class="col-xs-12">
 						<div class="col-xs-12 col-sm-4 mobile-center">
@@ -159,7 +163,7 @@
 						</div>
 
 						<div class="col-xs-6 col-sm-4">
-							<button class="saveSess pull-right">SAVE SESSION</button>
+							<button class="saveSess pull-right" id="saveSessbtn" data-toggle="modal" data-target="#nameSessModal">SAVE SESSION</button>
 						</div>
 					</div>
 				</div>
@@ -174,4 +178,50 @@
 	</nav>
 </div>
 <!-- CUSTOM SESSION BANNER END -->
+
+
+<!-- NAME SESSION MODAL -->
+	<!-- WEEK 1 MODAL -->
+	<div class="modal fade" id="nameSessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title text-center" id="savedSessModalTitle">NAME SESSION</h4>
+	      </div>
+
+	      <div class="modal-body">
+	        <div class="nameSessForm">
+	            <div class="form-group">
+	                <input class="form-control text-center" id="sessionName" placeholder="Session Name" name="name">
+	            </div>                                    
+	        </div>
+
+	        <div class="text-center saveSessBtnCont">
+	        	<button class="saveSessName">SAVE</button>
+	        </div>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+<!-- NAME SESSION MODAL -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

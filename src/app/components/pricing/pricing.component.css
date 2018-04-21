@@ -243,6 +243,15 @@ a{
 
 @media (max-width: 768px) {
 
+	.bannerimage{
+		padding-top: 120px;
+		min-height: 250px;
+	}
+
+	.impcont h1{
+		font-size: 26px;
+	}	
+
 	.pricingCont img{
 		max-width: 70%;
 		padding-bottom: 40px;
@@ -256,6 +265,11 @@ a{
 
 
 @media (max-width: 414px) {
+
+	.bannerimage{
+		padding-top: 90px;
+		min-height: 200px;
+	}	
 
 	.impcont h1{
 		font-size: 26px;
