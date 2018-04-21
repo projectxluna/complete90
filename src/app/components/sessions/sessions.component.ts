@@ -27,6 +27,15 @@ export class SessionsComponent implements OnInit {
   }
 
   sessions = [];
+
+  customSession = [
+    {
+      id: 'fe71e181-13ca-4725-80ce-6840df169e6a',
+      name: 'FOOTWORK SESSION',
+      content: ['contentId', 'contentId']
+    }
+  ];
+
   bsModalRef: BsModalRef;
 
   constructor(private dataService: DataService,
@@ -35,18 +44,24 @@ export class SessionsComponent implements OnInit {
     dataService.getFreeSessions().subscribe((response) => {
       if (!response.success) return;
       this.collectTagsAndCategories(response.content);
-      this.sessions.push(...response.content);
+      this.groupContent(response.content);
     });
 
     dataService.getSessions().subscribe((response) => {
       if (!response.success) return;
       this.collectTagsAndCategories(response.content)
-      this.sessions.push(...response.content);
+      this.groupContent(response.content);
     });
   }
 
   selectTag(tag) {
     this.selectedFilter.tag = tag;
+  }
+
+  addContentToCustomSession(contentId) {
+    console.log('adding video to session', contentId);
+    // prompt user to select which existing session they want to add
+    // this content to, or let them start a new session
   }
 
   selectCategory(category) {
@@ -59,20 +74,48 @@ export class SessionsComponent implements OnInit {
 
   ngOnInit() {
   }
+  
+  deleteUserSession(sessionId) {
+    console.log('deleting custom session', sessionId);
+  }
 
-  collectTagsAndCategories(sessions) {
+  collectTagsAndCategories(contentList) {
     let tags = this.filters.tags;
-    for (let session of sessions) {
-      this.filters.categories.push(session.name);
+    let categories = this.filters.categories;
 
-      for (let content of session.content) {
-        if (content.tags) tags.push(...content.tags);
-      }
+    for (let content of contentList) {
+      categories.push(content.group);
+      if (content.tags) tags.push(...content.tags);
     }
 
     this.filters.tags = tags.filter(function (value, index, self) {
       return self.indexOf(value) === index;
     });
+
+    this.filters.categories = categories.filter(function (value, index, self) {
+      return self.indexOf(value) === index;
+    });
+  }
+
+  groupContent(contentList) {
+    let sessions = {};
+
+    for (let content of contentList) {
+      if (sessions[content.group]) {
+        sessions[content.group].push(content);
+      } else {
+        sessions[content.group] = [content];
+      }
+    }
+    for (var session in sessions) {
+      if (!sessions.hasOwnProperty(session)) continue;
+  
+      var content = sessions[session];
+      this.sessions.push({
+        name: session,
+        content: content
+      });
+    }
   }
 
   openModalWithComponent(session, selectedIndex) {
