@@ -186,14 +186,36 @@ button:focus{
 	border-bottom: 1px solid #0000001a;
 }
 
-.vid-thumb img{
-	max-width: 100%;
+.vid-thumb{
+    position: relative;
+    /*display: inline-block;*/
+    overflow: hidden;	
 }
 
+.vid-thumb a span{
+    top: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);	
+}
+
+.vid-thumb a{
+	display: block;
+    position: absolute;
+    top: -100%;
+    opacity: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    color: inherit;
+    opacity: 1;
+    top: 0;
+}
+
+
 .fa-play-circle{
-	position: absolute;
-   	top: 29%;
-   	left: 45%;
    	color: #333333c4;
 }
 
@@ -379,18 +401,15 @@ input{
 	padding-bottom: 20px;
 }
 
+.addtoSess{
+	padding-top: 20px;
+}
+
 
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
 @media (max-width: 1024px) {
-
-.fa-play-circle {
-    position: absolute;
-    top: 24%;
-    left: 44%;
-    color: #333333c4;
-}
 
 
 }
@@ -422,17 +441,7 @@ input{
 	 	overflow-x: scroll;
 	 	white-space: nowrap;
 	  	-webkit-overflow-scrolling: touch;
-	}	
-
-
-	.fa-play-circle{
-	    position: absolute;
-	    top: 30%;
-	    left: 46%;
-	    color: #333333c4;
-	}	
-
-
+	}		
 
 }
 
@@ -475,13 +484,6 @@ input{
 		font-size: 12px;
 	}
 
-	.fa-play-circle {
-	    position: absolute;
-	    top: 24%;
-	    left: 44%;
-	    color: #333333c4;
-	}	
-
 	.form-group {
 	    max-width: 300px;
 	    margin-left: 5%;
@@ -500,13 +502,6 @@ input{
 	.deleteSess{
 		padding-left: 0px;
 		padding-right: 0px;
-	}
-
-	.fa-play-circle {
-	    position: absolute;
-	    top: 22%;
-	    left: 44%;
-	    color: #333333c4;
 	}
 
 	.form-group {

@@ -115,7 +115,7 @@
 		<div class="container cont-hscroll">,
 			<div class="row">
 				<!-- TRAINING VIDEO -->
-				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4">
+				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
 					<div class="add-btn-cont col-lg-11">
 						<div class="pull-right">
 							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
@@ -125,16 +125,16 @@
 						</div>
 					</div>
 					<div class="vid-thumb">
-						<img src="assets/video-thumb.png">
+						<img class="img-responsive" src="assets/video-thumb.png">
 						<!-- PLAY BTN -->
-						<a (click)="openModalWithComponent(session, i)"><i class="fa fa-play-circle fa-3x" aria-hidden="true"></i></a>
+						<a (click)="openModalWithComponent(session, i)"><span class="fa fa-play-circle fa-3x" aria-hidden="true"></span></a>
 					</div>
 
 					<div class="col-lg-12 videoDes">
 						<h1>{{ content.name | uppercase }}</h1>
 						<div class="row">
-							<div class="col-lg-6"><p><b>00:39</b></p></div>
-							<div class="col-lg-6"><p><b>ADDED ON 12/7/17</b></p></div>
+							<div class="col-xs-6"><p><b>00:39</b></p></div>
+							<div class="col-xs-6"><p><b>ADDED ON 12/7/17</b></p></div>
 						</div>
 					</div>
 				</div>
@@ -201,6 +201,18 @@
 	        <div class="text-center saveSessBtnCont">
 	        	<button class="saveSessName">SAVE</button>
 	        </div>
+
+
+	        <div class="addtoSess">
+	        	<h4 class="modal-title text-center" id="savedSessModalTitle">OR ADD TO SESSION</h4>
+	        </div>
+	        <div *ngFor="let session of customSession" class="row saved-pa">
+	        	<div class="col-xs-6 sessName">{{ session.name }}<span> {{ session.content.length }} Videos</span></div>
+	        	<div class="col-xs-5"><button class="viewSessbtn pull-right">ADD</button></div>
+	        	<div class="col-xs-1 deleteSess">
+	        		<button type="button" class="deleteSess"><span aria-hidden="true">&times;</span></button>
+	        	</div>
+	        </div>	        
 	      </div>
 
 	    </div>
