@@ -21,7 +21,7 @@
 
 <!-- EVENTS DESCRIPTION -->
 	<div class="container">
-		<div class="col-lg-10 eventsDesc">
+		<div class="col-lg-12 eventsDesc">
 			<p><b>The Complete 90</b> team who is lead by two former professionals and former national team players Giuliano Frano and Dylan Carreiro have put together a developmental soccer camp this summer. Players will be challenged with a technical training session in the morning followed by a tactical session in the afternoon. Our focus will be to develop players understanding of the game in order to allow decision making to be more effective in knowing if a pass, shot or skill move is the correct choice in certain situations.<br>
 			<br>
 			Our lunch break will allow for additional learning in the form of direct coach to player interaction. This time will be used to break down games further and give players a chance to ask questions about our experiences as professionals and what it takes to get to the next level. In addition, Sonoma Heights has a shelter where we will rest in the shade or use in the case were conditions become unplayable.<br>
@@ -32,7 +32,7 @@
 			</p>
 		</div>
 
-		<div class="col-lg-10 eventsLocation">
+		<div class="col-lg-12 eventsLocation">
 			<div class="col-lg-12 text-center">
 				<i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
 				<a href="https://www.google.ca/maps/place/100+Sunset+Ridge,+Woodbridge,+ON+L4H+1T9/@43.8307129,-79.6198587,16.56z" target="_blank"><p>Sonoma Heights Senior Soccer Field<br>
@@ -112,36 +112,45 @@
 
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title text-center" id="savedSessModalTitle">CAMP REGISTRATION</h4>
+	        <h4 class="modal-title text-center" id="savedSessModalTitle">WEEK 1 REGISTRATION</h4>
 	      </div>
 
 	      <div class="modal-body">
-	        <div class="registerForm">
-	            <div class="form-group">
-	                <input class="form-control text-center" id="regName" placeholder="Name" name="name">
-	            </div>
-	            <div class="form-group">
-	                <input type="email" class="form-control text-center" id="regEmail" placeholder="Email" name="email">
-	            </div>
-	            <div class="form-group">
-	                <input type="number" class="form-control text-center" id="inputAge" placeholder="Age" name="age">
-	            </div>
-	            <div class="form-group">
-	                <input class="form-control text-center" id="regGender" placeholder="Gender" name="gender">
-	            </div>	            
-	            <div class="form-group">
-	                <input class="form-control text-center" id="regJersey" placeholder="Jersey Size" name="jerseysize">
-	            </div> 
-	            <div class="form-group">
-	                <input class="form-control text-center" id="regPosition" placeholder="Position" name="regPosition">
-	            </div>                                    
-	        </div>
+	      	<form ngNoForm action="https://thecomplete90.us12.list-manage.com/subscribe/post" method="POST">
+    			<input type="hidden" name="u" value="18e4ef69694befc5389a215f1">
+    			<input type="hidden" name="id" value="f830cd031d">	      		
+		        <div class="registerForm">
+		            <div class="form-group">
+		                <input class="form-control" placeholder="First Name" type="text" name="MERGE1" id="MERGE1" size="25" value="">
+		            </div>
+		            <div class="form-group">
+		                <input class="form-control" placeholder="Last Name" type="text" name="MERGE2" id="MERGE2" size="25" value="">
+		            </div>		            
+		            <div class="form-group">
+		                <input class="form-control" placeholder="Email" type="email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value="">
+		            </div>
+		            <div class="form-group">
+		                <input class="form-control" placeholder="Age" type="text" name="MERGE3" id="MERGE3" size="25" value="">
+		            </div>
+		            <div class="form-group">
+		                <select class="select-small" id="MERGE4" name="MERGE4"><option value="" selected disabled>Gender</option><option value="Male">Male</option><option value="Female">Female</option></select>
+		            </div>	            
+		            <div class="form-group">
+		                <select class="select-small" id="MERGE5" name="MERGE5"><option value="" selected disabled>Jersey Size</option><option value="Small">Small</option><option value="Medium">Medium</option><option value="LARGE">Large</option></select>
+		            </div> 
+		            <div class="form-group">
+		                <select class="select-small" id="MERGE6" name="MERGE6"><option value="" selected disabled>Position</option><option value="ST">ST</option><option value="CAM">CAM</option><option value="CM">CM</option><option value="CDM">CDM</option><option value="RW">RW</option><option value="LW">LW</option><option value="CB">CB</option><option value="RB">RB</option><option value="LB">LB</option><option value="Gk">Gk</option></select>
+		            </div>                                    
+		        </div>
 
-	        <div class="text-center regBtnCont">
-	        	<button class="registerbtnModal">REGISTER</button>
-	        </div>
+		        <div class="text-center regBtnCont">
+		        	<input type="submit" class="formEmailButton registerbtnModal" name="submit" value="REGISTER">
+		        </div>
+		        <input type="hidden" name="ht" value="5c9a1caeb170d386b6a594736ad6a106b81d977b:MTUyNDYxMzU3My4xNjc2">
+    			<input type="hidden" name="mc_signupsource" value="hosted">
+	    	</form>
 	      </div>
-
+		
 	    </div>
 	  </div>
 	</div>
@@ -154,34 +163,43 @@
 
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title text-center" id="savedSessModalTitle">CAMP REGISTRATION</h4>
+	        <h4 class="modal-title text-center" id="savedSessModalTitle">WEEK 2 REGISTRATION</h4>
 	      </div>
 
 	      <div class="modal-body">
-	        <div class="registerForm">
-	            <div class="form-group">
-	                <input class="form-control text-center" id="regName" placeholder="Name" name="name">
-	            </div>
-	            <div class="form-group">
-	                <input type="email" class="form-control text-center" id="regEmail" placeholder="Email" name="email">
-	            </div>
-	            <div class="form-group">
-	                <input type="number" class="form-control text-center" id="inputAge" placeholder="Age" name="age">
-	            </div>
-	            <div class="form-group">
-	                <input class="form-control text-center" id="regGender" placeholder="Gender" name="gender">
-	            </div>	            
-	            <div class="form-group">
-	                <input class="form-control text-center" id="regJersey" placeholder="Jersey Size" name="jerseysize">
-	            </div> 
-	            <div class="form-group">
-	                <input class="form-control text-center" id="regPosition" placeholder="Position" name="regPosition">
-	            </div>                                    
-	        </div>
+	      	<form ngNoForm action="https://thecomplete90.us12.list-manage.com/subscribe/post" method="POST">
+    			<input type="hidden" name="u" value="18e4ef69694befc5389a215f1">
+    			<input type="hidden" name="id" value="6d7ccc8dff">	      		
+		        <div class="registerForm">
+		            <div class="form-group">
+		                <input class="form-control" placeholder="First Name" type="text" name="MERGE1" id="MERGE1" size="25" value="">
+		            </div>
+		            <div class="form-group">
+		                <input class="form-control" placeholder="Last Name" type="text" name="MERGE6" id="MERGE6" size="25" value="">
+		            </div>		            
+		            <div class="form-group">
+		                <input class="form-control" placeholder="Email" type="email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value="">
+		            </div>
+		            <div class="form-group">
+		                <input class="form-control" placeholder="Age" type="text" name="MERGE2" id="MERGE2" size="25" value="">
+		            </div>
+		            <div class="form-group">
+		                <select class="select-small" id="MERGE4" name="MERGE4"><option value="" selected disabled>Gender</option><option value="Male">Male</option><option value="Female">Female</option></select>
+		            </div>	            
+		            <div class="form-group">
+		                <select class="select-small" id="MERGE3" name="MERGE3"><option value="" selected disabled>Jersey Size</option><option value="Small">Small</option><option value="Medium">Medium</option><option value="LARGE">Large</option></select>
+		            </div> 
+		            <div class="form-group">
+		                <select class="select-small" id="MERGE5" name="MERGE5"><option value="" selected disabled>Position</option><option value="ST">ST</option><option value="CAM">CAM</option><option value="CM">CM</option><option value="CDM">CDM</option><option value="RW">RW</option><option value="LW">LW</option><option value="CB">CB</option><option value="RB">RB</option><option value="LB">LB</option><option value="Gk">Gk</option></select>
+		            </div>                                    
+		        </div>
 
-	        <div class="text-center regBtnCont">
-	        	<button class="registerbtnModal">REGISTER</button>
-	        </div>
+		        <div class="text-center regBtnCont">
+		        	<input type="submit" class="formEmailButton registerbtnModal" name="submit" value="REGISTER">
+		        </div>
+		        <input type="hidden" name="ht" value="12f6fe8227c0e1e1adf6414bd6e3fcf50cf7b0a5:MTUyNDYyMjI1MC4wNjUz">
+    			<input type="hidden" name="mc_signupsource" value="hosted">
+	    	</form>
 	      </div>
 
 	    </div>
