@@ -38,6 +38,10 @@ button:focus{
 	outline:0;
 }
 
+select:focus{
+	outline: 0;
+}
+
 .modal-content  {
     -webkit-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
@@ -191,6 +195,29 @@ input{
 
 .regBtnCont{
 	padding-bottom: 20px;
+}
+
+.select-small{
+	width: 100%;
+	color: #555;
+	border: none; 
+	border-width: 0; 
+	box-shadow: none;
+	border-radius: 0px;
+	border-bottom: 1px solid #fd1541;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	background-color: rgba(0, 0, 0, 0);	
+/*    -webkit-appearance: none;
+    -moz-appearance: none;*/
+	-ms-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	-webkit-box-sizing:content-box; 
+	box-sizing:content-box;    	
+}
+
+.select-small option{
+	text-align: center;
 }
 
 
