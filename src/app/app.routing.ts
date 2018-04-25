@@ -15,14 +15,14 @@ import { EventsComponent } from './components/events';
 
 const appRoutes: Routes = [
     { path: '', component: MainComponent },
-    { path: 'login_signup', component: LoginSignupComponent },
-    { path: 'forgot', component: ForgotComponent },
+    // { path: 'login_signup', component: LoginSignupComponent },
+    // { path: 'forgot', component: ForgotComponent },
     { path: 'about', component: AboutusComponent },
     { path: 'training', component: TrainingComponent },
-    { path: 'pricing', component: PricingComponent },
-    { path: 'paynow', component: PaymentComponent, canActivate: [AuthGuard] },
-    { path: 'sessions', component: SessionsComponent },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+    // { path: 'pricing', component: PricingComponent },
+    // { path: 'paynow', component: PaymentComponent, canActivate: [AuthGuard] },
+    // { path: 'sessions', component: SessionsComponent },
+    // { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     { path: 'events', component: EventsComponent },
 
     // otherwise redirect to home
