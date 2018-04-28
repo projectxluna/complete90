@@ -1,0 +1,65 @@
+.modal-content  {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
+}
+
+.open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+    color: #fd1541;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+input{
+	margin: 0px;
+}
+
+#savedSessModalTitle{
+	color: #333333;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px 25px 15px 25px;
+}
+
+.modal-header {
+    padding: 35px 15px 15px 15px;
+    border-bottom: transparent; 
+}
+
+.nameSessForm{
+	padding-top: 15px;
+}
+
+.form-group{
+	max-width: 300px;
+	margin-left: 23%;
+	margin-bottom: 30px;
+}
+
+.nameSessForm input{
+	border: none; 
+	border-width: 0; 
+	box-shadow: none;
+	border-bottom: 1px solid #fd1541;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	background-color: rgba(0, 0, 0, 0);	
+}
+
+.saveSessName{
+	background-color: #fd1541;
+	/*border: 1px solid #fd1541;*/
+	color: white;
+	border: transparent;
+	padding: 5px 9px;
+}
+
+.saveSessBtnCont{
+	padding-bottom: 20px;
+}
+
+.addtoSess{
+	padding-top: 20px;
+}

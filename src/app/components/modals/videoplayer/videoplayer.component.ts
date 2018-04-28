@@ -20,19 +20,13 @@ export class VideoplayerComponent implements OnInit {
   }
 
   playNext() {
-    if (this.selectedIndex+1 === this.session.content.length) {
-      console.log('at the end of the playlist');
-      return;
-    }
+    if (this.selectedIndex+1 === this.session.content.length) return;
     this.selectedIndex ++;
     this.selectedContent = this.session.content[this.selectedIndex];
   }
 
   playPrevious() {
-    if (this.selectedIndex === 0) {
-      console.log('no older videos to play');
-      return;
-    }
+    if (this.selectedIndex === 0) return;
     this.selectedIndex --;
     this.selectedContent = this.session.content[this.selectedIndex];
   }

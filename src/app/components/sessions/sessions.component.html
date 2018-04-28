@@ -54,8 +54,7 @@
 			<a><i class="fa fa-search" aria-hidden="true"></i></a>
 
 			<!-- CREATE SESSIONS BUTTON -->
-<!-- 			<button id="createSesBtn"><b>+ CREATE SESSION</b></button> -->
-				<button id="savedCont" type="button" class="btn btn-primary" data-toggle="modal" data-target="#savedSessModal">SAVED SESSIONS</button>
+			<button id="savedCont" type="button" class="btn btn-primary" data-toggle="modal" data-target="#savedSessModal">SAVED SESSIONS</button>
 
 		</div>
 		<!-- <div class="clearFilter col-lg-12 text-center">
@@ -64,10 +63,6 @@
 	</div>
 </div>
 <!-- FILTERS SECTION END -->
-
-
-
-
 
 <!-- SAVED SESSION MODAl -->
 <div class="modal fade" id="savedSessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -80,13 +75,17 @@
       <div class="modal-body">
         
         <!-- 1ST SAVED SESSION -->
-        <div *ngFor="let session of customSession" class="row saved-pa">
-        	<div class="col-xs-6 sessName">{{ session.name }}<span> {{ session.content.length }} Videos</span></div>
-        	<div class="col-xs-5"><button class="viewSessbtn pull-right">VIEW</button></div>
+        <div *ngFor="let session of customSessions" class="row saved-pa">
+        	<div class="col-xs-6 sessName">{{ session.name | uppercase }}<span> ({{ session.content.length }} Videos)</span></div>
+        	<div class="col-xs-5"><button (click)="startSession(session)" class="viewSessbtn pull-right">VIEW</button></div>
         	<div class="col-xs-1 deleteSess">
         		<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)"><span aria-hidden="true">&times;</span></button>
         	</div>
-        </div>
+		</div>
+		<div *ngIf="customSessions.length < 1" style="background-color: dimgray;">
+			No Saved Sessions Yet. To create your own session, simply press the red "+" button on a video to add it to the session. 
+			Scroll horozontally to view more videos within each category!
+		</div>
       </div>
     </div>
   </div>
@@ -145,31 +144,27 @@
 <!-- VIDEO CONTENT END -->
 
 <!-- CUSTOM SESSION BANNER -->
-<div class="sessionsBanner">
+<div *ngIf="banner.isActive" class="sessionsBanner">
 	<nav class="navbar navbar-default navbar-fixed-bottom sBanner">	  
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-1">
 				</div>
-				
+
 				<div class="cont-topPA col-xs-10">
 					<div class="col-xs-12">
 						<div class="col-xs-12 col-sm-4 mobile-center">
-							<label>1 VIDEO ADDED TO SESSION</label>
+							<label>{{ banner.count }} VIDEO ADDED TO SESSION</label>
 						</div>
 
 						<div class="col-xs-6 col-sm-4 text-center">
-							<button class="startSess">START SESSION</button>
-						</div>
-
-						<div class="col-xs-6 col-sm-4">
-							<button class="saveSess pull-right" id="saveSessbtn" data-toggle="modal" data-target="#nameSessModal">SAVE SESSION</button>
+							<button (click)="startSessionById(banner.sessionId)" class="startSess">START SESSION</button>
 						</div>
 					</div>
 				</div>
 
 				<div class="col-sx-1 cont-topPA-close ma-r">
-					<button class="pull-right closeBannerbtn closeActive">
+					<button (click)="closeBanner()" class="pull-right closeBannerbtn closeActive">
 						<i class="fa fa-times" aria-hidden="true"></i>
 					</button>
 				</div>
@@ -182,7 +177,7 @@
 
 <!-- NAME SESSION MODAL -->
 	<!-- WEEK 1 MODAL -->
-	<div class="modal fade" id="nameSessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!-- <div class="modal fade" id="nameSessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 
@@ -217,7 +212,7 @@
 
 	    </div>
 	  </div>
-	</div>
+	</div> -->
 <!-- NAME SESSION MODAL -->
 
 

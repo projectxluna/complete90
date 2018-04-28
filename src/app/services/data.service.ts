@@ -70,6 +70,28 @@ export class DataService {
       });
   }
 
+  saveSessions(sessions): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http
+      .post('/api/session/plan', sessions, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  deleteSessions(sessionId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, body: { sessionId} });
+
+    return this.http
+      .delete('/api/session/plan', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   uploadProfileImage(fileToUpload: File): Observable<boolean> {
     const formData: FormData = new FormData();
     formData.append('profileImg', fileToUpload, fileToUpload.name);
