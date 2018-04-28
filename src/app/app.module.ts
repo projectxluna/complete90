@@ -33,6 +33,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { EventsComponent } from './components/events/events.component';
 import { VideoplayerComponent } from './components/modals/videoplayer/videoplayer.component';
+import { AddcontentToSessionComponent } from './components/modals/addcontent-to-session/addcontent-to-session.component';
 
 
 
@@ -52,7 +53,8 @@ import { VideoplayerComponent } from './components/modals/videoplayer/videoplaye
     DashboardComponent,
     SettingsComponent,
     EventsComponent,
-    VideoplayerComponent
+    VideoplayerComponent,
+    AddcontentToSessionComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,8 @@ import { VideoplayerComponent } from './components/modals/videoplayer/videoplaye
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    VideoplayerComponent
+    VideoplayerComponent,
+    AddcontentToSessionComponent
   ]
 })
 export class AppModule { }
