@@ -99,13 +99,22 @@ module.exports = function (apiRoutes) {
             });
         }
     });
-    
-    /**
-     * modify a training plan(s)
-     */
-    apiRoutes.put('/session/plan', Auth.isAuthenticated, function (req, res) {
-    });
-    
+
+    apiRoutes.delete('/session/plan', Auth.isAuthenticated, function (req, res) {
+        Plan.findOneAndRemove({_id: mongoose.Types.ObjectId(req.body.sessionId)}, 
+        function(err, plan) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: err.errmsg,
+                    code: err.code
+                });
+            }
+            res.json({
+                success: true,
+            });
+        });
+    })
     /**
      * get user watched stats
      */
