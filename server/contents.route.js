@@ -5,7 +5,8 @@ module.exports = function (apiRoutes) {
     var request = require('request');
     var AWS = require('./helpers/aws');
     var Plan = require('./models/plan');
-    
+    var mongoose = require('mongoose');
+
     /**
      * get free sessions
      */
@@ -24,7 +25,7 @@ module.exports = function (apiRoutes) {
             });
         });
     });
-    
+
     /**
      * get all sessions
      */
@@ -50,11 +51,53 @@ module.exports = function (apiRoutes) {
             });
         });
     });
-    
+
     /**
-     * create new plan(s)
+     * create and modify training plan
      */
     apiRoutes.post('/session/plan', Auth.isAuthenticated, function (req, res) {
+        let name = req.body.name;
+        let content = req.body.content;
+        let id = req.body.id;
+        let userId = req.decoded.userId;
+
+        if (!name || !content) return res.status(422).send({ success: false });
+
+        if (id) {
+            Plan.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
+                content: content
+            }, function (err, plan) {
+                if (err) {
+                    return res.json({
+                        success: false,
+                        message: err.errmsg,
+                        code: err.code
+                    });
+                }
+                res.json({
+                    success: true,
+                    id: plan._id
+                });
+            });
+        } else {
+            let newPlan = new Plan();
+            newPlan.name = name;
+            newPlan.content = content;
+            newPlan.userId = userId;
+            newPlan.save(function (err, plan) {
+                if (err) {
+                    return res.json({
+                        success: false,
+                        message: err.errmsg,
+                        code: err.code
+                    });
+                }
+                res.json({
+                    success: true,
+                    id: plan._id
+                });
+            });
+        }
     });
     
     /**
@@ -68,13 +111,13 @@ module.exports = function (apiRoutes) {
      */
     apiRoutes.get('/stats', Auth.isAuthenticated, function (req, res) {
     });
-    
+
     /**
      * update user watched stats
      */
     apiRoutes.put('/stats', Auth.isAuthenticated, function (req, res) {
     });
-    
+
     /**
      * log watched content stats
      */
@@ -102,7 +145,7 @@ module.exports = function (apiRoutes) {
             // make request to s3
         }
     }
-    
+
     // load sessions json structure
     function loadSessions(callback) {
         let nodeEnv = process.env.NODE_ENV;
@@ -121,7 +164,7 @@ module.exports = function (apiRoutes) {
             });
         }
     }
-    
+
     // traverse json structure and sign all paid video url
     function signLinks(contentStructure, callback) {
         if (!isValidStructure(contentStructure)) {
@@ -146,7 +189,7 @@ module.exports = function (apiRoutes) {
         }
         callback(null, contents);
     }
-    
+
 
     function getUserPlans(contents, userId, callback) {
         Plan.find({
@@ -156,17 +199,24 @@ module.exports = function (apiRoutes) {
 
             let userPlan = [];
             for (let plan of plans) {
+                let videoContents = [];
+                plan.content.forEach((videoId) => {
+                    let content = contents.filter(function (value, index, self) {
+                        return value.id === videoId;
+                    });
+                    videoContents.push(...content);
+                });
                 let p = {
                     id: plan._id,
                     name: plan.name,
-                    content: plan.content
+                    content: videoContents
                 }
                 userPlan.push(p);
             }
             callback(null, contents, userPlan);
         });
     }
-    
+
     // should test integrity of data structure returned
     // for now always return true
     function isValidStructure(structure) {
