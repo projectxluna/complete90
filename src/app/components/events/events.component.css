@@ -22,6 +22,11 @@ div{
    cursor: default;
 }
 
+.field-shift {
+    left: -9999px;
+    position: absolute;
+}
+
 .container-fluid{
 	padding: 0px;
 }
