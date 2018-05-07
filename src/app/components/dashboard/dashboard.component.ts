@@ -17,18 +17,40 @@ export class DashboardComponent implements OnInit {
     subscription: undefined,
     creditCards: []
   };
+  stats = {
+    watched: '',
+    viewedTotal: 0
+  }
   model: any = {};
   loading: boolean = false;
 
   constructor(private router: Router,
     private dataService: DataService,
     private authenticationService: AuthenticationService) {
-    dataService.getUserProfile().subscribe((user) => {
+    dataService.getUserProfile().subscribe(user => {
       this.profile = user.profile;
     });
+    dataService.getWatchedStats().subscribe(result => {
+      if (result && result.success) {
+        this.stats.watched = this.getHumanTime(result.watchedTotal);
+        this.stats.viewedTotal = result.viewedTotal;
+      }
+    })
   }
 
   ngOnInit() {
+  }
+
+  getHumanTime(time) {
+    let h = Math.floor(time / (60 * 60 * 1000));
+    time = time % (60 * 60 * 1000);
+    let m = Math.floor(time / (60 * 1000));
+    time = time % (60 * 1000);
+    let s = Math.floor(time / 1000);
+
+    if (h) return h + ' Hours';
+    if (m) return m + ' Minutes';
+    if (s) return s + ' Seconds';
   }
 
   getSubscriptionLeft() {

@@ -5,6 +5,7 @@ module.exports = function (apiRoutes) {
     var request = require('request');
     var AWS = require('./helpers/aws');
     var Plan = require('./models/plan');
+    var UserStats = require('./models/stats');
     var mongoose = require('mongoose');
 
     /**
@@ -53,7 +54,7 @@ module.exports = function (apiRoutes) {
     });
 
     /**
-     * create and modify training plan
+     * Create and modify training plan
      */
     apiRoutes.post('/session/plan', Auth.isAuthenticated, function (req, res) {
         let name = req.body.name;
@@ -100,9 +101,76 @@ module.exports = function (apiRoutes) {
         }
     });
 
+    /**
+     * Delete training plan
+     */
     apiRoutes.delete('/session/plan', Auth.isAuthenticated, function (req, res) {
-        Plan.findOneAndRemove({_id: mongoose.Types.ObjectId(req.body.sessionId)}, 
-        function(err, plan) {
+        Plan.findOneAndRemove({ _id: mongoose.Types.ObjectId(req.body.sessionId) },
+            function (err, plan) {
+                if (err) {
+                    return res.json({
+                        success: false,
+                        message: err.errmsg,
+                        code: err.code
+                    });
+                }
+                res.json({
+                    success: true,
+                });
+            });
+    })
+
+    /**
+     * get user watched stats
+     */
+    apiRoutes.get('/session/stats', Auth.isAuthenticated, function (req, res) {
+        UserStats.aggregate([
+            {
+                $match: {
+                    userId: mongoose.Types.ObjectId(req.decoded.userId)
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    watchedTotal: { $sum: '$content.watchedTotal' },
+                    count: { $sum: 1 }
+                }
+            }
+        ], function (err, stats) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: err.errmsg,
+                    code: err.code
+                });
+            }
+            if (!stats || stats.length < 1) {
+                return res.json({
+                    success: false
+                });
+            }
+            res.json({
+                success: true,
+                watchedTotal: stats[0].watchedTotal,
+                viewedTotal: stats[0].count
+            });
+        });
+    });
+
+    /**
+     * update user watched stats
+     */
+    apiRoutes.post('/session/stats', Auth.isAuthenticated, function (req, res) {
+        let stats = req.body.contentStats;
+        let userId = req.decoded.userId;
+
+        UserStats.findOneAndUpdate({ 'userId': userId, 'content.id': stats.contentId }, {
+            userId: userId,
+            'content.id': stats.contentId,
+            'content.currentTime': stats.currentTime,
+            $inc: { 'content.watchedTotal': stats.watchedTotal }
+        }, { upsert: true }, function (err, numberAffected, raw) {
             if (err) {
                 return res.json({
                     success: false,
@@ -114,23 +182,6 @@ module.exports = function (apiRoutes) {
                 success: true,
             });
         });
-    })
-    /**
-     * get user watched stats
-     */
-    apiRoutes.get('/stats', Auth.isAuthenticated, function (req, res) {
-    });
-
-    /**
-     * update user watched stats
-     */
-    apiRoutes.put('/stats', Auth.isAuthenticated, function (req, res) {
-    });
-
-    /**
-     * log watched content stats
-     */
-    apiRoutes.post('/stats', Auth.isAuthenticated, function (req, res) {
     });
 
     // load free sessions
