@@ -5,6 +5,9 @@
 @import '../node_modules/font-awesome/css/font-awesome.css';
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+@font-face { font-family: Montserrat; src: url('assets/Montserrat-Regular.ttf'); } 
+@font-face { font-family: Montserrat; font-weight: bold; src: url('assets/Montserrat-Bold.ttf');}
+
 body {
     font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
     font-weight: 300;

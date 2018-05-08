@@ -1,17 +1,19 @@
-<div class="container" style="padding-top:100px;">
-	<form>
-		<div class="plan">
-			<div class="summary">
-				<ul>
-					<li>Name: {{ selectedPlan.name }}</li>
-					<li>Price: ${{ selectedPlan.price }}</li>
-				</ul>
+<div class="paynowbg">
+	<div class="container" style="padding-top:100px;">
+		<form class="paymentForm">
+			<div class="plan">
+				<div class="summary text-center">
+					<ul>
+						<li>Name: {{ selectedPlan.name }}</li>
+						<li>Price: ${{ selectedPlan.price }}</li>
+					</ul>
+				</div>
 			</div>
-		</div>
 
-		<div id="dropin-container"></div>
-		
-		<button type="submit" class="btn btn-primary" (click)="addCard()">Pay Now</button>
-	</form>
-	<span>{{ error }}</span>
+			<div id="dropin-container"></div>
+			<div class="text-center">
+			<button type="submit" class="btn btn-primary" (click)="addCard()">Pay Now</button></div>
+		</form>
+		<span>{{ error }}</span>
+	</div>
 </div>

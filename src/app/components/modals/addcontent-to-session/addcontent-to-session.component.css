@@ -1,3 +1,7 @@
+div{
+	font-family: 'Montserrat';
+}
+
 .modal-content  {
     -webkit-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
@@ -34,7 +38,7 @@ input{
 
 .form-group{
 	max-width: 300px;
-	margin-left: 23%;
+	margin-left: 32%;
 	margin-bottom: 30px;
 }
 
@@ -62,4 +66,15 @@ input{
 
 .addtoSess{
 	padding-top: 20px;
+}
+
+.viewSessbtn{
+	background-color: #fd1541;
+    color: white;
+    border: transparent;
+    padding: 5px 9px;
+}
+
+.saved-pa{
+	margin-bottom: 15px;
 }

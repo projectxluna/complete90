@@ -6,7 +6,9 @@
     </button>
   </div>
   <div class="modal-body">
-    <button type="button" class="btn btn-primary" (click)="playPrevious()">Play Previous</button>
+    <button type="button" class="btn btn-primary" (click)="playPrevious()">
+      <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+    </button>
     <vg-player>
       <vg-overlay-play></vg-overlay-play>
       <vg-buffering></vg-buffering>
@@ -37,10 +39,12 @@
         <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
       </video>
     </vg-player>
-    <button type="button" class="btn btn-primary" (click)="playNext()">Play Next</button>
+    <button type="button" class="btn btn-primary" (click)="playNext()">
+      <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
+    </button>
   </div>
-  <div class="modal-footer black">
+<!--   <div class="modal-footer black">
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
-  </div>
+  </div> -->
 </div>
 

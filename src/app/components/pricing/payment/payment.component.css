@@ -1,3 +1,101 @@
-.container {
-    color: black;
+/*--------------------------TABLE OF CONTENTS-------------------------*/
+/*
+0. GLOBAL CCS
+1. BACKGROUND
+2. PAYMENT FORM
+
+
+
+
+
+
+*/
+
+/*----------------------------0. GOBAL CSSS--------------------------*/
+
+div{
+	font-family: 'Montserrat';
+}
+
+.inactiveLink{
+   pointer-events: none;
+   cursor: default;
+}
+
+input, select, textarea{
+    color: white;
+}
+
+textarea:focus, input:focus {
+    color: white;
+}
+
+form, span{
+	font-size: 16px;
+}
+
+.alert-danger {
+    color: #fd1541;
+    background-color: transparent;
+    border-color: transparent;
+    text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
+/*----------------------------1. BACKGROUND--------------------------*/
+.paynowbg{
+	background-image: url('../../../../assets/paynow-bg.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;	
+}
+
+
+/*----------------------------2. PAYMENT FORM--------------------------*/
+
+.paymentForm{
+  margin-top: 230px;
+  margin-bottom: 260px;
+
+}
+
+
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1024px) {
+
+
+
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+
+
+}
+
+
+
+
+
+
+@media (max-width: 414px) {
+
+  .paymentForm{
+    margin-top: 90px;
+    margin-bottom: 90px;
+
+  }
+
+
 }
