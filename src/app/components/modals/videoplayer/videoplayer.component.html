@@ -6,7 +6,9 @@
     </button>
   </div>
   <div class="modal-body">
-    <button type="button" class="btn btn-primary" (click)="playPrevious()">Play Previous</button>
+    <button type="button" class="btn btn-primary" (click)="playPrevious()">
+      <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+    </button>
     <vg-player (onPlayerReady)="onPlayerReady($event)">
       <vg-overlay-play></vg-overlay-play>
       <vg-buffering></vg-buffering>
@@ -17,7 +19,7 @@
         <vg-scrub-bar-cue-points [vgCuePoints]="track?.cues"></vg-scrub-bar-cue-points>
       </vg-scrub-bar>
 
-      <vg-controls>
+      <vg-controls [vgAutohide]="true" [vgAutohideTime]="1.5">
         <vg-play-pause></vg-play-pause>
         <vg-playback-button></vg-playback-button>
 
@@ -35,9 +37,12 @@
       <video [src]="selectedContent.link" [vgMedia]="media" #media id="singleVideo" preload="auto">
       </video>
     </vg-player>
-    <button type="button" class="btn btn-primary" (click)="playNext()">Play Next</button>
+    <button type="button" class="btn btn-primary" (click)="playNext()">
+      <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
+    </button>
   </div>
-  <div class="modal-footer black">
-    <button type="button" class="btn btn-default" (click)="close()">{{closeBtnName}}</button>
-  </div>
+<!--   <div class="modal-footer black">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+  </div> -->
 </div>
+
