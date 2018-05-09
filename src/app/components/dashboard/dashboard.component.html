@@ -21,7 +21,7 @@
 						</span>
 					</div>
 					<div class="clear">
-						<h1 class="m-0">125 minutes</h1>
+						<h1 class="m-0">{{ stats.watched }}</h1>
 						<h2 class="m-0">Total time trained</h2>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 						</span>
 					</div>
 					<div class="clear">
-						<h1 class="m-0">42</h1>
+						<h1 class="m-0">{{ stats.viewedTotal }}</h1>
 						<h2 class="m-0">Total sessions viewed</h2>
 					</div>
 				</div>
@@ -82,15 +82,35 @@
 				    </div>
 
 					<div class="col-md-12 text-center">
-						<img src="assets/player-pic.png" class="profilePic">
+						<div class="uploadOver">
+							<img src="assets/player-pic.png" class="profilePic">
+							<div class="uploadIcon">
+								<a href=""><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
+							</div>
+						</div>
 						<div class="profileName">
 							<h3>{{ profile.name }}</h3>
 						</div>
 					</div>
 					<ul class="list">
-						<li><h4>POSITION: </h4></li>
-						<li><h4>HEIGHT: </h4></li>
-						<li><h4>POSITION: </h4></li>
+						<li>
+							<div class="row">
+								<a class="inactiveLink">POSITION: </a>
+								<input type="" name="" class="profileInput" placeholder="Edit Position">
+							</div>
+						</li>
+						<li>
+							<div class="row">
+								<a class="inactiveLink">HEIGHT: </a>
+								<input type="" name="" class="profileInput" placeholder="Edit Height">
+							</div>
+						</li>
+						<li>
+							<div class="row">
+								<a class="inactiveLink">PR. FOOT: </a>
+								<input type="" name="" class="profileInput" placeholder="Edit Pr. Foot">
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>

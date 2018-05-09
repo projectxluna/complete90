@@ -70,6 +70,29 @@ export class DataService {
       });
   }
 
+  getWatchedStats(): Observable<any> {
+    // add authorization header with jwt token
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    // get sessions from api
+    return this.http.get('/api/session/stats', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  saveWatchedStats(contentStats): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http
+      .post('/api/session/stats', { contentStats: contentStats }, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   saveSessions(sessions): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });

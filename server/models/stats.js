@@ -1,19 +1,26 @@
 // load the things we need
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
 
 // define the schema for our user model
 var statSchema = mongoose.Schema({
-    userStats: {
-
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        index: true,
+        required: true
     },
-    planStats: {
-
-    } 
+    content: {
+        id: {
+            type: String,
+            index: true,
+            required: true
+        },
+        currentTime: Number,
+        watchedTotal: Number,
+    }
 },
 {
     timestamps: true,
-    collection: 'stats'
+    collection: 'user_stats'
 });
 
 // create the model for users and expose it to our app
