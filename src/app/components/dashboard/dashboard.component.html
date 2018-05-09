@@ -74,7 +74,7 @@
 				            </a>
 				            <ul class="dropdown-menu">
 				            	<li>
-				            		<a class="dropdown-item" href="">Edit Profile</a>
+				            		<a class="dropdown-item" (click)="editMode = !editMode">Edit Profile</a>
 				          		</li>
 				            </ul>
 				          </li>
@@ -85,7 +85,8 @@
 						<div class="uploadOver">
 							<img src="assets/player-pic.png" class="profilePic">
 							<div class="uploadIcon">
-								<a href=""><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
+								<a (click)="addFiles()"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
+								<input type="file" #file style="display: none" (change)="onFilesAdded()" accept="image/*"/>
 							</div>
 						</div>
 						<div class="profileName">
@@ -95,7 +96,7 @@
 					<ul class="list">
 						<li>
 							<div class="row">
-								<a class="inactiveLink">POSITION: </a>
+								<a [ngClass]="{'inactiveLink': editMode}"class="inactiveLink">POSITION: </a>
 								<input type="" name="" class="profileInput" placeholder="Edit Position">
 							</div>
 						</li>

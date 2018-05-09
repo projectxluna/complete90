@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService, DataService } from '../../services';
 import { Router } from '@angular/router';
 
@@ -23,6 +23,11 @@ export class DashboardComponent implements OnInit {
   }
   model: any = {};
   loading: boolean = false;
+
+  editMode = false;
+  
+  @ViewChild('file') file;
+  public files: Set<File> = new Set();
 
   constructor(private router: Router,
     private dataService: DataService,
@@ -93,5 +98,13 @@ export class DashboardComponent implements OnInit {
           this.loading = false;
         }
       });
+  }
+
+  onFilesAdded() {
+
+  }
+
+  addFiles() {
+    this.file.nativeElement.click();
   }
 }
