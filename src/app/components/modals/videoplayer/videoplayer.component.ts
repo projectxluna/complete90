@@ -121,6 +121,7 @@ export class VideoplayerComponent implements OnInit {
     // save user watch progress 
     this.timer.stop();
     var watched = this.timer.time();
+    this.timer.reset();
 
     this.sessionStats.watchedTotal = watched;
     this.sessionStats.currentTime = this.api.getDefaultMedia().currentTime;
@@ -128,15 +129,12 @@ export class VideoplayerComponent implements OnInit {
 
     console.log('Watched time:', this.timer.formatTime(), 'Current time:', this.api.getDefaultMedia().currentTime);
     if (watched < 1) {
-      this.timer.reset();
       return;
     }
     this.dataService.saveWatchedStats(this.sessionStats).subscribe(result => {
       if (!result || !result.success) {
-        console.error('error saving content watched stat');
         return;
       }
-      this.timer.reset();
     });
   }
 
