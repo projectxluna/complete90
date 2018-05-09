@@ -6,7 +6,7 @@
     			<h1>IMPROVE YOUR SOCCER<br> SKILLS TODAY!</h1>
     		</div>
     		<div class="lrncont col-lg-6 col-lg-offset-7 col-md-6 col-md-offset-6">
-    			<a href="">LEARN MORE</a>
+    			<a [routerLink]="['/sessions']">LEARN MORE</a>
     		</div>
     	</div>
     </div>
@@ -32,7 +32,7 @@
 			</p>
 
 			<div class="offerTitle">
-				<a href="#/" class="inactiveLink">TRAINING WE OFFER</a>
+				<a class="inactiveLink">TRAINING WE OFFER</a>
 				<p><br>
 					•First Touch on the Ball<br>
 					•Movement & Spacing<br>
@@ -41,7 +41,7 @@
 				</p>
 			</div>
 			<div class="readMore">
-				<a href="#/"> READ MORE ></a>
+				<a [routerLink]="['/training']" > READ MORE ></a>
 			</div>
 		</div>
 	</div>
@@ -73,7 +73,7 @@
 						<div class="row">
 							<div class="col-lg-7 col-md-7">
 							<h1>CREATE CUSTOM SESSIONS</h1></div>
-							<div class="col-lg-5 col-md-5 sesLink text-center"><a href="/#">CREATE A SESSION</a></div>
+							<div class="col-lg-5 col-md-5 sesLink text-center"><a [routerLink]="['/sessions']">CREATE A SESSION</a></div>
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra sem innsequat augue sem, eget varius velit dignissim eget.
 						</p>
@@ -82,7 +82,7 @@
 					<div class="col-lg-12 persTrain">
 						<div class="col-lg-12 text-center">
 							<h1>1 ON 1 PERSONAL TRAINING<br> AVAILABLE LOCALLY</h1>
-							<a href="#/">LEARN MORE</a>
+							<a [routerLink]="['/training']">LEARN MORE</a>
 						</div>
 					</div>
 
@@ -106,7 +106,7 @@
 					<a href="" class="inactiveLink">PLAYER</a>
 					<h1><b>The Complete 90</b> for players</h1>
 					<div class="PromoSignbtn">
-						<a href="#/">SIGN UP</a>
+						<a [routerLink]="['/login_signup']">SIGN UP</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-sm-6">
@@ -125,7 +125,7 @@
 					<a href="" class="inactiveLink">COACH</a>
 					<h1><b>The Complete 90</b> for coaches</h1>
 					<div class="PromoSignbtn">
-						<a href="#/">SIGN UP</a>
+						<a [routerLink]="['/login_signup']">SIGN UP</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-sm-6">
