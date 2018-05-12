@@ -147,7 +147,9 @@ module.exports = function (apiRoutes) {
             }
             if (!stats || stats.length < 1) {
                 return res.json({
-                    success: false
+                    success: true,
+                    watchedTotal: 0,
+                    viewedTotal: 0
                 });
             }
             res.json({

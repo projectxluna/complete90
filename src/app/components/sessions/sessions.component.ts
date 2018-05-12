@@ -183,7 +183,7 @@ export class SessionsComponent implements OnInit {
       this.sessions = [];
       this.customSessions = [];
 
-      this.collectTagsAndCategories(response.content)
+      this.collectTagsAndCategories(response.content);
       this.groupContent(response.content);
       this.customSessions.push(...response.plans);
     });

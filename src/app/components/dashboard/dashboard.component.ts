@@ -30,6 +30,8 @@ export class DashboardComponent implements OnInit {
   model: any = {};
   loading: boolean = false;
 
+  sessions = [];
+
   editMode = false;
   
   @ViewChild('file') file;
@@ -37,7 +39,7 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router,
     private dataService: DataService,
     private authenticationService: AuthenticationService) {
-    dataService.getUserProfile().subscribe(user => {
+    dataService.getUserProfile(false).subscribe(user => {
       this.userProfileCallback(user.profile);
     });
     dataService.getWatchedStats().subscribe(result => {
@@ -45,10 +47,39 @@ export class DashboardComponent implements OnInit {
         this.stats.watched = this.getHumanTime(result.watchedTotal);
         this.stats.viewedTotal = result.viewedTotal;
       }
-    })
+    });
+    dataService.getSessions().subscribe((response) => {
+      if (!response.success) return;
+      this.sessions = [];
+
+      this.groupContent(response.content);
+    });
   }
 
   ngOnInit() {
+  }
+
+  groupContent(contentList) {
+    let sessions = {};
+
+    for (let content of contentList) {
+      if (sessions[content.group]) {
+        sessions[content.group].push(content);
+      } else {
+        sessions[content.group] = [content];
+      }
+    }
+    for (var session in sessions) {
+      if (!sessions.hasOwnProperty(session)) continue;
+
+      var content = sessions[session];
+      if (content.length > 0) {
+        this.sessions.push(content[0]);
+      }
+    }
+    if (this.sessions.length > 3) {
+      this.sessions = this.sessions.slice(2);
+    }
   }
 
   getHumanTime(time) {
@@ -60,7 +91,8 @@ export class DashboardComponent implements OnInit {
 
     if (h) return h + ' Hours';
     if (m) return m + ' Minutes';
-    if (s) return s + ' Seconds';
+
+    return s + ' Seconds';
   }
 
   getSubscriptionLeft() {

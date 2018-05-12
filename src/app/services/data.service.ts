@@ -17,7 +17,6 @@ export class DataService {
 
   getUserProfile(cache: boolean = true): Observable<any> {
     if (cache && this.cachedProfile) {
-      console.log('cache hit on user profile');
       return Observable.create((observer) => {
         observer.next(this.cachedProfile);
       });
@@ -50,7 +49,6 @@ export class DataService {
 
   getFreeSessions(cache: boolean = true): Observable<any> {
     if (cache && this.cachedFreeSession) {
-      console.log('cache hit on free sessions');
       return Observable.create((observer) => {
         observer.next(this.cachedFreeSession);
       });
@@ -66,7 +64,6 @@ export class DataService {
 
   getSessions(cache: boolean = true): Observable<any> {
     if (cache && this.cachedSessions) {
-      console.log('cache hit on sessions');
       return Observable.create((observer) => {
         observer.next(this.cachedSessions);
       });

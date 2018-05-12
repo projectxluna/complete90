@@ -128,7 +128,7 @@
 					<div class="box-tool">
 				        <ul class="nav">
 							<li class="nav-item inline">
-		            			<a class="nav-link" id="seeMorebtn">
+		            			<a class="nav-link" id="seeMorebtn" [routerLink]="['/sessions']">
 		              			SEE MORE
 		            			</a>
 		          			</li>
@@ -136,35 +136,17 @@
 				    </div>
 
 					<ul class="listVids">
-						<li>
-							<div class="row text-center" id="vidBG">
+						<li *ngFor="let content of sessions">
+							<div class="row text-center" id="vidBG" [routerLink]="['/sessions']">
 								<div class="col-lg-2 col-xs-3">
-								<img src="assets/player-pic.png" class="vidPic"></div>
-								<div class="col-lg-8 vidName"><a class="vidLink">Juggling with both feet </a></div>
-							</div>
-						</li>
-						
-
-						<li>
-							<div class="row text-center" id="vidBG">
-								<div class="col-lg-2 col-xs-3">
-								<img src="assets/player-pic.png" class="vidPic"></div>
-								<div class="col-lg-8 vidName"><a class="vidLink">First Touch </a></div>
-							</div>
-						</li>
-
-						<li>
-							<div class="row text-center" id="vidBG">
-								<div class="col-lg-2 col-xs-3">
-								<img src="assets/player-pic.png" class="vidPic"></div>
-								<div class="col-lg-8 vidName"><a class="vidLink">First Touch </a></div>
+									<img [src]="content.thumbnail" class="vidPic">
+								</div>
+								<div class="col-lg-8 vidName"><a class="vidLink">{{ content.name }}</a></div>
 							</div>
 						</li>
 					</ul>
-
 				</div>
 			</div>
-
 		</div>
 		<!-- PROFILE & SUGGESTED TILES END-->
 
@@ -180,7 +162,7 @@
 				        <ul class="nav">
 							<li class="nav-item inline">
 		            			<a class="nav-link">
-		              				<i class="fa fa-plus" aria-hidden="true" (click)="toggleSecurity()"></i>
+		              				<i class="fa fa-plus" [ngClass]="{'fa-minus': securityActive}" aria-hidden="true" (click)="toggleSecurity()"></i>
 		            			</a>
 		          			</li>
 				        </ul>
@@ -219,7 +201,7 @@
 				        <ul class="nav">
 							<li class="nav-item inline">
 		            			<a class="nav-link">
-		              				<i class="fa fa-plus" aria-hidden="true" (click)="togglePayment()"></i>
+		              				<i class="fa fa-plus" [ngClass]="{'fa-minus': paymentActive}" aria-hidden="true" (click)="togglePayment()"></i>
 		            			</a>
 		          			</li>
 				        </ul>
@@ -270,7 +252,7 @@
 				        <ul class="nav">
 							<li class="nav-item inline">
 		            			<a class="nav-link">
-		              				<i class="fa fa-plus" aria-hidden="true" (click)="toggleNotification()"></i>
+		              				<i class="fa fa-plus" [ngClass]="{'fa-minus': notificationActive}" aria-hidden="true" (click)="toggleNotification()"></i>
 		            			</a>
 		          			</li>
 				        </ul>
@@ -282,8 +264,7 @@
 
 					<div *ngIf="notificationActive" class="desc-p">
 						<div class="row m-0">
-							
-							<div class="form-group2 col-xs-1 no-pa">
+							<!-- <div class="form-group2 col-xs-1 no-pa">
 								<input type="checkbox" name="emailnews">
 							</div>
 							<div class="col-xs-11 no-pa">
@@ -302,11 +283,8 @@
 							</div>
 							<div class="col-xs-11 no-pa">
 								<label>Receive newsletter from The Complete 90</label>
-							</div>							
-
-
+							</div> -->
 						</div>
-
 					</div>
 				</div>
 			</div>			
