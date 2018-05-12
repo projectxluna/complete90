@@ -20,6 +20,10 @@ div{
    cursor: default;
 }
 
+.lowkey {
+	color: #aba8a8;
+}
+
 .rounded, .circle {
     border-radius: 500px;
 }
@@ -166,7 +170,7 @@ input{
 }
 
 .img-circle {
-    border-radius: 100%;
+    border-radius: 50%;
 }
 
 .profilePic{

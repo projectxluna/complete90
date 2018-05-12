@@ -74,7 +74,7 @@
 				            </a>
 				            <ul class="dropdown-menu">
 				            	<li>
-				            		<a class="dropdown-item" href="">Edit Profile</a>
+				            		<a class="dropdown-item" (click)="toggleEditMode()">Edit Profile</a>
 				          		</li>
 				            </ul>
 				          </li>
@@ -83,9 +83,10 @@
 
 					<div class="col-md-12 text-center">
 						<div class="uploadOver">
-							<img src="assets/player-pic.png" class="profilePic">
+							<img [src]="profile.avatarURL" class="profilePic img-circle">
 							<div class="uploadIcon">
-								<a href=""><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
+								<a (click)="addFiles()"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
+								<input type="file" name="profileImg" #file style="display: none" (change)="onFilesAdded()" accept="image/*"/>
 							</div>
 						</div>
 						<div class="profileName">
@@ -95,21 +96,24 @@
 					<ul class="list">
 						<li>
 							<div class="row">
-								<a class="inactiveLink">POSITION: </a>
-								<input type="" name="" class="profileInput" placeholder="Edit Position">
+								<a class="inactiveLink">POSITION: <span *ngIf="!editMode" class="lowkey">{{ profile.position || ''}}</span></a>
+								<input *ngIf="editMode" [(ngModel)]="profile.position" class="profileInput" placeholder="Edit Position">
 							</div>
 						</li>
 						<li>
 							<div class="row">
-								<a class="inactiveLink">HEIGHT: </a>
-								<input type="" name="" class="profileInput" placeholder="Edit Height">
+								<a class="inactiveLink">HEIGHT: <span *ngIf="!editMode" class="lowkey">{{ profile.height || ''}}</span></a>
+								<input *ngIf="editMode" [(ngModel)]="profile.height" class="profileInput" placeholder="Edit Height">
 							</div>
 						</li>
 						<li>
 							<div class="row">
-								<a class="inactiveLink">PR. FOOT: </a>
-								<input type="" name="" class="profileInput" placeholder="Edit Pr. Foot">
+								<a class="inactiveLink">PR. FOOT: <span *ngIf="!editMode" class="lowkey">{{ profile.foot || ''}}</span></a>
+								<input *ngIf="editMode" [(ngModel)]="profile.foot" class="profileInput" placeholder="Edit Pr. Foot">
 							</div>
+						</li>
+						<li>
+							<button *ngIf="editMode" (click)="updateProfile()" class="savePassbtn">SAVE</button>
 						</li>
 					</ul>
 				</div>
