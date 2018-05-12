@@ -11,7 +11,7 @@
                 coach: user.coach,
                 subscription: user.braintree.subscription,
                 creditCards: user.braintree.creditCards,
-                avatarURL: user.avatarURL
+                avatarURL: user.avatarURL || "/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg"
             }
             if (!user.coach) {
                 cleanUser.height = user.height;
