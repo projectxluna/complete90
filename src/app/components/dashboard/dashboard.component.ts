@@ -15,8 +15,14 @@ export class DashboardComponent implements OnInit {
   profile = {
     name: '',
     subscription: undefined,
-    creditCards: []
+    creditCards: [],
+    avatarURL: '',
+
+    height: '',
+    position: '',
+    foot: ''
   };
+
   stats = {
     watched: '',
     viewedTotal: 0
@@ -27,13 +33,12 @@ export class DashboardComponent implements OnInit {
   editMode = false;
   
   @ViewChild('file') file;
-  public files: Set<File> = new Set();
 
   constructor(private router: Router,
     private dataService: DataService,
     private authenticationService: AuthenticationService) {
     dataService.getUserProfile().subscribe(user => {
-      this.profile = user.profile;
+      this.userProfileCallback(user.profile);
     });
     dataService.getWatchedStats().subscribe(result => {
       if (result && result.success) {
@@ -84,7 +89,6 @@ export class DashboardComponent implements OnInit {
   updatePassword() {
     if (!this.model.oldPassword || !this.model.newPassword || !this.model.verifyPassword) {
       // 'make sure all required fields are completed!';
-      console.log('make sure all required fields are completed!');
       return;
     }
     this.loading = true;
@@ -101,10 +105,48 @@ export class DashboardComponent implements OnInit {
   }
 
   onFilesAdded() {
+    const files: { [key: string]: File } = this.file.nativeElement.files;
 
+    if (files && files[0]) {
+      this.dataService.uploadProfileImage(files[0]).subscribe(response => {
+        if (response.success) {
+          this.userProfileCallback(response.profile);
+        }
+      });
+    }
   }
 
   addFiles() {
     this.file.nativeElement.click();
+  }
+
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+  }
+
+  updateProfile() {
+    let foot = this.profile.foot;
+    let position = this.profile.position;
+    let height = this.profile.height;
+
+    if (!foot || !position || !height) return;
+
+    this.loading = true;
+    let profile = {
+      foot,
+      position,
+      height
+    }
+    this.dataService.updateUserProfile(profile).subscribe(response => {
+      this.loading = false;
+      this.editMode = false;
+      if (response.success) {
+        this.userProfileCallback(response.profile);
+      }
+    });
+  }
+
+  userProfileCallback(profile) {
+    this.profile = profile;
   }
 }

@@ -35,6 +35,19 @@ export class DataService {
       });
   }
 
+  updateUserProfile(profile): Observable<any> {
+    // add authorization header with jwt token
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    // get users from api
+    return this.http.post('/api/user/me', profile, options)
+      .map((response: Response) => {
+        this.cachedProfile = response.json();
+        return this.cachedProfile;
+      });
+  }
+
   getFreeSessions(cache: boolean = true): Observable<any> {
     if (cache && this.cachedFreeSession) {
       console.log('cache hit on free sessions');
@@ -115,7 +128,7 @@ export class DataService {
       });
   }
 
-  uploadProfileImage(fileToUpload: File): Observable<boolean> {
+  uploadProfileImage(fileToUpload: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('profileImg', fileToUpload, fileToUpload.name);
 
@@ -123,13 +136,10 @@ export class DataService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http
-      .post('/user/profile-img', formData, options)
+      .post('/api/user/profile-img', formData, options)
       .map((response: Response) => {
-        if (response.json() && response.json().success) {
-          return true;
-        } else {
-          return false;
-        }
+        this.cachedProfile = response.json();
+        return this.cachedProfile;
       });
   }
 
