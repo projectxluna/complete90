@@ -149,10 +149,10 @@ export class SessionsComponent implements OnInit {
   }
 
   deleteUserSession(sessionId) {
-    console.log('deleting custom session', sessionId);
+    // console.log('deleting custom session', sessionId);
     this.dataService.deleteSessions(sessionId).subscribe((response) => {
       if (!response || !response.success) {
-        console.error('Could not delete session');
+        // console.error('Could not delete session');
         return;
       }
       this.getSessions();
@@ -216,7 +216,6 @@ export class SessionsComponent implements OnInit {
         content: content
       });
     }
-    console.log(this.sessions)
   }
 
   startSessionById(sessionId) {

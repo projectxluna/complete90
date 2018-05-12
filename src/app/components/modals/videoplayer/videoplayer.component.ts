@@ -127,7 +127,7 @@ export class VideoplayerComponent implements OnInit {
     this.sessionStats.currentTime = this.api.getDefaultMedia().currentTime;
     this.sessionStats.contentId = this.selectedContent.id;
 
-    console.log('Watched time:', this.timer.formatTime(), 'Current time:', this.api.getDefaultMedia().currentTime);
+    // console.log('Watched time:', this.timer.formatTime(), 'Current time:', this.api.getDefaultMedia().currentTime);
     if (watched < 1) {
       return;
     }
@@ -149,41 +149,41 @@ export class VideoplayerComponent implements OnInit {
     this.api.getDefaultMedia().subscriptions.play.subscribe(
       () => {
         // start or create the timer for this particular video if it doesnt exist already
-        console.log('***PLAY')
+        // console.log('***PLAY')
         this.startTimer();
       }
     );
     this.api.getDefaultMedia().subscriptions.ended.subscribe(
       () => {
         // we save the total watched value
-        console.log('***ENDED');
+        // console.log('***ENDED');
         this.stopTimer();
       }
     );
     this.api.getDefaultMedia().subscriptions.pause.subscribe(
       () => {
         // we pause the timer..
-        console.log('***PAUSED')
+        // console.log('***PAUSED')
         this.stopTimer();
       }
     );
     this.api.getDefaultMedia().subscriptions.playing.subscribe(
       () => {
         // here we ensure that the timer is still running
-        console.log('onPlayingUpdated');
+        // console.log('onPlayingUpdated');
       }
     );
     this.api.getDefaultMedia().subscriptions.seeked.subscribe(
       () => {
         // here we want to resume our timer after seeking is completed
-        console.log('onSeeked');
+        // console.log('onSeeked');
         this.startTimer();
       }
     );
     this.api.getDefaultMedia().subscriptions.seeking.subscribe(
       () => {
         // here we want to stop our timer
-        console.log('onSeeking');
+        // console.log('onSeeking');
         this.stopTimer();
       }
     );
@@ -212,7 +212,7 @@ export class VideoplayerComponent implements OnInit {
 
   onEnterCuePoint(textTrack) {
     //this.cuePointData = JSON.parse($event.text);
-    console.log('entered cue', textTrack);
+    // console.log('entered cue', textTrack);
   }
 
   close() {

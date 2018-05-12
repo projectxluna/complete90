@@ -31,7 +31,7 @@ export class ForgotComponent implements OnInit {
 
     let token = this.route.snapshot.queryParams["token"];
     if (token) {
-      console.log(token);
+      // console.log(token);
       this.token = token;
       this.showResetPassword = true;
     }
