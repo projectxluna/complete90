@@ -200,7 +200,7 @@ module.exports = function (app) {
             let verifyPassword = req.body.verifyPassword;
 
             if (req.body.newPassword !== req.body.verifyPassword || !user.validPassword(oldPassword)) {
-                res.json({ success: false, message: 'Failed to update password' });
+                return res.json({ success: false, message: 'Failed to update password' });
             }
 
             user.password = user.generateHash(newPassword);

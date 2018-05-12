@@ -129,9 +129,11 @@ export class DashboardComponent implements OnInit {
       .subscribe(result => {
         if (result && result.success == true) {
           this.loading = false;
+          this.model = {};
         } else {
           //'please try again. something went wrong';
           this.loading = false;
+          this.model = {};
         }
       });
   }
