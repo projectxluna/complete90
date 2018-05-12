@@ -115,7 +115,7 @@
 			<div class="row">
 				<!-- TRAINING VIDEO -->
 				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
-					<div class="add-btn-cont col-lg-11">
+					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
 						<div class="pull-right">
 							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
 								<i class="fa fa-plus" aria-hidden="true"></i>
@@ -124,7 +124,7 @@
 						</div>
 					</div>
 					<div class="vid-thumb">
-						<img class="img-responsive" src="assets/video-thumb.png">
+						<img class="img-responsive" [src]="content.thumbnail">
 						<!-- PLAY BTN -->
 						<a (click)="openModalWithComponent(session, i)"><span class="fa fa-play-circle fa-3x" aria-hidden="true"></span></a>
 					</div>

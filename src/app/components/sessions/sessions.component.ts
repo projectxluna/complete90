@@ -46,7 +46,7 @@ export class SessionsComponent implements OnInit {
   }
 
   constructor(private dataService: DataService, private modalService: BsModalService) {
-      //this.getFreeSessions();
+      this.getFreeSessions();
       this.getSessions();
   }
 
@@ -180,7 +180,7 @@ export class SessionsComponent implements OnInit {
   getSessions(cache: boolean = false) {
     this.dataService.getSessions(cache).subscribe((response) => {
       if (!response.success) return;
-      this.sessions = [];
+      //this.sessions = [];
       this.customSessions = [];
 
       this.collectTagsAndCategories(response.content);
@@ -216,6 +216,7 @@ export class SessionsComponent implements OnInit {
         content: content
       });
     }
+    console.log(this.sessions)
   }
 
   startSessionById(sessionId) {
