@@ -44,7 +44,7 @@ export class LoginSignupComponent implements OnInit {
         let name = this.model.firstname + ' ' + this.model.lastname;
         this.authenticationService.signup(this.model.email, this.model.password, name)
             .subscribe(result => {
-                console.log('signup response:', result);
+                // console.log('signup response:', result);
                 if (result && result.success == true) {
                     /**
                      * we should actually route them to a temp page

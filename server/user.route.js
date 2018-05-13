@@ -58,37 +58,30 @@ module.exports = function (apiRoutes) {
         let imgname = req.decoded.userId + Math.round(new Date().getTime() / 1000) + ext;
         let imgPath = path.join(__dirname, '/../public/imgs/profile/');
 
-        //store image on the server
-        profileImg.mv(imgPath + imgname, function (err) {
+        // resize and store image on the server
+        // maybe store on s3 later
+        im.crop({
+            srcData: profileImg.data,
+            dstPath: imgPath + imgname,
+            width: 300,
+            height: 300,
+            quality: 1,
+            gravity: 'Center'
+        }, function (err, stdout, stderr) {
             if (err) return res.status(500).send(err);
-            im.crop({
-                srcPath: imgPath + imgname,
-                dstPath: imgPath + 'cropped' + imgname,
-                width: 300,
-                height: 300,
-                quality: 1,
-                gravity: 'Center'
-            }, function (err, stdout, stderr) {
-                if (err) return res.status(500).send(err);
 
-                User.findByIdAndUpdate(
-                    { _id: req.decoded.userId },
-                    {
-                        avatarURL: '/public/imgs/profile/' + 'cropped' + imgname
-                    },
-                    {
-                        upsert: true,
-                        new: true
-                    },
-                    function (err, new_user) {
-                        if (err) return res.status(500).send(err);
+            User.findByIdAndUpdate(
+                { _id: req.decoded.userId },
+                { avatarURL: '/public/imgs/profile/' + imgname },
+                { upsert: true, new: true },
+                function (err, new_user) {
+                    if (err) return res.status(500).send(err);
 
-                        res.json({
-                            success: true,
-                            profile: userHelper.exposedData(new_user)
-                        });
+                    res.json({
+                        success: true,
+                        profile: userHelper.exposedData(new_user)
                     });
-            });
+                });
         });
     });
 };
