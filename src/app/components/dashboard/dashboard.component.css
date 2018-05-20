@@ -186,7 +186,7 @@ input{
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 45%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -389,7 +389,7 @@ input{
 	}
 
 	.uploadIcon {
-	  top: 40%;
+	  top: 35%;
 	  left: 50%;
 	}
 
