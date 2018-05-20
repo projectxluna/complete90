@@ -40,14 +40,48 @@ export class SessionsComponent implements OnInit {
   };
 
 
+
   bsModalRef: BsModalRef;
 
   ngOnInit() {
   }
 
+  hasFilter() {
+    return this.selectedFilter.tag != '' || this.selectedFilter.category != '' || this.selectedFilter.skillLevel != '';
+  }
+
+  clearFilter() {
+    this.selectedFilter = {
+      tag: '',
+      category: '',
+      skillLevel: ''
+    }
+  }
+
+  getFilteredSessions() {
+    if (this.hasFilter()) {
+      let clone = _.cloneDeep(this.sessions);
+      return clone.filter(session => {
+        let tag = this.selectedFilter.tag;
+        let category = this.selectedFilter.category;
+
+        if (tag) {
+          session.content = session.content.filter(f => {
+            return f.tags && f.tags.indexOf(tag) != -1;
+          });
+        }
+        if (category) {
+          return session.name === this.selectedFilter.category;
+        }
+        return true;
+      });
+    }
+    return this.sessions;
+  }
+
   constructor(private dataService: DataService, private modalService: BsModalService) {
-      this.getFreeSessions();
-      this.getSessions();
+    this.getFreeSessions();
+    this.getSessions();
   }
 
   selectTag(tag) {

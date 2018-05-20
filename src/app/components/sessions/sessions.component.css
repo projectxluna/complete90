@@ -73,7 +73,7 @@ button:focus{
 	padding-bottom: 20px;
 }
 
-#savedCont{
+.filter-btn {
 	background-color: #fd1541;
 	padding-top: 4px;
     padding-bottom: 4px;
@@ -99,10 +99,10 @@ button:focus{
     border-radius: 0px;
 }
 
-.fa-search{
-	margin-left: 20px;
-	margin-right: 40px;
-	color: #fd1541;
+.fa-search {
+	margin-left: 5px;
+	margin-right: 10px;
+	color: white;
 }
 
 .btn-group>.btn {
@@ -496,7 +496,7 @@ input{
 
 @media (max-width: 375px) {
 
-	#savedCont{
+	.filter-btn {
 		margin-top: 20px;
 	}
 

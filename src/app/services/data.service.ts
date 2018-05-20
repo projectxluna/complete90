@@ -29,6 +29,11 @@ export class DataService {
     // get users from api
     return this.http.get('/api/user/me', options)
       .map((response: Response) => {
+        if (!response.json().success && localStorage.getItem('token')) {
+          this.authenticationService.logout();
+          this.cachedProfile = null;
+          return;
+        }
         this.cachedProfile = response.json();
         return this.cachedProfile;
       });
@@ -75,6 +80,9 @@ export class DataService {
     // get sessions from api
     return this.http.get('/api/sessions', options)
       .map((response: Response) => {
+        if (!response.json().success) {
+          return response.json();
+        }
         this.cachedSessions = response.json();
         return this.cachedSessions;
       });
