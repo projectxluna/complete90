@@ -7,6 +7,7 @@ module.exports = function (app) {
     var crypto = require('crypto');
     var apiRoutes = express.Router();
     var Auth = require('./helpers/auth');
+    const userHelper = require('./helpers/user');
 
     // un-authenticated routes
     apiRoutes.post('/login', function (req, res) {
@@ -36,7 +37,8 @@ module.exports = function (app) {
 
                     res.json({
                         success: true,
-                        token: token
+                        token: token,
+                        profile: userHelper.exposedData(user)
                     });
                 }
             }

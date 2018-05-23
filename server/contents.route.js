@@ -4,7 +4,10 @@ module.exports = function (apiRoutes) {
     var waterfall = require('async-waterfall');
     var request = require('request');
     var AWS = require('./helpers/aws');
+
     var Plan = require('./models/plan');
+    var User = require('./models/user');
+
     var UserStats = require('./models/stats');
     var mongoose = require('mongoose');
 
@@ -33,6 +36,15 @@ module.exports = function (apiRoutes) {
     apiRoutes.get('/sessions', Auth.isAuthenticated, function (req, res) {
         let userId = req.decoded.userId;
         waterfall([
+            function (callback) {
+                User.findById(userId, function (err, user) {
+                    if (!user.braintree.subscription) {
+                        callback('User does not have subscription');
+                    } else {
+                        callback(null);
+                    }
+                });
+            },
             loadSessions,
             signLinks,
             function (contents, callback) {
@@ -41,7 +53,8 @@ module.exports = function (apiRoutes) {
             getUserPlans
         ], function (err, contents, userPlans) {
             if (err) {
-                return res.status(422).send({
+                return res.json({
+                    success: false,
                     message: err
                 });
             }
