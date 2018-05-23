@@ -119,7 +119,7 @@
 				</div>
 			</div>
 
-			<div class="col-sm-12 col-md-6">
+			<div *ngIf="hasSubscription()" class="col-sm-12 col-md-6">
 				<div class="box p-a">
 					<div class="box-header">
 						<h3 class="m-0 suggestedHeader"><b>SUGGESTED VIDEOS</b></h3>
@@ -145,6 +145,18 @@
 							</div>
 						</li>
 					</ul>
+				</div>
+			</div>
+			<div *ngIf="!hasSubscription()" class="col-sm-12 col-md-6">
+				<div class="box p-a">
+					<div class="box-header">
+						<h3 class="m-0 suggestedHeader"><b>NO ACTIVE SUBSCRIPTIONS</b></h3>
+					</div>
+					<div class="row text-center" id="vidBG">
+						<a [routerLink]="['/pricing']" class="vidLink">
+							YOU DON'T HAVE A SUBSCRIPTION (click here to begin)
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

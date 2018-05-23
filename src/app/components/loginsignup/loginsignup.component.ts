@@ -44,7 +44,6 @@ export class LoginSignupComponent implements OnInit {
         let name = this.model.firstname + ' ' + this.model.lastname;
         this.authenticationService.signup(this.model.email, this.model.password, name)
             .subscribe(result => {
-                // console.log('signup response:', result);
                 if (result && result.success == true) {
                     /**
                      * we should actually route them to a temp page
@@ -82,11 +81,7 @@ export class LoginSignupComponent implements OnInit {
             .subscribe(result => {
                 if (result === true) {
                     this.dataService.getUserProfile().subscribe((me) => {
-                        if (this.previousRoute !== '/') {
-                            this.router.navigate([this.previousRoute]);
-                        } else {
-                            this.router.navigate(['/dashboard']);
-                        }
+                        this.router.navigate(['/dashboard']);
                     });
                 } else {
                     this.error = 'username or password is incorrect';
