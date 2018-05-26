@@ -154,6 +154,10 @@ input{
     padding: 1rem;
 }
 
+.box-alert{
+	border: 1px solid #fd1541;
+}
+
 .box-body {
     padding: 1rem;
 }
