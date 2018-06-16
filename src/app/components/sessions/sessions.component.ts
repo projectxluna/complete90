@@ -29,6 +29,7 @@ export class SessionsComponent implements OnInit {
   }
 
   sessions = [];
+  freeSessions = [];
   customSessions = [];
 
   banner = {
@@ -214,11 +215,11 @@ export class SessionsComponent implements OnInit {
   getSessions(cache: boolean = false) {
     this.dataService.getSessions(cache).subscribe((response) => {
       if (!response.success) return;
-      //this.sessions = [];
+      this.sessions = [];
       this.customSessions = [];
 
       this.collectTagsAndCategories(response.content);
-      this.groupContent(response.content);
+      this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);
     });
   }
@@ -226,12 +227,14 @@ export class SessionsComponent implements OnInit {
   getFreeSessions() {
     this.dataService.getFreeSessions().subscribe((response) => {
       if (!response.success) return;
-      this.collectTagsAndCategories(response.content);
-      this.groupContent(response.content);
+
+      this.freeSessions = [];
+      //this.collectTagsAndCategories(response.content);
+      this.groupContent(response.content, this.freeSessions);
     });
   }
 
-  groupContent(contentList) {
+  groupContent(contentList, fill) {
     let sessions = {};
 
     for (let content of contentList) {
@@ -245,7 +248,7 @@ export class SessionsComponent implements OnInit {
       if (!sessions.hasOwnProperty(session)) continue;
 
       var content = sessions[session];
-      this.sessions.push({
+      fill.push({
         name: session,
         content: content
       });

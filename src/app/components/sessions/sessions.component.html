@@ -1,8 +1,10 @@
- <!--HERO IMAGE START-->
+<!--HERO IMAGE START-->
 <div class="bannerimage">
 	<div class="container">
 		<div class="impcont col-lg-6 col-md-6">
-			<h1><b>SESSIONS/TRAINING</b></h1>
+			<h1>
+				<b>SESSIONS/TRAINING</b>
+			</h1>
 		</div>
 	</div>
 </div>
@@ -21,8 +23,10 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li *ngFor="let tag of filters.tags" (click)="selectTag(tag)"><a>{{ tag }}</a></li>
-				</ul>		  
+					<li *ngFor="let tag of filters.tags" (click)="selectTag(tag)">
+						<a>{{ tag }}</a>
+					</li>
+				</ul>
 			</div>
 
 			<!-- FILTER 2 -->
@@ -33,8 +37,10 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li *ngFor="let category of filters.categories" (click)="selectCategory(category)"><a>{{ category }}</a></li>
-				</ul>	  
+					<li *ngFor="let category of filters.categories" (click)="selectCategory(category)">
+						<a>{{ category }}</a>
+					</li>
+				</ul>
 			</div>
 
 			<!-- FILTER: SKILL LEVEL -->
@@ -45,7 +51,9 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li *ngFor="let skillLevel of filters.skillLevel" (click)="selectSkillLevel(skillLevel)"><a>{{ skillLevel }}</a></li>
+					<li *ngFor="let skillLevel of filters.skillLevel" (click)="selectSkillLevel(skillLevel)">
+						<a>{{ skillLevel }}</a>
+					</li>
 				</ul>
 			</div>
 
@@ -67,36 +75,45 @@
 
 <!-- SAVED SESSION MODAl -->
 <div class="modal fade" id="savedSessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-center" id="savedSessModalTitle">SAVED SESSIONS</h4>
-      </div>
-      <div class="modal-body">
-        
-        <!-- 1ST SAVED SESSION -->
-        <div *ngFor="let session of customSessions" class="row saved-pa">
-        	<div class="col-xs-6 sessName">{{ session.name | uppercase }}<span> ({{ session.content.length }} Videos)</span></div>
-        	<div class="col-xs-5"><button (click)="startSession(session)" class="viewSessbtn pull-right">VIEW</button></div>
-        	<div class="col-xs-1 deleteSess">
-        		<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)"><span aria-hidden="true">&times;</span></button>
-        	</div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title text-center" id="savedSessModalTitle">SAVED SESSIONS</h4>
+			</div>
+			<div class="modal-body">
+
+				<!-- 1ST SAVED SESSION -->
+				<div *ngFor="let session of customSessions" class="row saved-pa">
+					<div class="col-xs-6 sessName">{{ session.name | uppercase }}
+						<span> ({{ session.content.length }} Videos)</span>
+					</div>
+					<div class="col-xs-5">
+						<button (click)="startSession(session)" class="viewSessbtn pull-right">VIEW</button>
+					</div>
+					<div class="col-xs-1 deleteSess">
+						<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</div>
+				<div *ngIf="customSessions.length < 1" style="background-color: dimgray;">
+					No Saved Sessions Yet. To create your own session, simply press the red "+" button on a video to add it to the session. Scroll
+					horozontally to view more videos within each category!
+				</div>
+			</div>
 		</div>
-		<div *ngIf="customSessions.length < 1" style="background-color: dimgray;">
-			No Saved Sessions Yet. To create your own session, simply press the red "+" button on a video to add it to the session. 
-			Scroll horozontally to view more videos within each category!
-		</div>
-      </div>
-    </div>
-  </div>
+	</div>
 </div>
 <!-- SAVED SESSION MODAL END -->
 
 <!-- INSTRUCTION SENTENCE -->
 <div class="container">
 	<div class="col-xs-12 text-center createDesc">
-		<small>To create your own session, simply press the red "+" button on a video to add it to the session. </small><br>
+		<small>To create your own session, simply press the red "+" button on a video to add it to the session. </small>
+		<br>
 		<small>Scroll horozontally to view more videos within each category! </small>
 	</div>
 </div>
@@ -104,14 +121,14 @@
 
 <!-- VIDEO CONTENT -->
 <div class="container">
-	<!-- SUGGESTED DRILLS -->
-	<div *ngFor="let session of getFilteredSessions()" class="col-lg-12 suggVids">
+	<!-- FEATURED DRILLS -->
+	<div *ngFor="let session of freeSessions" class="col-lg-12 suggVids">
 		<div *ngIf="session.content.length > 0" class="container">
 			<div class="col-lg-12 catTitle">
 				<h1>{{ session.name }}</h1>
 			</div>
 		</div>
-		
+
 		<div *ngIf="session.content.length > 0" class="container cont-hscroll">,
 			<div class="row">
 				<!-- TRAINING VIDEO -->
@@ -127,15 +144,50 @@
 					<div class="vid-thumb">
 						<img class="img-responsive" [src]="content.thumbnail">
 						<!-- PLAY BTN -->
-						<a (click)="openModalWithComponent(session, i)"><span class="fa fa-play-circle fa-3x" aria-hidden="true"></span></a>
+						<a (click)="openModalWithComponent(session, i)">
+							<span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
+						</a>
+					</div>
+		
+					<div class="col-lg-12 videoDes">
+						<h1>{{ content.name | uppercase }}</h1>
+						<div class="row">
+						</div>
+					</div>
+				</div>
+				</div>
+		</div>
+	</div>
+	<!-- SUGGESTED DRILLS -->
+	<div *ngFor="let session of getFilteredSessions()" class="col-lg-12 suggVids">
+		<div *ngIf="session.content.length > 0" class="container">
+			<div class="col-lg-12 catTitle">
+				<h1>{{ session.name }}</h1>
+			</div>
+		</div>
+
+		<div *ngIf="session.content.length > 0" class="container cont-hscroll">,
+			<div class="row">
+				<!-- TRAINING VIDEO -->
+				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
+					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
+						<div class="pull-right">
+							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
+								<i class="fa fa-plus" aria-hidden="true"></i>
+								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
+							</button>
+						</div>
+					</div>
+					<div class="vid-thumb">
+						<img class="img-responsive" [src]="content.thumbnail">
+						<!-- PLAY BTN -->
+						<a (click)="openModalWithComponent(session, i)">
+							<span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
+						</a>
 					</div>
 
 					<div class="col-lg-12 videoDes">
 						<h1>{{ content.name | uppercase }}</h1>
-						<div class="row">
-							<!-- <div class="col-xs-6"><p><b>00:39</b></p></div> -->
-							<!-- <div class="col-xs-6"><p><b>ADDED ON 12/7/17</b></p></div> -->
-						</div>
 					</div>
 				</div>
 			</div>
@@ -146,7 +198,7 @@
 
 <!-- CUSTOM SESSION BANNER -->
 <div *ngIf="banner.isActive" class="sessionsBanner">
-	<nav class="navbar navbar-default navbar-fixed-bottom sBanner">	  
+	<nav class="navbar navbar-default navbar-fixed-bottom sBanner">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-1">

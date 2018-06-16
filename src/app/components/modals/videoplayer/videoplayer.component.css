@@ -21,9 +21,3 @@ div{
 	background-color: transparent;
 	border: none;
 }
-
-.btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
-    color: white;
-    background-color: #fd1541;
-    border: none;
-}

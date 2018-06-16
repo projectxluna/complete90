@@ -1,10 +1,13 @@
 var config = require('../config').get(process.env.NODE_ENV);var braintree = require('braintree');
-var gateway = braintree.connect({
-    environment: braintree.Environment.Sandbox,
-    merchantId: config.braintree.MERCHANT_ID,
-    publicKey: config.braintree.PUBLIC_KEY,
-    privateKey: config.braintree.PRIVATE_KEY
-});
+var btConfig = config.braintree;
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'dev') {
+    btConfig.environment = braintree.Environment.Sandbox;
+} else {
+    btConfig.environment = braintree.Environment.Production;
+}
+
+var gateway = braintree.connect(btConfig);
 
 var paymentController = {
     getClientToken: function (callback) {

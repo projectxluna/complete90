@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "nodemon ./server/server.js",
+    "prod": "NODE_ENV=production node ./server/server.js",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
