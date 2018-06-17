@@ -201,10 +201,7 @@ module.exports = function (apiRoutes) {
 
     // load free sessions
     function loadFreeSession(callback) {
-        let nodeEnv = process.env.NODE_ENV;
-        let contentStructure;
-        if (!nodeEnv || nodeEnv === 'development') {
-            contentStructure = require('../video_structure.json');
+        var sortSession = function (contentStructure) {
             let freeSessions = [];
             for (let session of contentStructure.sessions) {
                 if (session.free) {
@@ -216,8 +213,20 @@ module.exports = function (apiRoutes) {
             }
             callback(null, freeSessions);
         }
-        else {
-            // make request to s3
+
+        let nodeEnv = process.env.NODE_ENV;
+        if (!nodeEnv || nodeEnv === 'development') {
+            sortSession(require('../video_structure.json'));
+        } else {
+            let resourceLocation = config.aws.VIDEO_STRUCTURE;
+            request(resourceLocation, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    sortSession(JSON.parse(body))
+                }
+                else {
+                    callback(error);
+                }
+            });
         }
     }
 
