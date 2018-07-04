@@ -1,4 +1,5 @@
-var config = require('../config').get(process.env.NODE_ENV);var braintree = require('braintree');
+var config = require('../config').get(process.env.NODE_ENV);
+var braintree = require('braintree');
 var btConfig = config.braintree;
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'dev') {
