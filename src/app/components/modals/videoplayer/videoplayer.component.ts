@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { VgAPI } from 'videogular2/core';
-import { Subject } from 'rxjs/Subject';
 import { DataService } from '../../../services';
 
 declare var VTTCue;
@@ -64,7 +63,7 @@ export class Timer {
   styleUrls: ['./videoplayer.component.css']
 })
 export class VideoplayerComponent implements OnInit {
-  api: VgAPI;
+  static api: VgAPI;
   track: TextTrack;
   timer: Timer;
 
@@ -124,7 +123,7 @@ export class VideoplayerComponent implements OnInit {
     this.timer.reset();
 
     this.sessionStats.watchedTotal = watched;
-    this.sessionStats.currentTime = this.api.getDefaultMedia().currentTime;
+    this.sessionStats.currentTime = VideoplayerComponent.api.getDefaultMedia().currentTime;
     this.sessionStats.contentId = this.selectedContent.id;
 
     // console.log('Watched time:', this.timer.formatTime(), 'Current time:', this.api.getDefaultMedia().currentTime);
@@ -143,44 +142,44 @@ export class VideoplayerComponent implements OnInit {
    * ToDo: listen for modal close then store users watched status on every video.
    */
   onPlayerReady(api: VgAPI) {
-    this.api = api;
+    VideoplayerComponent.api = api;
 
     // register media events 
-    this.api.getDefaultMedia().subscriptions.play.subscribe(
+    api.getDefaultMedia().subscriptions.play.subscribe(
       () => {
         // start or create the timer for this particular video if it doesnt exist already
         // console.log('***PLAY')
         this.startTimer();
       }
     );
-    this.api.getDefaultMedia().subscriptions.ended.subscribe(
+    api.getDefaultMedia().subscriptions.ended.subscribe(
       () => {
         // we save the total watched value
         // console.log('***ENDED');
         this.stopTimer();
       }
     );
-    this.api.getDefaultMedia().subscriptions.pause.subscribe(
+    api.getDefaultMedia().subscriptions.pause.subscribe(
       () => {
         // we pause the timer..
         // console.log('***PAUSED')
         this.stopTimer();
       }
     );
-    this.api.getDefaultMedia().subscriptions.playing.subscribe(
+    api.getDefaultMedia().subscriptions.playing.subscribe(
       () => {
         // here we ensure that the timer is still running
         // console.log('onPlayingUpdated');
       }
     );
-    this.api.getDefaultMedia().subscriptions.seeked.subscribe(
+    api.getDefaultMedia().subscriptions.seeked.subscribe(
       () => {
         // here we want to resume our timer after seeking is completed
         // console.log('onSeeked');
         this.startTimer();
       }
     );
-    this.api.getDefaultMedia().subscriptions.seeking.subscribe(
+    api.getDefaultMedia().subscriptions.seeking.subscribe(
       () => {
         // here we want to stop our timer
         // console.log('onSeeking');
@@ -188,9 +187,8 @@ export class VideoplayerComponent implements OnInit {
       }
     );
     // Create cue track
-    this.api.addTextTrack('metadata', 'videoAnnotationTrack');
-    this.track = this.api.textTracks[0];
-    this.track.addEventListener("cuechange", this.onEnterCuePoint);
+    api.addTextTrack('metadata', 'videoAnnotationTrack');
+    this.track = api.textTracks[0];
 
     this.addCuePoints();
   }
@@ -206,13 +204,22 @@ export class VideoplayerComponent implements OnInit {
     if (!markers) return;
 
     markers.forEach(m => {
-      this.track.addCue(new VTTCue(m.startTime, m.endTime, m.title));
+      let cue = new VTTCue(m.startTime, m.endTime, m.title)
+      cue.onenter = this.onEnterCuePoint;
+      cue.onexit = this.onExitCuePoint;
+      cue.loop = m.loop;
+      this.track.addCue(cue);
     });
   }
 
   onEnterCuePoint(textTrack) {
-    //this.cuePointData = JSON.parse($event.text);
-    // console.log('entered cue', textTrack);
+  }
+
+  onExitCuePoint(textTrack) {
+    let cue = textTrack.currentTarget;
+    if (cue.loop) {
+      VideoplayerComponent.api.seekTime(cue.startTime);
+    }
   }
 
   close() {
