@@ -167,6 +167,10 @@ button:focus{
 	padding-bottom: 10px;
 }
 
+.modalDesc{
+	color: #333333;
+}
+
 /*----------------------------3. VIDEO CONTENT--------------------------*/
 .cont-hscroll > .row{
  	overflow-x: auto;
