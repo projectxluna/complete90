@@ -67,6 +67,7 @@ export class VideoplayerComponent implements OnInit {
   track: TextTrack;
   timer: Timer;
 
+  userCreated;
   session;
   sessionStats = {
     contentId: '',
@@ -186,20 +187,27 @@ export class VideoplayerComponent implements OnInit {
         this.stopTimer();
       }
     );
-    // Create cue track
-    api.addTextTrack('metadata', 'videoAnnotationTrack');
-    this.track = api.textTracks[0];
 
-    this.addCuePoints();
+    if (this.userCreated) {
+      // Create cue track
+      api.addTextTrack('metadata', 'videoAnnotationTrack');
+      this.track = api.textTracks[0];
+
+      this.addCuePoints();
+    }
   }
 
   removeCuePoits() {
+    if (!this.userCreated) return;
+
     let cues = this.track.cues;
     for (let i = cues.length - 1; i >= 0; i--) {
       this.track.removeCue(cues[i]);
     }
   }
   addCuePoints() {
+    if (!this.userCreated) return;
+
     let markers = this.selectedContent.markers;
     if (!markers) return;
 
