@@ -13,6 +13,7 @@ export class NavComponent implements OnInit {
   userProfile = {
     subscription: undefined,
   };
+  collapsed = true;
 
   constructor(
     private router: Router,
@@ -27,6 +28,18 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
+  collapse() {
+    this.collapsed = true;
+  }
+
+  expand() {
+    this.collapsed = false;
+  }
+
+  toggle() {
+    this.collapsed = !this.collapsed;
+  }
+
   isLoggedIn() {
     if (this.authenticationService.token) {
       return true;
@@ -36,5 +49,6 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+    this.collapse();
   }
 }
