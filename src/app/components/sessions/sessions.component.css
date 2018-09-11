@@ -182,14 +182,29 @@ button:focus{
  	float: none;
 }
 
+.catTitle{
+	margin-bottom: 20px;
+}
 
 .catTitle h1{
 	color: #fd1541;
 	font-size: 20px;
-	margin-bottom: 40px;
 	padding-bottom: 15px;
 	border-bottom: 1px solid #0000001a;
 }
+
+.catTitle h2{
+	color: #505050;
+	font-size: 15px;
+	font-weight: 700;
+	margin-top: 15px;
+	display: inline;	
+}
+
+.catTitle a{
+	text-decoration: none;
+}
+
 
 .vid-thumb{
     position: relative;
