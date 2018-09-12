@@ -21,6 +21,9 @@ export class DataService {
         observer.next(this.cachedProfile);
       });
     }
+    if (!this.authenticationService.token) {
+      return;
+    }
 
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
