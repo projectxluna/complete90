@@ -13,6 +13,7 @@ export class NavComponent implements OnInit {
   userProfile = {
     subscription: undefined,
   };
+  collapsed = true;
 
   constructor(
     private router: Router,
@@ -28,6 +29,19 @@ export class NavComponent implements OnInit {
   }
 
   activeRequest = false;
+
+  collapse() {
+    this.collapsed = true;
+  }
+
+  expand() {
+    this.collapsed = false;
+  }
+
+  toggle() {
+    this.collapsed = !this.collapsed;
+  }
+
   isLoggedIn() {
     if (this.authenticationService.token) {
       if(!this.userProfile.subscription && !this.activeRequest) {
@@ -45,5 +59,6 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+    this.collapse();
   }
 }
