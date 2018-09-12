@@ -163,15 +163,16 @@
 		<div *ngIf="session.content.length > 0" class="container box">
 			<div class="col-lg-12 catTitle">
 				<h1>{{ session.name }}</h1>
-				<a href=""><h2>SEE ALL</h2></a>
+				<a *ngIf="session.content.length > 3 && !session.expanded" (click)="expandSession(session)"><h2>SEE ALL</h2></a>
+				<a *ngIf="session.content.length > 3 && session.expanded" (click)="collapseSession(session)"><h2>COLLAPSE</h2></a>
 			</div>
 
 		</div>
 
-		<div *ngIf="session.content.length > 0" class="container cont-hscroll">,
-			<div class="row">
+		<div *ngIf="session.content.length > 0" class="container">
+			<div *ngIf="!session.expanded" class="row">
 				<!-- TRAINING VIDEO -->
-				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
+				<div *ngFor="let content of (session.content ? session.content.slice(0, 3): []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
 					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
 						<div class="pull-right">
 							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
@@ -195,7 +196,7 @@
 			</div>
 
 			<!----------- ROWS FOR SEE ALL BUTTON -------------->
-			<div class="row">
+			<div *ngIf="session.expanded" class="row">
 				<!-- TRAINING VIDEO -->
 				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
 					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
@@ -219,62 +220,7 @@
 					</div>
 				</div>				
 			</div>
-
-
-			<div class="row">
-				<!-- TRAINING VIDEO -->
-				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
-					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
-						<div class="pull-right">
-							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
-								<i class="fa fa-plus" aria-hidden="true"></i>
-								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
-							</button>
-						</div>
-					</div>
-					<div class="vid-thumb">
-						<img class="img-responsive" [src]="content.thumbnail">
-						<!-- PLAY BTN -->
-						<a (click)="openModalWithComponent(session, i)">
-							<span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
-						</a>
-					</div>
-
-					<div class="col-lg-12 videoDes">
-						<h1>{{ content.name | uppercase }}</h1>
-					</div>
-				</div>				
-			</div>
-
-
-			<div class="row">
-				<!-- TRAINING VIDEO -->
-				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
-					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
-						<div class="pull-right">
-							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
-								<i class="fa fa-plus" aria-hidden="true"></i>
-								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
-							</button>
-						</div>
-					</div>
-					<div class="vid-thumb">
-						<img class="img-responsive" [src]="content.thumbnail">
-						<!-- PLAY BTN -->
-						<a (click)="openModalWithComponent(session, i)">
-							<span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
-						</a>
-					</div>
-
-					<div class="col-lg-12 videoDes">
-						<h1>{{ content.name | uppercase }}</h1>
-					</div>
-				</div>				
-			</div>			
 			<!----------- ROWS FOR SEE ALL BUTTON END---------->
-
-
-
 		</div>
 	</div>
 </div>

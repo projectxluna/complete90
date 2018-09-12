@@ -205,6 +205,10 @@ button:focus{
 	text-decoration: none;
 }
 
+.catTitle a:hover {
+	cursor:pointer;
+}
+
 
 .vid-thumb{
     position: relative;

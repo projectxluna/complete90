@@ -6,7 +6,7 @@ import { AuthenticationService } from '../../services';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
   avatarUrl = "/public/imgs/profile/default.jpg";
@@ -16,19 +16,28 @@ export class NavComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private dataService: DataService,
-    private authenticationService: AuthenticationService) {
-      dataService.getUserProfile().subscribe((user) => {
-        this.avatarUrl = user.profile.avatarURL;
-        this.userProfile = user.profile;
-      });
+    public dataService: DataService,
+    public authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
   }
 
+  hasSubscription(cb) {
+    this.dataService.getUserProfile().subscribe(cb);
+  }
+
+  activeRequest = false;
   isLoggedIn() {
     if (this.authenticationService.token) {
+      if(!this.userProfile.subscription && !this.activeRequest) {
+        this.activeRequest = true;
+        this.hasSubscription((user) => {
+          this.avatarUrl = user.profile.avatarURL;
+          this.userProfile = user.profile;
+          this.activeRequest = false;
+        });
+      }
       return true;
     }
     return false;

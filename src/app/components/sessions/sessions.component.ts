@@ -133,6 +133,18 @@ export class SessionsComponent implements OnInit {
     });
   }
 
+  expandSession(session) {
+    if (!session) return;
+
+    session.expanded = true;
+  }
+
+  collapseSession(session) {
+    if (!session) return;
+
+    session.expanded = false;
+  }
+
   newSession(name, contentId) {
     if (!name || !contentId) return;
 

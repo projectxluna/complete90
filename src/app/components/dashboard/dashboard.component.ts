@@ -97,7 +97,6 @@ export class DashboardComponent implements OnInit {
 
   hasSubscription () {
     if (this.profile.subscription) {
-      console.log('sub', this.profile);
       return true;
     }
     return false;
