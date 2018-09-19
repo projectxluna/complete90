@@ -133,18 +133,6 @@ export class SessionsComponent implements OnInit {
     });
   }
 
-  expandSession(session) {
-    if (!session) return;
-
-    session.expanded = true;
-  }
-
-  collapseSession(session) {
-    if (!session) return;
-
-    session.expanded = false;
-  }
-
   newSession(name, contentId) {
     if (!name || !contentId) return;
 
@@ -256,14 +244,43 @@ export class SessionsComponent implements OnInit {
         sessions[content.group] = [content];
       }
     }
+
     for (var session in sessions) {
       if (!sessions.hasOwnProperty(session)) continue;
 
       var content = sessions[session];
+      var chunks = this.getChunks(content, 3);
+
       fill.push({
         name: session,
-        content: content
+        display: [],
+        content: content,
+        chunks: chunks || []
       });
+    }
+  }
+
+  showMore(session) {
+    if (session && session.chunks.length > 0) {
+      session.display.push(session.chunks.shift());
+
+      if (session.display.length == 1 && session.chunks.length > 0) {
+        session.display.push(session.chunks.shift());
+      }
+    }
+  }
+
+  getChunks(arr, len) {
+    if (arr && arr.length > 0) {
+      var chunks = [],
+            i = 0,
+            n = arr.length;
+
+        while (i < n) {
+          chunks.push(arr.slice(i, i += len));
+        }
+
+        return chunks;
     }
   }
 
@@ -277,6 +294,16 @@ export class SessionsComponent implements OnInit {
 
   startSession(session) {
     this.openModalWithComponent(session, 0, true);
+  }
+
+  openModalWithContent(session, contentId) {
+    let index;
+    session.content.find((element, i) => {
+      if (element.id == contentId) {
+        index = i;
+      }
+    });
+    this.openModalWithComponent(session, index)
   }
 
   openModalWithComponent(session, selectedIndex: number = 0, userCreated = false) {

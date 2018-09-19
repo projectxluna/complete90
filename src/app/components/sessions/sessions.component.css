@@ -213,7 +213,7 @@ button:focus{
 .vid-thumb{
     position: relative;
     /*display: inline-block;*/
-    overflow: hidden;	
+	overflow: hidden;	
 }
 
 .vid-thumb a span{
