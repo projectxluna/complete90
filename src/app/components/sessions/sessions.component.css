@@ -162,6 +162,17 @@ button:focus{
     opacity: 0.6;
 }
 
+.editSess {
+    float: initial;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    background-color: transparent;
+    border: transparent;
+    opacity: 0.6;
+}
+
 .saved-pa{
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -335,6 +346,25 @@ button:focus{
     color: white;
 }
 
+.detsbtn{
+	color: #fd1541;
+	font-size: 10px;
+	background-color: transparent;
+	border: transparent;
+}
+
+.dets-ma{
+	margin: 10px;
+}
+
+.viewVidbtn{
+    color: white;
+    background-color: #fd15417d;
+    border: transparent;
+    font-size: 12px;
+
+}
+
 .startSess{
 	background-color: white;
 	border-color: white;
@@ -367,6 +397,7 @@ button:focus{
 .closeActive1{
 	display: none;
 }
+
 
 /*--------------------------5. NAME SESSION MODAL ------------------------*/
 .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {

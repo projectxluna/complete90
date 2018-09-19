@@ -1,8 +1,12 @@
 .navbar{
 	font-family: 'Montserrat';
 	/*background-color:transparent;*/
-	background-color: #0000007a;
+	background-color: #000000cc;
 	margin-bottom: 0px;
+}
+
+.navbar-header{
+	position: absolute;
 }
 
 .navbar-nav>li>a {
@@ -32,6 +36,8 @@
 
 .navbar-brand img{
 	max-height: 210%;
+	display: inline;
+	margin-right: 20px;
 }
 
 
@@ -47,6 +53,12 @@
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
     color: #f8c809;
     background-color: transparent;
+}
+
+.logoTxt{
+	text-decoration: none;
+	color: white;
+	font-size: 14px;
 }
 
 .avatar {
@@ -66,6 +78,16 @@
 
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1180px) {
+	.navbar-header{
+		position: relative;
+	}
+
+}
+
+
+
 
 @media (max-width: 1024px) {
 
@@ -121,5 +143,11 @@
 
 
 @media (max-width: 414px) {
+
+	.navbar-brand img{
+	    max-height: 140%;
+	    display: inline;
+	    margin-right: 20px;
+	}	
 
 }
