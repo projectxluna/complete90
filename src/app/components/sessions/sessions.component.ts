@@ -5,6 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { VideoplayerComponent } from '../modals/videoplayer/videoplayer.component';
 import { AddcontentToSessionComponent } from '../modals/addcontent-to-session/addcontent-to-session.component';
 import * as _ from 'lodash';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-sessions',
@@ -160,18 +161,74 @@ export class SessionsComponent implements OnInit {
     if (arr.indexOf(contentId) === -1) {
       arr.push(contentId);
       f.content = arr;
-      this.save(f);
+      this.save(f, (response) => {
+        if (response && response.id) {
+          this.showBanner(response.id);
+          this.getSessions();
+        }
+      });
     }
   }
 
-  save(session) {
+  editSession(session) {
+    if (!session) return;
+
+    let sesionToSave = _.cloneDeep(session);
+    sesionToSave.content = this.flatContent(sesionToSave.content);
+
+    this.save(sesionToSave, (response) => {
+      session.editMode = false;
+    });
+  }
+
+  revertEdit(session) {
+    if (!session) return;
+
+    session.name = session.oldName;
+    session.editMode = false;
+  }
+
+  removeFromSession(session, index) {
+    if (!session || session.content.length < 1 || isUndefined(index)) return;
+
+    if (session.content.length == 1) {
+      this.deleteUserSession(session.id); //Delete session if this is the last video in it
+      return;
+    }
+
+    session.content.splice(index, 1);
+    let sesionToSave = _.cloneDeep(session);
+    sesionToSave.content = this.flatContent(sesionToSave.content);
+
+    this.save(sesionToSave);
+  }
+
+  flatContent(content) {
+    if (!content) return;
+    return content.map(e => e.id);
+  }
+
+  toggleSessionDetails(session) {
+    if (!session) return;
+    session.expanded = !session.expanded ? true : false;
+  }
+
+  toggleSessionEdit(session) {
+    if (!session) return;
+    session.oldName = session.name;
+    session.editMode = !session.editMode ? true : false;
+    session.expanded = false;
+  }
+
+  save(session, cb = null) {
     this.dataService.saveSessions(session).subscribe((response) => {
+      if (cb) {
+        cb(response);
+      }
       if (!response || !response.success) {
         console.error('Custom session failed to save!');
         return;
       }
-      this.showBanner(response.id);
-      this.getSessions();
     });
   }
 
@@ -292,8 +349,8 @@ export class SessionsComponent implements OnInit {
     this.startSession(session);
   }
 
-  startSession(session) {
-    this.openModalWithComponent(session, 0, true);
+  startSession(session, index = 0) {
+    this.openModalWithComponent(session, index, true);
   }
 
   openModalWithContent(session, contentId) {
