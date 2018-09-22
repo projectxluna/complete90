@@ -84,52 +84,47 @@
 				<h4 class="modal-title text-center" id="savedSessModalTitle">SAVED SESSIONS</h4>
 			</div>
 			<div class="modal-body">
+				<div *ngFor="let session of customSessions">
+					<div  class="row saved-pa">
+						<div class="col-xs-7 sessName">
+								<span *ngIf="!session.editMode">{{ session.name | uppercase }}</span>
+								<span *ngIf="!session.editMode"> ({{ session.content.length }} Videos)</span>
+								<input *ngIf="session.editMode" [(ngModel)]="session.name" class="profileInput" placeholder="{{ session.name }}">
+								<button [hidden]="session.editMode" class="editSess" (click)="toggleSessionEdit(session)"><i aria-hidden="true" class="fa fa-pencil"></i></button>
+								<button *ngIf="!session.editMode" class="detsbtn" (click)="toggleSessionDetails(session)">DETAILS ></button>
+							</div>
+							<div class="col-xs-2" *ngIf="session.editMode">
+								<button *ngIf="session.editMode" (click)="revertEdit(session)" class="viewSessbtn pull-right">CANCEL</button>
+							</div>
+							<div class="col-xs-2" *ngIf="session.editMode">
+								<button *ngIf="session.editMode" (click)="editSession(session)" class="viewSessbtn pull-right">SAVE</button>
+							</div>
+							<div class="col-xs-4" *ngIf="!session.expanded">
+								<button *ngIf="!session.editMode" (click)="startSession(session)" class="viewSessbtn pull-right">PLAY</button>
+							</div>
+							<div *ngIf="!session.editMode" class="col-xs-1 deleteSess">
+								<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)">
+									<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+					</div>
 
-				<!-- 1ST SAVED SESSION -->
-				<div *ngFor="let session of customSessions" class="row saved-pa">
-					<div class="col-xs-6 sessName">{{ session.name | uppercase }}
-						<span> ({{ session.content.length }} Videos)</span>
-						<button class="editSess"><i aria-hidden="true" class="fa fa-pencil"></i></button>
-						<button class="detsbtn">DETAILS ></button>
-					</div>
-					<div class="col-xs-5">
-						<button (click)="startSession(session)" class="viewSessbtn pull-right">PLAY</button>
-					</div>
-					<div class="col-xs-1 deleteSess">
-						<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)">
-							<span aria-hidden="true">&times;</span>
-						</button>
+					<!-- LIST OF VIDS INSIDE OF SESSION -->
+					<div [hidden]="session.content.length < 1 || !session.expanded">
+						<div *ngFor="let content of session.content; let i = index" class="row dets-ma">
+							<div class="col-xs-6 sessName">{{ content.name | uppercase }}
+							</div>
+							<div class="col-xs-5">
+								<button (click)="startSession(session, i)" class="viewVidbtn pull-right">VIEW</button>
+							</div>
+							<div class="col-xs-1 deleteSess">
+								<button type="button" class="deleteSess" (click)="removeFromSession(session, i)">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
-
-				<!-- LIST OF VIDS INSIDE OF SESSION -->
-				<div class="row dets-ma">
-					<div class="col-xs-6 sessName">L Turn
-					</div>
-					<div class="col-xs-5">
-						<button (click)="startSession(session)" class="viewVidbtn pull-right">VIEW</button>
-					</div>
-					<div class="col-xs-1 deleteSess">
-						<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-				</div>				
-				
-
-				<!-- LIST OF VIDS INSIDE OF SESSION -->
-				<div class="row dets-ma">
-					<div class="col-xs-6 sessName">L Turn
-					</div>
-					<div class="col-xs-5">
-						<button (click)="startSession(session)" class="viewVidbtn pull-right">VIEW</button>
-					</div>
-					<div class="col-xs-1 deleteSess">
-						<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-				</div>	
 
 				<div *ngIf="customSessions.length < 1" class="modalDesc text-center">
 					No Saved Sessions Yet. To create your own session, simply press the red "+" button on a video to add it to the session. Scroll
@@ -195,14 +190,12 @@
 		<div *ngIf="session.content.length > 0" class="container box">
 			<div class="col-lg-12 catTitle">
 				<h1>{{ session.name }}</h1>
-				<a *ngIf="session.content.length > 3 && !session.expanded" (click)="expandSession(session)"><h2>SEE ALL</h2></a>
-				<a *ngIf="session.content.length > 3 && session.expanded" (click)="collapseSession(session)"><h2>COLLAPSE</h2></a>
+				<!-- <a *ngIf="session.chunks.length > 0" (click)="showMore(session)"><h2>SHOW MORE</h2></a> -->
 			</div>
-
 		</div>
 
-		<div *ngIf="session.content.length > 0" class="container">
-			<div *ngIf="!session.expanded" class="row">
+		<div class="container">
+			<div [hidden]="session.display.length > 0" class="row">
 				<!-- TRAINING VIDEO -->
 				<div *ngFor="let content of (session.content ? session.content.slice(0, 3): []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
 					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
@@ -228,174 +221,35 @@
 			</div>
 
 			<!----------- ROWS FOR SEE ALL BUTTON -------------->
-			<div *ngIf="session.expanded" class="row">
-				<!-- TRAINING VIDEO -->
-				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
-					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
-						<div class="pull-right">
-							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
-								<i class="fa fa-plus" aria-hidden="true"></i>
-								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
-							</button>
+			<div *ngIf="session.display.length > 0">
+				<div *ngFor="let row of session.display" class="row">
+					<div *ngFor="let content of row" class="col-lg-4 col-md-4 col-sm-8">
+						<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
+							<div class="pull-right">
+								<button class="add-btn" (click)="addContentToCustomSession(content.id)">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+								</button>
+							</div>
+						</div>
+						<div class="vid-thumb">
+							<img class="img-responsive" [src]="content.thumbnail">
+							<a (click)="openModalWithContent(session, content.id)">
+								<span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
+							</a>
+						</div>
+
+						<div class="col-lg-12 videoDes">
+							<h1>{{ content.name | uppercase }}</h1>
 						</div>
 					</div>
-					<div class="vid-thumb">
-						<img class="img-responsive" [src]="content.thumbnail">
-						<!-- PLAY BTN -->
-						<a (click)="openModalWithComponent(session, i)">
-							<span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
-						</a>
-					</div>
-
-					<div class="col-lg-12 videoDes">
-						<h1>{{ content.name | uppercase }}</h1>
-					</div>
-				</div>				
+				</div>
 			</div>
 			<!----------- ROWS FOR SEE ALL BUTTON END---------->
-
-
-			<div _ngcontent-c3="" class="row">
-				
-				<div _ngcontent-c3="" class="col-lg-4 col-md-4 col-sm-8">
-					<div _ngcontent-c3="" class="add-btn-cont col-lg-11">
-						<div _ngcontent-c3="" class="pull-right">
-							<button _ngcontent-c3="" class="add-btn">
-								<i _ngcontent-c3="" aria-hidden="true" class="fa fa-plus"></i>
-								
-							</button>
-						</div>
-					</div>
-					<div _ngcontent-c3="" class="vid-thumb">
-						<img _ngcontent-c3="" class="img-responsive" src="https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/Toe+Touches+(4+Cone)+Thumbnail-min.jpg">
-						
-						<a _ngcontent-c3="">
-							<span _ngcontent-c3="" aria-hidden="true" class="fa fa-play-circle fa-3x"></span>
-						</a>
-					</div>
-
-					<div _ngcontent-c3="" class="col-lg-12 videoDes">
-						<h1 _ngcontent-c3="">TOE TOUCHES</h1>
-					</div>
-				</div>
-
-				<div _ngcontent-c3="" class="col-lg-4 col-md-4 col-sm-8">
-					<div _ngcontent-c3="" class="add-btn-cont col-lg-11">
-						<div _ngcontent-c3="" class="pull-right">
-							<button _ngcontent-c3="" class="add-btn">
-								<i _ngcontent-c3="" aria-hidden="true" class="fa fa-plus"></i>
-								
-							</button>
-						</div>
-					</div>
-					<div _ngcontent-c3="" class="vid-thumb">
-						<img _ngcontent-c3="" class="img-responsive" src="https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/Advances+Toe+Touches+(4+Cone)+Thumbnail-min.jpg">
-						
-						<a _ngcontent-c3="">
-							<span _ngcontent-c3="" aria-hidden="true" class="fa fa-play-circle fa-3x"></span>
-						</a>
-					</div>
-
-					<div _ngcontent-c3="" class="col-lg-12 videoDes">
-						<h1 _ngcontent-c3="">ADVANCED TOE TOUCHES</h1>
-					</div>
-				</div>
-
-				<div _ngcontent-c3="" class="col-lg-4 col-md-4 col-sm-8">
-					<div _ngcontent-c3="" class="add-btn-cont col-lg-11">
-						<div _ngcontent-c3="" class="pull-right">
-							<button _ngcontent-c3="" class="add-btn">
-								<i _ngcontent-c3="" aria-hidden="true" class="fa fa-plus"></i>
-								
-							</button>
-						</div>
-					</div>
-					<div _ngcontent-c3="" class="vid-thumb">
-						<img _ngcontent-c3="" class="img-responsive" src="https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/Instep+Taps+(4+Cone)+Thumbnail-min.jpg">
-						
-						<a _ngcontent-c3="">
-							<span _ngcontent-c3="" aria-hidden="true" class="fa fa-play-circle fa-3x"></span>
-						</a>
-					</div>
-
-					<div _ngcontent-c3="" class="col-lg-12 videoDes">
-						<h1 _ngcontent-c3="">INSTEP TAPS</h1>
-					</div>
-				</div>
-
-
-
-
-
-				<div _ngcontent-c3="" class="col-lg-4 col-md-4 col-sm-8">
-					<div _ngcontent-c3="" class="add-btn-cont col-lg-11">
-						<div _ngcontent-c3="" class="pull-right">
-							<button _ngcontent-c3="" class="add-btn">
-								<i _ngcontent-c3="" aria-hidden="true" class="fa fa-plus"></i>
-								
-							</button>
-						</div>
-					</div>
-					<div _ngcontent-c3="" class="vid-thumb">
-						<img _ngcontent-c3="" class="img-responsive" src="https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/L+Turn+(4+Cone)+Thumbnail-min.jpg">
-						
-						<a _ngcontent-c3="">
-							<span _ngcontent-c3="" aria-hidden="true" class="fa fa-play-circle fa-3x"></span>
-						</a>
-					</div>
-
-					<div _ngcontent-c3="" class="col-lg-12 videoDes">
-						<h1 _ngcontent-c3="">L TURN</h1>
-					</div>
-				</div>
-
-				<div _ngcontent-c3="" class="col-lg-4 col-md-4 col-sm-8">
-					<div _ngcontent-c3="" class="add-btn-cont col-lg-11">
-						<div _ngcontent-c3="" class="pull-right">
-							<button _ngcontent-c3="" class="add-btn">
-								<i _ngcontent-c3="" aria-hidden="true" class="fa fa-plus"></i>
-								
-							</button>
-						</div>
-					</div>
-					<div _ngcontent-c3="" class="vid-thumb">
-						<img _ngcontent-c3="" class="img-responsive" src="https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/L+Turn+Rolls+(4+Cone)+Thumbnail-min.jpg">
-						
-						<a _ngcontent-c3="">
-							<span _ngcontent-c3="" aria-hidden="true" class="fa fa-play-circle fa-3x"></span>
-						</a>
-					</div>
-
-					<div _ngcontent-c3="" class="col-lg-12 videoDes">
-						<h1 _ngcontent-c3="">L TURN ROLLS</h1>
-					</div>
-				</div>
-
-				<div _ngcontent-c3="" class="col-lg-4 col-md-4 col-sm-8">
-					<div _ngcontent-c3="" class="add-btn-cont col-lg-11">
-						<div _ngcontent-c3="" class="pull-right">
-							<button _ngcontent-c3="" class="add-btn">
-								<i _ngcontent-c3="" aria-hidden="true" class="fa fa-plus"></i>
-								
-							</button>
-						</div>
-					</div>
-					<div _ngcontent-c3="" class="vid-thumb">
-						<img _ngcontent-c3="" class="img-responsive" src="https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/1+Cone/Pull+-+Touch+-+Chip+(1+Cone)+Thumbnail.jpg">
-						
-						<a _ngcontent-c3="">
-							<span _ngcontent-c3="" aria-hidden="true" class="fa fa-play-circle fa-3x"></span>
-						</a>
-					</div>
-
-					<div _ngcontent-c3="" class="col-lg-12 videoDes">
-						<h1 _ngcontent-c3="">PULL - TOUCH - CHIP</h1>
-					</div>
-				</div>				
+		</div>
+		<div *ngIf="session.chunks.length > 0" class="container box">
+			<div class="col-lg-12 catTitle">
+				<a (click)="showMore(session)"><h2>SHOW MORE</h2></a>
 			</div>
-
-
-
 		</div>
 	</div>
 </div>

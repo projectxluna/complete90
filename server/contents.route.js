@@ -79,9 +79,11 @@ module.exports = function (apiRoutes) {
 
         if (id) {
             Plan.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
+                name: name,
                 content: content
             }, function (err, plan) {
                 if (err) {
+                    console.error(err)
                     return res.json({
                         success: false,
                         message: err.errmsg,
