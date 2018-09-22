@@ -12,6 +12,7 @@ import { SessionsComponent } from './components/sessions';
 import { PaymentComponent } from './components/pricing/payment';
 import { DashboardComponent } from './components/dashboard';
 import { EventsComponent } from './components/events';
+import { ContactusComponent } from './components/contactus';
 
 const appRoutes: Routes = [
     { path: '', component: MainComponent },
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
     { path: 'sessions', component: SessionsComponent },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     { path: 'events', component: EventsComponent },
+    { path: 'contact', component: ContactusComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

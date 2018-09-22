@@ -1,0 +1,207 @@
+/*--------------------------TABLE OF CONTENTS-------------------------*/
+/*
+0. GLOBAL CCS
+1. BG IMAGE
+2. CONTACT TEXT
+3. CONTACT FORM
+
+*/
+
+/*----------------------------0. GOBAL CSSS--------------------------*/
+
+div{
+	font-family: 'Montserrat';
+}
+
+.inactiveLink{
+   pointer-events: none;
+   cursor: default;
+}
+
+.container-fluid{
+	padding: 0px;
+}
+
+.ma-l{
+	margin-left: 15px;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+button:focus{
+	outline:0;
+}
+
+.modal-content  {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
+}
+
+p{
+	color: white;
+}
+
+.f-style{
+	color: red;
+}
+
+.contact-pa{
+	padding-top: 150px;
+	padding-bottom: 150px;
+}
+
+input:focus{
+	outline: 0px;
+}
+
+textarea:focus{
+	outline: 0px;
+}
+
+.btn{
+	background-color: #fd1541;
+	border: transparent;
+	color: white;
+}
+
+.contact-us{
+	padding-top: 290px;
+    padding-bottom: 290px;
+    height: 100vh;
+}
+
+input::placeholder { 
+	color: white; 
+}
+
+textarea::placeholder{
+	color: white;
+}
+
+
+/*----------------------------1. BG IMAGE--------------------------*/
+.contactusbg{
+	background-image: url('../../../assets/contact-bg.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;	
+}
+
+/*----------------------------2. CONTACT TEXT--------------------------*/
+.contactTitle{
+	padding-bottom: 110px;
+}
+
+
+/*----------------------------3. CONTACT FORM--------------------------*/
+.form-control{
+	display: block;
+    width: 100%;
+    height: 34px;
+}
+
+
+.f-style input{
+	border: none;
+	width: 70%;
+    border-width: 0;
+    box-shadow: none;
+    color: white;
+    border-bottom: 1px solid #fd1541;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: rgba(0, 0, 0, 0);
+} 
+
+.f-style textarea{
+	border: none;
+	width: 70%;
+	resize: none;
+    border-width: 0;
+    box-shadow: none;
+    color: white;
+    border-bottom: 1px solid #fd1541;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
+
+
+
+
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1024px) {
+
+	.contact-us{
+		padding-top: 210px;
+		padding-bottom: 170px;
+		height: 100vh;
+	}
+
+	.contactTitle{
+		padding-bottom: 60px;
+	}
+
+	p{
+		padding-bottom: 80px;
+	}
+
+	.f-style{
+		text-align: center;
+	}
+
+	.f-style input{
+		width: 70%;
+	}
+
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+	.f-style{
+		text-align: center;
+	}
+
+	.f-style input{
+		width: 70%;
+	} 
+
+	p{
+		padding-bottom: 80px;
+	}
+
+}
+
+
+
+
+
+
+@media (max-width: 414px) {
+
+	.contact-us{
+		padding-top: 140px;
+		padding-bottom: 170px;
+		height: 100vh;
+	}
+
+	.contactTitle{
+		padding-bottom: 40px;
+	}	
+
+	p{
+		padding-bottom: 40px;
+	}
+}
