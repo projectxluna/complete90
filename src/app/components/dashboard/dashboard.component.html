@@ -72,7 +72,7 @@
 				            <a class="dropdown-toggle" data-toggle="dropdown">
 				              <i class="fa fa-pencil" aria-hidden="true"></i>
 				            </a>
-				            <ul class="dropdown-menu">
+				            <ul class="dropdown-menu pull-right">
 				            	<li>
 				            		<a class="dropdown-item" (click)="toggleEditMode()">Edit Profile</a>
 				          		</li>
@@ -112,13 +112,14 @@
 								<input *ngIf="editMode" [(ngModel)]="profile.foot" class="profileInput" placeholder="Edit Pr. Foot">
 							</div>
 						</li>
-						<li>
+						<li class="text-center editbtn">
 							<button *ngIf="editMode" (click)="updateProfile()" class="savePassbtn">SAVE</button>
 						</li>
 					</ul>
 				</div>
 			</div>
 
+			<!-- SUGGESTED VID TILE -->
 			<div *ngIf="hasSubscription()" class="col-sm-12 col-md-6">
 				<div class="box p-a">
 					<div class="box-header">
@@ -147,6 +148,8 @@
 					</ul>
 				</div>
 			</div>
+			<!-- SUGGESTED VID TILE END-->
+
 			<div *ngIf="!hasSubscription()" class="col-sm-12 col-md-6">
 				<div class="box p-a">
 					<div class="box-header">
@@ -302,6 +305,305 @@
 			</div>			
 		</div>		
 		<!-- SETTINGS TILES END -->
+
+
+
+		<!-- MANAGER PROFILE & SAVED DRILLS TILES -->
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<div class="box p-a">
+					<div class="box-header">
+						<h3 class="m-0"><b>PROFILE</b></h3>
+					</div>
+
+					<div class="box-tool">
+				        <ul class="nav">
+				          <li class="nav-item inline dropdown">
+				            <a class="dropdown-toggle" data-toggle="dropdown">
+				              <i class="fa fa-pencil" aria-hidden="true"></i>
+				            </a>
+				            <ul class="dropdown-menu pull-right">
+				            	<li>
+				            		<a class="dropdown-item" (click)="toggleEditMode()">Edit Profile</a>
+				          		</li>
+				            </ul>
+				          </li>
+				        </ul>
+				    </div>
+
+					<div class="col-md-12 text-center">
+						<div class="uploadOver">
+							<img [src]="profile.avatarURL" class="profilePic img-circle">
+							<div class="uploadIcon">
+								<a (click)="addFiles()"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
+								<input type="file" name="profileImg" #file style="display: none" (change)="onFilesAdded()" accept="image/*"/>
+							</div>
+						</div>
+						<div class="profileName">
+							<h3>{{ profile.name }}</h3>
+						</div>
+					</div>
+					<ul class="list">
+						<li>
+							<div class="row">
+								<a class="inactiveLink">POSITION: <span *ngIf="!editMode" class="lowkey">{{ profile.position || ''}}</span></a>
+								<input *ngIf="editMode" [(ngModel)]="profile.position" class="profileInput" placeholder="Edit Position">
+							</div>
+						</li>
+						<li>
+							<div class="row">
+								<a class="inactiveLink">HEIGHT: <span *ngIf="!editMode" class="lowkey">{{ profile.height || ''}}</span></a>
+								<input *ngIf="editMode" [(ngModel)]="profile.height" class="profileInput" placeholder="Edit Height">
+							</div>
+						</li>
+						<li>
+							<div class="row">
+								<a class="inactiveLink">PR. FOOT: <span *ngIf="!editMode" class="lowkey">{{ profile.foot || ''}}</span></a>
+								<input *ngIf="editMode" [(ngModel)]="profile.foot" class="profileInput" placeholder="Edit Pr. Foot">
+							</div>
+						</li>
+						<li class="text-center editbtn">
+							<button *ngIf="editMode" (click)="updateProfile()" class="savePassbtn">SAVE</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- MANAGER PROFILE & SAVED DRILLS TILES END -->
+			
+			
+			<!-- SQUAD TILE -->
+			<div class="col-sm-12 col-md-6">
+				<div class="box p-a">
+					<div class="box-header">
+						<h3 class="m-0 suggestedHeader"><b>SQUAD MEMBERS</b></h3>
+					</div>
+
+					<div class="box-tool">
+				        <ul class="nav">
+							<li class="nav-item inline red-btn">
+		            			<a class="nav-link" data-toggle="modal" data-target="#squadModal">
+		              			SEE ALL
+		            			</a>
+		          			</li>
+				        </ul>
+				    </div>
+				    <div class="row" id="sq-pa">
+					<ul class="listSquad col-lg-6 col-sm-6">
+						<li>
+							<a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
+						</li>
+						<li>
+							<a>MICHAEL BRADLEY</a>&nbsp;&nbsp;<span id="plypos">CB</span>
+						</li>
+						<li>
+							<a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
+						</li>
+						<li>
+							<a>MICHAEL BRADLEY</a>&nbsp;&nbsp;<span id="plypos">CB</span>
+						</li>	
+						<li>
+							<a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
+						</li>
+						<li>
+							<a>MICHAEL BRADLEY</a>&nbsp;&nbsp;<span id="plypos">CB</span>
+						</li>											
+					</ul>
+					<ul class="listSquad col-lg-6 col-sm-6">
+						<li>
+							<a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
+						</li>
+						<li>
+							<a>MICHAEL BRADLEY</a>&nbsp;&nbsp;<span id="plypos">CB</span>
+						</li>
+						<li>
+							<a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
+						</li>
+						<li>
+							<a>MICHAEL BRADLEY</a>&nbsp;&nbsp;<span id="plypos">CB</span>
+						</li>	
+						<li>
+							<a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
+						</li>
+						<li>
+							<a>MICHAEL BRADLEY</a>&nbsp;&nbsp;<span id="plypos">CB</span>
+						</li>											
+					</ul></div>
+
+				</div>
+			</div>
+			<!-- SQUAD TILE END-->
+
+			<!-- SQUAD MODAl -->
+			<div class="modal fade" id="squadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title text-center" id="ModalTitle">SQUAD MEMBERS</h4>
+						</div>
+
+
+						<div class="modal-body">
+
+							<div class="row saved-pa">
+								<div class="col-xs-6">
+									<a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- SAVED SESSION MODAL END -->			
+
+			<!-- SAVED DRILLS TILE -->
+			<div class="col-sm-12 col-md-6">
+				<div class="box p-a">
+					<div class="box-header">
+						<h3 class="m-0 suggestedHeader"><b>SAVED DRILLS</b></h3>
+					</div>
+
+					<div class="box-tool">
+				        <ul class="nav">
+							<li class="nav-item inline red-btn">
+		            			<a class="nav-link" data-toggle="modal" data-target="#drillModal">
+		              			SEE MORE
+		            			</a>
+		          			</li>
+				        </ul>
+				    </div>
+
+					<ul class="listDrills">
+						<li>
+							<a>DEFENSIVE DRILL</a>
+						</li>
+						<li>
+							<a>ATTACKING DRILL</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- SAVED DRILLS TILE END-->
+
+
+			<!-- SAVED DRILLS MODAl -->
+			<div class="modal fade" id="drillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title text-center" id="ModalTitle">SAVED DRILLS</h4>
+						</div>
+						<div class="modal-body">
+
+							<!-- 1ST SAVED SESSION -->
+							<div class="row saved-pa">
+								<div class="col-xs-6 drillName">
+									DRILL 1
+									<button class="editBtn"><i aria-hidden="true" class="fa fa-pencil"></i></button>
+								</div>
+								<div class="col-xs-5">
+									<button class="pull-right red-btn-modal">EXPORT</button>
+									<button class="pull-right red-btn-modal">LOAD</button>
+								</div>
+								<div class="col-xs-1">
+									<button type="button" class="deleteBtn">
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
+									</button>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- SAVED DRILLS MODAL END -->
+
+			<!-- DRILL MAKER TILE -->
+			<div class="col-lg-12">
+				<div class="box p-a">
+					<div class="box-header">
+						<h3 class="m-0 suggestedHeader"><b>CREATE A DRILL</b></h3>
+					</div>
+
+					<div class="box-tool">
+				        <ul class="nav">
+				          <li class="nav-item inline dropdown">
+				            <a class="dropdown-toggle" data-toggle="dropdown">
+				              <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+				            </a>
+				            <ul class="dropdown-menu pull-right">
+				            	<li>
+				            		<a class="dropdown-item">Save Drill</a>
+				          		</li>
+				          		<li>
+				            		<a class="dropdown-item" >Export Drill</a>
+				          		</li>
+				            </ul>
+				          </li>
+				        </ul>
+				    </div>
+
+				    
+				    <div class="row">
+				    	<!-- DRILL FIELD VIEW -->
+					    <div class="col-lg-6">
+					    	<div class="col-lg-12 drillView">
+					    		<img src="assets/fullFld.png">
+					    		<!-- <img src="assets/halfFld.png">
+					    		<img src="assets/18yardFld.png">
+					    		<img src="assets/emptyFld.png"> -->
+					    	</div>
+
+					    	<div class="col-lg-12">
+					    		<h4 class="text-center drillvTitle"><b>VIEW</b></h4>
+						    	<!-- DRILL VIEW BUTTONS -->
+						    	<nav class="col-lg-12 center-pills text-center" id="myScrollspy">
+					              <ul class="nav nav-pills viewBtns">
+					                  <li><a>Full</a></li>
+					                  <li><a>Half</a></li>
+					                  <li><a>18 Yard</a></li>
+					                  <li><a>Empty</a></li>
+					              </ul>
+					          </nav>
+								<!-- DRILL VIEW BUTTONS END -->
+					    	</div>
+					    </div>
+					    <!-- DRILL FIELD VIEW END -->
+
+					    <!-- DRILL ICONS VIEW -->
+					    <div class="col-lg-6">
+					    	<h4 class="text-center">Drag and drop icons to create custom drills</h4>
+
+					    	<ul class="drill-icons">
+					    		<li>
+					    			<img src="assets/sb-icon.png">
+					    		</li>
+					    		<li>
+					    			<img src="assets/player-icon.png">
+					    		</li>
+					    		<li>
+					    			<img src="assets/pylon-icon.png">
+					    		</li>
+					    	</ul>
+					    	
+					    </div>
+					    <!-- DRILL ICONS VIEW END -->
+					</div>
+
+
+				</div>
+			</div>
+			<!-- DRILL MAKER TILE END-->
+
+
+
 	</div>
 <!-- DASHBOARD TILES END-->
 

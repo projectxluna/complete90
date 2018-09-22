@@ -34,6 +34,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { EventsComponent } from './components/events/events.component';
 import { VideoplayerComponent } from './components/modals/videoplayer/videoplayer.component';
 import { AddcontentToSessionComponent } from './components/modals/addcontent-to-session/addcontent-to-session.component';
+import { ContactusComponent } from './components/contactus/contactus.component';
 
 
 
@@ -54,7 +55,8 @@ import { AddcontentToSessionComponent } from './components/modals/addcontent-to-
     SettingsComponent,
     EventsComponent,
     VideoplayerComponent,
-    AddcontentToSessionComponent
+    AddcontentToSessionComponent,
+    ContactusComponent
   ],
   imports: [
     BrowserModule,

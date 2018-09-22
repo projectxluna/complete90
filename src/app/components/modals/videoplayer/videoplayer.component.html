@@ -2,7 +2,7 @@
   <div class="modal-header black">
     <h4 class="modal-title pull-left">{{ selectedContent.name }} <span *ngIf="selectedContent.description && selectedContent.description.length > 0">({{ selectedContent.description }})</span></h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
-      &nbsp;<span aria-hidden="true">&times;</span>
+      <span aria-hidden="true">&times;</span>
     </button>
     <button type="button" class="close text-center" (click)="toggleAutoLoop()" *ngIf="userCreated">
       <i class="fa fa-toggle-off" [ngClass]="{'fa-toggle-on': canAutoLoop()}" aria-hidden="true"></i>
