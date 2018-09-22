@@ -67,6 +67,7 @@ export class VideoplayerComponent implements OnInit {
   track: TextTrack;
   timer: Timer;
 
+  static autoLoop: boolean = true;
   userCreated;
   session;
   sessionStats = {
@@ -85,6 +86,14 @@ export class VideoplayerComponent implements OnInit {
     this.selectedContent = this.session.content[this.selectedIndex] || this.session.content[0];
     this.sessionStats.contentId = this.selectedContent.id;
     this.timer = new Timer();
+  }
+
+  toggleAutoLoop() {
+    VideoplayerComponent.autoLoop = !VideoplayerComponent.autoLoop;
+  }
+
+  canAutoLoop() {
+    return VideoplayerComponent.autoLoop;
   }
 
   playNext() {
@@ -225,7 +234,7 @@ export class VideoplayerComponent implements OnInit {
 
   onExitCuePoint(textTrack) {
     let cue = textTrack.currentTarget;
-    if (cue.loop) {
+    if (cue.loop && VideoplayerComponent.autoLoop) {
       VideoplayerComponent.api.seekTime(cue.startTime);
     }
   }
