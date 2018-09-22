@@ -1,4 +1,4 @@
-div{
+div {
 	font-family: 'Montserrat';
 }
 
@@ -16,13 +16,17 @@ div{
     flex-direction: row;
 }
 
-.btn-primary{
+.btn-primary {
 	color: #fd1541;
 	background-color: transparent;
 	border: none;
 }
 
-.al-text{
+.fa-toggle-on {
+	color: #178e14;
+}
+
+.al-text {
 	color: #797979;
 	padding-right: 5px;
 }
