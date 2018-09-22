@@ -3,6 +3,7 @@
 	/*background-color:transparent;*/
 	background-color: #000000cc;
 	margin-bottom: 0px;
+	font-weight: 700;
 }
 
 .navbar-header{
@@ -59,6 +60,7 @@
 	text-decoration: none;
 	color: white;
 	font-size: 14px;
+	font-weight: 300;
 }
 
 .avatar {
