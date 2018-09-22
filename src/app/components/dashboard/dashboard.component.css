@@ -5,6 +5,7 @@
 2. QUICK STATS TILES
 3. PROFILE & SUGGESTED TILES
 4. SETTING TILES
+5. MANAGER TILES
 
 */
 
@@ -62,6 +63,45 @@ input{
 .box h3{
 	color: #0000008a;
 }
+
+.editbtn{
+	margin-right: 40px;
+}
+
+.modal-header {
+    padding: 35px 15px 15px 15px;
+    border-bottom: 0px;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px 25px 15px 25px;
+}
+
+.red-btn-modal{
+    color: white;
+    background-color: #fd1541;
+    border: transparent;
+    margin-right: 5px;
+}
+
+.editBtn{
+    float: initial;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    background-color: transparent;
+    border: transparent;
+    opacity: 0.6;
+}
+
+.deleteBtn{
+	color: #9c9c9c;
+    background: transparent;
+    border: transparent;
+}
+
 
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
@@ -358,6 +398,125 @@ input{
 	padding-left: 0px;
 }
 
+
+
+/*------------------------5. MANAGER TILES---------------------*/
+.listSquad{
+	padding-left: 10px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+
+.listSquad li{
+	padding-bottom: 10px;
+}
+
+.listSquad a{
+	color: #0b1c38;
+}
+
+.listDrills li{
+	padding-bottom: 10px;
+}
+
+.listDrills a{
+	text-decoration: none;
+	color: #0b1c38;
+}
+
+.listDrills a:hover{
+	cursor: pointer;
+}
+
+#plypos a{
+	text-decoration: none;
+	color: grey;
+}
+
+#sq-pa{
+	padding-left: 26px;
+	padding-right: 26px;
+}
+
+.red-btn a{
+	color: red;
+	cursor: pointer;
+}
+
+#ModalTitle{
+	font-family: 'Montserrat';
+	color: #333333;
+}
+
+.drillvTitle{
+	padding-bottom: 0px;
+}
+
+.saved-pa {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.drillView img{
+	width: 100%;
+}
+
+#myScrollspy{
+
+}
+
+.viewBtns{
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    text-align: center;	
+
+}
+
+.viewBtns li{
+	/*background-color: red;*/
+}
+
+.viewBtns>li>a {
+	color: white;
+	padding: 6px 15px;
+    border-radius: 4px;
+    background-color: #0b1c38;
+    cursor: pointer;
+}
+
+.viewBtns>li>a:hover{
+	color: white;
+	padding: 6px 15px;
+    border-radius: 4px;
+    background-color: #fd1541;
+    cursor: pointer;
+}
+
+#savebtn{
+	color: #5cda57;;
+}
+
+#exportbtn{
+	color: #fd1541;
+}
+
+ul>.drill-icons{
+	padding-left: 0px;
+}
+
+.drill-icons li{
+	padding-bottom: 15px;
+}
+
+.drill-icons li> img{
+	width: 5%;
+}
+
+.drillName{
+    color: #333333;
+}
+
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
 @media (max-width: 1024px) {
@@ -427,6 +586,12 @@ input{
 	.uploadIcon {
 	  top: 35%;
 	  left: 50%;
+	}
+
+	.listSquad{
+		padding-top: 0px;
+		padding-bottom: 0px;
+		margin-bottom: 0px;
 	}
 
 }
