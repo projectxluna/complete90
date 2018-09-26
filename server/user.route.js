@@ -26,12 +26,16 @@ module.exports = function (apiRoutes) {
         let foot = req.body.foot;
         let position = req.body.position;
         let height = req.body.height;
+        let companyname = req.body.companyName;
+        let teamName = req.body.teamName;
 
         var update = {};
 
         if (foot) update.foot = foot;
         if (position) update.position = position;
         if (height) update.height = height;
+        if (companyname) update.companyname = companyname;
+        if (teamName) update.teamName = teamName;
 
         User.findOneAndUpdate({ _id: req.decoded.userId }, update,
             {
