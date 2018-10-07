@@ -85,47 +85,47 @@
 			</div>
 			<div class="modal-body">
 				<div *ngFor="let session of customSessions">
-					<div  class="row saved-pa">
+					<div class="row saved-pa">
 						<div class="col-xs-7 sessName">
-								<span *ngIf="!session.editMode">{{ session.name | uppercase }}</span>
-								<span *ngIf="!session.editMode"> ({{ session.content.length }} Videos)</span>
-								<input *ngIf="session.editMode" [(ngModel)]="session.name" class="profileInput" placeholder="{{ session.name }}">
-								<button [hidden]="session.editMode" class="editSess" (click)="toggleSessionEdit(session)"><i aria-hidden="true" class="fa fa-pencil"></i></button>
-								<button *ngIf="!session.editMode" class="detsbtn" (click)="toggleSessionDetails(session)">DETAILS ></button>
-							</div>
-							<div class="col-xs-2" *ngIf="session.editMode">
-								<button *ngIf="session.editMode" (click)="revertEdit(session)" class="viewSessbtn pull-right">CANCEL</button>
-							</div>
-							<div class="col-xs-2" *ngIf="session.editMode">
-								<button *ngIf="session.editMode" (click)="editSession(session)" class="viewSessbtn pull-right">SAVE</button>
-							</div>
-							<div class="col-xs-4" *ngIf="!session.expanded">
-								<button *ngIf="!session.editMode" (click)="startSession(session)" class="viewSessbtn pull-right">PLAY</button>
-							</div>
-							<div *ngIf="!session.editMode" class="col-xs-1 deleteSess">
-								<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)">
-									<span aria-hidden="true">&times;</span>
-								</button>
+							<span *ngIf="!session.editMode">{{ session.name | uppercase }}</span>
+							<span *ngIf="!session.editMode"> ({{ session.content.length }} Videos)</span>
+							<input *ngIf="session.editMode" [(ngModel)]="session.name" class="profileInput" placeholder="{{ session.name }}">
+							<button [hidden]="session.editMode" class="editSess" (click)="toggleSessionEdit(session)">
+								<i aria-hidden="true" class="fa fa-pencil"></i>
+							</button>
+							<button *ngIf="!session.editMode" class="detsbtn" (click)="toggleSessionDetails(session)">DETAILS ></button>
+						</div>
+						<div class="col-xs-2" *ngIf="session.editMode">
+							<button *ngIf="session.editMode" (click)="revertEdit(session)" class="viewSessbtn pull-right">CANCEL</button>
+						</div>
+						<div class="col-xs-2" *ngIf="session.editMode">
+							<button *ngIf="session.editMode" (click)="editSession(session)" class="viewSessbtn pull-right">SAVE</button>
+						</div>
+						<div class="col-xs-4" *ngIf="!session.expanded && session.content.length > 0">
+							<button *ngIf="!session.editMode" (click)="startSession(session)" class="viewSessbtn pull-right">PLAY</button>
+						</div>
+						<div *ngIf="!session.editMode && !session.expanded" class="col-xs-1 deleteSess">
+							<button type="button" class="deleteSess" (click)="deleteUserSession(session.id)">
+								<i class="fa fa-trash-o" aria-hidden="true"></i>
+							</button>
 						</div>
 					</div>
-
 					<!-- LIST OF VIDS INSIDE OF SESSION -->
 					<div [hidden]="session.content.length < 1 || !session.expanded">
 						<div *ngFor="let content of session.content; let i = index" class="row dets-ma">
 							<div class="col-xs-6 sessName">{{ content.name | uppercase }}
 							</div>
 							<div class="col-xs-5">
-								<button (click)="startSession(session, i)" class="viewVidbtn pull-right">VIEW</button>
+								<button (click)="startSession(session, i)" class="viewSessbtn pull-right">PLAY</button>
 							</div>
 							<div class="col-xs-1 deleteSess">
 								<button type="button" class="deleteSess" (click)="removeFromSession(session, i)">
-									<span aria-hidden="true">&times;</span>
+									<i class="fa fa-trash-o" aria-hidden="true"></i>
 								</button>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div *ngIf="customSessions.length < 1" class="modalDesc text-center">
 					No Saved Sessions Yet. To create your own session, simply press the red "+" button on a video to add it to the session. Scroll
 					horozontally to view more videos within each category!

@@ -204,16 +204,18 @@ module.exports = function (apiRoutes) {
     // load free sessions
     function loadFreeSession(callback) {
         var sortSession = function (contentStructure) {
-            let freeSessions = [];
-            for (let session of contentStructure.sessions) {
-                if (session.free) {
-                    for (let content of session.content) {
-                        content.group = session.name;
-                        freeSessions.push(content);
-                    }
-                }
-            }
-            callback(null, freeSessions);
+            let freeSessions = contentStructure.sessions.filter(e => {
+                return e.free;
+            });
+            let freeContent = [];
+            freeSessions.forEach(session => {
+                session.content.forEach(content => {
+                    content.group = session.name;
+                    content.link = AWS.signUrl(content.link);
+                    freeContent.push(content);
+                });
+            });
+            callback(null, freeContent);
         }
 
         let nodeEnv = process.env.NODE_ENV;
@@ -275,7 +277,6 @@ module.exports = function (apiRoutes) {
         }
         callback(null, contents);
     }
-
 
     function getUserPlans(contents, userId, callback) {
         Plan.find({

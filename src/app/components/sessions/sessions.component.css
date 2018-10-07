@@ -33,6 +33,12 @@ button:focus{
 }
 
 .modal-content  {
+	/* width:inherit;
+	max-width:inherit;
+	height:inherit;
+    margin: 0 auto;
+	pointer-events:all; */
+
     -webkit-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
     border-radius: 0px !important; 
