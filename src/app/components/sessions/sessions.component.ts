@@ -142,7 +142,9 @@ export class SessionsComponent implements OnInit {
       content: [contentId]
     }
 
-    this.save(newSession);
+    this.save(newSession, response => {
+      this.getSessions();
+    });
   }
 
   addToExistingSession(id, contentId) {
