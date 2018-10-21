@@ -287,11 +287,11 @@ module.exports = function (apiRoutes) {
             let userPlan = [];
             for (let plan of plans) {
                 let videoContents = [];
-                plan.content.forEach((videoId) => {
-                    let content = contents.filter(function (value, index, self) {
-                        return value.id === videoId;
+                plan.content.forEach(videoId => {
+                    let content = contents.find(function (element) {
+                        return element.id === videoId;
                     });
-                    videoContents.push(...content);
+                    videoContents.push(content);
                 });
                 let p = {
                     id: plan._id,

@@ -78,6 +78,7 @@ export class VideoplayerComponent implements OnInit {
 
   selectedIndex;
   selectedContent;
+  static originalVolume: any;
 
   constructor(public bsModalRef: BsModalRef, public dataService: DataService) {
   }
@@ -105,6 +106,7 @@ export class VideoplayerComponent implements OnInit {
     this.selectedContent = this.session.content[this.selectedIndex];
     this.removeCuePoits();
     this.addCuePoints();
+    VideoplayerComponent.originalVolume = undefined;
   }
 
   playPrevious() {
@@ -116,6 +118,7 @@ export class VideoplayerComponent implements OnInit {
     this.selectedContent = this.session.content[this.selectedIndex];
     this.removeCuePoits();
     this.addCuePoints();
+    VideoplayerComponent.originalVolume = undefined;
   }
 
   startTimer() {
@@ -236,6 +239,12 @@ export class VideoplayerComponent implements OnInit {
     let cue = textTrack.currentTarget;
     if (cue.loop && VideoplayerComponent.autoLoop) {
       VideoplayerComponent.api.seekTime(cue.startTime);
+      if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
+      // turn off music here
+      VideoplayerComponent.api.volume = 0;
+    } else {
+      // Restore old volume here
+      if (VideoplayerComponent.originalVolume) VideoplayerComponent.api.volume = VideoplayerComponent.originalVolume;
     }
   }
 
