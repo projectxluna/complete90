@@ -63,7 +63,7 @@ export class SessionsComponent implements OnInit {
   getFilteredSessions() {
     if (this.hasFilter()) {
       let clone = _.cloneDeep(this.sessions);
-      return clone.filter(session => {
+      let filtered = clone.filter(session => {
         let tag = this.selectedFilter.tag;
         let category = this.selectedFilter.category;
 
@@ -72,11 +72,17 @@ export class SessionsComponent implements OnInit {
             return f.tags && f.tags.indexOf(tag) != -1;
           });
         }
+        session.chunks.length = 0;
+        session.chunks = this.getChunks(session.content, 3);
+
+        session.display.length = 0;
+        session.display.push(...session.chunks);
         if (category) {
           return session.name === this.selectedFilter.category;
         }
         return true;
       });
+      return filtered;
     }
     return this.sessions;
   }

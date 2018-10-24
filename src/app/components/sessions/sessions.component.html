@@ -195,7 +195,7 @@
 		</div>
 
 		<div class="container">
-			<div [hidden]="session.display.length > 0" class="row">
+			<div [hidden]="session.display.length > 0 || hasFilter()" class="row">
 				<!-- TRAINING VIDEO -->
 				<div *ngFor="let content of (session.content ? session.content.slice(0, 3): []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
 					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
@@ -217,7 +217,7 @@
 					<div class="col-lg-12 videoDes">
 						<h1>{{ content.name | uppercase }}</h1>
 					</div>
-				</div>				
+				</div>
 			</div>
 
 			<!----------- ROWS FOR SEE ALL BUTTON -------------->
