@@ -123,7 +123,7 @@ export class SessionsComponent implements OnInit {
     }, this.banner.defaultTimeout);
   }
 
-  addContentToCustomSession(contentId) {
+  addContentToCustomSession(contentId, content) {
     // prompt user to select which existing session they want to add
     // this content to, or let them start a new session
     const initialState = {
@@ -135,7 +135,7 @@ export class SessionsComponent implements OnInit {
       if (result && result.type === 'new') {
         this.newSession(result.name, contentId);
       } else if (result && result.type === 'add') {
-        this.addToExistingSession(result.id, contentId);
+        this.addToExistingSession(result.id, contentId, content);
       }
     });
   }
@@ -153,7 +153,7 @@ export class SessionsComponent implements OnInit {
     });
   }
 
-  addToExistingSession(id, contentId) {
+  addToExistingSession(id, contentId, content) {
     if (!id) return;
 
     let existing = this.customSessions.find((session) => {
@@ -169,10 +169,10 @@ export class SessionsComponent implements OnInit {
     if (arr.indexOf(contentId) === -1) {
       arr.push(contentId);
       f.content = arr;
+      if (content) existing.content.push(content);
       this.save(f, (response) => {
         if (response && response.id) {
           this.showBanner(response.id);
-          this.getSessions();
         }
       });
     }

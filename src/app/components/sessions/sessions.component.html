@@ -162,7 +162,7 @@
 				<div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
 					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
 						<div class="pull-right">
-							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
+							<button class="add-btn" (click)="addContentToCustomSession(content.id, content)">
 								<i class="fa fa-plus" aria-hidden="true"></i>
 								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
 							</button>
@@ -200,7 +200,7 @@
 				<div *ngFor="let content of (session.content ? session.content.slice(0, 3): []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
 					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
 						<div class="pull-right">
-							<button class="add-btn" (click)="addContentToCustomSession(content.id)">
+							<button class="add-btn" (click)="addContentToCustomSession(content.id, content)">
 								<i class="fa fa-plus" aria-hidden="true"></i>
 								<!-- <i class="fa fa-check" aria-hidden="true"></i> -->
 							</button>
@@ -226,7 +226,7 @@
 					<div *ngFor="let content of row" class="col-lg-4 col-md-4 col-sm-8">
 						<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
 							<div class="pull-right">
-								<button class="add-btn" (click)="addContentToCustomSession(content.id)">
+								<button class="add-btn" (click)="addContentToCustomSession(content.id, content)">
 									<i class="fa fa-plus" aria-hidden="true"></i>
 								</button>
 							</div>
