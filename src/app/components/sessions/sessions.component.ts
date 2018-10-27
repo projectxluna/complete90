@@ -335,6 +335,14 @@ export class SessionsComponent implements OnInit {
     }
   }
 
+  showLess(session) {
+    if (session && session.display) {
+      while (session.display.length) {
+        session.chunks.unshift(session.display.pop());
+      }
+    }
+  }
+
   getChunks(arr, len) {
     if (arr && arr.length > 0) {
       var chunks = [],
