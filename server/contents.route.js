@@ -281,7 +281,7 @@ module.exports = function (apiRoutes) {
     function getUserPlans(contents, userId, callback) {
         Plan.find({
             userId: userId
-        }).limit(10).sort({ _id: -1 }).exec((err, plans) => {
+        }).sort({ _id: -1 }).exec((err, plans) => {
             if (err) callback(err);
 
             let userPlan = [];
