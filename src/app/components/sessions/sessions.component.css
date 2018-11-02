@@ -140,6 +140,8 @@ button:focus{
 .modal-body {
     position: relative;
     padding: 15px 25px 15px 25px;
+    overflow: scroll;
+    height: 500px;
 }
 
 .modal-header {
