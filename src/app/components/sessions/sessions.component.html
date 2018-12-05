@@ -92,7 +92,7 @@
 							<input *ngIf="session.editMode" [(ngModel)]="session.name" class="profileInput" placeholder="{{ session.name }}">
 							<button [hidden]="session.editMode" class="editSess" (click)="toggleSessionEdit(session)">
 								<i aria-hidden="true" class="fa fa-pencil"></i>
-							</button>
+							</button><br>
 							<button *ngIf="!session.editMode" class="detsbtn" (click)="toggleSessionDetails(session)">DETAILS ></button>
 						</div>
 						<div class="col-xs-2" *ngIf="session.editMode">

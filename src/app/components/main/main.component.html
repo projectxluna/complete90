@@ -15,23 +15,38 @@
 
 <!-- DESCRIPTION SECTION -->
 	<div class="container descTitle">
-		<h1>THE COMPLETE 90</h1>
+		<h1>THE<b>COMPLETE 90</b></h1>
 	</div>
 
 
 
 	<div class="container">
 		<div class="col-lg-6 col-md-6 descpic">
-			<img src="assets/player-silhouette.png">
+			<img src="assets/hero-2.png">
 		</div>
 
 		<div class="col-lg-5 col-md-5 descpara">
-			<p><b>THE COMPLETE 90</b> will take the time to significantly improve a players technique and skill set in an individual or small group environment, that is most beneficial for their development to play at the next level as a soccer player. <br>
-			<br>
-			Team environments are a great way to develop an understanding of the game, however, lack the necessary time and touches on the ball to improve technique.
+			<p>
+			<!-- <b>THE COMPLETE 90</b> will take the time to significantly improve a players technique and skill set in an individual or small group environment, that is most beneficial for their development to play at the next level as a soccer player. <br>
+			<br><br> -->
+			<b><i class="fa fa-video-camera"></i>&nbsp; HD Video Content</b><br>
+			Have access to over 90+ HD drills. All of which are categorized into Ball Mastery, Wall Work,  and Core.
+			<br><br>
+			<b><i class="fa fa-cogs"></i>&nbsp; Custom Sessions</b><br>
+			Create a custom session with the drills you want to improve on. Revisit these sessions as muany times as you like or create new ones.
+			<br><br>
+			<b><i class="fa fa-bar-chart"></i>&nbsp; Track Your Progress</b><br>
+			All sessions are set up on a timer so you can keep track of your dedication to training.
+			<br><br>
+			<b><i class="fa fa-user"></i>&nbsp; Personalized Profile</b><br>
+			Keep your profile up to date with current player attributes. Be sure to access your profile frequently to view new suggested drills.
 			</p>
 
-			<div class="offerTitle">
+			<div class="readMore">
+				<a [routerLink]="['/training']" > SIGN UP ></a>
+			</div>
+
+			<!-- <div class="offerTitle">
 				<a class="inactiveLink">TRAINING WE OFFER</a>
 				<p><br>
 					•First Touch on the Ball<br>
@@ -42,7 +57,7 @@
 			</div>
 			<div class="readMore">
 				<a [routerLink]="['/training']" > READ MORE ></a>
-			</div>
+			</div> -->
 		</div>
 	</div>
 <!-- DESCRIPTION SECTION END-->
@@ -51,45 +66,9 @@
 
 <!-- VIDEO SHOWCASE -->
 	<div class="vidShowcasebg">
-		<div class="container">
-
-
-				<div class="col-lg-7 cold-md-5 mainVideo">
-					<div class="videoWrapper">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/47HVAbzh-yM?showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-					</div>
-
-					<div class="col-lg-8 mainVideo">
-						<h1>DRIBBLING EXERCISE</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra sem innsequat augue sem, eget varius velit dignissim eget.</p>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-lg-offset-1 col-md-6 col-md-offset-3 createSes">
-					<div class="col-lg-12 sesImgcont">
-						<img src="assets/create-a-session.png" class="img-responsive">
-					</div>
-					<div class="col-lg-12">
-						<div class="row">
-							<div class="col-lg-7 col-md-7">
-							<h1>CREATE CUSTOM SESSIONS</h1></div>
-							<div class="col-lg-5 col-md-5 sesLink text-center"><a [routerLink]="['/sessions']">CREATE A SESSION</a></div>
-						</div>
-						<p>Browse our Library of soccer specific drills and pick your favourites in order to create custom sessions that will be challenging.
-						</p>
-					</div>
-
-					<div class="col-lg-12 persTrain">
-						<div class="col-lg-12 text-center">
-							<h1>1 ON 1 PERSONAL TRAINING<br> AVAILABLE LOCALLY</h1>
-							<a [routerLink]="['/training']">LEARN MORE</a>
-						</div>
-					</div>
-
-				</div>
-
-
-		</div>
+			<div class="videoWrapper">
+				<iframe width="560" height="315" scrolling="yes" src="https://www.youtube.com/embed/47HVAbzh-yM?showinfo=0&controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			</div>
 	</div>
 <!-- VIDEO SHOWCASE END -->
 
@@ -97,10 +76,11 @@
 
 <!-- PLAYER/COACH SECTION-->
 <div class="playercoachCont container-fluid">
-	<div class="row">
+	<!-- SMALL DISPLAY -->
+	<!-- <div class="row"> -->
 		<!-- PLAYER SIDE -->
-		<div class="playerPromoCont">
-			<div class="col-lg-6 col-sm-12 playerPromo">
+		<div class="playerPromoCont" id="sm-ad">
+			<div class="col-sm-12 playerPromo">
 
 				<div class="col-lg-5 col-md-6 col-sm-6 playerPromoText">
 					<a href="" class="inactiveLink">PLAYER</a>
@@ -115,17 +95,15 @@
 
 			</div>	
 		</div>
-
-
 		<!-- COACH SIDE -->
-		<div class="coachPromoCont">
-			<div class="col-lg-6 col-sm-12 coachPromo">
+		<div class="coachPromoCont" id="sm-ad">
+			<div class="col-sm-12 coachPromo">
 
 				<div class="col-lg-5 col-md-5 col-sm-5 coachPromoText">
 					<a href="" class="inactiveLink">MANAGER</a>
 					<h1>THE<b>COMPLETE 90</b> for managers</h1>
 					<div class="PromoSignbtn">
-						<a [routerLink]="['/login_signup']">SIGN UP</a>
+						<a href="#" onclick="return false;">COMING SOON</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-sm-6">
@@ -133,9 +111,39 @@
 				</div>
 
 			</div>		
-
 		</div>
-	</div>
+
+		<!-- LARGE DISPLAY -->
+		<ul class="flexlist" id="lg-ad">
+			<!-- PLAYER SIDE -->
+			<li class="flexlist-item playerPromo">
+				<div class="col-lg-5 col-md-6 col-sm-6 playerPromoText">
+					<a href="" class="inactiveLink">PLAYER</a>
+					<h1>THE<b>COMPLETE 90</b> for players</h1>
+					<div class="PromoSignbtn">
+						<a [routerLink]="['/login_signup']">SIGN UP</a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-sm-6">
+					<img src="assets/playereditpic.png">
+				</div>
+			</li>
+
+			<!-- COACH SIDE -->
+		    <li class="flexlist-item coachPromo">
+		    	<div class="col-lg-5 col-md-5 col-sm-5 coachPromoText">
+					<a href="" class="inactiveLink">MANAGER</a>
+					<h1>THE<b>COMPLETE 90</b> for managers</h1>
+					<div class="PromoSignbtn">
+						<a href="#" onclick="return false;">COMING SOON</a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-sm-6">
+					<img src="assets/coachpic.png">
+				</div>
+		    </li> 
+		</ul>
+	<!-- </div> -->
 </div>
 <!-- PLAYER/COACH SECTION END -->
 

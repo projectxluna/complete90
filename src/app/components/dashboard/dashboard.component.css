@@ -300,8 +300,21 @@ input{
 	margin-right: 0px;
 }
 
+#vidBG2{
+	background-color: #fd1541;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 .vidLink{
 	/*color: red;*/
+	text-decoration: none;
+}
+
+.vidLink2{
+	color: white;
 	text-decoration: none;
 }
 
@@ -310,7 +323,8 @@ input{
 }
 
 .vidName{
-	padding-top: 44px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 #seeMorebtn{

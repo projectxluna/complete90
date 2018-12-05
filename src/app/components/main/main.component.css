@@ -25,6 +25,17 @@ div{
    cursor: default;
 }
 
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+*{
+    -webkit-overflow-scrolling: touch;
+}
+
 
 /*----------------------------1. HERO IMAGE--------------------------*/
 .heroimage{
@@ -64,11 +75,9 @@ div{
 .descTitle h1{
 	color: #1e1e1e;
 	background-color: white;
-	font-weight: 700;
 	padding-top: 100px;
 	padding-bottom: 50px;
 }
-
 
 .descpic img{
 	max-width: 65%;
@@ -96,6 +105,10 @@ div{
 	padding-bottom: 0px;
 }
 
+.fa{
+	color: #fd1541;
+}
+
 .readMore a{
 	color: #fd1541;
 	text-decoration: none;
@@ -107,9 +120,11 @@ div{
 
 .vidShowcasebg{
 	background-color: #fbfbff;
-	padding-top: 150px;
-	padding-bottom: 150px;
+	/*padding-top: 150px;
+	padding-bottom: 150px;*/
 }
+
+
 
 .mainVideo{
 	background-color: white;
@@ -175,8 +190,6 @@ div{
 	background-color: #fd1541;
 	padding: 5px;
 }
-
-
 
 .videoWrapper {
 	position: relative;
@@ -318,9 +331,28 @@ div{
 	border: 1px solid #fd1541;
 }
 
+.flexlist{ 
+	display: -webkit-flex; 
+	display: -ms-flexbox; 
+	display: flex; 
+	-webkit-flex-wrap: wrap; 
+	-ms-flex-wrap: wrap; 
+	flex-wrap: wrap; 
+	overflow: hidden;
+	padding-left: 0px;
+}
 
+.flexlist-item{ 
+	width: calc(100% / 2 - 0px); 
+	float: left; 
+	display: -webkit-flex; 
+	display: -ms-flexbox; 
+	display: flex;
+}
 
-
+#sm-ad{
+	display: none;
+}
 
 
 /*----------------------------5. QUOTE SECTION---------------------------*/
@@ -330,9 +362,6 @@ div{
 	font-size: 20px;
 	color: #484848;
 }
-
-
-
 
 
 /* ----------------------------6. MEDIA QUERIES------------------------------*/
@@ -369,6 +398,14 @@ div{
 		padding-top: 15px;
 		max-width: 100%;
 	}
+
+	#lg-ad{
+		display: none;
+	}
+
+	#sm-ad{
+		display: block;
+	}
 }
 
 
@@ -384,7 +421,6 @@ div{
 	.impcont h1{
 		font-size: 26px;
 	}	
-
 
 }
 

@@ -4,8 +4,9 @@
 1. BANNER IMAGE
 2. ABOUT FOUNDER
 3. FAQ SECTION
-4. PLAYER/COACH SECTION
-5. QUOTE SECTION
+4. AFFILIATES SECTION
+5. PLAYER/COACH SECTION
+6. QUOTE SECTION
 
 
 */
@@ -21,6 +22,12 @@ div{
    cursor: default;
 }
 
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
@@ -138,8 +145,28 @@ div{
 }
 
 
+/*----------------------------5. AFFILIATES SECTION---------------------------*/
+.affDesc h1{
+	font-size: 30px;
+    color: #252525;
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
 
-/*-----------------------4. PLAYER/COACH SECTION---------------------------*/
+.sponRow{
+    padding-bottom: 80px;
+}
+
+.sponLogo1 img{
+    max-width: 40%;
+}
+
+.sponLogo2 img{
+	padding-top: 20px;
+    max-width: 45%;
+}
+
+/*-----------------------5. PLAYER/COACH SECTION---------------------------*/
 .playerPromo{
 	background-color: #0e233e;
 }
@@ -240,44 +267,39 @@ div{
 	border: 1px solid #fd1541;
 }
 
+.flexlist{ 
+	display: -webkit-flex; 
+	display: -ms-flexbox; 
+	display: flex; 
+	-webkit-flex-wrap: wrap; 
+	-ms-flex-wrap: wrap; 
+	flex-wrap: wrap; 
+	overflow: hidden;
+	padding-left: 0px;
+}
+
+.flexlist-item{ 
+	width: calc(100% / 2 - 0px); 
+	float: left; 
+	display: -webkit-flex; 
+	display: -ms-flexbox; 
+	display: flex;
+}
+
+#sm-ad{
+	display: none;
+}
 
 
 
 
-
-/*----------------------------5. QUOTE SECTION---------------------------*/
+/*----------------------------6. QUOTE SECTION---------------------------*/
 .quoteStyle h1{
 	padding-top: 40px;
 	padding-bottom: 40px;
 	font-size: 20px;
 	color: #484848;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
@@ -303,6 +325,13 @@ div{
 		max-width: 100%;
 	}	
 
+	#lg-ad{
+		display: none;
+	}
+
+	#sm-ad{
+		display: block;
+	}
 
 }
 
@@ -330,6 +359,10 @@ div{
 		font-size: 14px;
 		padding-top: 22px;
 		padding-bottom: 22px;
+	}
+
+	.sponLogo1 img{
+		padding-bottom: 80px;
 	}
 
 
