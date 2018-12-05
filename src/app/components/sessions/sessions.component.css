@@ -359,6 +359,7 @@ button:focus{
 	font-size: 10px;
 	background-color: transparent;
 	border: transparent;
+	padding-left: 0px;
 }
 
 .dets-ma{
