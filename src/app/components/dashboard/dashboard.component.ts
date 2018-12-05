@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService, DataService } from '../../services';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,18 +8,33 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  @ViewChild('dropzone') dropZone:ElementRef;
+  // @ViewChild('iconList') iconListContainer:ElementRef;
+  @ViewChild('file') file;
+
   securityActive = false;
   notificationActive = false;
   paymentActive = false;
   profile = {
     name: '',
+    coach: false,
     subscription: undefined,
     creditCards: [],
     avatarURL: '',
+    companyName: '',
+    teamName: '',
 
     height: '',
     position: '',
     foot: ''
+  };
+
+  selectedField;
+  drillLayout = {
+    _full: "assets/fullFld.png",
+    _half: "assets/halfFld.png",
+    _18yard: "assets/18yardFld.png",
+    _empty: "assets/emptyFld.png"
   };
 
   stats = {
@@ -29,15 +43,134 @@ export class DashboardComponent implements OnInit {
   }
   model: any = {};
   loading: boolean = false;
-
-  sessions = [];
-
   editMode = false;
-  
-  @ViewChild('file') file;
 
-  constructor(private router: Router,
-    private dataService: DataService,
+
+  layout = [];
+  sessions = [];
+  draggable = [
+    {
+      name: "cone",
+      img: "assets/pylon-icon.png"
+    },
+    {
+      name: "player",
+      img: "assets/player-icon.png"
+    },
+    {
+      name: "ball",
+      img: "assets/sb-icon.png"
+    },
+    {
+      name: "line",
+      img: "assets/line-icon.png"
+    },
+    {
+      name: "line",
+      img: "assets/line2-icon.png"
+    }
+  ];
+
+  iconList = {
+    isVisible: false,
+    positionX: 0,
+    positionY: 0,
+  }
+
+  getPosition(el) {
+    var xPos = 0;
+    var yPos = 0;
+
+    while (el) {
+      if (el.tagName == "BODY") {
+        // deal with browser quirks with body/window/document and page scroll
+        var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+        var yScroll = el.scrollTop || document.documentElement.scrollTop;
+
+        xPos += (el.offsetLeft - xScroll + el.clientLeft);
+        yPos += (el.offsetTop - yScroll + el.clientTop);
+      } else {
+        // for all other non-BODY elements
+        xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+        yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+      }
+
+      el = el.offsetParent;
+    }
+    return {
+      x: xPos,
+      y: yPos
+    };
+  }
+
+  toggleIconList(event) {
+    // console.log('toggle', event)
+    this.iconList.isVisible = !this.iconList.isVisible;
+
+    if (this.iconList.isVisible) {
+      // let iconContainer = this.iconListContainer.nativeElement.getBoundingClientRect();
+      // @ViewChild('iconList') iconListContainer:ElementRef;
+      // let dropzone = this.dropZone.nativeElement.getBoundingClientRect();
+
+      // console.log('iconsContainer', event)
+
+      var parentPosition = this.getPosition(event.currentTarget);
+
+      let x = event.clientX - parentPosition.x;
+      let y = event.clientY - parentPosition.y;
+
+      this.iconList.positionX = x;
+      this.iconList.positionY = y;
+    }
+  }
+
+  copyIconToPosition(icon) {
+    this.layout.push({
+      url: icon.img,
+      x: this.iconList.positionX,
+      y: this.iconList.positionY,
+    })
+  }
+
+  getUrl(url) {
+    let field = "url('" + url + "')";
+    return field;
+  }
+
+  dragEnd(event, item) {
+    // console.log('Element was dragged', event);
+    // console.log('item', item);
+    let rect = this.dropZone.nativeElement.getBoundingClientRect();
+    // console.log('dropZone', JSON.stringify(rect))
+
+    let position = this.getPosition(this.dropZone.nativeElement);
+
+    let newX = item.x + event.x;
+    let newY = item.y + event.y;
+    let notOutBounds = this.isCoordinateWithinRectangle(newX, newY, rect);
+    // console.log('offset', position);
+    // console.log('New X:', newX, ', New Y:', newY);
+    // console.log('out of bounds', notOutBounds)
+    if (item && notOutBounds) {
+      item.x = newX;
+      item.y = newY;
+    }
+  }
+
+  isCoordinateWithinRectangle(
+    clientX: number,
+    clientY: number,
+    rect
+  ): boolean {
+    return (
+      clientX+64 >= rect.left &&
+      clientX+64 <= rect.right &&
+      (clientY+64)*2 >= rect.top &&
+      (clientY*2)-75 <= rect.bottom
+    );
+  }
+
+  constructor(private dataService: DataService,
     private authenticationService: AuthenticationService) {
     dataService.getUserProfile(false).subscribe(user => {
       this.userProfileCallback(user.profile);
@@ -95,7 +228,7 @@ export class DashboardComponent implements OnInit {
     return s + ' Seconds';
   }
 
-  hasSubscription () {
+  hasSubscription() {
     if (this.profile.subscription) {
       return true;
     }
@@ -169,14 +302,16 @@ export class DashboardComponent implements OnInit {
     let foot = this.profile.foot;
     let position = this.profile.position;
     let height = this.profile.height;
-
-    if (!foot || !position || !height) return;
+    let companyname = this.profile.companyName;
+    let teamName = this.profile.teamName;
 
     this.loading = true;
     let profile = {
       foot,
       position,
-      height
+      height,
+      companyname,
+      teamName
     }
     this.dataService.updateUserProfile(profile).subscribe(response => {
       this.loading = false;

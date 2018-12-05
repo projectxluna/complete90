@@ -51,8 +51,8 @@ userSchema.methods.validPassword = function(password) {
  * This should be checking against something in the db!
  */
 userSchema.methods.hasCoachSubscription = function() {
-    //return true;
-    return (this.braintree.subscription && this.braintree.subscription.planId.includes("coach"));
+    return true;
+    // return (this.braintree.subscription && this.braintree.subscription.planId.includes("coach"));
 }
 
 // create the model for users and expose it to our app

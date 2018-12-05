@@ -471,12 +471,10 @@ input{
     padding-bottom: 10px;
 }
 
-.drillView img{
-	width: 100%;
-}
-
-#myScrollspy{
-
+.drillView {
+	background-size:100% auto;
+	height: 485px;
+	background-repeat: no-repeat;
 }
 
 .viewBtns{
@@ -485,10 +483,6 @@ input{
     margin: 0;
     text-align: center;	
 
-}
-
-.viewBtns li{
-	/*background-color: red;*/
 }
 
 .viewBtns>li>a {
@@ -515,16 +509,36 @@ input{
 	color: #fd1541;
 }
 
-ul>.drill-icons{
-	padding-left: 0px;
+.icon-list-view {
+	position: absolute;
+    display: flex;
+    align-items: center;
+	justify-content: center;
+	flex-direction: column;
+    background-color:white;
 }
 
-.drill-icons li{
-	padding-bottom: 15px;
+.drill-icons {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+    justify-content: center;
 }
 
-.drill-icons li> img{
-	width: 5%;
+.drill-icon-container {
+	width: 70px;
+	height: 70px;
+	background-repeat: no-repeat;
+	margin: 10px;
+}
+
+.drill-icon {
+	position: absolute;
+    width: 64px;
+	height: 64px;
+	z-index: 9;
+	cursor: move;
+	background-repeat: no-repeat;
 }
 
 .drillName{

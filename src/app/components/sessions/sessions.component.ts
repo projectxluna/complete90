@@ -304,22 +304,28 @@ export class SessionsComponent implements OnInit {
 
     for (let content of contentList) {
       if (sessions[content.group]) {
-        sessions[content.group].push(content);
+        sessions[content.group].content.push(content);
+        sessions[content.group].defaultView = content.defaultView ? content.defaultView : 3
       } else {
-        sessions[content.group] = [content];
+        sessions[content.group] = {
+          content: [content],
+          defaultView: content.defaultView ? content.defaultView : 3
+        }
       }
     }
 
     for (var session in sessions) {
       if (!sessions.hasOwnProperty(session)) continue;
 
-      var content = sessions[session];
-      var chunks = this.getChunks(content, 3);
+      var contents = sessions[session];
+      var chunks = this.getChunks(contents.content, 3);
+      var defaultView = contents.defaultView ;
 
       fill.push({
         name: session,
         display: [],
-        content: content,
+        content: contents.content,
+        defaultView: defaultView,
         chunks: chunks || []
       });
     }

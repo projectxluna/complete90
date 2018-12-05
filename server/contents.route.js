@@ -264,6 +264,9 @@ module.exports = function (apiRoutes) {
             for (let content of session.content) {
                 try {
                     if (!session.free) {
+                        if (session.defaultView) {
+                            content.defaultView = session.defaultView;
+                        }
                         content.group = session.name;
                         content.link = AWS.signUrl(content.link);
                         contents.push(content);

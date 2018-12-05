@@ -197,7 +197,7 @@
 		<div class="container">
 			<div [hidden]="session.display.length > 0 || hasFilter()" class="row">
 				<!-- TRAINING VIDEO -->
-				<div *ngFor="let content of (session.content ? session.content.slice(0, 3): []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
+				<div *ngFor="let content of (session.content ? session.content.slice(0, 3) : []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
 					<div *ngIf="!content.free" class="add-btn-cont col-lg-11">
 						<div class="pull-right">
 							<button class="add-btn" (click)="addContentToCustomSession(content.id, content)">
@@ -248,8 +248,8 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12 catTitle">
-				<a class="col-lg-6" *ngIf="session.chunks.length > 0" (click)="showMore(session)"><h2>SHOW MORE</h2></a>
-				<a class="col-lg-6" *ngIf="session.display.length" (click)="showLess(session)"><h2>SHOW LESS</h2></a>
+				<a *ngIf="session.chunks.length > 0" (click)="showMore(session)"><h2>SHOW MORE</h2></a>
+				<a style="padding-left: 15px;" *ngIf="session.display.length" (click)="showLess(session)"><h2>SHOW LESS</h2></a>
 			</div>
 		</div>
 	</div>
