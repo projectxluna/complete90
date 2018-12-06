@@ -35,6 +35,8 @@ import { EventsComponent } from './components/events/events.component';
 import { VideoplayerComponent } from './components/modals/videoplayer/videoplayer.component';
 import { AddcontentToSessionComponent } from './components/modals/addcontent-to-session/addcontent-to-session.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
+import { TermsComponent } from './components/terms/terms.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 
 
 
@@ -56,7 +58,9 @@ import { ContactusComponent } from './components/contactus/contactus.component';
     EventsComponent,
     VideoplayerComponent,
     AddcontentToSessionComponent,
-    ContactusComponent
+    ContactusComponent,
+    TermsComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

@@ -20,7 +20,7 @@ footer{
 }
 
 .footernavSocial li{
-	padding: 0px 25px 25px 25px;
+	padding: 0px 25px 0px 25px;
 }
 
 .footernavSocial ul{
@@ -67,7 +67,7 @@ ul, menu, dir {
 
 	.footernav ul{
 		/*display: inline-block;*/
-		font-size: 10px;
+		font-size: 8px;
 	}
 
 

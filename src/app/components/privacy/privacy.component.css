@@ -1,0 +1,27 @@
+div{
+	font-family: 'Montserrat';
+}
+
+
+.pri h1 {
+    font-size: 30px;
+    color: #252525;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #00000024;
+    margin-top: 170px;
+}
+
+.pri p{
+	margin-top: 40px;
+	margin-bottom: 40px;
+	color: #252525;
+}
+
+.pri a{
+	text-decoration: none;
+	color: #fd1541;
+}
+
+.contactp{
+	margin-bottom: 80px !important;
+}

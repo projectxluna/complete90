@@ -24,6 +24,12 @@ div{
    cursor: default;
 }
 
+video {
+  width: 100%    !important;
+  height: auto   !important;
+  display: block;
+}
+
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
@@ -84,8 +90,8 @@ div{
 
 .vidShowcasebg{
 	background-color: #fbfbff;
-	padding-top: 60px;
-	padding-bottom: 100px;
+	/*padding-top: 60px;
+	padding-bottom: 100px;*/
 }
 
 .showcaseTitle h1{

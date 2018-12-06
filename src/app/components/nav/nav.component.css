@@ -81,6 +81,21 @@
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
+@media (max-width: 1200px) {
+
+	.logoTxt {
+	    font-size: 10px;
+	}
+
+	.navbar-brand img {
+	    max-height: 160%;
+	    display: inline;
+	    margin-right: 20px;
+	}
+
+}
+
+
 @media (max-width: 1180px) {
 	.navbar-header{
 		position: relative;
@@ -109,7 +124,12 @@
 }
 
 
+@media (max-width: 840px) {
+	.navbar-nav>li>a {
+	    font-size: 9px;
+	}
 
+}
 
 
 
