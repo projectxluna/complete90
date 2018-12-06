@@ -10,16 +10,17 @@
         const pass = config.mailer.PASSWORD //remember to turn off secure app in gmail
 
         var smtpTransport = nodemailer.createTransport({
-            service: config.mailer.SERVICE_PROVIDER || 'Gmail',
+            service: config.mailer.SERVICE_PROVIDER,
+            secure: false,
             auth: {
                 user: email,
                 pass: pass
             }
         });
 
-        var handlebarsOptions = {
+    var handlebarsOptions = {
             viewEngine: 'handlebars',
-            viewPath: path.join(__dirname, './templates/'),
+            viewPath: path.join(__dirname, '../templates/'),
             extName: '.html'
         };
 

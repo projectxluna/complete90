@@ -109,9 +109,9 @@ module.exports = function (app) {
                     to: user.email,
                     from: mailer.email,
                     template: 'forgot-password-email',
-                    subject: 'Password help has arrived!',
+                    subject: 'THE Complete 90 Password help has arrived!',
                     context: {
-                        url: 'http://localhost:9000/forgot?token=' + token,
+                        url: 'https://thecomplete90.com/forgot?token=' + token,
                         name: user.name.split(' ')[0]
                     }
                 };
@@ -171,7 +171,7 @@ module.exports = function (app) {
                                 to: user.email,
                                 from: mailer.email,
                                 template: 'reset-password-email',
-                                subject: 'Password Reset Confirmation',
+                                subject: 'THE Complete 90 Password Reset Confirmation',
                                 context: {
                                     name: user.name.split(' ')[0]
                                 }
@@ -213,25 +213,25 @@ module.exports = function (app) {
                     });
                 } else {
                     return res.json({ success: true });
-                    // var data = {
-                    //     to: user.email,
-                    //     from: mailer.email,
-                    //     template: 'reset-password-email',
-                    //     subject: 'Password Reset Confirmation',
-                    //     context: {
-                    //         name: user.name.split(' ')[0]
-                    //     }
-                    // };
+                    var data = {
+                        to: user.email,
+                        from: mailer.email,
+                        template: 'reset-password-email',
+                        subject: 'THE Complete 90 Password Reset Confirmation',
+                        context: {
+                            name: user.name.split(' ')[0]
+                        }
+                    };
 
-                    // mailer.smtpTransport().sendMail(data, function (err) {
-                    //     if (!err) {
-                    //         return res.json({ success: true });
-                    //     } else {
-                    //         return res.status(422).send({
-                    //             message: err
-                    //         });
-                    //     }
-                    // });
+                    mailer.smtpTransport().sendMail(data, function (err) {
+                        if (!err) {
+                            return res.json({ success: true });
+                        } else {
+                            return res.status(422).send({
+                                message: err
+                            });
+                        }
+                    });
                 }
             });
         });
