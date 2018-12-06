@@ -90,7 +90,8 @@
 							</div>
 						</div>
 						<div class="profileName">
-							<h3>{{ profile.name }}</h3>
+							<h3 *ngIf="!editMode">{{ profile.name }}</h3>
+							<input *ngIf="editMode" [(ngModel)]="profile.name" class="profileInput" placeholder="Edit Name">
 						</div>
 					</div>
 					<ul class="list">

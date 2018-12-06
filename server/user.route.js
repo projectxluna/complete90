@@ -23,6 +23,7 @@ module.exports = function (apiRoutes) {
      * Update user profile
      */
     apiRoutes.post('/user/me', Auth.isAuthenticated, function (req, res) {
+        let name = req.body.name;
         let foot = req.body.foot;
         let position = req.body.position;
         let height = req.body.height;
@@ -31,6 +32,7 @@ module.exports = function (apiRoutes) {
 
         var update = {};
 
+        if (name) update.name = name;
         if (foot) update.foot = foot;
         if (position) update.position = position;
         if (height) update.height = height;

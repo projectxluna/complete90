@@ -299,6 +299,7 @@ export class DashboardComponent implements OnInit {
   }
 
   updateProfile() {
+    let name = this.profile.name;
     let foot = this.profile.foot;
     let position = this.profile.position;
     let height = this.profile.height;
@@ -311,7 +312,8 @@ export class DashboardComponent implements OnInit {
       position,
       height,
       companyname,
-      teamName
+      teamName,
+      name
     }
     this.dataService.updateUserProfile(profile).subscribe(response => {
       this.loading = false;
