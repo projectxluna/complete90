@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class PricingComponent implements OnInit {
 
   isYearly = true;
-  playerPrice = '240.00';
-  coachPrice = '300.00';
+  playerPrice;
+  coachPrice;
   plans = {};
 
   constructor(private dataService: DataService,
@@ -27,8 +27,8 @@ export class PricingComponent implements OnInit {
   }
 
   setCycle(cycle) {
-    this.coachPrice = this.plans['coach-'+cycle].price || '300.0';
-    this.playerPrice = this.plans['player-'+cycle].price || '240.0';
+    this.coachPrice = this.plans['coach-'+cycle].price;
+    this.playerPrice = this.plans['player-'+cycle].price;
     
     this.isYearly = cycle === 'yearly';
   }
@@ -37,6 +37,7 @@ export class PricingComponent implements OnInit {
     plans.forEach(f => {
       this.plans[f.id] = f;
     });
+    this.setCycle('yearly');
   }
 
   selectPlan(type) {
