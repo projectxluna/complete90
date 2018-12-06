@@ -23,6 +23,10 @@ div{
    cursor: default;
 }
 
+.ph{
+	margin: 0px;
+}
+
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{

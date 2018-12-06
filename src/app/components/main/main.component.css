@@ -36,11 +36,19 @@ div{
     -webkit-overflow-scrolling: touch;
 }
 
+video {
+  width: 100%    !important;
+  height: auto   !important;
+  display: block;
+}
+
 
 /*----------------------------1. HERO IMAGE--------------------------*/
 .heroimage{
 	padding-top: 90px;
-	background-image: url('../../../assets/heroimage.jpg');
+	/*background-image: url('../../../assets/heroimage.jpg');*/
+	/*background-image: url('../../../assets/hero-image.jpg');*/
+	background-image: url('../../../assets/hero-image-2.jpg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -55,19 +63,20 @@ div{
 
 .heroimage a{
 	text-decoration: none; 
-	color: #fd1541;
-	font-size: 16px;
-	border: 1px solid white;
-	padding: 10px;
-}
-
-.heroimage a:hover{
-	text-decoration: none; 
 	color: white;
 	font-size: 16px;
 	border: 1px solid #fd1541;
 	padding: 10px;
 	background-color: #fd1541;
+}
+
+.heroimage a:hover{
+	text-decoration: none; 
+	color: #fd1541;
+	font-size: 16px;
+	border: 1px solid white;
+	padding: 10px;
+	background-color: transparent;
 }
 
 
@@ -365,6 +374,12 @@ div{
 
 
 /* ----------------------------6. MEDIA QUERIES------------------------------*/
+@media (max-width: 1200px) {
+	.coachPromo .PromoSignbtn a{
+	    font-size: 10px;
+	}
+}
+
 
 @media (max-width: 1024px) {
 
@@ -437,4 +452,16 @@ div{
 		padding-bottom: 20px;
 	}
 
+	.descpic img{
+		padding-bottom: 40px;
+		margin-left: 50px;
+	}
+
+	.playerPromoText h1 {
+	    padding-top: 90px;
+	}
+
+	.coachPromoText h1 {
+	    padding-top: 90px;
+	}
 }

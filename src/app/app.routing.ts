@@ -13,6 +13,8 @@ import { PaymentComponent } from './components/pricing/payment';
 import { DashboardComponent } from './components/dashboard';
 import { EventsComponent } from './components/events';
 import { ContactusComponent } from './components/contactus';
+import { TermsComponent } from './components/terms';
+import { PrivacyComponent } from './components/privacy';
 
 const appRoutes: Routes = [
     { path: '', component: MainComponent },
@@ -26,6 +28,8 @@ const appRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     { path: 'events', component: EventsComponent },
     { path: 'contact', component: ContactusComponent },
+    { path: 'terms', component: TermsComponent },
+    { path: 'privacy', component: PrivacyComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

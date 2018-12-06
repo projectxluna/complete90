@@ -304,6 +304,19 @@ div{
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
+
+@media (max-width: 1200px) {
+	.coachPromo .PromoSignbtn a{
+	    font-size: 10px;
+	}
+	
+	.aboutG{
+			font-size: 11px;
+		}
+
+
+}
+
 @media (max-width: 1024px) {
 
 	.aboutNum h2{
@@ -375,9 +388,29 @@ div{
 
 @media (max-width: 414px) {
 
+	.aboutG {
+	    font-size: 12px;
+	}
+
+	#faqSec{
+		font-size: 12px !important;
+	}
+
 	.bannerimage{
 		padding-top: 90px;
 		min-height: 200px;
 	}	
+
+	.playerPromoText h1 {
+	    padding-top: 90px;
+	}
+
+	.coachPromoText h1 {
+	    padding-top: 90px;
+	}
+
+	.rightDesc img{
+	    padding-top: 40px;
+	}
 
 }
