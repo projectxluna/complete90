@@ -68,7 +68,10 @@ module.exports = function (app) {
                     success: true
                 });
             } else {
-                return next(err);
+                console.log(err);
+                return res.json({
+                    success: false
+                });
             }
         });
     });
