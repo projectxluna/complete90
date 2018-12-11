@@ -14,17 +14,18 @@
 
 	<div class="col-lg-6">
 		<form class="f-style">
+			<div *ngIf="error" class="alert alert-danger">{{error}}</div>
 			<div class="form-group col-lg-12">
-				<input type="name" name="c-name" placeholder="Enter Name">
+				<input [(ngModel)]="model.name" type="name" name="c-name" placeholder="Enter Name">
 			</div>
 			<div class="form-group col-lg-12">
-				<input type="email" name="email" placeholder="Enter Email">
+				<input [(ngModel)]="model.from" type="email" name="email" placeholder="Enter Email">
 			</div>
 			<div class="form-group col-lg-12">
-				<textarea name="message" rows="4" placeholder="Message"></textarea>
+				<textarea [(ngModel)]="model.message" name="message" rows="4" placeholder="Message"></textarea>
 			</div>
 			<div class="form-group col-lg-12">
-				<button class="btn">SUBMIT</button>
+				<button class="btn" (click)="submit()">SUBMIT</button>
 			</div>
 		</form>
 	</div>

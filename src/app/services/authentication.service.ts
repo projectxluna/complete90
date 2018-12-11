@@ -43,6 +43,13 @@ export class AuthenticationService {
       });
   }
 
+  contactus(payload): Observable<any> {
+    return this.http.post('/api/contactus', payload)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   logout(): void {
     // clear token from local storage to log user out
     this.token = null;

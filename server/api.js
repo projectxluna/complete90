@@ -45,6 +45,34 @@ module.exports = function (app) {
         });
     });
 
+    apiRoutes.post('/contactus', function (req, res) {
+        var from = req.body.from;
+        var name = req.body.name;
+        var message = req.body.message;
+
+        var data = {
+            to: 'info@thecomplete90.com',
+            from: mailer.email,
+            template: 'contact-form',
+            subject: 'New Contact Request',
+            context: {
+                message: message,
+                name: name,
+                from: from
+            }
+        };
+
+        mailer.smtpTransport().sendMail(data, function (err) {
+            if (!err) {
+                return res.json({
+                    success: true
+                });
+            } else {
+                return next(err);
+            }
+        });
+    });
+
     apiRoutes.post('/signup', function (req, res) {
         var newUser = new User();
         newUser.name = req.body.name;
