@@ -11,11 +11,14 @@ module.exports = function (apiRoutes) {
     apiRoutes.get('/user/me', Auth.isAuthenticated, function (req, res) {
         User.findOne({ _id: req.decoded.userId }, function (err, user) {
             if (err) return res.status(500).send(err);
-
-            res.json({
-                success: true,
-                profile: userHelper.exposedData(user)
-            });
+            try {
+                res.json({
+                    success: true,
+                    profile: userHelper.exposedData(user)
+                });
+            } catch (error) {
+                res.json({success: false, message: error});
+            }
         });
     });
 
@@ -45,11 +48,14 @@ module.exports = function (apiRoutes) {
                 new: true
             }, function (err, user) {
                 if (err) return res.status(500).send(err);
-
-                res.json({
-                    success: true,
-                    profile: userHelper.exposedData(user)
-                });
+                try {
+                    res.json({
+                        success: true,
+                        profile: userHelper.exposedData(user)
+                    });
+                } catch (error) {
+                    res.json({success: false, message: error});
+                }
             });
     });
 
@@ -83,10 +89,17 @@ module.exports = function (apiRoutes) {
                 function (err, new_user) {
                     if (err) return res.status(500).send(err);
 
-                    res.json({
-                        success: true,
-                        profile: userHelper.exposedData(new_user)
-                    });
+                    try {
+                        res.json({
+                            success: true,
+                            profile: userHelper.exposedData(new_user)
+                        });
+                    } catch (error) {
+                        res.json({
+                            success: false,
+                            message: error
+                        });
+                    }
                 });
         });
     });
