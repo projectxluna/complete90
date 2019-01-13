@@ -1,7 +1,7 @@
 <div class="loginbg">
 
     <!-- reset email -->
-    <div class="container">
+    <div class="container" *ngIf="!resetEmailSent">
         <div *ngIf="!showResetPassword" class="container login">
             <form class="col-lg-12">
                 <div class="loginTitle col-lg-6 col-lg-offset-3 text-center">
@@ -28,20 +28,32 @@
                 </div>
 
                 <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="model.newPassword"
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="New Password" [(ngModel)]="model.newPassword"
                         name="newPassword">
                 </div>
 
                 <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="model.verifyPassword"
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Verify New Password" [(ngModel)]="model.verifyPassword"
                         name="verifyPassword">
                 </div>
                 <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
                     <button (click)="back()" type="submit" class="btn btn-primary" id="btn1">Back</button>
-                    <button (click)="setNewPassword()" class="btn btn-primary" id="btn2" (click)="toggleSignup()">Send</button>
+                    <button (click)="setNewPassword()" class="btn btn-primary" id="btn2" (click)="toggleSignup()">Update</button>
                 </div>
             </form>
             <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        </div>
+    </div>
+
+    <div class="container" *ngIf="resetEmailSent">
+        <!-- Reset Email Sent -->
+        <div class="container login col-lg-12">
+            <div class="loginTitle col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                <span>Please check your email and follow the instructions to reset your password. Thanks!</span>
+            </div>
+            <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                <button (click)="continueToPreviousRoute()" type="submit" class="btn btn-primary" id="btn1">Continue</button>
+            </div>
         </div>
     </div>
 </div>

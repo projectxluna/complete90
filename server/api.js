@@ -9,6 +9,12 @@ module.exports = function (app) {
     var Auth = require('./helpers/auth');
     const userHelper = require('./helpers/user');
 
+    var config = require('./config').get(process.env.NODE_ENV);
+    var mcConfig = config.mailChimp;
+
+    var Mailchimp = require('mailchimp-api-v3')
+    var mailchimp = new Mailchimp(mcConfig.API_KEY);
+
     // un-authenticated routes
     apiRoutes.post('/login', function (req, res) {
         User.findOne({
@@ -82,17 +88,41 @@ module.exports = function (app) {
         newUser.email = req.body.email;
         newUser.password = newUser.generateHash(req.body.password);
 
-        newUser.save(function (err, user) {
-            if (err) {
+        User.findOne({
+            'email': req.body.email
+        }, function (err, user) {
+            if (user || err) {
                 return res.json({
                     success: false,
-                    message: err.errmsg,
-                    code: err.code
+                    message: err || 'Email already in use. Please Login'
+                });
+            } else {
+                newUser.save(function (err, user) {
+                    if (err) {
+                        return res.json({
+                            success: false,
+                            message: err.errmsg,
+                            code: err.code
+                        });
+                    }
+                    res.json({
+                        success: true
+                    });
+                    var name = req.body.name.split(' ');
+                    mailchimp.post('/lists/' + mcConfig.SIGN_UP_LIST + '/members', {
+                        email_address: req.body.email,
+                        status: 'subscribed',
+                        merge_fields: {
+                            'FNAME': name[0],
+                            'LNAME': name[1]
+                        }
+                    }).then(function (results) {
+                        console.log('Added to MailChimp!');
+                    }).catch(function (err) {
+                        console.error(err);
+                    });
                 });
             }
-            res.json({
-                success: true
-            });
         });
     });
 
