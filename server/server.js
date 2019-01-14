@@ -6,7 +6,7 @@ var morgan = require('morgan');
 var mongoose = require('mongoose');
 var config = require('./config').get(process.env.NODE_ENV);
 var path = require('path');
-
+var PromoJob = require('./jobs/promo.job');
 var port = process.env.PORT || 9000;
 
 // mongoose config
@@ -47,4 +47,5 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/../dist/index.html'));
 });
 
+PromoJob.register();
 app.listen(port);

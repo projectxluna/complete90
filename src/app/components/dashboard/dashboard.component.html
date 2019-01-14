@@ -230,14 +230,54 @@
             <div *ngIf="!hasSubscription()" class="col-sm-12 col-md-6">
                 <div class="box p-a">
                     <div class="box-header">
-                        <h3 class="m-0 suggestedHeader"><b>NO ACTIVE SUBSCRIPTIONS</b></h3>
+                        <h3 class="m-0 suggestedHeader">
+                            <b>NO ACTIVE SUBSCRIPTIONS</b>
+                        </h3>
                     </div>
                     <div class="row text-center" id="vidBG2">
                         <a [routerLink]="['/pricing']" class="vidLink2">
                             <b>YOU DON'T HAVE A SUBSCRIPTION (click here to begin)</b>
                         </a>
                     </div>
+                    <div class="row text-center" style="padding-top: 15px;">
+                        <button type="button" class="btn btn-primary filter-btn " data-toggle="modal" data-target="#promoCodeModal">
+                            Have a Promo Code? Click here
+                        </button>
+                    </div>
                 </div>
+            
+                <!-- Promo Code Modal -->
+                <div class="modal fade promo-modal" id="promoCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title text-center" id="savedSessModalTitle">Please enter your Promo Code below</h4>
+                            </div>
+                            <div *ngIf="!hasSubscription()" class="modal-body">
+                                <div class="promo-fields">
+                                    <div class="form-group" style="display: flex;">
+                                        <input [(ngModel)]="model.promoCode" name="promocode" class="form-control" placeholder="code">
+                                    </div>
+                                    <div style="display: flex;">
+                                        <button (click)="claimCode()" data-dismiss="modal" class="savePassbtn">ACTIVATE CODE</button>
+                                    </div>
+                                </div>
+                                <div class="modalDesc text-center">
+                                    {{ promoCodeError }}
+                                </div>
+                            </div>
+                            <div *ngIf="hasSubscription()" class="modal-body">
+                                <div class="promo-fields">
+                                    Promo Code Activated!!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Promo Code Modal END -->
             </div>
         </div>
         <!-- PROFILE & SUGGESTED TILES END-->

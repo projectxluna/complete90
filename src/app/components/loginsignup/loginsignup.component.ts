@@ -17,7 +17,6 @@ export class LoginSignupComponent implements OnInit {
     error = '';
     email = new FormControl('', [Validators.required, Validators.email]);
     previousRoute: string;
-
     constructor(
         private dataService: DataService, 
         private router: Router,

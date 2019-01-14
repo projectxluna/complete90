@@ -28,10 +28,10 @@ module.exports = function (app) {
             }
 
             if (!user) {
-                res.json({ success: false, message: 'Authentication failed. User not found.' });
+                res.json({ success: false, message: 'Authentication failed' });
             } else if (user) {
                 if (!user.validPassword(req.body.password)) {
-                    res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+                    res.json({ success: false, message: 'Authentication failed' });
                 } else {
                     var payload = {
                         userId: user._id,

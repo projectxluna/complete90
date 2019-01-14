@@ -55,6 +55,18 @@ export class DataService {
       });
   }
 
+  activatePromoCode(code): Observable<any> {
+    // add authorization header with jwt token
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    // get users from api
+    return this.http.post('/api/user/promo/activate', code, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   getFreeSessions(cache: boolean = true): Observable<any> {
     if (cache && this.cachedFreeSession) {
       return Observable.create((observer) => {
