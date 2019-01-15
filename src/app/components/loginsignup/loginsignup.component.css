@@ -3,7 +3,7 @@
 0. GLOBAL CCS
 1. BACKGROUND
 2. LOGIN DIV
-
+3. TERMSOFUSE MODAL
 
 
 
@@ -99,11 +99,76 @@ form, span{
 }
 
 
+/*----------------------------3. TERMSOFUSE MODAL--------------------------*/
+.modal-content  {
+	/* width:inherit;
+	max-width:inherit;
+	height:inherit;
+    margin: 0 auto;
+	pointer-events:all; */
+
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
+}
+
+#termsModalTitle{
+	font-family: 'Montserrat';
+	color: #333333;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px 25px 15px 25px;
+    max-height: 400px;
+    color: #333333;
+    max-height: calc(100vh - 610px);
+    overflow-y: auto;
+}
+
+.modal-header {
+    padding: 35px 15px 15px 15px;
+    border-bottom: transparent; 
+}
+
+.ter a{
+	text-decoration: none;
+	color: #fd1541;
+}
+
+.modal-footer{
+	border: 0px;
+}
+
+.abtn{
+    background-color: #04c530;
+    border-radius: 0px;
+    border: none;
+}
+
+.dbtn{
+	background-color: #fd1541;
+    border-radius: 0px;
+    border: none;
+}
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
+@media (max-width: 1200px) {
+
+	.modal-body {
+	    max-height: calc(100vh - 210px);
+	}
+
+}
+
+
+
 
 @media (max-width: 1024px) {
 
+	.modal-body {
+	    max-height: calc(100vh - 310px);
+	}
 
 
 }
@@ -111,11 +176,11 @@ form, span{
 
 
 
-
-
 @media (max-width: 768px) {
 
-
+	.modal-body {
+	    max-height: calc(100vh - 210px);
+	}
 
 }
 
@@ -125,6 +190,10 @@ form, span{
 
 
 @media (max-width: 414px) {
+
+	.modal-body {
+	    max-height: calc(100vh - 250px);
+	}
 
 	.login, .signup{
 		padding-top: 170px;
