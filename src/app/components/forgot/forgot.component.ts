@@ -12,6 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class ForgotComponent implements OnInit {
   model: any = {};
   loading = false;
+  resetEmailSent = false;
   showResetPassword = false;
   hide = true;
   error = '';
@@ -47,12 +48,16 @@ export class ForgotComponent implements OnInit {
       .subscribe(result => {
         if (result && result.success == true) {
           //say something here 
-          this.router.navigate([this.previousRoute]);
+          this.resetEmailSent = true;
         } else {
           this.error = result.message || 'Unkmown email address. Please try again';
           this.loading = false;
         }
       });
+  }
+
+  continueToPreviousRoute() {
+    this.router.navigate([this.previousRoute]);
   }
 
   setNewPassword() {

@@ -17,7 +17,6 @@ export class LoginSignupComponent implements OnInit {
     error = '';
     email = new FormControl('', [Validators.required, Validators.email]);
     previousRoute: string;
-
     constructor(
         private dataService: DataService, 
         private router: Router,
@@ -34,9 +33,18 @@ export class LoginSignupComponent implements OnInit {
         this.signup = !this.signup;
     }
 
+    validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
     signUp() {
         if (!this.model.firstname || !this.model.lastname || !this.model.email || !this.model.password) {
-            this.error = 'make sure all required fields are completed!';
+            this.error = 'Make sure all required fields are completed!';
+            return;
+        }
+        if (!this.validateEmail(this.model.email)) {
+            this.error = 'Please enter a valid email';
             return;
         }
         this.loading = true;
@@ -53,6 +61,7 @@ export class LoginSignupComponent implements OnInit {
                      */
                     this.signup = false;
                     this.loading = false;
+                    this.error = '';
                 } else if (result && result.success !== true) {
                     switch(result.code) {
                         case 11000:
@@ -64,7 +73,7 @@ export class LoginSignupComponent implements OnInit {
                     }
                     this.loading = false;
                 } else {
-                    this.error = 'please try again. something went wrong';
+                    this.error = 'Please try again. something went wrong';
                     this.loading = false;
                 }
             });
@@ -72,7 +81,7 @@ export class LoginSignupComponent implements OnInit {
 
     login() {
         if (!this.model.email || !this.model.password) {
-            this.error = 'make sure all required fields are completed!';
+            this.error = 'Make sure all required fields are completed!';
             return;
         }
 

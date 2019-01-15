@@ -12,8 +12,8 @@
 /*----------------------------0. GOBAL CSSS--------------------------*/
 
 div{
-	font-family: 'Montserrat';
-	/*font-family: 'Roboto', sans-serif;*/
+    font-family: 'Montserrat';
+    /*font-family: 'Roboto', sans-serif;*/
 }
 
 .inactiveLink{
@@ -22,7 +22,7 @@ div{
 }
 
 .lowkey {
-	color: #aba8a8;
+    color: #aba8a8;
 }
 
 .rounded, .circle {
@@ -30,16 +30,16 @@ div{
 }
 
 h4{
-	font-size: 14px;
-	padding-bottom: 10px;
+    font-size: 14px;
+    padding-bottom: 10px;
 }
 
 h3{
-	font-size: 18px;
+    font-size: 18px;
 }
 
 ul{
-	list-style-type: none;
+    list-style-type: none;
 }
 
 .nav>li>a:hover {
@@ -48,24 +48,24 @@ ul{
 }
 
 input{
-	width: 250px;
-	outline:0;
+    width: 250px;
+    outline:0;
 }
 
 .desc-p{
-	padding: 1rem;
+    padding: 1rem;
 }
 
 .fa-plus, .fa-pencil{
-	color: #fd1541;
+    color: #fd1541;
 }
 
 .box h3{
-	color: #0000008a;
+    color: #0000008a;
 }
 
 .editbtn{
-	margin-right: 40px;
+    margin-right: 40px;
 }
 
 .modal-header {
@@ -97,7 +97,7 @@ input{
 }
 
 .deleteBtn{
-	color: #9c9c9c;
+    color: #9c9c9c;
     background: transparent;
     border: transparent;
 }
@@ -106,21 +106,21 @@ input{
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
-	padding-top: 120px;
-	background-image: url('../../../assets/dashboard-banner.jpg');
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-	min-height: 250px;
-	width: 100%;
-	color: white;
+    padding-top: 120px;
+    background-image: url('../../../assets/dashboard-banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 250px;
+    width: 100%;
+    color: white;
 }
 
 
 /*----------------------------2. QUICK STATS TILES--------------------------*/
 .padding{
-	padding: 24px;
-	background-color: #f9f9f9;
+    padding: 24px;
+    background-color: #f9f9f9;
 }
 
 .box, .box-color {
@@ -149,20 +149,20 @@ input{
 }
 
 .stat1, .stat2, .stat3{
-	margin-top: 20px;
-	margin-bottom: 20px;
-	/*color: #00000066;*/
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /*color: #00000066;*/
 }
 
 .stat1 h1, .stat2 h1, .stat3 h1{
-	font-size: 22px;
+    font-size: 22px;
 /*	margin-top: 10px;
-	margin-bottom: 0px;*/
+    margin-bottom: 0px;*/
 }
 
 .stat1 h2, .stat2 h2, .stat3 h2{
-	font-size: 18px;
-	/*margin-top: 5px;*/
+    font-size: 18px;
+    /*margin-top: 5px;*/
 }
 
 .w-48 {
@@ -214,12 +214,12 @@ input{
 }
 
 .profilePic{
-	max-width: 40%;
-	opacity: 1;
-  	width: 100%;
-  	height: auto;
-  	transition: .5s ease;
-  	backface-visibility: hidden;
+    max-width: 40%;
+    opacity: 1;
+      width: 100%;
+      height: auto;
+      transition: .5s ease;
+      backface-visibility: hidden;
 }
 
 .uploadIcon {
@@ -254,12 +254,12 @@ input{
 }
 
 .list li{
-	padding-bottom: 30px;
+    padding-bottom: 30px;
 }
 
 .profileInput{
-	border: none;
-	border-width: 0;
+    border: none;
+    border-width: 0;
     box-shadow: none;
     border-bottom: 1px solid #00000066;
     border-bottom-left-radius: 0px;
@@ -268,92 +268,128 @@ input{
 }
 
 .profileName{
-	padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .suggestedHeader{
-	padding-bottom: 30px;
+    padding-bottom: 30px;
 }
 
 .listVids{
-	padding-left: 0px;
-	padding-top: 22px;
-	padding-bottom: 22px;
+    padding-left: 0px;
+    padding-top: 22px;
+    padding-bottom: 22px;
 }
 
 .listVids li{
-	padding-top: 20px;
-	padding-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .listVids h4{
-	font-size: 14px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 #vidBG{
-	background-color: #f9f9f9;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-left: 0px;
-	margin-right: 0px;
+    background-color: #f9f9f9;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.modal-content  {
+	/* width:inherit;
+	max-width:inherit;
+	height:inherit;
+    margin: 0 auto;
+	pointer-events:all; */
+
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
+}
+
+.promo-modal {
+	font-family: 'Montserrat';
+	color: #333333;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px 25px 15px 25px;
+    overflow: scroll;
+    display: flex;
+}
+
+.promo-fields {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.modal-header {
+    padding: 35px 15px 15px 15px;
+    border-bottom: transparent; 
 }
 
 #vidBG2{
-	background-color: #fd1541;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	margin-left: 0px;
-	margin-right: 0px;
+    background-color: #fd1541;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .vidLink{
-	/*color: red;*/
-	text-decoration: none;
+    /*color: red;*/
+    text-decoration: none;
 }
 
 .vidLink2{
-	color: white;
-	text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
 
 .vidPic{
-	max-width: 80%;
+    max-width: 80%;
 }
 
 .vidName{
-	padding-top: 20px;
-	padding-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 #seeMorebtn{
-	color: #fd1541;
+    color: #fd1541;
 }
 
 
 /*------------------------4. SETTINGS TILES--------------------------*/
 
 .form-p{
-	padding: 1rem;
-	padding-top: 30px;
+    padding: 1rem;
+    padding-top: 30px;
 }
 
 .form-group{
-	width: 90px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+    width: 90px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .form-group input{
-	border: 0px;
-	border-bottom: 1px solid #fd1541;
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
+    border: 0px;
+    border-bottom: 1px solid #fd1541;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 .form-group input:focus{
-	outline: none;
+    outline: none;
 }
 
 .form-control {
@@ -361,33 +397,33 @@ input{
 }
 
 .savePassbtn{
-	color: white;
-	background-color: #5cda57;
-	border: 0px;
-	padding: 7px 22px;
+    color: white;
+    background-color: #5cda57;
+    border: 0px;
+    padding: 7px 22px;
 }
 
 .currentPaybg{
-	background-color: #f9f9f9;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top: 10px;
+    background-color: #f9f9f9;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
 }
 
 .ccFile{
-	color: #000000a8;
+    color: #000000a8;
 }
 
 .fa-cc-visa{
-	color: #1a1f71;
+    color: #1a1f71;
 }
 
 .fa-cc-paypal{
-	color: #009cde;
+    color: #009cde;
 }
 
 .fa-cc-mastercard{
-	color: #f79f1a;
+    color: #f79f1a;
 }
 
 .fa-2x {
@@ -395,75 +431,75 @@ input{
 }
 
 .updateBtn{
-	padding-top: 30px;
+    padding-top: 30px;
 }
 
 .paypalBtn{
-	background-color: #009cde;
-	border: 0px;
-	color: white;
-	padding: 7px 22px;
+    background-color: #009cde;
+    border: 0px;
+    color: white;
+    padding: 7px 22px;
 }
 
 .no-pa{
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-right: 0px;
-	padding-left: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 
 
 /*------------------------5. MANAGER TILES---------------------*/
 .listSquad{
-	padding-left: 10px;
+    padding-left: 10px;
     padding-top: 22px;
     padding-bottom: 22px;
 }
 
 .listSquad li{
-	padding-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 .listSquad a{
-	color: #0b1c38;
+    color: #0b1c38;
 }
 
 .listDrills li{
-	padding-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 .listDrills a{
-	text-decoration: none;
-	color: #0b1c38;
+    text-decoration: none;
+    color: #0b1c38;
 }
 
 .listDrills a:hover{
-	cursor: pointer;
+    cursor: pointer;
 }
 
 #plypos a{
-	text-decoration: none;
-	color: grey;
+    text-decoration: none;
+    color: grey;
 }
 
 #sq-pa{
-	padding-left: 26px;
-	padding-right: 26px;
+    padding-left: 26px;
+    padding-right: 26px;
 }
 
 .red-btn a{
-	color: red;
-	cursor: pointer;
+    color: red;
+    cursor: pointer;
 }
 
 #ModalTitle{
-	font-family: 'Montserrat';
-	color: #333333;
+    font-family: 'Montserrat';
+    color: #333333;
 }
 
 .drillvTitle{
-	padding-bottom: 0px;
+    padding-bottom: 0px;
 }
 
 .saved-pa {
@@ -472,9 +508,9 @@ input{
 }
 
 .drillView {
-	background-size:100% auto;
-	height: 485px;
-	background-repeat: no-repeat;
+    background-size:100% auto;
+    height: 485px;
+    background-repeat: no-repeat;
 }
 
 .viewBtns{
@@ -486,59 +522,59 @@ input{
 }
 
 .viewBtns>li>a {
-	color: white;
-	padding: 6px 15px;
+    color: white;
+    padding: 6px 15px;
     border-radius: 4px;
     background-color: #0b1c38;
     cursor: pointer;
 }
 
 .viewBtns>li>a:hover{
-	color: white;
-	padding: 6px 15px;
+    color: white;
+    padding: 6px 15px;
     border-radius: 4px;
     background-color: #fd1541;
     cursor: pointer;
 }
 
 #savebtn{
-	color: #5cda57;;
+    color: #5cda57;;
 }
 
 #exportbtn{
-	color: #fd1541;
+    color: #fd1541;
 }
 
 .icon-list-view {
-	position: absolute;
+    position: absolute;
     display: flex;
     align-items: center;
-	justify-content: center;
-	flex-direction: column;
+    justify-content: center;
+    flex-direction: column;
     background-color:white;
 }
 
 .drill-icons {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
 }
 
 .drill-icon-container {
-	width: 70px;
-	height: 70px;
-	background-repeat: no-repeat;
-	margin: 10px;
+    width: 70px;
+    height: 70px;
+    background-repeat: no-repeat;
+    margin: 10px;
 }
 
 .drill-icon {
-	position: absolute;
+    position: absolute;
     width: 64px;
-	height: 64px;
-	z-index: 9;
-	cursor: move;
-	background-repeat: no-repeat;
+    height: 64px;
+    z-index: 9;
+    cursor: move;
+    background-repeat: no-repeat;
 }
 
 .drillName{
@@ -548,78 +584,78 @@ input{
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
 @media (max-width: 1024px) {
-	.listVids{
-		padding-left: 0px;
-		padding-top: 0px;
-		padding-bottom: 0px;
-	}
+    .listVids{
+        padding-left: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
 
-	.vidName{
-		padding-top: 24px;
-	}
+    .vidName{
+        padding-top: 24px;
+    }
 
 }
 
 @media (max-width: 768px) {
 
-	.bannerimage{
-		padding-top: 120px;
-		min-height: 250px;
-	}
+    .bannerimage{
+        padding-top: 120px;
+        min-height: 250px;
+    }
 
-	.impcont h1{
-		font-size: 26px;
-	}	
+    .impcont h1{
+        font-size: 26px;
+    }	
 
-	.vidName{
-		padding-top: 53px;
-	}
+    .vidName{
+        padding-top: 53px;
+    }
 
-	.uploadIcon {
-	  top: 35%;
-	  left: 50%;
-	}
+    .uploadIcon {
+      top: 35%;
+      left: 50%;
+    }
 
 }
 
 @media (max-width: 414px) {
 
-	.bannerimage{
-		padding-top: 90px;
-		min-height: 200px;
-	}
+    .bannerimage{
+        padding-top: 90px;
+        min-height: 200px;
+    }
 
-	.impcont h1{
-		font-size: 26px;
-	}		
+    .impcont h1{
+        font-size: 26px;
+    }		
 
-	.vidName{
-		padding-top: 14px;
-	}
+    .vidName{
+        padding-top: 14px;
+    }
 
-	.box-header h3 {
-	    font-size: 16px;
-	}
+    .box-header h3 {
+        font-size: 16px;
+    }
 
-	.nav>li>a {
-	    position: relative;
-	    display: block;
-	    padding: 5px 10px;
-	}
+    .nav>li>a {
+        position: relative;
+        display: block;
+        padding: 5px 10px;
+    }
 
-	input{
-		width: 270px;
-	}
+    input{
+        width: 270px;
+    }
 
-	.uploadIcon {
-	  top: 35%;
-	  left: 50%;
-	}
+    .uploadIcon {
+      top: 35%;
+      left: 50%;
+    }
 
-	.listSquad{
-		padding-top: 0px;
-		padding-bottom: 0px;
-		margin-bottom: 0px;
-	}
+    .listSquad{
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
 
 }

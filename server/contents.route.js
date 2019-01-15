@@ -38,7 +38,7 @@ module.exports = function (apiRoutes) {
         waterfall([
             function (callback) {
                 User.findById(userId, function (err, user) {
-                    if (!user.braintree.subscription) {
+                    if (!user.braintree.subscription && !user.subscription) {
                         callback('User does not have subscription');
                     } else {
                         callback(null);

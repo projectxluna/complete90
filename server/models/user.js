@@ -30,7 +30,12 @@ var userSchema = mongoose.Schema({
         paymentMethods : [],
         creditCards: [],
         subscription: {}
-    }
+    },
+    promo_code: String,
+    survey: {
+        viewed: Boolean,
+    },
+    subscription: Object,
 },
 {
     timestamps: true,

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService, DataService } from '../../services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -171,25 +172,30 @@ export class DashboardComponent implements OnInit {
   }
 
   constructor(private dataService: DataService,
-    private authenticationService: AuthenticationService) {
-    dataService.getUserProfile(false).subscribe(user => {
+    private authenticationService: AuthenticationService,
+    private router: Router) {
+      this.init();
+  }
+
+  ngOnInit() {
+  }
+
+  init() {
+    this.dataService.getUserProfile(false).subscribe(user => {
       this.userProfileCallback(user.profile);
     });
-    dataService.getWatchedStats().subscribe(result => {
+    this.dataService.getWatchedStats().subscribe(result => {
       if (result && result.success) {
         this.stats.watched = this.getHumanTime(result.watchedTotal);
         this.stats.viewedTotal = result.viewedTotal;
       }
     });
-    dataService.getSessions().subscribe((response) => {
+    this.dataService.getSessions().subscribe((response) => {
       if (!response.success) return;
       this.sessions = [];
 
       this.groupContent(response.content);
     });
-  }
-
-  ngOnInit() {
   }
 
   groupContent(contentList) {
@@ -243,7 +249,8 @@ export class DashboardComponent implements OnInit {
     var firstDate = new Date(this.profile.subscription.nextBillingDate);
     var secondDate = new Date();
 
-    return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+    let daysLeft = firstDate.getTime() - secondDate.getTime();
+    return (daysLeft > 0) ? Math.round( daysLeft / oneDay) : 0;
   }
 
   toggleSecurity() {
@@ -276,6 +283,30 @@ export class DashboardComponent implements OnInit {
           this.model = {};
         }
       });
+  }
+
+  promoCodeError = '';
+  claimCode() {
+    if (this.loading) {
+      return;
+    }
+    if (!this.model.promoCode) {
+      this.promoCodeError = 'Invalid Code';
+      return;
+    }
+
+    this.loading = true;
+    this.promoCodeError = '';
+
+    this.dataService.activatePromoCode({ code: this.model.promoCode }).subscribe((response) => {
+      this.loading = false;
+      if (response && response.success) {
+        this.promoCodeError = '';
+        this.init();
+      } else {
+        this.promoCodeError = 'Unable to activate code. Please try again!';
+      }
+    });
   }
 
   onFilesAdded() {

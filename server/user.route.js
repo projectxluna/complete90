@@ -4,6 +4,8 @@ module.exports = function (apiRoutes) {
     var Auth = require('./helpers/auth');
     var User = require('./models/user');
     var im = require('imagemagick');
+    var PromoController = require('./helpers/promo');
+    var mailer = require('./helpers/mailer');
 
     /**
      * get user profile
@@ -57,6 +59,47 @@ module.exports = function (apiRoutes) {
                     res.json({success: false, message: error});
                 }
             });
+    });
+
+    /**
+     * Activate Promo Code
+     */
+    apiRoutes.post('/user/promo/activate', Auth.isAuthenticated, function (req, res) {
+        let code = req.body.code;
+        PromoController.validate(code).then(promo => {
+            let update = {
+                promo_code: promo.code,
+                subscription: promo.values[0]
+            }
+            User.findOneAndUpdate({ _id: req.decoded.userId }, update, function (err, user) {
+                    if (err) return res.status(500).send(err);
+                    try {
+                        res.json({ success: true });
+
+                        var data = {
+                            to: 'info@thecomplete90.com',
+                            from: mailer.email,
+                            template: 'promo-code-activated',
+                            subject: 'The Complete 90 Promo Code Activation',
+                            context: {
+                                code: code,
+                                name: user.name,
+                                email: user.email
+                            }
+                        };
+
+                        mailer.smtpTransport().sendMail(data, function (err) {
+                            if (err) {
+                                console.error(err);
+                            }
+                        });
+                    } catch (error) {
+                        res.json({ success: false, message: error });
+                    }
+                });
+        }).catch(err => {
+            res.json({success: false, message: err});
+        });
     });
 
     /**
