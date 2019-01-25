@@ -150,6 +150,9 @@ export class SessionsComponent implements OnInit {
 
     this.save(newSession, response => {
       this.getSessions();
+      if (response && response.id) {
+        this.showBanner(response.id);
+      }
     });
   }
 
