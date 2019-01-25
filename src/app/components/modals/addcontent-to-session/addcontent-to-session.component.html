@@ -3,25 +3,24 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="bsModalRef.hide()"><span aria-hidden="true">&times;</span></button>
       <h4 class="modal-title text-center" id="savedSessModalTitle">NAME SESSION</h4>
     </div>
-    
+
     <div class="modal-body">
       <div class="nameSessForm">
           <div class="form-group">
               <input [(ngModel)]="session.name" class="form-control text-center" id="sessionName" placeholder="Session Name" name="name">
-          </div>                                    
+          </div>
       </div>
-    
+
       <div class="text-center saveSessBtnCont">
         <button class="saveSessName" (click)="createNewSession()">SAVE</button>
       </div>
-    
-    
+
       <div class="addtoSess">
         <h4 class="modal-title text-center" id="savedSessModalTitle">OR ADD TO SESSION</h4>
       </div>
       <div *ngFor="let session of customSession" class="row saved-pa" style="color: black;">
         <div class="col-xs-6 sessName">{{ session.name | uppercase }}<span> ({{ session.content.length }} Videos)</span></div>
         <div class="col-xs-5"><button class="viewSessbtn pull-right" (click)="addToSession(session.id)">ADD</button></div>
-      </div>	        
+      </div>
     </div>
 </div>

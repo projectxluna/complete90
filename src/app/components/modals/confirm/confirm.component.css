@@ -1,0 +1,40 @@
+div{
+    font-family: 'Montserrat';
+}
+
+.modal-content  {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
+}
+
+.modal-title {
+    color: #333333;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px 25px 15px 25px;
+    color: black;
+}
+
+.modal-header {
+    padding: 35px 15px 15px 15px;
+    border-bottom: transparent; 
+}
+
+.cancel-btn {
+    background-color: #fd1541;
+    color: white;
+    border: transparent;
+    padding: 5px 9px;
+    margin: 10px;
+}
+
+.confirm-btn {
+    background-color: #b8f16f;
+    color: white;
+    border: transparent;
+    padding: 5px 9px;
+    margin: 10px;
+}

@@ -37,6 +37,7 @@ import { AddcontentToSessionComponent } from './components/modals/addcontent-to-
 import { ContactusComponent } from './components/contactus/contactus.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
+import { ConfirmComponent } from './components/modals/confirm/confirm.component';
 
 
 
@@ -60,7 +61,8 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
     AddcontentToSessionComponent,
     ContactusComponent,
     TermsComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,8 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
   bootstrap: [AppComponent],
   entryComponents: [
     VideoplayerComponent,
-    AddcontentToSessionComponent
+    AddcontentToSessionComponent,
+    ConfirmComponent
   ]
 })
 export class AppModule { }
