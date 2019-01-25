@@ -6,8 +6,8 @@ import { DataService } from '../../../services';
 declare var VTTCue;
 
 export class Timer {
-  private startAt = 0;	// Time of last start / resume. (0 if not running)
-  private lapTime = 0;	// Time on the clock when last stopped in milliseconds
+  private startAt = 0; // Time of last start / resume. (0 if not running)
+  private lapTime = 0; // Time on the clock when last stopped in milliseconds
 
   constructor() {
 

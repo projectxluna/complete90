@@ -4,6 +4,7 @@ import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { VideoplayerComponent } from '../modals/videoplayer/videoplayer.component';
 import { AddcontentToSessionComponent } from '../modals/addcontent-to-session/addcontent-to-session.component';
+import { ConfirmComponent } from '../modals/confirm/confirm.component';
 import * as _ from 'lodash';
 import { isUndefined } from 'util';
 
@@ -202,16 +203,28 @@ export class SessionsComponent implements OnInit {
   removeFromSession(session, index) {
     if (!session || session.content.length < 1 || isUndefined(index)) return;
 
-    if (session.content.length == 1) {
-      this.deleteUserSession(session.id); //Delete session if this is the last video in it
-      return;
-    }
+    const params = {
+      title: 'Delete Session',
+      message: 'Are you sure you want to delete this session?',
+      cancelLabel: 'Back',
+      confirmLabel: 'Confirm'
+    };
 
-    session.content.splice(index, 1);
-    let sesionToSave = _.cloneDeep(session);
-    sesionToSave.content = this.flatContent(sesionToSave.content);
+    let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params, class: 'modal-sm' });
+    confirmModal.content.onClose.subscribe(result => {
+      if (result.confirm) {
+        if (session.content.length == 1) {
+          this.deleteUserSession(session.id); //Delete session if this is the last video in it
+          return;
+        }
 
-    this.save(sesionToSave);
+        session.content.splice(index, 1);
+        let sesionToSave = _.cloneDeep(session);
+        sesionToSave.content = this.flatContent(sesionToSave.content);
+
+        this.save(sesionToSave);
+      }
+    });
   }
 
   flatContent(content) {
@@ -253,12 +266,24 @@ export class SessionsComponent implements OnInit {
 
   deleteUserSession(sessionId) {
     // console.log('deleting custom session', sessionId);
-    this.dataService.deleteSessions(sessionId).subscribe((response) => {
-      if (!response || !response.success) {
-        // console.error('Could not delete session');
-        return;
+    const params = {
+      title: 'Delete Session',
+      message: 'Are you sure you want to delete this session?',
+      cancelLabel: 'Back',
+      confirmLabel: 'Confirm'
+    };
+
+    let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params, class: 'modal-sm' });
+    confirmModal.content.onClose.subscribe(result => {
+      if (result.confirm) {
+        this.dataService.deleteSessions(sessionId).subscribe((response) => {
+          if (!response || !response.success) {
+            // console.error('Could not delete session');
+            return;
+          }
+          this.getSessions();
+        });
       }
-      this.getSessions();
     });
   }
 

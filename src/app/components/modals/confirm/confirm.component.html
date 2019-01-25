@@ -1,0 +1,15 @@
+<div class="modal-content">
+    <div class="modal-header row">
+      <h4 class="modal-title text-center">{{ title }}</h4>
+    </div>
+
+    <div class="modal-body row">
+      <div class="row text-center">
+        {{ message }}
+      </div>
+      <div class="row text-center">
+        <button class="cancel-btn" (click)="back()">{{ cancelLabel }}</button>
+        <button class="confirm-btn" (click)="continue()">{{ confirmLabel }}</button>
+      </div>
+    </div>
+</div>
