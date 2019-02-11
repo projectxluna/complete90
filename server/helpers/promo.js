@@ -16,20 +16,23 @@ var subscriptionLeft = function (subscription) {
 var PromoController = {
     validate: function (code) {
         return new Promise((resolve, reject) => {
-            User.findOne({ promo_code: code }, (err, user) => {
-                if (user || err) {
+            Promo.findOne({ code: code }, (err, promo) => {
+                if (err || !promo) {
                     return reject({
-                        err: err || 'Promo code already in use'
+                        err: err || 'Promo code not found'
                     });
                 }
-                Promo.findOne({ code: code }, (err, promo) => {
-                    if (err || !promo) {
+                User.find({ promo_code: code }, (err, users) => {
+                    if (!users || err) {
                         return reject({
-                            err: err || 'Promo code not found'
+                            err: err || 'Promo code already in use'
                         });
                     }
-                    // if (subscriptionLeft(promo.))
-                    //We should validate that the promo code has not expired
+                    if (promo.max_use && users.length >= promo.max_use) {
+                        return reject({
+                            err: "Sorry the promo code you've entered is no longer valid"
+                        });
+                    }
                     resolve(promo);
                 });
             });
