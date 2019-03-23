@@ -11,6 +11,9 @@ var planSchema = mongoose.Schema({
     },
     content: {
         type: [String]
+    },
+    detailedContent: {
+        type: [{}]
     }
 },
 {

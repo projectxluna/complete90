@@ -46,9 +46,12 @@ export class NavComponent implements OnInit {
     if (this.authenticationService.token) {
       if(!this.userProfile.subscription && !this.activeRequest) {
         this.activeRequest = true;
-        this.hasSubscription((user) => {
-          this.avatarUrl = user.profile.avatarURL;
-          this.userProfile = user.profile;
+        this.hasSubscription((res) => {
+          if (!res.success) {
+            return;
+          }
+          this.avatarUrl = res.user.avatarURL;
+          this.userProfile = res.user;
           this.activeRequest = false;
         });
       }
@@ -59,6 +62,7 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+    this.dataService.bustCache();
     this.collapse();
   }
 }

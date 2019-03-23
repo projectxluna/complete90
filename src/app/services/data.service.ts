@@ -15,15 +15,21 @@ export class DataService {
     private authenticationService: AuthenticationService) {
   }
 
+  bustCache() {
+    this.cachedProfile = null;
+    this.cachedSessions = null;
+    this.cachedFreeSession = null;
+  }
+
   getUserProfile(cache: boolean = true): Observable<any> {
     if (cache && this.cachedProfile) {
       return Observable.create((observer) => {
         observer.next(this.cachedProfile);
       });
     }
-    if (!this.authenticationService.token) {
-      return;
-    }
+    // if (!this.authenticationService.token) {
+    //   return;
+    // }
 
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
@@ -126,12 +132,34 @@ export class DataService {
       });
   }
 
-  saveSessions(sessions): Observable<any> {
+  addContentToSession(sessions): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
 
     return this.http
-      .post('/api/session/plan', sessions, options)
+      .post('/api/session/content', sessions, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  createSession(sessions): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http
+      .post('/api/session', sessions, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  deleteContentFromSession(body): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, body });
+
+    return this.http
+      .delete('/api/session/content', options)
       .map((response: Response) => {
         return response.json();
       });
@@ -142,7 +170,7 @@ export class DataService {
     let options = new RequestOptions({ headers: headers, body: { sessionId} });
 
     return this.http
-      .delete('/api/session/plan', options)
+      .delete('/api/session', options)
       .map((response: Response) => {
         return response.json();
       });

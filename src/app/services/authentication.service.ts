@@ -36,8 +36,8 @@ export class AuthenticationService {
       });
   }
 
-  signup(email: string, password: string, name: string): Observable<any> {
-    return this.http.post('/api/signup', { email: email, password: password, name: name })
+  signup(profile): Observable<any> {
+    return this.http.post('/api/signup', profile)
       .map((response: Response) => {
         return response.json();
       });

@@ -5,30 +5,27 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
 
   @ViewChild('dropzone') dropZone:ElementRef;
   // @ViewChild('iconList') iconListContainer:ElementRef;
-  @ViewChild('file') file;
 
   securityActive = false;
   notificationActive = false;
   paymentActive = false;
-  profile = {
+
+  user = {
     name: '',
-    coach: false,
     subscription: undefined,
+    nationality: '',
     creditCards: [],
     avatarURL: '',
-    companyName: '',
-    teamName: '',
-
-    height: '',
-    position: '',
-    foot: ''
+    clubName: '',
   };
+  playerProfile: any;
+  coachProfile: any;
 
   selectedField;
   drillLayout = {
@@ -181,9 +178,7 @@ export class DashboardComponent implements OnInit {
   }
 
   init() {
-    this.dataService.getUserProfile(false).subscribe(user => {
-      this.userProfileCallback(user.profile);
-    });
+    this.loadProfile();
     this.dataService.getWatchedStats().subscribe(result => {
       if (result && result.success) {
         this.stats.watched = this.getHumanTime(result.watchedTotal);
@@ -195,6 +190,12 @@ export class DashboardComponent implements OnInit {
       this.sessions = [];
 
       this.groupContent(response.content);
+    });
+  }
+
+  loadProfile() {
+    this.dataService.getUserProfile(false).subscribe(res => {
+      this.onProfileUpdated(res.user);
     });
   }
 
@@ -235,18 +236,18 @@ export class DashboardComponent implements OnInit {
   }
 
   hasSubscription() {
-    if (this.profile.subscription) {
+    if (this.user.subscription) {
       return true;
     }
     return false;
   }
 
   getSubscriptionLeft() {
-    if (!this.profile.subscription) {
+    if (!this.user.subscription) {
       return 0;
     }
     var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    var firstDate = new Date(this.profile.subscription.nextBillingDate);
+    var firstDate = new Date(this.user.subscription.nextBillingDate);
     var secondDate = new Date();
 
     let daysLeft = firstDate.getTime() - secondDate.getTime();
@@ -285,77 +286,22 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  promoCodeError = '';
-  claimCode() {
-    if (this.loading) {
-      return;
-    }
-    if (!this.model.promoCode) {
-      this.promoCodeError = 'Invalid Code';
-      return;
-    }
-
-    this.loading = true;
-    this.promoCodeError = '';
-
-    this.dataService.activatePromoCode({ code: this.model.promoCode }).subscribe((response) => {
-      this.loading = false;
-      if (response && response.success) {
-        this.promoCodeError = '';
-        this.init();
-      } else {
-        this.promoCodeError = 'Unable to activate code. Please try again!';
-      }
-    });
-  }
-
-  onFilesAdded() {
-    const files: { [key: string]: File } = this.file.nativeElement.files;
-
-    if (files && files[0]) {
-      this.dataService.uploadProfileImage(files[0]).subscribe(response => {
-        if (response.success) {
-          this.userProfileCallback(response.profile);
-        }
+  onProfileUpdated(user) {
+    if (user) {
+      this.user = user;
+      this.user.avatarURL = user.avatarURL;
+      this.playerProfile = user.profiles.find(profile => {
+        return profile.type === 'PLAYER';
       });
+      this.coachProfile = user.profiles.find(profile => {
+        return profile.type === 'MANAGER';
+      });
+    } else {
+      // this.loadProfile();
     }
   }
 
-  addFiles() {
-    this.file.nativeElement.click();
-  }
-
-  toggleEditMode() {
-    this.editMode = !this.editMode;
-  }
-
-  updateProfile() {
-    let name = this.profile.name;
-    let foot = this.profile.foot;
-    let position = this.profile.position;
-    let height = this.profile.height;
-    let companyname = this.profile.companyName;
-    let teamName = this.profile.teamName;
-
-    this.loading = true;
-    let profile = {
-      foot,
-      position,
-      height,
-      companyname,
-      teamName,
-      name
-    }
-    this.dataService.updateUserProfile(profile).subscribe(response => {
-      this.loading = false;
-      this.editMode = false;
-      if (response.success) {
-        this.userProfileCallback(response.profile);
-      }
-    });
-  }
-
-  userProfileCallback(profile) {
-    this.profile = profile;
+  onSubscriptionUpdated() {
+    this.loadProfile();
   }
 }

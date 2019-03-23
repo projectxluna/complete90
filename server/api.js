@@ -1,5 +1,5 @@
+const { exposedData, PROFILES } = require('./helpers/user');
 module.exports = function (app) {
-    var User = require('./models/user');
     var mailer = require('./helpers/mailer');
     var express = require('express');
     var jwt = require('jsonwebtoken');
@@ -7,7 +7,7 @@ module.exports = function (app) {
     var crypto = require('crypto');
     var apiRoutes = express.Router();
     var Auth = require('./helpers/auth');
-    const userHelper = require('./helpers/user');
+    var User = require('./models/user');
 
     var config = require('./config').get(process.env.NODE_ENV);
     var mcConfig = config.mailChimp;
@@ -44,7 +44,7 @@ module.exports = function (app) {
                     res.json({
                         success: true,
                         token: token,
-                        profile: userHelper.exposedData(user)
+                        user: exposedData(user)
                     });
                 }
             }
@@ -87,6 +87,8 @@ module.exports = function (app) {
         newUser.name = req.body.name;
         newUser.email = req.body.email;
         newUser.password = newUser.generateHash(req.body.password);
+        newUser.profiles.push(req.body.isManager ? PROFILES.MANAGER : PROFILES.PLAYER);
+        newUser.clubName = req.body.isManager ? req.body.clubName : '';
 
         User.findOne({
             'email': req.body.email

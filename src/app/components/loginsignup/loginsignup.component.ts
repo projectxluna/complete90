@@ -15,6 +15,7 @@ export class LoginSignupComponent implements OnInit {
     signup = false;
     hide = true;
     error = '';
+    createManagerProfile = false;
     email = new FormControl('', [Validators.required, Validators.email]);
     previousRoute: string;
     constructor(
@@ -30,6 +31,7 @@ export class LoginSignupComponent implements OnInit {
     }
 
     toggleSignup() {
+        this.error = '';
         this.signup = !this.signup;
     }
 
@@ -47,17 +49,27 @@ export class LoginSignupComponent implements OnInit {
             this.error = 'Please enter a valid email';
             return;
         }
+        if (this.createManagerProfile && !this.model.clubName) {
+            this.error = 'Club name is required to create a manager profile';
+            return;
+        }
         this.loading = true;
 
-        let name = this.model.firstname + ' ' + this.model.lastname;
-        this.authenticationService.signup(this.model.email, this.model.password, name)
+        let payload = {
+            name: this.model.firstname + ' ' + this.model.lastname,
+            email: this.model.email,
+            password: this.model.password,
+            isManager: this.createManagerProfile,
+            clubName: this.model.clubName
+        };
+        this.authenticationService.signup(payload)
             .subscribe(result => {
                 if (result && result.success == true) {
                     /**
-                     * we should actually route them to a temp page
+                     * we should actually send them to a temp page
                      * that will ask them to confirm their email or 
                      * some other user validation step. then shortly
-                     * after route them to the home page
+                     * after send them to the home page
                      */
                     this.signup = false;
                     this.loading = false;
@@ -100,12 +112,11 @@ export class LoginSignupComponent implements OnInit {
     }
 
     forgotPassword() {
+        this.error = '';
         this.router.navigate(['/forgot']);
     }
 
     getErrorMessage() {
-        return this.email.hasError('required') ? 'You must enter a value' :
-            this.email.hasError('email') ? 'Not a valid email' :
-                '';
+        return this.email.hasError('required') ? 'You must enter a value' : (this.email.hasError('email') ? 'Not a valid email' : '');
     }
 }

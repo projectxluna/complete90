@@ -1,6 +1,6 @@
+const { exposedData } = require('./helpers/user');
+const path = require('path');
 module.exports = function (apiRoutes) {
-    const path = require('path');
-    const userHelper = require('./helpers/user');
     var Auth = require('./helpers/auth');
     var User = require('./models/user');
     var im = require('imagemagick');
@@ -16,7 +16,7 @@ module.exports = function (apiRoutes) {
             try {
                 res.json({
                     success: true,
-                    profile: userHelper.exposedData(user)
+                    user: exposedData(user)
                 });
             } catch (error) {
                 res.json({success: false, message: error});
@@ -29,20 +29,17 @@ module.exports = function (apiRoutes) {
      */
     apiRoutes.post('/user/me', Auth.isAuthenticated, function (req, res) {
         let name = req.body.name;
-        let foot = req.body.foot;
-        let position = req.body.position;
-        let height = req.body.height;
-        let companyname = req.body.companyName;
-        let teamName = req.body.teamName;
+        let nationality = req.body.nationality;
+        let playerProfile = req.body.playerProfile;
+        let coachProfile = req.body.coachProfile;
 
         var update = {};
-
+        var profiles = []
         if (name) update.name = name;
-        if (foot) update.foot = foot;
-        if (position) update.position = position;
-        if (height) update.height = height;
-        if (companyname) update.companyname = companyname;
-        if (teamName) update.teamName = teamName;
+        if (nationality) update.nationality = nationality;
+        if (playerProfile) profiles.push(playerProfile);
+        if (coachProfile) profiles.push(coachProfile);
+        if (profiles.length) update.profiles = profiles;
 
         User.findOneAndUpdate({ _id: req.decoded.userId }, update,
             {
@@ -53,7 +50,7 @@ module.exports = function (apiRoutes) {
                 try {
                     res.json({
                         success: true,
-                        profile: userHelper.exposedData(user)
+                        user: exposedData(user)
                     });
                 } catch (error) {
                     res.json({success: false, message: error});
@@ -135,7 +132,7 @@ module.exports = function (apiRoutes) {
                     try {
                         res.json({
                             success: true,
-                            profile: userHelper.exposedData(new_user)
+                            user: exposedData(new_user)
                         });
                     } catch (error) {
                         res.json({

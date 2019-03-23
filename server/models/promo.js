@@ -10,7 +10,9 @@ var promoSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         index: true,
     },
-    max_use: Number,
+    maxUse: Number,
+    validFrom: Date,
+    validTo: Date,
 },
 {
     timestamps: true,

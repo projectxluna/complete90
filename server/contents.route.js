@@ -67,38 +67,77 @@ module.exports = function (apiRoutes) {
     });
 
     /**
-     * Create and modify training plan
+     * Add content to session
      */
-    apiRoutes.post('/session/plan', Auth.isAuthenticated, function (req, res) {
+    apiRoutes.post('/session/content', Auth.isAuthenticated, function (req, res) {
+        if (!req.body || !req.body.id || !req.body.contentId) {
+            return res.status(422).send({ success: false });
+        }
+        let id = req.body.id;
+        delete req.body.id;
+        Plan.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
+            '$push': {
+                detailedContent: req.body
+            }
+        }, function (err, plan) {
+            if (err) {
+                console.log(err);
+                return res.json({ success: false, message: err.errmsg, code: err.code });
+            }
+            console.log('Saved content to session');
+            res.json({ success: true, id: plan._id });
+        });
+    });
+
+    /**
+     * Delete content from session
+     */
+    apiRoutes.delete('/session/content', Auth.isAuthenticated, function(req, res) {
+        if (!req.body || !req.body.contentId || !req.body.sessionId) {
+            return res.status(422).send({ success: false });
+        }
+        Plan.update({_id: mongoose.Types.ObjectId(req.body.sessionId)}, {
+            '$pull': {
+                content: {
+                    '$in': [req.body.contentId]
+                },
+                detailedContent: {
+                    contentId: req.body.contentId
+                }
+            }
+        }, { multi: true }, function(err, val) {
+            if (err) {
+                console.log(err);
+                return res.json({ success: false, message: err.errmsg, code: err.code });
+            }
+            res.json({ success: true});
+        });
+    });
+
+    /**
+     * Create/Edit session
+     */
+    apiRoutes.post('/session', Auth.isAuthenticated, function (req, res) {
         let name = req.body.name;
         let content = req.body.content;
-        let id = req.body.id;
         let userId = req.decoded.userId;
+        let sessionId = req.body.id;
+ 
+        if (!name) return res.status(422).send({ success: false });
 
-        if (!name || !content) return res.status(422).send({ success: false });
-
-        if (id) {
-            Plan.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
-                name: name,
-                content: content
-            }, function (err, plan) {
+        if (sessionId) {
+            Plan.findByIdAndUpdate(mongoose.Types.ObjectId(sessionId), { name }, function (err, plan) {
                 if (err) {
-                    console.error(err)
-                    return res.json({
-                        success: false,
-                        message: err.errmsg,
-                        code: err.code
-                    });
+                    console.log(err);
+                    return res.json({ success: false, message: err.errmsg, code: err.code });
                 }
-                res.json({
-                    success: true,
-                    id: plan._id
-                });
+                console.log('Saved content to session');
+                res.json({ success: true, id: plan._id });
             });
         } else {
             let newPlan = new Plan();
             newPlan.name = name;
-            newPlan.content = content;
+            newPlan.detailedContent = content;
             newPlan.userId = userId;
             newPlan.save(function (err, plan) {
                 if (err) {
@@ -108,10 +147,7 @@ module.exports = function (apiRoutes) {
                         code: err.code
                     });
                 }
-                res.json({
-                    success: true,
-                    id: plan._id
-                });
+                res.json({ success: true, id: plan._id });
             });
         }
     });
@@ -119,7 +155,7 @@ module.exports = function (apiRoutes) {
     /**
      * Delete training plan
      */
-    apiRoutes.delete('/session/plan', Auth.isAuthenticated, function (req, res) {
+    apiRoutes.delete('/session', Auth.isAuthenticated, function (req, res) {
         Plan.findOneAndRemove({ _id: mongoose.Types.ObjectId(req.body.sessionId) },
             function (err, plan) {
                 if (err) {
@@ -294,6 +330,16 @@ module.exports = function (apiRoutes) {
                     let content = contents.find(function (element) {
                         return element.id === videoId;
                     });
+                    videoContents.push(content);
+                });
+                plan.detailedContent.forEach(cont => {
+                    let content = contents.find(function (element) {
+                        return element.id === cont.contentId;
+                    });
+                    if (content) {
+                        content.reps = cont.reps || 0,
+                        content.sets = cont.sets || 0
+                    }
                     videoContents.push(content);
                 });
                 let p = {

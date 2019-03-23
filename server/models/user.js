@@ -19,11 +19,11 @@ var userSchema = mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    teamName: String,
-    companyName: String,
-    height: String,
-    position: String,
-    foot: String,
+    clubName: String,
+    nationality: String,
+    profiles: {
+        type: [{}]
+    },
     avatarURL: String,
     braintree: {
         id: String,
