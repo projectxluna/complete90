@@ -134,22 +134,35 @@ export class SessionsComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
     this.bsModalRef.content.onClose.subscribe(result => {
       if (result && result.type === 'new') {
-        this.newSession(result.name, contentId);
+        let newSession = {
+          name: result.name,
+          content:  {
+            contentId,
+            reps: result.session.reps || 0,
+            sets: result.session.sets || 0,
+          }
+        };
+        this.newSession(newSession);
       } else if (result && result.type === 'add') {
-        this.addToExistingSession(result.id, contentId, content);
+        let addContent = {
+          id: result.id,
+          reps: result.session.reps || 0,
+          sets: result.session.sets || 0,
+          contentId: contentId
+        };
+        this.addToExistingSession(addContent).then(response => {
+          this.getSessions();
+        }).catch(error => {
+          console.log(error);
+        });
       }
     });
   }
 
-  newSession(name, contentId) {
-    if (!name || !contentId) return;
+  newSession(session) {
+    if (!session.name || !session.content) return;
 
-    let newSession = {
-      name: name,
-      content: [contentId]
-    }
-
-    this.save(newSession, response => {
+    this.save(session, response => {
       this.getSessions();
       if (response && response.id) {
         this.showBanner(response.id);
@@ -157,38 +170,25 @@ export class SessionsComponent implements OnInit {
     });
   }
 
-  addToExistingSession(id, contentId, content) {
-    if (!id) return;
-
-    let existing = this.customSessions.find((session) => {
-      return session.id === id;
-    });
-
-    let f = _.cloneDeep(existing);
-    let arr = [];
-
-    f.content.forEach(e => {
-      arr.push(e.id);
-    });
-    if (arr.indexOf(contentId) === -1) {
-      arr.push(contentId);
-      f.content = arr;
-      if (content) existing.content.push(content);
-      this.save(f, (response) => {
-        if (response && response.id) {
-          this.showBanner(response.id);
+  addToExistingSession(session) {
+    return new Promise((resolve, reject) => {
+      this.dataService.addContentToSession(session).subscribe((response) => {
+        if (!response || !response.success) {
+          return reject('Custom session failed to save!');
         }
+        resolve(response);
       });
-    }
+    });
   }
 
   editSession(session) {
     if (!session) return;
 
-    let sesionToSave = _.cloneDeep(session);
-    sesionToSave.content = this.flatContent(sesionToSave.content);
-
-    this.save(sesionToSave, (response) => {
+    let save = {
+      id: session.id,
+      name: session.name
+    }
+    this.save(save, (response) => {
       session.editMode = false;
     });
   }
@@ -218,18 +218,15 @@ export class SessionsComponent implements OnInit {
           return;
         }
 
-        session.content.splice(index, 1);
-        let sesionToSave = _.cloneDeep(session);
-        sesionToSave.content = this.flatContent(sesionToSave.content);
+        let deleted = session.content.splice(index, 1);
+        let toDelete = {
+          contentId: deleted[0].id,
+          sessionId: session.id
+        }
 
-        this.save(sesionToSave);
+        this.dataService.deleteContentFromSession(toDelete).subscribe(response => {});
       }
     });
-  }
-
-  flatContent(content) {
-    if (!content) return;
-    return content.map(e => e.id);
   }
 
   toggleSessionDetails(session) {
@@ -245,7 +242,7 @@ export class SessionsComponent implements OnInit {
   }
 
   save(session, cb = null) {
-    this.dataService.saveSessions(session).subscribe((response) => {
+    this.dataService.createSession(session).subscribe((response) => {
       if (cb) {
         cb(response);
       }
@@ -265,7 +262,6 @@ export class SessionsComponent implements OnInit {
   }
 
   deleteUserSession(sessionId) {
-    // console.log('deleting custom session', sessionId);
     const params = {
       title: 'Delete Session',
       message: 'Are you sure you want to delete this session?',
