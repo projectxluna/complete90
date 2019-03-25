@@ -1,5 +1,15 @@
-const { exposedData } = require('./helpers/user');
+const { exposedUserData, exposedClubData } = require('./helpers/pure');
 const path = require('path');
+const Club = require('./models/club');
+
+const findClub = (ownerId) => {
+    return new Promise((resolve, reject) => {
+        Club.findOne({owner: ownerId}, (err, club) => {
+            resolve(club);
+        });
+    });
+}
+
 module.exports = function (apiRoutes) {
     var Auth = require('./helpers/auth');
     var User = require('./models/user');
@@ -10,13 +20,14 @@ module.exports = function (apiRoutes) {
     /**
      * get user profile
      */
-    apiRoutes.get('/user/me', Auth.isAuthenticated, function (req, res) {
-        User.findOne({ _id: req.decoded.userId }, function (err, user) {
+    apiRoutes.get('/user/me', Auth.isAuthenticated, (req, res) => {
+        User.findOne({ _id: req.decoded.userId }, async (err, user) => {
             if (err) return res.status(500).send(err);
             try {
                 res.json({
                     success: true,
-                    user: exposedData(user)
+                    user: exposedUserData(user),
+                    club: exposedClubData(await findClub(user._id))
                 });
             } catch (error) {
                 res.json({success: false, message: error});
@@ -50,7 +61,7 @@ module.exports = function (apiRoutes) {
                 try {
                     res.json({
                         success: true,
-                        user: exposedData(user)
+                        user: exposedUserData(user)
                     });
                 } catch (error) {
                     res.json({success: false, message: error});
@@ -132,7 +143,7 @@ module.exports = function (apiRoutes) {
                     try {
                         res.json({
                             success: true,
-                            user: exposedData(new_user)
+                            user: exposedUserData(new_user)
                         });
                     } catch (error) {
                         res.json({

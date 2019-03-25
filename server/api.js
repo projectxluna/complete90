@@ -1,4 +1,14 @@
-const { exposedData, PROFILES } = require('./helpers/user');
+const {
+    exposedUserData,
+    exposedClubData,
+    PROFILES,
+    createUser,
+    findClub,
+    createClub,
+    findUserByEmail
+} = require('./helpers/pure');
+const User = require('./models/user');
+
 module.exports = function (app) {
     var mailer = require('./helpers/mailer');
     var express = require('express');
@@ -7,7 +17,6 @@ module.exports = function (app) {
     var crypto = require('crypto');
     var apiRoutes = express.Router();
     var Auth = require('./helpers/auth');
-    var User = require('./models/user');
 
     var config = require('./config').get(process.env.NODE_ENV);
     var mcConfig = config.mailChimp;
@@ -16,39 +25,35 @@ module.exports = function (app) {
     var mailchimp = new Mailchimp(mcConfig.API_KEY);
 
     // un-authenticated routes
-    apiRoutes.post('/login', function (req, res) {
-        User.findOne({
-            'email': req.body.email
-        }, function (err, user) {
-            if (err) {
-                return res.json({
-                    success: false,
-                    message: err
-                });
-            }
-
-            if (!user) {
+    apiRoutes.post('/login', async (req, res) => {
+        try {
+            let user = await findUserByEmail(req.body.email);
+            if (!user.validPassword(req.body.password)) {
                 res.json({ success: false, message: 'Authentication failed' });
-            } else if (user) {
-                if (!user.validPassword(req.body.password)) {
-                    res.json({ success: false, message: 'Authentication failed' });
-                } else {
-                    var payload = {
-                        userId: user._id,
-                        name: user.name
-                    }
-                    var token = jwt.sign(payload, app.get('superSecret'), {
-                        expiresIn: 86400 * 7 // expires in 1 week. *Note: add some sort of auto renewal
-                    });
-
-                    res.json({
-                        success: true,
-                        token: token,
-                        user: exposedData(user)
-                    });
+            } else {
+                var payload = {
+                    userId: user._id,
+                    name: user.name
                 }
+                var token = jwt.sign(payload, app.get('superSecret'), {
+                    expiresIn: 86400 * 7 // expires in 1 week. *Note: add some sort of auto renewal
+                });
+
+                var ret = {
+                    success: true,
+                    token: token,
+                    user: exposedUserData(user),
+                    club: exposedClubData(await findClub(user._id))
+                }
+
+                res.json(ret);
             }
-        });
+        } catch (err) {
+            return res.json({
+                success: false,
+                message: err || 'Authentication failed'
+            });
+        }
     });
 
     apiRoutes.post('/contactus', function (req, res) {
@@ -82,50 +87,38 @@ module.exports = function (app) {
         });
     });
 
-    apiRoutes.post('/signup', function (req, res) {
+    apiRoutes.post('/signup', async (req, res) => {
         var newUser = new User();
         newUser.name = req.body.name;
         newUser.email = req.body.email;
         newUser.password = newUser.generateHash(req.body.password);
         newUser.profiles.push(req.body.isManager ? PROFILES.MANAGER : PROFILES.PLAYER);
-        newUser.clubName = req.body.isManager ? req.body.clubName : '';
 
-        User.findOne({
-            'email': req.body.email
-        }, function (err, user) {
-            if (user || err) {
-                return res.json({
-                    success: false,
-                    message: err || 'Email already in use. Please Login'
-                });
-            } else {
-                newUser.save(function (err, user) {
-                    if (err) {
-                        return res.json({
-                            success: false,
-                            message: err.errmsg,
-                            code: err.code
-                        });
-                    }
-                    res.json({
-                        success: true
-                    });
-                    var name = req.body.name.split(' ');
-                    mailchimp.post('/lists/' + mcConfig.SIGN_UP_LIST + '/members', {
-                        email_address: req.body.email,
-                        status: 'subscribed',
-                        merge_fields: {
-                            'FNAME': name[0],
-                            'LNAME': name[1]
-                        }
-                    }).then(function (results) {
-                        console.log('Added to MailChimp!');
-                    }).catch(function (err) {
-                        console.error(err);
-                    });
-                });
+        try {
+            let user = await createUser(newUser);
+            res.json({
+                success: true
+            });
+            if (req.body.isManager) {
+                await createClub(req.body.clubName, user._id);
             }
-        });
+            var name = req.body.name.split(' ');
+            mailchimp.post('/lists/' + mcConfig.SIGN_UP_LIST + '/members', {
+                email_address: req.body.email,
+                status: 'subscribed',
+                merge_fields: {
+                    'FNAME': name[0],
+                    'LNAME': name[1]
+                }
+            }).catch(err => {
+                console.error(err);
+            });
+        } catch (err) {
+            return res.json({
+                success: false,
+                message: err
+            });
+        }
     });
 
     apiRoutes.post('/forgot_pasword', function (req, res) {
