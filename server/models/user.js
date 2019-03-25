@@ -19,7 +19,6 @@ var userSchema = mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    clubName: String,
     nationality: String,
     profiles: {
         type: [{}]

@@ -108,6 +108,16 @@ export class DataService {
         return this.cachedSessions;
       });
   }
+  getLeaderBoard(): Observable<any> {
+    // add authorization header with jwt token
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get('/api/session/leaderboard', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
 
   getWatchedStats(): Observable<any> {
     // add authorization header with jwt token

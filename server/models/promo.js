@@ -1,9 +1,13 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const { PROFILE_TYPE } = require('../helpers/pure');
 
 var promoSchema = mongoose.Schema({
     code: {
         type: String,
         index: true
+    },
+    profileType: {
+        type: PROFILE_TYPE
     },
     values: [{}],
     owner: { 
