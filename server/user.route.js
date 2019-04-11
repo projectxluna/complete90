@@ -1,13 +1,34 @@
 const { exposedUserData, exposedClubData } = require('./helpers/pure');
 const path = require('path');
+const _ = require('lodash');
 const Club = require('./models/club');
+const Team = require('./models/team');
+const User = require('./models/user');
 
 const findClub = (ownerId) => {
     return new Promise((resolve, reject) => {
         Club.findOne({owner: ownerId}, (err, club) => {
+            if (err) console.log(err);
             resolve(club);
         });
     });
+}
+
+const findClubById = (id) => {
+    return new Promise((resolve, reject) => {
+        Club.findById(id, (err, club) => {
+            if (err) console.log(err);
+            resolve(club);
+        });
+    });
+}
+
+const findTeamById = (id) => {
+    return Team.findById(id).lean().exec();
+}
+
+const findManager = (id) => {
+    return User.findById(id).lean().exec();
 }
 
 module.exports = function (apiRoutes) {
@@ -23,12 +44,36 @@ module.exports = function (apiRoutes) {
     apiRoutes.get('/user/me', Auth.isAuthenticated, (req, res) => {
         User.findOne({ _id: req.decoded.userId }, async (err, user) => {
             if (err) return res.status(500).send(err);
+
+            let club;
+            let teams;
+            if (user.clubId) {
+                club = await findClubById(user.clubId);
+                if (club && user.teamId) {
+                    teams = club.teams.filter(teamId => { return teamId == user.teamId.toString() });
+                }
+            } else {
+                club = await findClub(user._id);
+            }
             try {
-                res.json({
+                let ret = {
                     success: true,
                     user: exposedUserData(user),
-                    club: exposedClubData(await findClub(user._id))
-                });
+                    club: exposedClubData(club)
+                }
+                if (teams) {
+                    ret.club.teams = undefined;
+                    let team = await findTeamById(teams[0]);
+                    if (team) {
+                        let manager = await findManager(team.managerId);
+                        team.managerName = manager.name;
+                        ret.club.team = team;
+                    }
+                }
+                if (user.clubStatus) {
+                    ret.club.status = user.clubStatus;
+                }
+                res.json(ret);
             } catch (error) {
                 res.json({success: false, message: error});
             }

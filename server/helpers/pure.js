@@ -1,6 +1,5 @@
-'use strict';
-const User = require('../models/user')
-const Club = require('../models/club')
+var User = require('../models/user')
+var Club = require('../models/club')
 
 const isEmptyObj = (obj) => {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
@@ -8,14 +7,16 @@ const isEmptyObj = (obj) => {
 
 const exposedUserData = (user) => {
     let cleanUser = {
+        id: user._id,
         name: user.name,
         email: user.email,
         subscription: user.braintree.subscription || user.subscription,
         nationality: user.nationality || "",
         creditCards: user.braintree.creditCards,
-        avatarURL: user.avatarURL || "/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg",
-        clubName: user.clubName,
-        profiles: user.profiles
+        avatarURL: user.avatarURL || '/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg',
+        profiles: user.profiles,
+        clubId: user.clubId,
+        teamId: user.teamId
     }
     return cleanUser;
 }
@@ -27,7 +28,9 @@ const exposedClubData = (club) => {
     return {
         name: club.name,
         createdAt: club.createdAt,
-        teams: club.teams
+        teams: club.teams,
+        _id: club._id,
+        logoUrl: club.logoUrl || '/public/imgs/clubs/default.png',
     };
 }
 
@@ -63,23 +66,6 @@ const findUserByEmail = (email) => {
         })
     });
 }
-const createUser = (user) => {
-    return new Promise((resolve, reject) => {
-        User.findOne({
-            email: user.email
-        }, (err, found) => {
-            if (found || err) {
-                return reject(err || 'Email already in use. Please Login');
-            }
-            user.save((err, user) => {
-                if (err) {
-                    return reject(err);
-                }
-                resolve(user);
-            });
-        });
-    });
-}
 
 const PROFILE_TYPE = {
     PLAYER: 'PLAYER',
@@ -87,6 +73,12 @@ const PROFILE_TYPE = {
     OWNER: 'OWNER' 
 }
 Object.freeze(PROFILE_TYPE);
+
+const CLUB_REQUEST_STATUS = {
+    PENDING: 'PENDING',
+    ACTIVE: 'ACTIVE',
+}
+Object.freeze(CLUB_REQUEST_STATUS);
 
 const PROFILES = {
     PLAYER: {
@@ -106,9 +98,9 @@ Object.freeze(PROFILES);
 
 exports.exposedUserData = exposedUserData;
 exports.exposedClubData = exposedClubData
-exports.createUser = createUser
 exports.findClub = findClub
 exports.createClub = createClub
 exports.findUserByEmail = findUserByEmail
 exports.PROFILES = PROFILES;
-exports.PROFILE_TYPE = PROFILE_TYPE
+exports.PROFILE_TYPE = PROFILE_TYPE;
+exports.CLUB_REQUEST_STATUS = CLUB_REQUEST_STATUS;

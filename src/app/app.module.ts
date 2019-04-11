@@ -47,8 +47,7 @@ import { MyClubComponent } from './components/my-club/my-club.component';
 import { TeamRoasterComponent } from './components/team-roaster/team-roaster.component';
 import { CreateAssignmentsComponent } from './components/create-assignments/create-assignments.component';
 import { GetSubscriptionComponent } from './components/get-subscription/get-subscription.component';
-
-
+import { ElapsedTimestampPipe } from './pipes/elapsed-timestamp.pipe';
 
 @NgModule({
   declarations: [
@@ -78,7 +77,8 @@ import { GetSubscriptionComponent } from './components/get-subscription/get-subs
     MyClubComponent,
     TeamRoasterComponent,
     CreateAssignmentsComponent,
-    GetSubscriptionComponent
+    GetSubscriptionComponent,
+    ElapsedTimestampPipe
   ],
   imports: [
     BrowserModule,

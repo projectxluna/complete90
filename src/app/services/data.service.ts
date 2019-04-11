@@ -21,21 +21,106 @@ export class DataService {
     this.cachedFreeSession = null;
   }
 
+  findClubByName(clubName: string): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {clubName} });
+
+    return this.http.get('/api/club', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  findPendingClubRequest(): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get('/api/club/pending-request', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  addPlayerToClub(userId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/club/confirm-request', {userId}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  createTeam(teamName): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/club/new-team', {teamName}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  getTeams(): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get('/api/club/teams', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  getPlayers(teamId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {teamId} });
+
+    return this.http.get('/api/club/team/players', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  joinTeam(teamId, playerId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/club/join-team', {teamId, playerId}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  getUsersWithoutTeam(): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get('/api/club/no-teams', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  requestClubAccess(clubId: string): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/club/join', {clubId}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   getUserProfile(cache: boolean = true): Observable<any> {
     if (cache && this.cachedProfile) {
       return Observable.create((observer) => {
         observer.next(this.cachedProfile);
       });
     }
-    // if (!this.authenticationService.token) {
-    //   return;
-    // }
 
-    // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
 
-    // get users from api
     return this.http.get('/api/user/me', options)
       .map((response: Response) => {
         if (!response.json().success && localStorage.getItem('token')) {
@@ -49,11 +134,9 @@ export class DataService {
   }
 
   updateUserProfile(profile): Observable<any> {
-    // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
 
-    // get users from api
     return this.http.post('/api/user/me', profile, options)
       .map((response: Response) => {
         this.cachedProfile = response.json();
@@ -108,10 +191,10 @@ export class DataService {
         return this.cachedSessions;
       });
   }
-  getLeaderBoard(): Observable<any> {
+  getLeaderBoard(timestamp = undefined, club = undefined): Observable<any> {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
-    let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers, params: {timestamp, club}});
 
     return this.http.get('/api/session/leaderboard', options)
       .map((response: Response) => {

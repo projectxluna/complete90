@@ -23,4 +23,4 @@ var clubSchema = mongoose.Schema({
     collection: 'clubs'
 });
 
-module.exports = mongoose.model('Club', clubSchema);;
+module.exports = mongoose.model('Club', clubSchema);

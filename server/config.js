@@ -18,6 +18,10 @@ var config = {
             EMAIL_ID: "projectxluna@gmail.com",
             PASSWORD: "**********"
         },
+        mailChimp: {
+            API_KEY: 'apikeyhere-us12',
+            SIGN_UP_LIST: 'XXXXXXXXX'
+        },
         URL_EXPIRATION: 5,
     },
 

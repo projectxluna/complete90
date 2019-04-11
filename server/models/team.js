@@ -7,10 +7,15 @@ var teamSchema = mongoose.Schema({
         index: true,
         required: true
     },
+    clubId: { 
+        type: mongoose.Schema.Types.ObjectId,
+        index: true,
+        required: true
+    },
 },
 {
     timestamps: true,
-    collection: 'clubs'
+    collection: 'teams'
 });
 
 module.exports = mongoose.model('Team', teamSchema);

@@ -84,7 +84,6 @@ module.exports = function (apiRoutes) {
                 console.log(err);
                 return res.json({ success: false, message: err.errmsg, code: err.code });
             }
-            console.log('Saved content to session');
             res.json({ success: true, id: plan._id });
         });
     });
@@ -237,7 +236,7 @@ module.exports = function (apiRoutes) {
         });
     });
 
-    const findUserName = (userId) => {
+    const findUser = (userId) => {
         return new Promise((resolve, reject) => {
             User.findById(userId, (err, user) => {
                 if (err) {
@@ -249,14 +248,18 @@ module.exports = function (apiRoutes) {
     }
 
     apiRoutes.get('/session/leaderboard', Auth.isAuthenticated, (req, res) => {
+        const { timestamp, club } = req.body;
+        let match = {};
+        if (timestamp > 0) {
+            match.updatedAt = {
+                $gte: Date.now() - timestamp,
+            } 
+        }
         UserStats.aggregate([
-            {
-                $match: {
-                }
-            },
+            { $match: match },
             {
                 $group: {
-                    _id: null,
+                    _id: '$userId',
                     userId: { $first: '$userId' },
                     watchedTotal: { $sum: '$content.watchedTotal' },
                     count: { $sum: 1 }
@@ -271,10 +274,10 @@ module.exports = function (apiRoutes) {
                 });
             }
             const pArray = stats.map(async (stat) => {
-                let user =  await findUserName(stat.userId)
+                let user =  await findUser(stat.userId)
                 return {
                     name: user.name,
-                    avatarUrl: user.avatarURL || '/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg',
+                    photoUrl: user.avatarURL || '/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg',
                     watchedTotal: stat.watchedTotal,
                     count: stat.count
                 };

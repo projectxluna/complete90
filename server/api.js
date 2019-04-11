@@ -8,6 +8,7 @@ const {
     findUserByEmail
 } = require('./helpers/pure');
 const User = require('./models/user');
+const Club = require('./models/club');
 
 module.exports = function (app) {
     var mailer = require('./helpers/mailer');
@@ -25,38 +26,44 @@ module.exports = function (app) {
     var mailchimp = new Mailchimp(mcConfig.API_KEY);
 
     // un-authenticated routes
-    apiRoutes.post('/login', async (req, res) => {
-        try {
-            let user = await findUserByEmail(req.body.email);
-            if (!user.validPassword(req.body.password)) {
-                res.json({ success: false, message: 'Authentication failed' });
-            } else {
-                var payload = {
-                    userId: user._id,
-                    name: user.name
+    apiRoutes.post('/login', (req, res) => {
+            User.findOne({
+                email: req.body.email
+            }, (err, user) => {
+                if (err) {
+                    return res.json({
+                        success: false,
+                        message: err || 'Authentication failed'
+                    });
                 }
-                var token = jwt.sign(payload, app.get('superSecret'), {
-                    expiresIn: 86400 * 7 // expires in 1 week. *Note: add some sort of auto renewal
-                });
+                if (!user.validPassword(req.body.password)) {
+                    res.json({ success: false, message: 'Authentication failed' });
+                } else {
+                    var payload = {
+                        userId: user._id,
+                        name: user.name
+                    }
+                    var token = jwt.sign(payload, app.get('superSecret'), {
+                        expiresIn: 86400 * 7 // expires in 1 week. *Note: add some sort of auto renewal
+                    });
 
-                var ret = {
-                    success: true,
-                    token: token,
-                    user: exposedUserData(user),
-                    club: exposedClubData(await findClub(user._id))
+                    Club.findOne({owner: user._id}, (err, club) => {
+                        var ret = {
+                            success: true,
+                            token: token,
+                            user: exposedUserData(user),
+                            club: exposedClubData(club)
+                        }
+                        if (user.clubStatus && ret.club) {
+                            ret.club.status = user.clubStatus;
+                        }
+                        res.json(ret);
+                    });
                 }
-
-                res.json(ret);
-            }
-        } catch (err) {
-            return res.json({
-                success: false,
-                message: err || 'Authentication failed'
             });
-        }
     });
 
-    apiRoutes.post('/contactus', function (req, res) {
+    apiRoutes.post('/contactus', (req, res) => {
         var from = req.body.from;
         var name = req.body.name;
         var message = req.body.message;
@@ -73,7 +80,7 @@ module.exports = function (app) {
             }
         };
 
-        mailer.smtpTransport().sendMail(data, function (err) {
+        mailer.smtpTransport().sendMail(data, (err) => {
             if (!err) {
                 return res.json({
                     success: true
@@ -87,7 +94,7 @@ module.exports = function (app) {
         });
     });
 
-    apiRoutes.post('/signup', async (req, res) => {
+    apiRoutes.post('/signup', (req, res) => {
         var newUser = new User();
         newUser.name = req.body.name;
         newUser.email = req.body.email;
@@ -95,25 +102,41 @@ module.exports = function (app) {
         newUser.profiles.push(req.body.isManager ? PROFILES.MANAGER : PROFILES.PLAYER);
 
         try {
-            let user = await createUser(newUser);
-            res.json({
-                success: true
-            });
-            if (req.body.isManager) {
-                await createClub(req.body.clubName, user._id);
-            }
-            var name = req.body.name.split(' ');
-            mailchimp.post('/lists/' + mcConfig.SIGN_UP_LIST + '/members', {
-                email_address: req.body.email,
-                status: 'subscribed',
-                merge_fields: {
-                    'FNAME': name[0],
-                    'LNAME': name[1]
+            User.findOne({
+                email: newUser.email
+            }, (err, found) => {
+                if (found || err) {
+                    return res.json({
+                        success: false,
+                        message: err
+                    });
                 }
-            }).catch(err => {
-                console.error(err);
+                newUser.save(async (err, user) => {
+                    if (err) {
+                        console.log(err)
+                        return reject(err);
+                    }
+                    res.json({
+                        success: true
+                    });
+                    if (req.body.isManager) {
+                        await createClub(req.body.clubName, user._id);
+                    }
+                    var name = req.body.name.split(' ');
+                    mailchimp.post('/lists/' + mcConfig.SIGN_UP_LIST + '/members', {
+                        email_address: req.body.email,
+                        status: 'subscribed',
+                        merge_fields: {
+                            'FNAME': name[0],
+                            'LNAME': name[1]
+                        }
+                    }).catch(err => {
+                        console.error(err);
+                    });
+                });
             });
         } catch (err) {
+            console.log(err)
             return res.json({
                 success: false,
                 message: err
@@ -303,6 +326,7 @@ module.exports = function (app) {
     });
     require('./braintree.route')(apiRoutes);
     require('./contents.route')(apiRoutes);
+    require('./club.route')(apiRoutes);
     require('./user.route')(apiRoutes);
 
     app.use('/api', apiRoutes);

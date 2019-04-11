@@ -1,0 +1,97 @@
+div {
+    font-family: 'Montserrat';
+}
+
+h3 {
+    font-size: 18px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+input {
+    width: 250px;
+    outline: 0;
+}
+
+.lowkey {
+    color: #aba8a8;
+}
+
+
+.fa-plus,
+.fa-pencil {
+    color: #fd1541;
+}
+
+.suggestedHeader{
+    padding-bottom: 30px;
+}
+
+.box {
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 1.5rem;
+    color: #00000066;
+    border: 1px solid #f7f7f7;
+    padding: 16px !important;
+    h3 {
+        color: #0000008a;
+    }
+    .box-header {
+        position: relative;
+        padding: 1rem;
+        h3 {
+            font-size: 20px;
+        }
+    }
+    .box-body {
+        padding: 1rem;
+    }
+    .box-tool {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        padding: 1rem;
+    }
+    .items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-left: 40px;
+        padding-bottom: 10px;
+        .item {
+            display: flex;
+            width: 50%;
+            padding: 15px 5px 15px 5px;
+            .title {
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {}
+
+@media (max-width: 768px) {
+    .uploadIcon {
+        top: 40%;
+        left: 50%;
+    }
+}
+
+@media (max-width: 414px) {
+    .box-header h3 {
+        font-size: 16px;
+    }
+    .nav>li>a {
+        position: relative;
+        display: block;
+        padding: 5px 10px;
+    }
+    input {
+        width: 270px;
+    }
+}

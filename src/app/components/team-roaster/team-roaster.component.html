@@ -1,0 +1,171 @@
+<div class="box p-a">
+  <div class="box-header">
+      <h3 class="m-0 suggestedHeader"><b>TEAM ROSTER</b></h3>
+  </div>
+
+  <div class="box-tool">
+      <div *ngIf="teams && teams.length" class="tool-controls">
+          <div class="assign-team-btn" (click)="openModal(createTeamModal)">NEW TEAM</div>
+          <div class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN</div>
+      </div>
+  </div>
+  <div class="row" id="sq-pa">
+    <tabset *ngIf="teams && teams.length">
+        <tab *ngFor="let team of teams" [heading]="team.name" [active]="team.active" (select)="selectTeam(team)"
+            (deselect)="team.active = false">
+            <table class="listSquad col-lg-6 col-sm-6" style="margin-top: 20px;">
+                <tr *ngFor="let player of team.players">
+                  <td>
+                    <div class="leaderboard__row-imgcontainer">
+                        <img [src]="player.avatarURL" class="leaderboard__row-img">
+                    </div>
+                  </td>
+                  <td>
+                      <div>
+                        #{{ player.profiles[0].jersey || 0 }}
+                      </div>
+                  </td> 
+                  <td>
+                      <div>
+                        {{ player.shortName }}
+                      </div>
+                  </td>
+                  <td>
+                      <div class="assign-team-btn">Assign</div>
+                  </td>
+                  <td>
+                      <div>
+                        {{ player.assignmentCompletion || 60 }}%
+                      </div>
+                  </td>
+                  <td>
+                    <div class="assign-team-btn">View</div>
+                  </td>
+                </tr>
+            </table>
+            <!-- <ul class="listSquad col-lg-6 col-sm-6">
+                <li *ngFor="let player of team.players">
+                    <a>{{ player.name | uppercase }}</a>&nbsp;&nbsp;<span id="plypos">{{ player.position | uppercase }}</span>
+                </li>
+                <span *ngIf="!team.players || team.players.length == 0">
+                    No players on team. Click Assign to begin
+                </span>
+            </ul> -->
+        </tab>
+    </tabset>
+    <div *ngIf="!teams || teams.length == 0">
+        No teams yet. To begin, click below.
+        <div class="new_team_btn" (click)="openModal(createTeamModal)">CREATE TEAM</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="squadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center" id="ModalTitle">SQUAD MEMBERS</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row saved-pa">
+                    <div class="col-xs-6">
+                        <a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="drillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center" id="ModalTitle">SAVED DRILLS</h4>
+            </div>
+            <div class="modal-body">
+
+                <!-- 1ST SAVED SESSION -->
+                <div class="row saved-pa">
+                    <div class="col-xs-6 drillName">
+                        DRILL 1
+                        <button class="editBtn"><i aria-hidden="true" class="fa fa-pencil"></i></button>
+                    </div>
+                    <div class="col-xs-5">
+                        <button class="pull-right red-btn-modal">EXPORT</button>
+                        <button class="pull-right red-btn-modal">LOAD</button>
+                    </div>
+                    <div class="col-xs-1">
+                        <button type="button" class="deleteBtn">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CREATE TEAM -->
+<ng-template #createTeamModal>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 *ngIf="page === 1" class="modal-title text-center">Please Enter Team Name</h4>
+    </div>
+    <div class="modal-body">
+        <div class="promo-fields">
+            <div class="form-group" style="display: flex;">
+                <input [(ngModel)]="model.teamName" name="teamName" class="form-control" placeholder="Team Name">
+            </div>
+            <div class="no_club" (click)="createTeam()">Create Team</div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- ASSIGN PLAYERS TO TEAM -->
+<ng-template #assignPlayerModal>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center">Click on user to add them to a team</h4>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="!selectedUser">
+            <div class="club-list" *ngIf="usersWithoutTeam && usersWithoutTeam.length">
+                <div *ngFor="let user of usersWithoutTeam" class="club-list-item" (click)="selectUser(user)"
+                    [ngStyle]="{'background-color': user.active ? '#efefef' : '#ffffff'}">
+                    <img [src]="user.avatarURL">
+                    <span>{{ user.name }} </span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!usersWithoutTeam || usersWithoutTeam.length == 0">
+            No players without team
+        </div>
+        <div *ngIf="selectedUser">
+            <div class="promo-fields">
+                <div class="form-group" style="display: flex;">
+                    <span>Team: </span>
+                    <select [(ngModel)]="model.team">
+                        <option *ngFor="let team of teams" [ngValue]="team">{{ team.name }}</option>
+                    </select>
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <div class="no_club" (click)="deselectUser()" style="margin: 15px;">Back</div>
+                    <div class="no_club" (click)="addUserToTeam()" style="margin: 15px;">Next</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
