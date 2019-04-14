@@ -1,22 +1,118 @@
 <div class="box">
   <div class="box-header">
-      <h3 class="m-0 suggestedHeader"><b>TRAINING SESSIONS</b></h3>
+      <h3 class="m-0"><b>TRAINING SESSIONS</b></h3>
   </div>
 
-  <div class="box-tool">
+  <!-- <div class="box-tool">
       <ul class="nav">
         <li class="nav-item inline red-btn">
             <a class="nav-link" >CREATE SESSION</a>
         </li>
       </ul>
-  </div>
+  </div> -->
 
-  <ul class="listDrills">
-      <li>
-          <a>DEFENSIVE DRILL</a>
-      </li>
-      <li>
-          <a>ATTACKING DRILL</a>
-      </li>
-  </ul>
+  <div class="box-body">
+      <div class="plans">
+          <div class="plan_row" *ngFor="let plan of plans">
+            <div class="plan_name" *ngIf="plan.content.length">{{ plan.name | uppercase }}</div>
+            <div class="assign_button" (click)="selectPlan(plan, assign)">Assign</div>
+            <div class="assign_button">Report</div>
+          </div>
+          <div class="plan_row" *ngIf="!plans || plans.length == 0">
+            No Saved Plans. To begin go to the sessions page and create a plan.
+          </div>
+      </div>
+  </div>
 </div>
+
+<!-- Assign plan to player or team -->
+<ng-template #assign>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center" *ngIf="modal.page == 1">Create Assignment</h4>
+        <h4 class="modal-title text-center" *ngIf="modal.page == 2">Select Player or Team</h4>
+        <h4 class="modal-title text-center" *ngIf="modal.page == 3">Set Due Date</h4>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="modal.page == 1" class="assignment-types">
+            <div class="assignment-type" (click)="setType('player')">
+                Player
+            </div>
+            <div class="assignment-type" (click)="setType('team')">
+                Team
+            </div>
+        </div>
+        <div *ngIf="modal.page == 2 && modal.selectedType === 'player'">
+            <div class="club-list">
+                <div *ngFor="let player of players" class="club-list-item" (click)="selectPlayer(player)"
+                    [ngStyle]="{'background-color': player.active ? '#efefef' : '#ffffff'}">
+                    <img [src]="player.avatarURL">
+                    <span>{{ player.name }} </span>
+                </div>
+            </div>
+            <div class="no_club" (click)="modal.page = 3">Continue</div>
+        </div>
+        <div *ngIf="modal.page == 2 && modal.selectedType === 'team'">
+            <div class="club-list">
+                <div *ngFor="let team of teams" class="club-list-item" (click)="selectTeam(team)"
+                    [ngStyle]="{'background-color': team.active ? '#efefef' : '#ffffff'}">
+                    <span>{{ team.name }} </span>
+                </div>
+            </div>
+            <div class="no_club" (click)="modal.page = 3">Continue</div>
+        </div>
+        <div *ngIf="modal.page == 3">
+            <div class="row form-group">
+                <span class="form-label">From</span>
+                <input type="text" placeholder="Due Date" class="form-control" bsDatepicker
+                    [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.startDate">
+            </div>
+            <div class="row form-group">
+                <span class="form-label">Due Date</span>
+                <input type="text" placeholder="Due Date" class="form-control" bsDatepicker
+                    [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.endDate">
+            </div>
+            <div class="no_club" (click)="createAssignment()">Continue</div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Reports -->
+<ng-template #report>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center">Reports</h4>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="!selectedUser">
+            <div class="club-list" *ngIf="usersWithoutTeam && usersWithoutTeam.length">
+                <div *ngFor="let user of usersWithoutTeam" class="club-list-item" (click)="selectUser(user)"
+                    [ngStyle]="{'background-color': user.active ? '#efefef' : '#ffffff'}">
+                    <img [src]="user.avatarURL">
+                    <span>{{ user.name }} </span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!usersWithoutTeam || usersWithoutTeam.length == 0">
+            No players without team
+        </div>
+        <div *ngIf="selectedUser">
+            <div class="promo-fields">
+                <div class="form-group" style="display: flex;">
+                    <span>Team: </span>
+                    <select [(ngModel)]="model.team">
+                        <option *ngFor="let team of teams" [ngValue]="team">{{ team.name }}</option>
+                    </select>
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <div class="no_club" (click)="deselectUser()" style="margin: 15px;">Back</div>
+                    <div class="no_club" (click)="addUserToTeam()" style="margin: 15px;">Next</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

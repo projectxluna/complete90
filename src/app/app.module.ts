@@ -21,6 +21,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { FooterComponent } from './components/footer/footer.component';
 
 import { DragAndDropModule } from 'angular-draggable-droppable';
@@ -87,6 +90,8 @@ import { ElapsedTimestampPipe } from './pipes/elapsed-timestamp.pipe';
     ModalModule.forRoot(),
     ProgressbarModule.forRoot(),
     TabsModule.forRoot(),
+    TimepickerModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     VideogularModule,
     HttpModule,
     BrowserAnimationsModule,

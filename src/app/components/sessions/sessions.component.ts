@@ -33,6 +33,7 @@ export class SessionsComponent implements OnInit {
   sessions = [];
   freeSessions = [];
   customSessions = [];
+  assignments = [];
 
   banner = {
     isActive: false,
@@ -302,11 +303,13 @@ export class SessionsComponent implements OnInit {
   }
 
   getSessions(cache: boolean = false) {
+    this.assignments.length = 0;
+
     this.dataService.getSessions(cache).subscribe((response) => {
       if (!response.success) return;
       this.sessions = [];
       this.customSessions = [];
-
+      this.assignments = response.assignments;
       this.collectTagsAndCategories(response.content);
       this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);

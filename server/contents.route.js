@@ -1,15 +1,16 @@
+var config = require('./config').get(process.env.NODE_ENV);
+var Auth = require('./helpers/auth');
+var waterfall = require('async-waterfall');
+var request = require('request');
+var AWS = require('./helpers/aws');
+
+var Plan = require('./models/plan');
+var User = require('./models/user');
+var Assignment = require('./models/assignment');
+var UserStats = require('./models/stats');
+var mongoose = require('mongoose');
+
 module.exports = function (apiRoutes) {
-    var config = require('./config').get(process.env.NODE_ENV);
-    var Auth = require('./helpers/auth');
-    var waterfall = require('async-waterfall');
-    var request = require('request');
-    var AWS = require('./helpers/aws');
-
-    var Plan = require('./models/plan');
-    var User = require('./models/user');
-
-    var UserStats = require('./models/stats');
-    var mongoose = require('mongoose');
 
     /**
      * get free sessions
@@ -51,7 +52,7 @@ module.exports = function (apiRoutes) {
                 callback(null, contents, userId);
             },
             getUserPlans
-        ], function (err, contents, userPlans) {
+        ], function (err, contents, userPlans, managerPlans) {
             if (err) {
                 return res.json({
                     success: false,
@@ -61,7 +62,8 @@ module.exports = function (apiRoutes) {
             res.json({
                 success: true,
                 content: contents,
-                plans: userPlans
+                plans: userPlans,
+                assignments: managerPlans
             });
         });
     });
@@ -370,39 +372,90 @@ module.exports = function (apiRoutes) {
         callback(null, contents);
     }
 
-    function getUserPlans(contents, userId, callback) {
-        Plan.find({
-            userId: userId
-        }).sort({ _id: -1 }).exec((err, plans) => {
-            if (err) callback(err);
+    async function getUserPlans(contents, userId, callback) {
+        let user = await findUser(userId);
+        let plans = await getUserCreatedPlan(userId);
+        let assignments = await getAssignment(userId, user.teamId);
+        let assignedPlanIds = assignments.map(assignment => {
+            return assignment.planId;
+        });
+        let assignedPlans = await getPlansWithIds(assignedPlanIds);
+        let a = {}
+        for (let plan of assignedPlans) {
+            a[plan._id] = plan;
+        }
+        assignments.map(assignment => {
+            assignment.plan = mapPlanToContent(a[assignment.planId], contents);
+        });
 
-            let userPlan = [];
-            for (let plan of plans) {
-                let videoContents = [];
-                plan.content.forEach(videoId => {
-                    let content = contents.find(function (element) {
-                        return element.id === videoId;
-                    });
-                    videoContents.push(content);
-                });
-                plan.detailedContent.forEach(cont => {
-                    let content = contents.find(function (element) {
-                        return element.id === cont.contentId;
-                    });
-                    if (content) {
-                        content.reps = cont.reps || 0,
-                        content.sets = cont.sets || 0
-                    }
-                    videoContents.push(content);
-                });
-                let p = {
-                    id: plan._id,
-                    name: plan.name,
-                    content: videoContents
-                }
-                userPlan.push(p);
+        let userPlan = plans.map(plan => {return mapPlanToContent(plan, contents)});
+        callback(null, contents, userPlan, assignments);
+    }
+
+    const mapPlanToContent = (plan, contents) => {
+        let videoContents = [];
+        plan.content.forEach(videoId => {
+            let content = contents.find(function (element) {
+                return element.id === videoId;
+            });
+            videoContents.push(content);
+        });
+        plan.detailedContent.forEach(cont => {
+            let content = contents.find(function (element) {
+                return element.id === cont.contentId;
+            });
+            if (content) {
+                content.reps = cont.reps || 0,
+                    content.sets = cont.sets || 0
             }
-            callback(null, contents, userPlan);
+            videoContents.push(content);
+        });
+        let p = {
+            id: plan._id,
+            name: plan.name,
+            content: videoContents
+        }
+        return p;
+    }
+
+    const getUserCreatedPlan = (userId) => {
+        return new Promise((resolve, reject) => {
+            Plan.find({
+                userId: userId
+            }).sort({ _id: -1 }).lean().exec((error, plans) => {
+                if (error) console.error(error)
+                resolve(plans)
+            });
+        });
+    }
+
+    const getAssignment = (userId, teamId) => {
+        return new Promise((resolve, reject) => {
+            let query = {
+                $or: [{forPlayers: mongoose.Types.ObjectId(userId)}]
+            }
+            if (teamId) {
+                query.$or.push({
+                    forTeams: mongoose.Types.ObjectId(teamId)
+                });
+            }
+            Assignment.find(query).sort({ _id: -1}).lean().exec((error, assignments) => {
+                if (error) console.error(error)
+                resolve(assignments)
+            });
+        });
+    }
+
+    const getPlansWithIds = (planIds) => {
+        return new Promise((resolve, reject) => {
+            Plan.find({
+                _id: {
+                    $in: planIds
+                }
+            }, (error, plans) => {
+                if (error) console.error(error)
+                resolve(plans)
+            });
         });
     }
 

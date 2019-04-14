@@ -20,6 +20,7 @@ const options = {
     bufferMaxEntries: 0,
     promiseLibrary: global.Promise
 };
+// mongoose.set('debug', true);
 
 // connect to database
 mongoose.connect(config.database, options,function (err) {

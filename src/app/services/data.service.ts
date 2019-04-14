@@ -51,6 +51,16 @@ export class DataService {
       });
   }
 
+  createAssignment(payload): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/user/assignment', payload, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   createTeam(teamName): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "nodemon ./server/server.js",
-    "prod": "NODE_ENV=production node ./server/server.js",
+    "prod": "nodemon NODE_ENV=production node ./server/server.js",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -41,8 +41,8 @@
     "ngx-bootstrap": "^2.0.2",
     "nodemailer": "^4.7.0",
     "nodemailer-express-handlebars": "^2.0.0",
-    "rxjs": "^6.3.3",
-    "rxjs-compat": "^6.3.3",
+    "rxjs": "^6.2.2",
+    "rxjs-compat": "^6.2.2",
     "videogular2": "^6.0.8",
     "zone.js": "~0.8.26"
   },

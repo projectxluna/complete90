@@ -1,9 +1,10 @@
 const { exposedUserData, exposedClubData } = require('./helpers/pure');
 const path = require('path');
-const _ = require('lodash');
 const Club = require('./models/club');
 const Team = require('./models/team');
 const User = require('./models/user');
+const Assignment = require('./models/assignment');
+const mongoose = require('mongoose');
 
 const findClub = (ownerId) => {
     return new Promise((resolve, reject) => {
@@ -33,7 +34,6 @@ const findManager = (id) => {
 
 module.exports = function (apiRoutes) {
     var Auth = require('./helpers/auth');
-    var User = require('./models/user');
     var im = require('imagemagick');
     var PromoController = require('./helpers/promo');
     var mailer = require('./helpers/mailer');
@@ -152,6 +152,38 @@ module.exports = function (apiRoutes) {
                 });
         }).catch(err => {
             res.json({success: false, message: err});
+        });
+    });
+
+    /**
+     * Get assignments
+     */
+    apiRoutes.get('/user/assignment', Auth.isAuthenticated, (req, res) => {
+        const userId = req.decoded.userId
+
+    });
+
+    /**
+     * Create assignment
+     */
+    apiRoutes.post('/user/assignment', Auth.isAuthenticated, function (req, res) {
+        const {forTeams, forPlayers, planId, startDate, endDate} = req.body;
+        const userId = req.decoded.userId
+        
+        if (!forTeams && !forPlayers) return res.json({success: false, message: 'player or team required'});
+        if (!planId) return res.json({success: false, message: 'plan required'});
+
+        let assignment = new Assignment();
+        assignment.userId = userId;
+        assignment.planId = planId;
+        assignment.forTeams = forTeams;
+        assignment.forPlayers = forPlayers;
+        assignment.startDate = startDate
+        assignment.endDate = endDate;
+
+        assignment.save((err, saved) => {
+            if (err) return res.json({success: false, message: err});
+            res.json({success: true});
         });
     });
 
