@@ -42,15 +42,12 @@
                     <div class="assign-team-btn">View</div>
                   </td>
                 </tr>
+                <tr *ngIf="!team.players || team.players.length == 0">
+                    <span>
+                        No players on team. Click Assign to begin
+                    </span>
+                </tr>
             </table>
-            <!-- <ul class="listSquad col-lg-6 col-sm-6">
-                <li *ngFor="let player of team.players">
-                    <a>{{ player.name | uppercase }}</a>&nbsp;&nbsp;<span id="plypos">{{ player.position | uppercase }}</span>
-                </li>
-                <span *ngIf="!team.players || team.players.length == 0">
-                    No players on team. Click Assign to begin
-                </span>
-            </ul> -->
         </tab>
     </tabset>
     <div *ngIf="!teams || teams.length == 0">
