@@ -15,7 +15,7 @@ module.exports = function (apiRoutes) {
                 message: 'Invalid param: club name is required'
             });
         }
-        Club.find({name: clubName}, (err, clubs) => {
+        Club.find({name: new RegExp('^'+clubName+'$', "i")}, (err, clubs) => {
             if (err) {
                 return res.status(422).send({
                     message: err
