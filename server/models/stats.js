@@ -16,6 +16,11 @@ var statSchema = mongoose.Schema({
         },
         currentTime: Number,
         watchedTotal: Number,
+        contentLength: Number
+    },
+    assignmentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        index: true,
     }
 },
 {

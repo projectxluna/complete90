@@ -13,7 +13,7 @@
     <tabset *ngIf="teams && teams.length">
         <tab *ngFor="let team of teams" [heading]="team.name" [active]="team.active" (select)="selectTeam(team)"
             (deselect)="team.active = false">
-            <table class="listSquad col-lg-6 col-sm-6" style="margin-top: 20px;">
+            <table class="listSquad col-lg-6 col-sm-6" style="margin-top: 20px; width: 100%">
                 <tr *ngFor="let player of team.players">
                   <td>
                     <div class="leaderboard__row-imgcontainer">
@@ -25,21 +25,11 @@
                         #{{ player.profiles[0].jersey || 0 }}
                       </div>
                   </td> 
-                  <td>
-                      <div>
-                        {{ player.shortName }}
-                      </div>
+                  <td style="width: 50%;">
+                      {{ player.shortName }}
                   </td>
                   <td>
-                      <div class="assign-team-btn">Assign</div>
-                  </td>
-                  <td>
-                      <div>
-                        {{ player.assignmentCompletion || 60 }}%
-                      </div>
-                  </td>
-                  <td>
-                    <div class="assign-team-btn">View</div>
+                    <div class="assign-team-btn" (click)="openPlayerReportModal(player, playerReport)">View</div>
                   </td>
                 </tr>
                 <tr *ngIf="!team.players || team.players.length == 0">
@@ -164,5 +154,59 @@
                 </div>
             </div>
         </div>
+    </div>
+</ng-template>
+
+<!-- Selected player report -->
+<ng-template #playerReport>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center">Training</h4>
+    </div>
+    <div class="modal-body">
+        <tabset>
+            <tab *ngFor="let tab of reportModal.tabs" [heading]="tab.name" [active]="tab.active" (select)="tab.active = !tab.active"
+                (deselect)="tab.active = false">
+                <table *ngIf="reportModal.report && reportModal.report[tab.id]" class="listSquad col-lg-6 col-sm-6"
+                    style="margin-top: 20px; width: 100%;">
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            Length
+                        </td>
+                        <td>
+                            Created On
+                        </td>
+                        <td>
+                            Due Date
+                        </td>
+                        <td>
+                            Completion
+                        </td>
+                    </tr>
+                    <tr *ngFor="let report of reportModal.report[tab.id]">
+                        <td>
+                            {{ report.contentName }}
+                        </td>
+                        <td>
+                            {{ report.contentLength / 100 | number:'.1-2' }} s
+                        </td>
+                        <td>
+                            {{ report.createdAt | date }}
+                        </td>
+                        <td>
+                            {{ report.dueDate | date }}
+                        </td>
+                        <td>
+                            {{ report.completion | number:'.1-2' | percent }}
+                        </td>
+                    </tr>
+                </table>
+            </tab>
+        </tabset>
     </div>
 </ng-template>

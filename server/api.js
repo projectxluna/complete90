@@ -328,6 +328,7 @@ module.exports = function (app) {
     require('./contents.route')(apiRoutes);
     require('./club.route')(apiRoutes);
     require('./user.route')(apiRoutes);
+    require('./report.route')(apiRoutes);
 
     app.use('/api', apiRoutes);
 };

@@ -109,10 +109,10 @@ export class MyClubComponent implements OnInit {
     }
     this.dataService.addPlayerToClub(player.id).subscribe(response => {
       if (response.success) {
-        setTimeout(() => {
-          this.findPendingRequest();
-          this.modalRef.hide();
-        }, 3000);
+        this.findPendingRequest();
+        this.modalRef.hide();
+        // setTimeout(() => {
+        // }, 3000);
       }
     });
   }

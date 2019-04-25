@@ -216,14 +216,16 @@ module.exports = function (apiRoutes) {
      * update user watched stats
      */
     apiRoutes.post('/session/stats', Auth.isAuthenticated, function (req, res) {
-        let stats = req.body.contentStats;
+        const {contentStats, assignmentId} = req.body;
         let userId = req.decoded.userId;
 
-        UserStats.findOneAndUpdate({ 'userId': userId, 'content.id': stats.contentId }, {
+        UserStats.findOneAndUpdate({ 'userId': userId, 'content.id': contentStats.contentId }, {
             userId: userId,
-            'content.id': stats.contentId,
-            'content.currentTime': stats.currentTime,
-            $inc: { 'content.watchedTotal': stats.watchedTotal }
+            'content.id': contentStats.contentId,
+            'content.currentTime': contentStats.currentTime,
+            'content.contentLength': contentStats.contentLength,
+            $inc: { 'content.watchedTotal': contentStats.watchedTotal },
+            assignmentId: mongoose.Types.ObjectId(assignmentId)
         }, { upsert: true }, function (err, numberAffected, raw) {
             if (err) {
                 return res.json({

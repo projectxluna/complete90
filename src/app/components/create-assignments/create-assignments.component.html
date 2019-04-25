@@ -1,22 +1,14 @@
 <div class="box">
   <div class="box-header">
-      <h3 class="m-0"><b>TRAINING SESSIONS</b></h3>
+      <h3 class="m-0"><b>ASSIGNMENTS</b></h3>
   </div>
-
-  <!-- <div class="box-tool">
-      <ul class="nav">
-        <li class="nav-item inline red-btn">
-            <a class="nav-link" >CREATE SESSION</a>
-        </li>
-      </ul>
-  </div> -->
 
   <div class="box-body">
       <div class="plans">
           <div class="plan_row" *ngFor="let plan of plans">
             <div class="plan_name" *ngIf="plan.content.length">{{ plan.name | uppercase }}</div>
             <div class="assign_button" (click)="selectPlan(plan, assign)">Assign</div>
-            <div class="assign_button">Report</div>
+            <!-- <div class="assign_button" (click)="getReport(plan, report)">Report</div> -->
           </div>
           <div class="plan_row" *ngIf="!plans || plans.length == 0">
             No Saved Plans. To begin go to the sessions page and create a plan.
@@ -88,31 +80,28 @@
         <h4 class="modal-title text-center">Reports</h4>
     </div>
     <div class="modal-body">
-        <div *ngIf="!selectedUser">
-            <div class="club-list" *ngIf="usersWithoutTeam && usersWithoutTeam.length">
-                <div *ngFor="let user of usersWithoutTeam" class="club-list-item" (click)="selectUser(user)"
-                    [ngStyle]="{'background-color': user.active ? '#efefef' : '#ffffff'}">
-                    <img [src]="user.avatarURL">
-                    <span>{{ user.name }} </span>
-                </div>
-            </div>
+        <div *ngIf="selectedPlan && !selectedPlan.assignments || selectedPlan.assignments.length == 0">
+            This plan has not been assigned yet
         </div>
-        <div *ngIf="!usersWithoutTeam || usersWithoutTeam.length == 0">
-            No players without team
-        </div>
-        <div *ngIf="selectedUser">
-            <div class="promo-fields">
-                <div class="form-group" style="display: flex;">
-                    <span>Team: </span>
-                    <select [(ngModel)]="model.team">
-                        <option *ngFor="let team of teams" [ngValue]="team">{{ team.name }}</option>
-                    </select>
-                </div>
-                <div style="display: flex; flex-direction: row;">
-                    <div class="no_club" (click)="deselectUser()" style="margin: 15px;">Back</div>
-                    <div class="no_club" (click)="addUserToTeam()" style="margin: 15px;">Next</div>
-                </div>
-            </div>
+        <div *ngIf="selectedPlan.assignments && selectedPlan.assignments.length">
+            <table>
+                <tr>
+                    <td>Team/Player</td>
+                    <td>Created On</td>
+                    <td>Due Date</td>
+                </tr>
+                <tr *ngFor="let plan of selectedPlan.assignments">
+                    <td>
+                        {{plan.forTeams + plan.forPlayers}}
+                    </td>
+                    <td>
+                        {{plan.createdAt | date}}
+                    </td>
+                    <td>
+                        {{plan.endDate | date}}
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </ng-template>

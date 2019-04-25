@@ -61,6 +61,26 @@ export class DataService {
       });
   }
 
+  getAssignments(planId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {planId} });
+
+    return this.http.get('/api/user/assignment', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  getPlayerReport(playerId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {playerId} });
+
+    return this.http.get('/api/report/assignment', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   createTeam(teamName): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
@@ -224,12 +244,12 @@ export class DataService {
       });
   }
 
-  saveWatchedStats(contentStats): Observable<any> {
+  saveWatchedStats(payload): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
 
     return this.http
-      .post('/api/session/stats', { contentStats: contentStats }, options)
+      .post('/api/session/stats', payload, options)
       .map((response: Response) => {
         return response.json();
       });

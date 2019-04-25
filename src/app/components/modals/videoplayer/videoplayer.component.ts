@@ -79,10 +79,12 @@ export class VideoplayerComponent implements OnInit {
     contentId: '',
     currentTime: 0, // seconds
     watchedTotal: 0, // seconds
+    contentLength: 0
   }
 
   selectedIndex;
   selectedContent;
+  assignmentId;
   static originalVolume: any;
 
   constructor(public bsModalRef: BsModalRef, public dataService: DataService) {
@@ -184,12 +186,16 @@ export class VideoplayerComponent implements OnInit {
     this.sessionStats.watchedTotal = watched;
     this.sessionStats.currentTime = VideoplayerComponent.api.getDefaultMedia().currentTime;
     this.sessionStats.contentId = this.selectedContent.id;
-
+    this.sessionStats.contentLength = VideoplayerComponent.api.getDefaultMedia().duration;
     // console.log('Watched time:', this.timer.formatTime(), 'Current time:', this.api.getDefaultMedia().currentTime);
     if (watched < 1) {
       return;
     }
-    this.dataService.saveWatchedStats(this.sessionStats).subscribe(result => {
+    let payload = {
+      contentStats: this.sessionStats,
+      assignmentId: this.assignmentId ? this.assignmentId : null
+    };
+    this.dataService.saveWatchedStats(payload).subscribe(result => {
       if (!result || !result.success) {
         return;
       }

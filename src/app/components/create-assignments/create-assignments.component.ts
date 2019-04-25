@@ -101,6 +101,22 @@ export class CreateAssignmentsComponent implements OnInit {
     this.openModal(template);
   }
 
+  reportRequestActive = false;
+  selectedPlan;
+  getReport(plan, template) {
+    if (this.reportRequestActive) {
+      return;
+    }
+    this.selectedPlan = plan;
+    this.reportRequestActive = true;
+    this.dataService.getAssignments(plan.id).subscribe(res => {
+      plan.assignments = res.assignments;
+      console.log(res);
+      this.openModal(template);
+      this.reportRequestActive = false;
+    });
+  }
+
   createAssignment() {
     let payload = {
       planId: this.modal.plan.id,

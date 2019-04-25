@@ -143,7 +143,7 @@
                 <div *ngFor="let assignment of assignments; let i = index" class="col-lg-4 col-md-4 col-sm-8">
                     <div class="vid-thumb">
                         <img class="img-responsive" [src]="assignment.plan.content[0].thumbnail">
-                        <a (click)="openModalWithComponent(assignment.plan, 0)">
+                        <a (click)="openAssignmentModal(assignment)">
                             <span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
                         </a>
                     </div>

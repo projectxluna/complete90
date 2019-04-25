@@ -412,6 +412,17 @@ export class SessionsComponent implements OnInit {
     this.openModalWithComponent(session, index)
   }
 
+  openAssignmentModal(assignment) {
+    const initialState = {
+      session: assignment.plan,
+      selectedIndex: 0,
+      userCreated: false,
+      assignmentId: assignment._id
+    };
+    this.bsModalRef = this.modalService.show(VideoplayerComponent, { initialState, class: 'modal-lg' });
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
   openModalWithComponent(session, selectedIndex: number = 0, userCreated = false) {
     const initialState = {
       session,

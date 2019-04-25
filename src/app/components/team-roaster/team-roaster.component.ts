@@ -16,6 +16,14 @@ export class TeamRoasterComponent implements OnInit {
     team: undefined
   };
 
+  reportModal = {
+    player: undefined,
+    report: undefined,
+    tabs: [
+      {name: 'Individual', active: true, id: 'player'},
+      {name: 'Team', active: false, id: 'team'}
+    ]
+  };
   usersWithoutTeam: any;
   page = 1;
   selectedUser: any;
@@ -50,6 +58,7 @@ export class TeamRoasterComponent implements OnInit {
 
   closeModal() {
     this.modalRef.hide();
+    this.resetReportModal();
   }
 
   openTeamAssignemntModal(template: TemplateRef<any>) {
@@ -104,6 +113,17 @@ export class TeamRoasterComponent implements OnInit {
     });
   }
 
+  resetReportModal() {
+    this.reportModal = {
+      player: undefined,
+      report: undefined,
+      tabs: [
+        {name: 'Individual', active: true, id: 'player'},
+        {name: 'Team', active: false, id: 'team'}
+      ]
+    };
+  }
+
   addUserToTeam() {
     if (!this.selectedUser || !this.model.team) {
       return;
@@ -118,6 +138,14 @@ export class TeamRoasterComponent implements OnInit {
       this.selectTeam(this.teams[0]);
       this.closeModal();
     });
+  }
+
+  openPlayerReportModal(player, template) {
+    this.reportModal.player = player;
+    this.openModal(template)
+    this.dataService.getPlayerReport(player.id).subscribe(response => {
+      this.reportModal.report = response.stats;
+    })
   }
 
   generateTestData() {

@@ -28,6 +28,14 @@ const findTeamById = (id) => {
     return Team.findById(id).lean().exec();
 }
 
+const findTeamByIds = (ids) => {
+    return Team.find({_id: {$in: ids} }).lean().exec();
+}
+
+const findUserByIds = (ids) => {
+    return User.find({_id: {$in: ids} }).lean().exec();
+}
+
 const findManager = (id) => {
     return User.findById(id).lean().exec();
 }
@@ -159,8 +167,38 @@ module.exports = function (apiRoutes) {
      * Get assignments
      */
     apiRoutes.get('/user/assignment', Auth.isAuthenticated, (req, res) => {
-        const userId = req.decoded.userId
+        const userId = req.decoded.userId;
+        const planId = req.query.planId;
+        
+        let search = {
+            userId: userId
+        };
+        if (planId) {
+            search.planId = planId;
+        }
+        Assignment.find(search).lean().exec(async (err, assignments) => {
+            if (err) return res.status(400).send(err);
 
+            let playersId = [];
+            let teamsId = [];
+            assignments.forEach(a => {
+                teamsId.push(...a.forTeams);
+                playersId.push(...a.forPlayers);
+            });
+            let teams = await findTeamByIds(teamsId);
+            let players = await findUserByIds(playersId);
+
+            let mappedAssignment = assignments.map(assignment => {
+                assignment.forPlayers = assignment.forPlayers.map(playerId => {
+                    return players.find(player => {return player._id == playerId}).name;
+                });
+                return assignment;
+            })
+            res.json({
+                success: true,
+                assignments: mappedAssignment
+            });
+        });
     });
 
     /**
