@@ -14,10 +14,15 @@
         </div>
     </div>
 
-    <div *ngIf="coachProfile && pendingPlayerRequests && pendingPlayerRequests.length" class="box-tool">
-        <div class="tool-controls">
+    <div *ngIf="coachProfile" class="box-tool">
+        <div class="tool-controls" *ngIf="pendingPlayerRequests && pendingPlayerRequests.length">
             <div class="assign-team-btn" (click)="openModal(confirmTemplate)">{{ pendingPlayerRequests.length }} PENDING</div>
         </div>
+        <ul class="nav" (click)="editMode = !editMode">
+            <li class="nav-item inline dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            </li>
+        </ul>
     </div>
 
     <div *ngIf="playerProfile && !club" class="box-body">
@@ -55,10 +60,18 @@
 
     <div class="box-body" *ngIf="coachProfile">
         <div class="club_manager">
-            <img *ngIf="club.logoUrl" [src]="club.logoUrl" class="club_manager_logo">
+            <div class="logo">
+                <img *ngIf="club.logoUrl && !editMode" [src]="club.logoUrl" class="club_manager_logo">
+                <div *ngIf="editMode" class="uploadIcon">
+                    <a (click)="addFiles()"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
+                    <input type="file" name="profileImg" #file style="display: none" (change)="onFilesAdded()" accept="image/*" />
+                </div>
+            </div>
             <div class="club_manager_props">
-                <div class="club_manager_prop">{{ club.name }}</div>
-                <div class="club_manager_prop">Years With Club: {{ club.createdAt }}</div>
+                <div *ngIf="!editMode" class="club_manager_prop">{{ club.name }}</div>
+                <div *ngIf="!editMode" class="club_manager_prop">Years With Club: {{ club.createdAt }}</div>
+                <div *ngIf="editMode" class="club_manager_prop"><input [(ngModel)]="club.name" name="clubName" class="form-control" placeholder="name"></div>
+                <div *ngIf="editMode" class="no_club" (click)="updateClub()">Save</div>
             </div>
         </div>
     </div>

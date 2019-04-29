@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DataService } from '../../services';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -9,6 +9,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class MyClubComponent implements OnInit {
 
+  @ViewChild('file') file;
   profile: any;
   playerProfile: any;
   coachProfile: any;
@@ -18,6 +19,7 @@ export class MyClubComponent implements OnInit {
   model = {
     clubName: ''
   };
+  editMode: boolean = false;
 
   error = '';
   page = 1;
@@ -109,11 +111,47 @@ export class MyClubComponent implements OnInit {
     }
     this.dataService.addPlayerToClub(player.id).subscribe(response => {
       if (response.success) {
-        this.findPendingRequest();
+        // this.findPendingRequest();
         this.modalRef.hide();
-        // setTimeout(() => {
-        // }, 3000);
+        window.location.reload();
       }
     });
+  }
+
+  updateClub() {
+    this.loading = true;
+    let club = {
+      clubId: this.club._id,
+      name: this.club.name
+    };
+    this.dataService.updateClub(club).subscribe(response => {
+      this.loading = false;
+      this.editMode = false;
+      if (response.success) {
+        console.log(response)
+      }
+    });
+  }
+
+  addFiles() {
+    this.file.nativeElement.click();
+  }
+
+  loading: boolean = false;
+  onFilesAdded() {
+    const files: { [key: string]: File } = this.file.nativeElement.files;
+
+    if (files && files[0]) {
+      this.loading = true;
+      this.dataService.uploadClubImage(files[0], this.club._id).subscribe(response => {
+        try {
+          window.location.reload();
+        } catch (error) {
+          console.log(error);
+        }
+        this.loading = false;
+        this.editMode = false;
+      });
+    }
   }
 }

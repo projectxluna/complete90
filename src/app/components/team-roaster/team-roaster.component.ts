@@ -24,6 +24,12 @@ export class TeamRoasterComponent implements OnInit {
       {name: 'Team', active: false, id: 'team'}
     ]
   };
+  teamModal = {
+    team: undefined
+  };
+  playerModal = {
+    player: undefined
+  };
   usersWithoutTeam: any;
   page = 1;
   selectedUser: any;
@@ -148,36 +154,47 @@ export class TeamRoasterComponent implements OnInit {
     })
   }
 
-  generateTestData() {
-    this.teams = [
-      { 
-        name: 'Team 1',
-        active: true,
-        players: [
-          {
-            name: 'ANTHONY JONES',
-            position: 'GK',
-            photoUrl: '',
-            jersey: 10,
-            rating: 60,
-          },
-          { name: 'MICHAEL BRADLEY', position: 'LM'},
-          { name: 'ANTHONY JONES', position: 'LB'},
-          { name: 'ANTHONY JONES', position: 'CM'},
-          { name: 'Sadiq Awosanmi', position: 'GK'},
-          { name: 'Sadiq Awosanmi', position: 'F'},
-          { name: 'Sadiq Awosanmi', position: 'F'},
-        ]
-      },
-      { 
-        name: 'Team 2',
-        players: [
-          { name: 'ANTHONY JONES', position: 'LB'},
-          { name: 'ANTHONY JONES', position: 'CM'},
-          { name: 'Sadiq Awosanmi', position: 'GK'},
-          { name: 'Sadiq Awosanmi', position: 'F'},
-        ]
-      }
-    ];
+  editPlayer(player, template) {
+    this.playerModal.player = player;
+    this.openModal(template);
+  }
+
+  updatePlayer() {
+    if (!this.playerModal.player) {
+      return;
+    }
+    this.dataService.removeFromTeam(this.playerModal.player.id).subscribe(res => {
+      this.getTeams();
+      this.closeModal();
+    });
+  }
+
+  editTeam(team, template) {
+    this.teamModal.team = team;
+    this.openModal(template);
+  }
+
+  updateTeam() {
+    if (!this.teamModal.team) {
+      return;
+    }
+    let team = {
+      name: this.teamModal.team.name,
+      id: this.teamModal.team._id
+    };
+    this.dataService.updateTeam(team).subscribe(res => {
+      this.getTeams();
+      this.closeModal();
+    });
+  }
+
+  deleteTeam() {
+    if (!this.teamModal.team) {
+      return;
+    }
+    this.dataService.deleteTeam(this.teamModal.team._id).subscribe(res => {
+      this.getTeams();
+      this.closeModal();
+    });
   }
 }

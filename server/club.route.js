@@ -3,10 +3,22 @@ const Club = require('./models/club');
 const Team = require('./models/team');
 const User = require('./models/user');
 const mongoose = require('mongoose');
+const path = require('path');
 const _ = require('lodash')
+const im = require('imagemagick');
 const { exposedClubData, exposedUserData, CLUB_REQUEST_STATUS } = require('./helpers/pure');
 
 module.exports = function (apiRoutes) {
+
+    const findTeamPlayer = (teamId) => {
+        return new Promise((resolve, reject) => {
+            User.find({teamId: mongoose.Types.ObjectId(teamId)}, (err, users) => {
+                if (err) return reject(err);
+                let cleanedUsers = users.map(user => exposedUserData(user));
+                resolve(cleanedUsers);
+            });
+        });
+    }
 
     apiRoutes.get('/club', Auth.isAuthenticated, (req, res) => {
         const { clubName } = req.query;
@@ -31,10 +43,28 @@ module.exports = function (apiRoutes) {
         });
     });
 
+    apiRoutes.put('/club', Auth.isAuthenticated, (req, res) => {
+        const { name, clubId } = req.body;
+        let ownerId = req.decoded.userId;
+
+        if (!clubId || !name) {
+            return res.status(422).send({success: false, message: 'Invalid Params'});
+        }
+
+        Club.findOneAndUpdate({owner: mongoose.Types.ObjectId(ownerId), _id: mongoose.Types.ObjectId(clubId)}, {
+            name: name
+        }, (err, club) => {
+            if (err) {
+                return res.json({success: false, err: err});
+            }
+            return res.json({success: true});
+        });
+    });
+
     apiRoutes.get('/club/pending-request', Auth.isAuthenticated, (req, res) => {
         let userId = req.decoded.userId;
         Club.findOne({owner: mongoose.Types.ObjectId(userId)}, (err, club) => {
-            if (err) {
+            if (err || !club) {
                 return res.status(422).send({
                     message: err
                 });
@@ -53,7 +83,7 @@ module.exports = function (apiRoutes) {
                             name: user.name,
                             email: user.email,
                             subscription: user.braintree.subscription || user.subscription,
-                            avatarURL: user.avatarURL || "/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg",
+                            avatarURL: user.avatarURL || '/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg',
                         }
                     })
                 });
@@ -61,16 +91,76 @@ module.exports = function (apiRoutes) {
         });
     });
 
-    const findTeamPlayer = (teamId) => {
-        return new Promise((resolve, reject) => {
-            User.find({teamId: mongoose.Types.ObjectId(teamId)}, (err, users) => {
-                if (err) return reject(err);
-                let cleanedUsers = users.map(user => exposedUserData(user));
-                resolve(cleanedUsers);
+    apiRoutes.post('/club/confirm-request', Auth.isAuthenticated, (req, res) => {
+        let ownerId = req.decoded.userId;
+        const {userId} = req.body;
+        Club.findOne({owner: mongoose.Types.ObjectId(ownerId)}, (err, club) => {
+            if (err || !club) {
+                return res.status(422).send({
+                    message: err
+                });
+            }
+            User.findOneAndUpdate({_id: mongoose.Types.ObjectId(userId)}, { clubStatus: CLUB_REQUEST_STATUS.ACTIVE }, (err, saved) => {
+                if (err) {
+                    return res.status(422).send({
+                        message: err
+                    });
+                }
+                res.json({
+                    success: true
+                });
             });
         });
-    }
+    });
+    
+    apiRoutes.post('/club/team', Auth.isAuthenticated, (req, res) => {
+        let ownerId = req.decoded.userId;
+        const {teamName} = req.body
+        if (!teamName) {
+            return res.status(422).send({
+                message: 'Invalid Param: Team name is required'
+            });
+        }
+        Club.findOne({owner: mongoose.Types.ObjectId(ownerId)}, (err, club) => {
+            if (err) {
+                return res.status(422).send({
+                    message: err
+                });
+            }
+            let team = new Team();
+            team.name = teamName;
+            team.managerId = mongoose.Types.ObjectId(ownerId);
+            team.clubId = club._id;
+            
+            team.save((err, team) => {
+                if (err) {
+                    return res.status(422).send({
+                        message: err
+                    });
+                }
+                res.json({
+                    success: true
+                });
+                
+                if (team) {
+                    let teams = club.teams || [];
+                    teams.push(team._id);
+                    Club.findOneAndUpdate({_id: club._id}, {teams: teams}, (err, cb) =>{
+                        console.log('updated club with new team id')
+                    });
+                }
+            });
+        });
+    });
+    
+    apiRoutes.delete('/club/team/player', Auth.isAuthenticated, (req, res) => {
+        const {playerId} = req.query;
+        User.findByIdAndUpdate(playerId, {teamId: null}, (err, user) => {
+            if (err) return res.json({success: false, err});
 
+            res.json({success: true, user});
+        });
+    })
     apiRoutes.get('/club/team/players', Auth.isAuthenticated, async (req, res) => {
         let players = await findTeamPlayer(req.query.teamId);
         res.json({
@@ -93,7 +183,7 @@ module.exports = function (apiRoutes) {
     apiRoutes.get('/club/no-teams', Auth.isAuthenticated, (req, res) => {
         let userId = req.decoded.userId;
         Club.findOne({owner: mongoose.Types.ObjectId(userId)}, (err, club) => {
-            if (err) {
+            if (err || !club) {
                 return res.status(422).send({
                     message: err
                 });
@@ -101,10 +191,10 @@ module.exports = function (apiRoutes) {
             User.find({
                 clubId: club._id,
                 clubStatus: CLUB_REQUEST_STATUS.ACTIVE,
-                teamId: {
-                    $exists: false,
-                    $eq: null || undefined
-                }
+                $or: [
+                    {teamId: {$exists: false}},
+                    {teamId: {$eq: null}}
+                ]
             }, (err, users) => {
                 if (err) {
                     return res.status(422).send({
@@ -120,65 +210,19 @@ module.exports = function (apiRoutes) {
         });
     });
 
-    apiRoutes.post('/club/confirm-request', Auth.isAuthenticated, (req, res) => {
-        let ownerId = req.decoded.userId;
-        const {userId} = req.body;
-        Club.findOne({owner: mongoose.Types.ObjectId(ownerId)}, (err, club) => {
-            if (err) {
-                return res.status(422).send({
-                    message: err
-                });
-            }
-            User.findOneAndUpdate({_id: mongoose.Types.ObjectId(userId)}, { clubStatus: CLUB_REQUEST_STATUS.ACTIVE }, (err, saved) => {
-                if (err) {
-                    return res.status(422).send({
-                        message: err
-                    });
-                }
-                res.json({
-                    success: true
-                });
-            });
+    apiRoutes.put('/club/team', Auth.isAuthenticated, (req, res) => {
+        const {id, name} = req.body;
+        Team.findByIdAndUpdate(id, {name: name}, (err, team) => {
+            if (err) return res.json({success: false, err});
+            res.json({success: true})
         });
     });
 
-    apiRoutes.post('/club/new-team', Auth.isAuthenticated, (req, res) => {
-        let ownerId = req.decoded.userId;
-        const {teamName} = req.body
-        if (!teamName) {
-            return res.status(422).send({
-                message: 'Invalid Param: Team name is required'
-            });
-        }
-        Club.findOne({owner: mongoose.Types.ObjectId(ownerId)}, (err, club) => {
-            if (err) {
-                return res.status(422).send({
-                    message: err
-                });
-            }
-            let team = new Team();
-            team.name = teamName;
-            team.managerId = mongoose.Types.ObjectId(ownerId);
-            team.clubId = club._id;
-
-            team.save((err, team) => {
-                if (err) {
-                    return res.status(422).send({
-                        message: err
-                    });
-                }
-                res.json({
-                    success: true
-                });
-
-                if (team) {
-                    let teams = club.teams || [];
-                    teams.push(team._id);
-                    Club.findOneAndUpdate({_id: club._id}, {teams: teams}, (err, cb) =>{
-                        console.log('updated club with new team id')
-                    });
-                }
-            });
+    apiRoutes.delete('/club/team', Auth.isAuthenticated, (req, res) => {
+        const {teamId} = req.query;
+        Team.deleteOne({_id: mongoose.Types.ObjectId(teamId)}, (err, result) => {
+            if (err) return res.json({success: false, err});
+            res.json({success: true});
         });
     });
 
@@ -233,6 +277,51 @@ module.exports = function (apiRoutes) {
                     success: true
                 });
             });
+        });
+    });
+
+    /**
+     * upload user image
+     */
+    apiRoutes.post('/club/club-img', Auth.isAuthenticated, function (req, res) {
+        if (!req.files) return res.status(400).send('No files were uploaded.');
+        const {clubImg} = req.files;
+        const {clubId} = req.body;
+        let userId = req.decoded.userId;
+
+        let ext = '.' + (clubImg.name.split('.')[1]) || '.jpg';
+        let imgname = userId + Math.round(new Date().getTime() / 1000) + ext;
+        let imgPath = path.join(__dirname, '/../public/imgs/clubs/');
+
+        // resize and store image on the server
+        // maybe store on s3 later
+        im.crop({
+            srcData: clubImg.data,
+            dstPath: imgPath + imgname,
+            width: 300,
+            height: 300,
+            quality: 1,
+            gravity: 'Center'
+        }, function (err, stdout, stderr) {
+            if (err) return res.status(500).send(err);
+
+            Club.findOneAndUpdate({ _id: mongoose.Types.ObjectId(clubId), owner: mongoose.Types.ObjectId(userId)},
+                { logoUrl: '/public/imgs/clubs/' + imgname },
+                { upsert: true, new: true }, (err, club) => {
+                    if (err) return res.status(500).send(err);
+
+                    try {
+                        res.json({
+                            success: true,
+                            club
+                        });
+                    } catch (error) {
+                        res.json({
+                            success: false,
+                            message: error
+                        });
+                    }
+                });
         });
     });
 }

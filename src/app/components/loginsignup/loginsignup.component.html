@@ -47,8 +47,8 @@
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="model.password" name="password">
                 </div>
                 <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-                    <a *ngIf="!createManagerProfile" class="form-text text-muted" id="" (click)="createManagerProfile = !createManagerProfile">Do you want to crate a manager profile?</a>
-                    <a *ngIf="createManagerProfile" class="form-text text-muted" id="" (click)="createManagerProfile = !createManagerProfile">Create player profile?</a>
+                    <a *ngIf="!createManagerProfile" class="form-text text-muted" id="" (click)="createManagerProfile = !createManagerProfile">Do you want to create a manager profile?</a>
+                    <a *ngIf="createManagerProfile" class="form-text text-muted" id="" (click)="createManagerProfile = !createManagerProfile">Switch to player profile?</a>
                 </div>
                 <div *ngIf="createManagerProfile" class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
                     <input name="clubName" class="form-control" placeholder="Enter Club Name" [(ngModel)]="model.clubName">

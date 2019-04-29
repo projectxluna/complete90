@@ -80,12 +80,42 @@ export class DataService {
         return response.json();
       });
   }
+  
+  updateClub(club): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put('/api/club', club, options)
+      .map((response: Response) => {
+        return  response.json();
+      });
+  }
 
   createTeam(teamName): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post('/api/club/new-team', {teamName}, options)
+    return this.http.post('/api/club/team', {teamName}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  updateTeam(team): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put('/api/club/team', team, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  deleteTeam(teamId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {teamId} });
+
+    return this.http.delete('/api/club/team', options)
       .map((response: Response) => {
         return response.json();
       });
@@ -116,6 +146,17 @@ export class DataService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post('/api/club/join-team', {teamId, playerId}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  removeFromTeam(playerId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {playerId} });
+
+    return this.http
+      .delete('/api/club/team/player', options)
       .map((response: Response) => {
         return response.json();
       });
@@ -311,6 +352,21 @@ export class DataService {
       .map((response: Response) => {
         this.cachedProfile = response.json();
         return this.cachedProfile;
+      });
+  }
+
+  uploadClubImage(fileToUpload: File, clubId): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('clubImg', fileToUpload, fileToUpload.name);
+    formData.append('clubId', clubId);
+
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http
+      .post('/api/club/club-img', formData, options)
+      .map((response: Response) => {
+        return response.json();
       });
   }
 
