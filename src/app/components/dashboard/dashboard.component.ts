@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('dropzone') dropZone:ElementRef;
   // @ViewChild('iconList') iconListContainer:ElementRef;
-
+  drillMakerActive = false;
   securityActive = false;
   notificationActive = false;
   paymentActive = false;

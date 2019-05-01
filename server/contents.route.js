@@ -402,7 +402,7 @@ module.exports = function (apiRoutes) {
             });
             videoContents.push(content);
         });
-        plan.detailedContent.forEach(cont => {
+        (plan.detailedContent || []).forEach(cont => {
             let content = contents.find(function (element) {
                 return element.id === cont.contentId;
             });
