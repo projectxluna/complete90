@@ -286,11 +286,12 @@ module.exports = function (apiRoutes) {
                     watchedTotal: stat.watchedTotal,
                     count: stat.count
                 };
-            })
+            });
             const mapped = await Promise.all(pArray);
+            let sorted = mapped.filter((a) => {return a != null && a != undefined }).sort((a, b) => {return b.watchedTotal - a.watchedTotal});
             res.json({
                 success: true,
-                leaderboard: mapped
+                leaderboard: sorted
             });
         });
     });
