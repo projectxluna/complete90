@@ -66,15 +66,18 @@ export class CreateAssignmentsComponent implements OnInit {
   }
 
   getTeams() {
-    this.dataService.getTeams().subscribe(res => {
-      if (!res || !res.success) {
-        return;
-      }
-      this.teams = res.teams;
-      this.players.length = 0;
-      this.teams.forEach(team => {
-        this.dataService.getPlayers(team._id).subscribe(res => {
-          this.players.push(...res.players);
+    return new Promise((resolve, reject) => {
+      this.dataService.getTeams().subscribe(res => {
+        if (!res || !res.success) {
+          return resolve();
+        }
+        this.teams = res.teams;
+        this.players.length = 0;
+        this.teams.forEach(team => {
+          this.dataService.getPlayers(team._id).subscribe(res => {
+            this.players.push(...res.players);
+            resolve();
+          });
         });
       });
     });
@@ -98,7 +101,9 @@ export class CreateAssignmentsComponent implements OnInit {
 
   selectPlan(plan, template) {
     this.modal.plan = plan;
-    this.openModal(template);
+    this.getTeams().then(() => {
+      this.openModal(template);
+    });
   }
 
   reportRequestActive = false;
