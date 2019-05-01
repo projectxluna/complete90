@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../../services';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ConfirmComponent } from '../modals/confirm/confirm.component';
 
 @Component({
   selector: 'team-roaster',
@@ -192,9 +193,21 @@ export class TeamRoasterComponent implements OnInit {
     if (!this.teamModal.team) {
       return;
     }
-    this.dataService.deleteTeam(this.teamModal.team._id).subscribe(res => {
-      this.getTeams();
-      this.closeModal();
+    const params = {
+      title: 'Delete Team',
+      message: 'Are you sure you want to delete this team?',
+      cancelLabel: 'Back',
+      confirmLabel: 'Confirm'
+    };
+
+    let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params });
+    confirmModal.content.onClose.subscribe(result => {
+      if (result.confirm) {
+        this.dataService.deleteTeam(this.teamModal.team._id).subscribe(res => {
+          this.getTeams();
+          this.closeModal();
+        });
+      }
     });
   }
 }
