@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const _ = require('lodash')
 const im = require('imagemagick');
-const { exposedClubData, exposedUserData, CLUB_REQUEST_STATUS } = require('./helpers/pure');
+const { exposedUserData, CLUB_REQUEST_STATUS } = require('./helpers/pure');
 
 module.exports = function (apiRoutes) {
 
@@ -20,26 +20,35 @@ module.exports = function (apiRoutes) {
         });
     }
 
-    apiRoutes.get('/club', Auth.isAuthenticated, (req, res) => {
+    const findClubLike = (clubName) => {
+        return Club.find({name: new RegExp(clubName, 'i')}).lean().exec();
+    }
+
+    const findUser = (userId) => {
+        return User.findById(userId).lean().exec();
+    }
+
+    apiRoutes.get('/club', Auth.isAuthenticated, async (req, res) => {
         const { clubName } = req.query;
         if (!clubName) {
             return res.status(422).send({
                 message: 'Invalid param: club name is required'
             });
         }
-        Club.find({name: new RegExp(clubName, 'i')}, (err, clubs) => {
-            if (err) {
-                return res.status(422).send({
-                    message: err
-                });
+        let clubs = await findClubLike(clubName);
+
+        let clubsMapped = [];
+        await Promise.all(clubs.map(async club => {
+            let owner = await findUser(club.owner);
+            if (owner) {
+                club.managerName = owner.name;
             }
-            let clubsMapped = clubs.map(club => {
-                return exposedClubData(club);
-            });
-            res.json({
-                success: true,
-                clubs: clubsMapped
-            });
+            clubsMapped.push(club);
+        }));
+
+        res.json({
+            success: true,
+            clubs: clubsMapped
         });
     });
 

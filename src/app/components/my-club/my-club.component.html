@@ -101,7 +101,10 @@
             <div class="club-list">
                 <div *ngFor="let club of clubs" class="club-list-item" (click)="club.active = !club.active" [ngStyle]="{'background-color': club.active ? '#efefef' : '#ffffff'}">
                     <img [src]="club.logoUrl">
-                    <span>{{ club.name }} </span>
+                    <div class="club_desc">
+                        <span class="club_name">{{ club.name }}</span>
+                        <span class="coach_name"> Manager: {{ club.managerName }}</span>
+                    </div>
                 </div>
             </div>
             <div class="no_club" (click)="confirmRequest()">Confirm Request</div>

@@ -109,11 +109,20 @@ td, th {
                 -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
             }
-            span {
+            .club_desc {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
                 padding-left: 20px;
                 padding-right: 20px;
-                align-items: center;
                 justify-content: center;
+
+                .club_name {
+                    font-weight: bold;
+                }
+                .coach_name {
+                    font-size: 12px;
+                }
             }
         }
     }
