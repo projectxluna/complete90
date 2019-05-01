@@ -6,15 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ElapsedTimestampPipe implements PipeTransform {
 
   transform(time: any, args?: any): any {
-    var h = 0, m = 0, s = 0, ms = 0;
+    var h = 0, m = 0, s = 0;
     var newTime = '';
+    let date = new Date(time);
 
-    h = Math.floor(time / (60 * 60 * 1000));
-    time = time % (60 * 60 * 1000);
-    m = Math.floor(time / (60 * 1000));
-    time = time % (60 * 1000);
-    s = Math.floor(time / 1000);
-    ms = time % 1000;
+    h = date.getHours();
+    m = date.getMinutes();
+    s = date.getSeconds();
 
     if (h > 0) {
       newTime += this.pad(h, 2) + ':';

@@ -15,7 +15,7 @@
                   <th>Name</th>
                   <th>Time Trained</th>
                 </tr>
-                <tr *ngFor="let player of players; let i = index" class="leaderboard__row">
+                <tr *ngFor="let player of players.slice(0, 10); let i = index" class="leaderboard__row">
                   <td>
                     <span class="leaderboard__row-txt">{{ i + 1 }}</span>
                   </td>
