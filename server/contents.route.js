@@ -279,6 +279,7 @@ module.exports = function (apiRoutes) {
             }
             const pArray = stats.map(async (stat) => {
                 let user =  await findUser(stat.userId)
+                if (!user) return
                 return {
                     name: user.name,
                     photoUrl: user.avatarURL || '/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg',
