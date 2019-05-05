@@ -4,7 +4,6 @@ const Team = require('./models/team');
 const User = require('./models/user');
 const mongoose = require('mongoose');
 const path = require('path');
-const _ = require('lodash')
 const im = require('imagemagick');
 const { exposedUserData, CLUB_REQUEST_STATUS } = require('./helpers/pure');
 

@@ -31,26 +31,24 @@
     </div>
 
     <div *ngIf="playerProfile && club && club.status == 'ACTIVE'" class="box-body" style="padding-top: 10%;">
-        <table style="width:100%" *ngIf="assignments">
+        <table style="width:100%" *ngIf="playerProfile.assignments" class="assignments">
             <tr>
               <th>Training</th>
               <th>Length</th> 
               <th>Assigned On</th>
               <th>Due Date</th>
-              <th>Completion</th>
             </tr>
-            <tr>
-              <td>Ball Mastery</td>
+            <tr *ngFor="let assignment of playerProfile.assignments">
+              <td><a [routerLink]="['/sessions']">{{ assignment.plan.name }}</a></td>
               <td>&mdash;</td> 
-              <td>&mdash;</td>
-              <td>&mdash;</td>
-              <td>&mdash;</td>
+              <td>{{ assignment.createdAt | date }}</td>
+              <td>{{ assignment.endDate | date }}</td>
             </tr>
         </table>
         <div *ngIf="assignments" style="padding-top: 20px;">
             SEE ALL
         </div>
-        <div *ngIf="!assignments">
+        <div *ngIf="!playerProfile || !playerProfile.assignments">
             No training plans have been assigned to you. Check back later.
         </div>
     </div>

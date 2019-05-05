@@ -52,6 +52,12 @@ export class MyClubComponent implements OnInit {
       });
       if (this.coachProfile) {
         this.findPendingRequest();
+      } else {
+        this.dataService.getSessions().subscribe(response => {
+          if (response.success && response.assignments) {
+            this.playerProfile.assignments = response.assignments;
+          }
+        });
       }
     });
   }

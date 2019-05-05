@@ -40,6 +40,23 @@ const findManager = (id) => {
     return User.findById(id).lean().exec();
 }
 
+const getAssignment = (userId, teamId) => {
+    return new Promise((resolve, reject) => {
+        let query = {
+            $or: [{forPlayers: mongoose.Types.ObjectId(userId)}]
+        }
+        if (teamId) {
+            query.$or.push({
+                forTeams: mongoose.Types.ObjectId(teamId)
+            });
+        }
+        Assignment.find(query).sort({ _id: -1}).lean().exec((error, assignments) => {
+            if (error) console.error(error)
+            resolve(assignments)
+        });
+    });
+}
+
 module.exports = function (apiRoutes) {
     var Auth = require('./helpers/auth');
     var im = require('imagemagick');
@@ -76,6 +93,7 @@ module.exports = function (apiRoutes) {
                         let manager = await findManager(team.managerId);
                         team.managerName = manager.name;
                         ret.club.team = team;
+                        ret.assignments = await getAssignment(req.decoded.userId, team._id);
                     }
                 }
                 if (user.clubStatus) {
@@ -155,7 +173,7 @@ module.exports = function (apiRoutes) {
                             }
                         });
                     } catch (error) {
-                        res.json({ success: false, message: error });
+                        // res.json({ success: false, message: error });
                     }
                 });
         }).catch(err => {
