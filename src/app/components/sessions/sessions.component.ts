@@ -416,7 +416,7 @@ export class SessionsComponent implements OnInit {
     const initialState = {
       session: assignment.plan,
       selectedIndex: 0,
-      userCreated: false,
+      userCreated: true,
       assignmentId: assignment._id
     };
     this.bsModalRef = this.modalService.show(VideoplayerComponent, { initialState, class: 'modal-lg' });

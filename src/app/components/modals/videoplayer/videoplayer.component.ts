@@ -128,7 +128,7 @@ export class VideoplayerComponent implements OnInit {
     if (h > 0) {
       newTime += this.pad(h, 2) + ':';
     }
-    newTime = this.pad(m, 2) + ':' + this.pad(s, 2);
+    newTime += this.pad(m, 2) + ':' + this.pad(s, 2);
     return newTime;
   }
 
