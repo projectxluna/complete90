@@ -8,13 +8,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'dev') {
     btConfig.environment = braintree.Environment.Production;
 }
 
-// var gateway = braintree.connect(btConfig);
-var gateway = braintree.connect({
-    environment:  braintree.Environment.Sandbox,
-    merchantId:   '64wmhwjzmhx4zpsn',
-    publicKey:    'db9j7d8kpm8j8ybj',
-    privateKey:   '02015303a86d48d9a3badb0b8b5d81f8'
-});
+var gateway = braintree.connect(btConfig);
 
 var paymentController = {
     getClientToken: function (callback) {

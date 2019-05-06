@@ -1,44 +1,30 @@
-module.exports = {
-  up(db) {
-    return new Promise((resolve, reject) => {
-      var profiles = db.collection('user_profile').find({
-        "$or": [
-          { "height": { $ne: null } },
-          { "position": { $ne: null } },
-          { "foot": { $ne: null } }
-        ]
-      });
-      var updates = [];
-      profiles.forEach(p => {
-        updates.push({
-          "updateOne": {
-            "filter" : {_id: p._id},
-            "update" : {
-              "$set": { // Set new property called playerProfile
-                "playerProfile": {
-                  "height": p.height || "",
-                  "position": p.position || "",
-                  "foot": p.foot || ""
-                }
-              },
-              "$unset": { // Cleanup old properties
-                "height": "",
-                "position": "",
-                "foot": ""
-              },
-            }
+function migrateProfile () {
+  var profiles = db.user_profile.find();
+  profiles.forEach(function(p) {
+    db.user_profile.update({ _id: p._id }, {
+      "$set": {
+        "profiles":[  
+          {
+            "jersey" : "",
+            "age" : "",
+            "foot" : p.foot || "",
+            "position" : p.position || "",
+            "height" : p.height || "",
+            "type" : "PLAYER"
           }
-        });
-      });
-      db.collection('user_profile').bulkWrite(updates, function(result) {
-        resolve();
-      });
+        ],
+      },
+      "$unset": {
+        "height": "",
+        "position": "",
+        "foot": ""
+      },
     });
-  },
+  });
+}
 
-  down(db) {
-    return new Promise((resolve, reject) => {
-      resolve();
-    });
-  }
-};
+db.user_profile.bulkWrite(updates, function (result) {
+  console.log(result)
+});
+migrateProfile();
+// mongo --host mongo.internal.lucova.com lucova_payment --eval "load('/tmp/real_fruit_app_users.js')" > input.json
