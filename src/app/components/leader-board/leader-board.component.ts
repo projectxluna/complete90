@@ -54,6 +54,7 @@ export class LeaderBoardComponent implements OnInit {
 
   fetchLeaderBoard(filter) {
     this.dataService.getLeaderBoard(filter.timestamp, filter.club).subscribe(response => {
+      this.players.length = 0;
       this.players = response.leaderboard || [];
       this.players.sort((a, b) => {
         return b.watchedTotal - a.watchedTotal;

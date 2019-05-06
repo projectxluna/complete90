@@ -279,7 +279,9 @@ module.exports = function (apiRoutes) {
                 if (user && user.clubId && user.clubStatus === CLUB_REQUEST_STATUS.ACTIVE) {
                     let clubUser = await findUserInClub(user.clubId);
                     let userIds = clubUser.map(u => u._id);
-                    match.userId = {$in: userIds};
+                    if (userIds && userIds.length) {
+                        match.userId = {$in: userIds};
+                    }
                 }
             } catch (err) {
                 console.log(err);
