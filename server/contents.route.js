@@ -287,6 +287,12 @@ module.exports = function (apiRoutes) {
                 console.log(err);
             }
         }
+        if (Object.keys(match).length == 0) {
+            return res.json({
+                success: true,
+                leaderboard: []
+            });
+        }
         UserStats.aggregate([
             { $match: match },
             {
