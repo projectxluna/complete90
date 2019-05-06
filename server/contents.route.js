@@ -9,6 +9,7 @@ var User = require('./models/user');
 var Assignment = require('./models/assignment');
 var UserStats = require('./models/stats');
 var mongoose = require('mongoose');
+const { exposedUserData, CLUB_REQUEST_STATUS } = require('./helpers/pure');
 
 module.exports = function (apiRoutes) {
 
@@ -251,13 +252,38 @@ module.exports = function (apiRoutes) {
         });
     }
 
-    apiRoutes.get('/session/leaderboard', Auth.isAuthenticated, (req, res) => {
-        const { timestamp, club } = req.body;
+    const findUserInClub = (clubId) => {
+        return new Promise((resolve, reject) => {
+            User.find({clubId: mongoose.Types.ObjectId(clubId)}, (err, users) => {
+                if (err) {
+                    reject(err)
+                }
+                resolve(users)
+            })
+        });
+    }
+
+    apiRoutes.get('/session/leaderboard', Auth.isAuthenticated, async (req, res) => {
+        const { timestamp, club } = req.query;
+        let userId = req.decoded.userId;
+
         let match = {};
-        if (timestamp > 0) {
+        if (timestamp && timestamp > 0) {
             match.updatedAt = {
-                $gte: Date.now() - timestamp,
+                $gte: new Date(Date.now() - timestamp),
             } 
+        }
+        if (club) {
+            try {
+                let user = await findUser(userId);
+                if (user && user.clubId && user.clubStatus === CLUB_REQUEST_STATUS.ACTIVE) {
+                    let clubUser = await findUserInClub(user.clubId);
+                    let userIds = clubUser.map(u => u._id);
+                    match.userId = {$in: userIds};
+                }
+            } catch (err) {
+                console.log(err);
+            }
         }
         UserStats.aggregate([
             { $match: match },

@@ -13,7 +13,7 @@ export class LeaderBoardComponent implements OnInit {
 
   constructor(private dataService: DataService) {
     this.generateTestData();
-    this.fetchLeaderBoard();
+    this.fetchLeaderBoard(this.categories[0].filter);
   }
 
   ngOnInit() {
@@ -24,29 +24,36 @@ export class LeaderBoardComponent implements OnInit {
       { 
         name: 'Weekly',
         active: true,
-        filter: 86400 * 7
+        filter: {
+          timestamp: 1000 * 60 * 60 * 24 * 7,
+        }
       },
       { 
         name: 'Monthly',
         active: false,
-        filter: 86400 * 31
+        filter: {
+          timestamp: 1000 * 60 * 60 * 24 * 30,
+        }
       },
       { 
         name: 'All Time',
         active: false,
-        filter: 0
+        filter: {
+          timestamp: 0,
+        }
       },
       { 
         name: 'My Club',
         active: false,
+        filter: {
+          club: true
+        }
       },
     ];
   }
 
-  fetchLeaderBoard(timestamp = undefined) {
-    if (!timestamp) timestamp = 86400 * 7; // Default to last 7 days
-
-    this.dataService.getLeaderBoard(timestamp).subscribe(response => {
+  fetchLeaderBoard(filter) {
+    this.dataService.getLeaderBoard(filter.timestamp, filter.club).subscribe(response => {
       this.players = response.leaderboard || [];
       this.players.sort((a, b) => {
         return b.watchedTotal - a.watchedTotal;

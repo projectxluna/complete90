@@ -262,7 +262,7 @@ export class DataService {
         return this.cachedSessions;
       });
   }
-  getLeaderBoard(timestamp = undefined, club = undefined): Observable<any> {
+  getLeaderBoard(timestamp, club): Observable<any> {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers, params: {timestamp, club}});
