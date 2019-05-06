@@ -49,18 +49,29 @@ const mapAssignment = (a, mapedPlans, mapedStats) => {
             completion: 0
         };
     }
+    let percents = plan.detailedContent.map(c => {
+        let multi = (c.reps * c.sets) || 1;
+        let stat = stats.find(s => c.contentId === s.content.id);
+        if (!stat) {
+            return 0;
+        }
+        let watchedTotalMillis = stat.content.watchedTotal;
+        let contentLength = stat.content.contentLength * multi;
+        let p = Math.floor(watchedTotalMillis/1000) / Math.ceil(contentLength);
+        return p > 1 ? 1 : p;
+    });
+    let avg = percents.reduce((acc, cur) => acc + cur) / percents.length;
     let totalReps = plan.detailedContent.map(d => d.reps).reduce((acc, cur) => acc + cur);
     let totalSets = plan.detailedContent.map(d => d.sets).reduce((acc, cur) => acc + cur);
     let multi = (totalReps * totalSets) || 1;
-
-    let watchedTotalMillis = stats.map(s => s.content.watchedTotal || 0).reduce((acc, cur) => acc + cur);
     let totalLength = (stats.map(s => s.content.contentLength).reduce((acc, cur) => acc + cur) || 1) * multi;
+
     return {
         contentName: plan.name,
         createdAt: a.createdAt,
         dueDate: a.endDate,
         contentLength: totalLength,
-        completion: (Math.floor(watchedTotalMillis/1000) / Math.ceil(totalLength))
+        completion: avg
     };
 }
 
