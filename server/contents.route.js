@@ -268,7 +268,7 @@ module.exports = function (apiRoutes) {
         let userId = req.decoded.userId;
 
         let match = {};
-        if (timestamp && timestamp > 0) {
+        if (timestamp && timestamp >= 0) {
             match.updatedAt = {
                 $gte: new Date(Date.now() - timestamp),
             } 
