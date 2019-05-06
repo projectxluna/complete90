@@ -42,6 +42,9 @@ module.exports = function (apiRoutes) {
             if (owner) {
                 club.managerName = owner.name;
             }
+            if (!club.logoUrl) {
+                club.logoUrl = '/public/imgs/clubs/default.png'
+            }
             clubsMapped.push(club);
         }));
 

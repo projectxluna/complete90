@@ -59,6 +59,9 @@ export class TeamRoasterComponent implements OnInit {
 
   getUsersWithoutTeam() {
     this.dataService.getUsersWithoutTeam().subscribe(res => {
+      if (!res || !res.success) {
+        return;
+      }
       this.usersWithoutTeam = res.users;
     });
   }

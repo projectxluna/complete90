@@ -59,7 +59,7 @@
     <div class="box-body" *ngIf="coachProfile">
         <div class="club_manager">
             <div class="logo">
-                <img *ngIf="club.logoUrl && !editMode" [src]="club.logoUrl" class="club_manager_logo">
+                <img *ngIf="club && club.logoUrl && !editMode" [src]="club.logoUrl" class="club_manager_logo">
                 <div *ngIf="editMode" class="uploadIcon">
                     <a (click)="addFiles()"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
                     <input type="file" name="profileImg" #file style="display: none" (change)="onFilesAdded()" accept="image/*" />

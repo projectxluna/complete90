@@ -119,20 +119,22 @@ module.exports = function (app) {
                     res.json({
                         success: true
                     });
+                    var name = req.body.name.split(' ');
                     if (req.body.isManager) {
                         await createClub(req.body.clubName, user._id);
+                        // send manager email here
+                    } else {
+                        mailchimp.post('/lists/' + mcConfig.SIGN_UP_LIST + '/members', {
+                            email_address: req.body.email,
+                            status: 'subscribed',
+                            merge_fields: {
+                                'FNAME': name[0],
+                                'LNAME': name[1]
+                            }
+                        }).catch(err => {
+                            console.error(err);
+                        });
                     }
-                    var name = req.body.name.split(' ');
-                    mailchimp.post('/lists/' + mcConfig.SIGN_UP_LIST + '/members', {
-                        email_address: req.body.email,
-                        status: 'subscribed',
-                        merge_fields: {
-                            'FNAME': name[0],
-                            'LNAME': name[1]
-                        }
-                    }).catch(err => {
-                        console.error(err);
-                    });
                 });
             });
         } catch (err) {
