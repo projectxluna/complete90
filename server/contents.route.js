@@ -268,7 +268,7 @@ module.exports = function (apiRoutes) {
         let userId = req.decoded.userId;
 
         let match = {};
-        if (timestamp && timestamp >= 0) {
+        if (timestamp && timestamp > 0) {
             match.updatedAt = {
                 $gte: new Date(Date.now() - timestamp),
             } 
@@ -287,7 +287,7 @@ module.exports = function (apiRoutes) {
                 console.log(err);
             }
         }
-        if (Object.keys(match).length == 0) {
+        if (Object.keys(match).length == 0 && !timestamp) {
             return res.json({
                 success: true,
                 leaderboard: []
