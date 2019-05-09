@@ -4,6 +4,7 @@ const Club = require('./models/club');
 const Team = require('./models/team');
 const User = require('./models/user');
 const Assignment = require('./models/assignment');
+const PlayerAttributes = require('./models/player_attribute');
 const mongoose = require('mongoose');
 
 const findClub = (ownerId) => {
@@ -240,6 +241,24 @@ module.exports = function (apiRoutes) {
         assignment.save((err, saved) => {
             if (err) return res.json({success: false, message: err});
             res.json({success: true});
+        });
+    });
+
+    /**
+     * Get player attributes
+     */
+    apiRoutes.get('/user/attributes', Auth.isAuthenticated, (req, res) => {
+        const userId = req.decoded.userId;
+
+        PlayerAttributes.find({
+            userId: mongoose.Types.ObjectId(userId),
+        }).exec((err, playerAttributes) => {
+            if (err) return res.status(400).send(err);
+
+            res.json({
+                success: true,
+                attributes: playerAttributes
+            });
         });
     });
 

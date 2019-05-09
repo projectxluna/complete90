@@ -1,10 +1,10 @@
 const cron = require('cron');
 const ENV = process.env.NODE_ENV;
 const request = require('request');
-const mongoose = require('mongoose');
 const User = require('../models/user');
 const UserStats = require('../models/stats');
-
+const PlayerAttribute = require('../models/player_attribute');
+const mongoose = require('mongoose');
 const config = require('../config').get(ENV);
 
 const allowedTags = ['Strength', 'Speed', 'Control', 'Passing', 'Dribbling', 'Finishing'];
@@ -86,22 +86,95 @@ const findUsers = () => {
     });
 }
 
+const getMean = (data, field) => {
+    if (!data || !data.length) {
+        return;
+    }
+    return data.map((v) => {
+        return v[field];
+    }).reduce((a, b) => {
+        return Number(a) + Number(b);
+    }) / data.length;
+}
+
+const getSD = (data, field) => {
+    if (!data || !data.length) {
+        return;
+    }
+    let m = getMean(data, field);
+    return Math.sqrt(data.map((v) => {
+        return v[field];
+    }).reduce((sq, n) => {
+        return sq + Math.pow(n - m, 2);
+    }, 0) / (data.length - 1));
+}
+
+const convertRange = (value, r1, r2) => {
+    return (value - r1[0]) * (r2[1] - r2[0]) / (r1[1] - r1[0]) + r2[0];
+}
+
 const callback = async () => {
-    console.log('Runing Player Atrribute Job')
-    // let contentTags = await loadContent();
-    // let userStats = await getAllUserStats();
-    // let groupedByTags = {};
+    let contentTags = await loadContent();
+    let userStats = await getAllUserStats();
+    let groupedByTags = {};
+    allowedTags.forEach(tag => {
+        groupedByTags[tag] = [];
+    });
+    let allContent = [];
 
-    // userStats.forEach(stat => {
-    //     if (!stat.content) return;
-    //     stat.content.forEach(c => {
-    //         if (groupedByTags[c.id]) {
-    //             groupedByTags[c].push(c)
-    //         }
-    //     });
-    // });
-    // console.log(contentTags)
+    userStats.forEach(stat => {
+        if (!stat.content) return;
+        stat.content.forEach(c => {
+            allContent.push({
+                userId: stat._id,
+                contentId: c.id,
+                watchedTotal: c.watchedTotal
+            });
+        });
+    });
+    allContent.forEach(c => {
+        let tags = contentTags[c.contentId];
+        if (!tags) return;
+        tags.forEach(t => {
+            groupedByTags[t].push(c);
+        });
+    });
 
+    Object.keys(groupedByTags).forEach(key => {
+        let values = groupedByTags[key];
+        if (!values || !values.length) return;
+        let standardDiv = getSD(groupedByTags[key], 'watchedTotal');
+        console.log('standard diviation for', key, '=', standardDiv);
+        let deviations = [];
+        values.forEach(v => {
+            let deviationFromMean = Math.floor(v.watchedTotal - standardDiv);
+            deviations.push(deviationFromMean);
+            v.deviationFromMean = deviationFromMean;
+        });
+        deviations = deviations.sort((a, b) => {
+            return a - b;
+        });
+        let min = deviations[0];
+        let max = deviations[deviations.length -1];
+        values.forEach(v => {
+            let value = v.deviationFromMean;
+            let scaled = Math.floor(convertRange(value, [min, max], [1, 10]));
+            v.score = scaled;
+
+            PlayerAttribute.findOneAndUpdate({
+                userId: mongoose.Types.ObjectId(v.userId),
+                tag: key
+            }, {
+                userId: mongoose.Types.ObjectId(v.userId),
+                tag: key,
+                score: v.score
+            }, { upsert: true }, (err, numAffected, raw) => {
+                // console.log(err, numAffected, raw);
+            });
+        });
+    });
+
+    // console.log(groupedByTags);
 }
 
 var PlayerAttributeJob = {

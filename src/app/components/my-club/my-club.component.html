@@ -65,7 +65,7 @@
                     <input type="file" name="profileImg" #file style="display: none" (change)="onFilesAdded()" accept="image/*" />
                 </div>
             </div>
-            <div class="club_manager_props">
+            <div *ngIf="club"class="club_manager_props">
                 <div *ngIf="!editMode" class="club_manager_prop">{{ club.name }}</div>
                 <div *ngIf="!editMode" class="club_manager_prop">Club active since: {{ club.createdAt | timeSince }}</div>
                 <div *ngIf="editMode" class="club_manager_prop"><input [(ngModel)]="club.name" name="clubName" class="form-control" placeholder="name"></div>

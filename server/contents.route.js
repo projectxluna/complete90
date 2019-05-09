@@ -432,6 +432,7 @@ module.exports = function (apiRoutes) {
 
     const mapPlanToContent = (plan, contents) => {
         let videoContents = [];
+        if (!plan) return;
         plan.content.forEach(videoId => {
             let content = contents.find(function (element) {
                 return element.id === videoId;
