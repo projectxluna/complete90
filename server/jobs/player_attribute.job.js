@@ -144,7 +144,7 @@ const callback = async () => {
         let values = groupedByTags[key];
         if (!values || !values.length) return;
         let standardDiv = getSD(groupedByTags[key], 'watchedTotal');
-        console.log('standard diviation for', key, '=', standardDiv);
+        // console.log('standard diviation for', key, '=', standardDiv);
         let deviations = [];
         values.forEach(v => {
             let deviationFromMean = Math.floor(v.watchedTotal - standardDiv);
