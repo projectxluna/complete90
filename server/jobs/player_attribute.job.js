@@ -6,7 +6,6 @@ const User = require('../models/user');
 const UserStats = require('../models/stats');
 
 const config = require('../config').get(ENV);
-const devContentStructure = require('../../video_structure.json');
 
 const allowedTags = ['Strength', 'Speed', 'Control', 'Passing', 'Dribbling', 'Finishing'];
 
@@ -33,6 +32,7 @@ const collectTags = (contentStructure) => {
 const loadContent = () => {
     return new Promise((resolve, reject) => {
         if (!ENV || ENV === 'dev' || ENV === 'development') {
+            const devContentStructure = require('../../video_structure.json');
             resolve(collectTags(devContentStructure));
         }
         else {
