@@ -9,7 +9,7 @@ var User = require('./models/user');
 var Assignment = require('./models/assignment');
 var UserStats = require('./models/stats');
 var mongoose = require('mongoose');
-const { exposedUserData, CLUB_REQUEST_STATUS } = require('./helpers/pure');
+const { CLUB_REQUEST_STATUS } = require('./helpers/pure');
 
 module.exports = function (apiRoutes) {
 

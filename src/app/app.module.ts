@@ -51,6 +51,7 @@ import { TeamRoasterComponent } from './components/team-roaster/team-roaster.com
 import { CreateAssignmentsComponent } from './components/create-assignments/create-assignments.component';
 import { GetSubscriptionComponent } from './components/get-subscription/get-subscription.component';
 import { ElapsedTimestampPipe } from './pipes/elapsed-timestamp.pipe';
+import { TimeSincePipe } from './pipes/time-since.pipe';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { ElapsedTimestampPipe } from './pipes/elapsed-timestamp.pipe';
     TeamRoasterComponent,
     CreateAssignmentsComponent,
     GetSubscriptionComponent,
-    ElapsedTimestampPipe
+    ElapsedTimestampPipe,
+    TimeSincePipe
   ],
   imports: [
     BrowserModule,
