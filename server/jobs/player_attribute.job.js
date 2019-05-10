@@ -1,7 +1,6 @@
 const cron = require('cron');
 const ENV = process.env.NODE_ENV;
 const request = require('request');
-const User = require('../models/user');
 const UserStats = require('../models/stats');
 const PlayerAttribute = require('../models/player_attribute');
 const mongoose = require('mongoose');
@@ -72,17 +71,6 @@ const getAllUserStats = () => {
             }
             resolve(userStats);
         });
-    });
-}
-
-const findUsers = () => {
-    return new Promise((resolve, reject) => {
-        User.findById(userId, (err, user) => {
-            if (err) {
-                reject(err)
-            }
-            resolve(user)
-        })
     });
 }
 

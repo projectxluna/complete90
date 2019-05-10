@@ -83,24 +83,32 @@ module.exports = function (apiRoutes) {
         if (!playerId) {
             return res.status(400).send('Require player id');
         }
-        let user = await User.findById(playerId).exec();
-        let playerAssignments = await getPlayerAssignment(user._id) || [];
-        let teamAssignments = await getTeamAssignment(user.teamId);
-
-        let assignmentIds = playerAssignments.map(a => a._id).concat(teamAssignments.map(a => a._id));
-        let mapedStats = {};
-        let watchedStats = await getWatchedStats(assignmentIds);
-        watchedStats.map(stat => !mapedStats[stat.assignmentId] ? mapedStats[stat.assignmentId] = [stat] : mapedStats[stat.assignmentId].push(stat));
-
-        let planIds = playerAssignments.map(a => a.planId).concat(teamAssignments.map(a => a.planId));
-        let mapedPlans = {};
-        let plans = await getPlans(planIds);
-        plans.map(p => mapedPlans[p._id] = p);
-
-        let stats = {
-            player: playerAssignments.map(a => mapAssignment(a, mapedPlans, mapedStats)),
-            team: teamAssignments.map(a => mapAssignment(a, mapedPlans, mapedStats))
+        try {
+            let user = await User.findById(playerId).exec();
+            let playerAssignments = await getPlayerAssignment(user._id) || [];
+            let teamAssignments = await getTeamAssignment(user.teamId);
+    
+            let assignmentIds = playerAssignments.map(a => a._id).concat(teamAssignments.map(a => a._id));
+            let mapedStats = {};
+            let watchedStats = await getWatchedStats(assignmentIds);
+            watchedStats.map(stat => !mapedStats[stat.assignmentId] ? mapedStats[stat.assignmentId] = [stat] : mapedStats[stat.assignmentId].push(stat));
+    
+            let planIds = playerAssignments.map(a => a.planId).concat(teamAssignments.map(a => a.planId));
+            let mapedPlans = {};
+            let plans = await getPlans(planIds);
+            plans.map(p => mapedPlans[p._id] = p);
+    
+            let stats = {
+                player: playerAssignments.map(a => mapAssignment(a, mapedPlans, mapedStats)),
+                team: teamAssignments.map(a => mapAssignment(a, mapedPlans, mapedStats))
+            }
+            res.json({ success: true, stats});
+        } catch (error) {
+            console.log(error);
+            return res.status(400).send({
+                success: false,
+                error: error
+            });
         }
-        res.json({ success: true, stats});
     });
 };
