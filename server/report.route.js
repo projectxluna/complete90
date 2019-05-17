@@ -86,8 +86,8 @@ module.exports = function (apiRoutes) {
         try {
             let user = await User.findById(playerId).exec();
             let playerAssignments = await getPlayerAssignment(user._id) || [];
-            let teamAssignments = await getTeamAssignment(user.teamId);
-    
+            let teamAssignments = await getTeamAssignment(user.teamId) || [];
+
             let assignmentIds = playerAssignments.map(a => a._id).concat(teamAssignments.map(a => a._id));
             let mapedStats = {};
             let watchedStats = await getWatchedStats(assignmentIds);

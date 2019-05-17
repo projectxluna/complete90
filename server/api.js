@@ -2,10 +2,7 @@ const {
     exposedUserData,
     exposedClubData,
     PROFILES,
-    createUser,
-    findClub,
-    createClub,
-    findUserByEmail
+    createClub
 } = require('./helpers/pure');
 const User = require('./models/user');
 const Club = require('./models/club');
@@ -30,7 +27,7 @@ module.exports = function (app) {
             User.findOne({
                 email: req.body.email
             }, (err, user) => {
-                if (err) {
+                if (err || !user) {
                     return res.json({
                         success: false,
                         message: err || 'Authentication failed'
@@ -108,7 +105,7 @@ module.exports = function (app) {
                 if (found || err) {
                     return res.json({
                         success: false,
-                        message: err
+                        message: err || 'Email already exists!'
                     });
                 }
                 newUser.save(async (err, user) => {
