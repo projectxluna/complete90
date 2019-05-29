@@ -18,7 +18,9 @@ export class AddcontentToSessionComponent implements OnInit {
   session = {
     name: '',
     reps: null,
-    sets: null
+    sets: null,
+    minutes: null,
+    seconds: null,
   }
 
   constructor(public bsModalRef: BsModalRef) { }

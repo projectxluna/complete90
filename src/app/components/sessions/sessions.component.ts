@@ -141,6 +141,8 @@ export class SessionsComponent implements OnInit {
             contentId,
             reps: result.session.reps || 0,
             sets: result.session.sets || 0,
+            seconds: result.session.seconds || 0,
+            minutes: result.session.minutes || 0,
           }
         };
         this.newSession(newSession);
@@ -149,6 +151,8 @@ export class SessionsComponent implements OnInit {
           id: result.id,
           reps: result.session.reps || 0,
           sets: result.session.sets || 0,
+          seconds: result.session.seconds || 0,
+          minutes: result.session.minutes || 0,
           contentId: contentId
         };
         this.addToExistingSession(addContent).then(response => {

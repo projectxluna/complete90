@@ -137,7 +137,7 @@ export class VideoplayerComponent implements OnInit {
   }
 
   getTime() {
-    return this.formatTime((this.selectedContent.reps || 0 + this.selectedContent.sets || 0) * this.mediaLength * 1000)
+    return this.formatTime((this.selectedContent.reps || 1 + this.selectedContent.sets || 1) * this.mediaLength * 1000)
   }
 
   playNext() {

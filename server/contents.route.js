@@ -432,7 +432,6 @@ module.exports = function (apiRoutes) {
 
     const mapPlanToContent = (plan, contents) => {
         let videoContents = [];
-        if (!plan) return;
         plan.content.forEach(videoId => {
             let content = contents.find(function (element) {
                 return element.id === videoId;
@@ -444,8 +443,10 @@ module.exports = function (apiRoutes) {
                 return element.id === cont.contentId;
             });
             if (content) {
-                content.reps = cont.reps || 0,
-                    content.sets = cont.sets || 0
+                content.reps = cont.reps || 0;
+                content.sets = cont.sets || 0;
+                content.seconds = cont.seconds || 0;
+                content.minutes = cont.minutes || 0;
             }
             videoContents.push(content);
         });
