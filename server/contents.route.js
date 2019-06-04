@@ -423,7 +423,9 @@ module.exports = function (apiRoutes) {
             a[plan._id] = plan;
         }
         assignments.map(assignment => {
-            assignment.plan = mapPlanToContent(a[assignment.planId], contents);
+            if (a[assignment.planId]) {
+                assignment.plan = mapPlanToContent(a[assignment.planId], contents);
+            }
         });
 
         let userPlan = plans.map(plan => {return mapPlanToContent(plan, contents)});
