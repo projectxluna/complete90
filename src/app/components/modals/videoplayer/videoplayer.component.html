@@ -17,6 +17,9 @@
       <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
     </button>
     <vg-player (onPlayerReady)="onPlayerReady($event)">
+      <div *ngIf="userCreated" class="loop-timer-container">
+        <div class="loop-timer">{{ getTimerText() }}</div>
+      </div>
       <vg-overlay-play></vg-overlay-play>
       <!-- <vg-buffering></vg-buffering> -->
 
@@ -38,9 +41,6 @@
       <video [src]="selectedContent.link" [vgMedia]="media" #media id="singleVideo" preload="auto">
       </video>
     </vg-player>
-    <div class="loop-timer-container">
-      <div class="loop-timer">{{ getTimerText() }}</div>
-    </div>
     <button type="button" class="btn btn-primary" (click)="playNext()">
       <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
     </button>
