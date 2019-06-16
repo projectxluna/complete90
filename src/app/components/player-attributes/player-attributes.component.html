@@ -14,7 +14,7 @@
         <div class="rating" *ngFor="let category of attributes.categories">
           <div class="rating_name">{{ category.name | uppercase }}</div>
           <progressbar [value]="category.value" [type]="getType(category)">
-              <b>{{category.value}}%</b>
+              <b>{{category.value}}</b>
           </progressbar>
         </div>
       </div>

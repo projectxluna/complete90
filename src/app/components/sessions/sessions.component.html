@@ -141,17 +141,19 @@
         <div class="container cont-hscroll">
             <div class="row">
                 <div *ngFor="let assignment of assignments; let i = index" class="col-lg-4 col-md-4 col-sm-8">
-                    <div class="vid-thumb">
-                        <img class="img-responsive" [src]="assignment.plan.content[0].thumbnail">
-                        <a (click)="openAssignmentModal(assignment)">
-                            <span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
-                        </a>
-                    </div>
+                    <div *ngIf="assignment && assignment.plan">
+                        <div class="vid-thumb">
+                            <img class="img-responsive" [src]="assignment.plan.content[0].thumbnail">
+                            <a (click)="openAssignmentModal(assignment)">
+                                <span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
+                            </a>
+                        </div>
 
-                    <div class="col-lg-12 videoDes">
-                        <h1>{{ assignment.plan.name | uppercase }}</h1>
-                        <div class="row" style="padding-left: 10px;">
-                            Due Date: {{ assignment.endDate | date }}
+                        <div class="col-lg-12 videoDes">
+                            <h1>{{ assignment.plan.name | uppercase }}</h1>
+                            <div class="row" style="padding-left: 10px;">
+                                Due Date: {{ assignment.endDate | date }}
+                            </div>
                         </div>
                     </div>
                 </div>
