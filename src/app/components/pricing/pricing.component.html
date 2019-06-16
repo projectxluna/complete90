@@ -20,8 +20,8 @@
     <div class="container">
         <div class="col-lg-4 col-lg-offset-4">
             <ul class="nav nav-pills text-center">
-                <li role="presentation" (click)="setCycle('yearly')" [ngClass]="{'active': isYearly}"><a>YEARLY</a></li>
-                  <li role="presentation" (click)="setCycle('monthly')" [ngClass]="{'active': !isYearly}"><a>MONTHLY</a></li>
+                <!-- <li role="presentation" (click)="setCycle('yearly')" [ngClass]="{'active': isYearly}"><a>YEARLY</a></li> -->
+                <li role="presentation" (click)="setCycle('monthly')" [ngClass]="{'active': !isYearly}"><a>MONTHLY</a></li>
             </ul>
         </div>
     </div>
@@ -29,11 +29,13 @@
         <div class="col-lg-6 col-md-6 col-sm-6 pricingCont text-center" id="p1">
             <img src="assets/player-pic.png">
             <h4><b>PLAYER</b></h4>
-            <h3>FULL ACCESS TO COMPLETE<br>VIDEO CONTENT</h3>
+            <h3>ACCESS TO ALL<br>VIDEO CONTENT</h3>
             <h2>CREATE CUSTOM SESSIONS</h2>
+            <h2>JOIN THE TRAINING LEADERBOARD</h2>
+            <h2>IMPROVE YOUR PLAYER ATTRIBUTES</h2>
             <h1>${{ playerPrice }}</h1>
             <h5 *ngIf="!isYearly">monthly</h5>
-            <h5 *ngIf="isYearly">yearly</h5>
+            <!-- <h5 *ngIf="isYearly">yearly</h5> -->
             <button *ngIf="!isCoach" (click)="selectPlan('player')">SELECT</button>
         </div>
 
@@ -41,14 +43,15 @@
         <div class="col-lg-6 col-md-6 col-sm-6 pricingCont text-center" id="p3">
             <img src="assets/player-pic.png">
             <h4><b>MANAGER</b></h4>
-            <h3>FULL ACCESS TO COMPLETE<br>VIDEO CONTENT</h3>
+            <h3>FULL ACCESS TO ALL<br>VIDEO CONTENT</h3>
             <h2>CREATE CUSTOM SESSIONS</h2>
-            <h2>DESIGN DRILLS</h2>
+            <h2>MONITOR TEAM PROGRESS</h2>
+            <!-- <h2>DESIGN DRILLS</h2> -->
             <h1 class="ph">&nbsp;</h1>
 
             <h1>$ {{ coachPrice }}</h1>
             <h5 *ngIf="!isYearly">monthly</h5>
-            <h5 *ngIf="isYearly">yearly</h5>
+            <!-- <h5 *ngIf="isYearly">yearly</h5> -->
             <button *ngIf="isCoach" (click)="selectPlan('coach')">SELECT</button>
         </div>
     </div>

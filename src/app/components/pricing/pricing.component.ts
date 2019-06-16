@@ -19,6 +19,7 @@ export class PricingComponent implements OnInit {
     this.dataService.getClient().subscribe((res) => {
       if (res) {
         this.processPlans(res.plans);
+        this.setCycle('monthly');
       }
     });
     this.dataService.getUserProfile().subscribe(me => {
