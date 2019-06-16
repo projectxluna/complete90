@@ -13,7 +13,7 @@
 
     <div class="col-md-12 text-center">
         <div class="upload" *ngIf="profile">
-            <img [src]="profile.avatarURL" class="profilePic img-circle">
+            <img [src]="profile.avatarURL" class="profilePic img-circle" draggable="false">
             <div class="uploadIcon">
                 <a (click)="addFiles()"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
                 <input type="file" name="profileImg" #file style="display: none" (change)="onFilesAdded()" accept="image/*" />
