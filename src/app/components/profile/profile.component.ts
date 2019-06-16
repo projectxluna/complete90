@@ -18,6 +18,10 @@ export class ProfileComponent implements OnInit {
   loading: boolean;
 
   constructor(private dataService: DataService) {
+    this.loadProfile();
+  }
+
+  loadProfile() {
     this.dataService.getUserProfile().subscribe(res => {
       if (!res.success) {
         return;
@@ -74,6 +78,7 @@ export class ProfileComponent implements OnInit {
       this.dataService.uploadProfileImage(files[0]).subscribe(response => {
         this.loading = false;
         if (response.success) {
+          this.loadProfile();
           this.profileUpdated.emit(response.user);
         }
       });
