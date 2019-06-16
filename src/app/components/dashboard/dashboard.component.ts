@@ -16,6 +16,9 @@ export class DashboardComponent implements OnInit {
   notificationActive = false;
   paymentActive = false;
 
+  passwordUpdated = false;
+  passwordError = '';
+
   user = {
     name: '',
     subscription: undefined,
@@ -275,15 +278,27 @@ export class DashboardComponent implements OnInit {
 
     this.authenticationService.changePassword(this.model.oldPassword, this.model.newPassword, this.model.verifyPassword)
       .subscribe(result => {
+        this.passwordUpdated = true;
+
         if (result && result.success == true) {
           this.loading = false;
           this.model = {};
+          setTimeout(() => {
+            this.toggleSecurity();
+            this.passwordUpdated = false;
+          }, 2000);
+          this.passwordError = 'Password Successfully Updated';
         } else {
           //'please try again. something went wrong';
           this.loading = false;
+          this.passwordError = 'Failed to Update Password';
           this.model = {};
         }
       });
+  }
+
+  hidePasswordSection() {
+    this.passwordUpdated = false;
   }
 
   onProfileUpdated(user) {

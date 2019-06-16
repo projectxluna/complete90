@@ -144,26 +144,35 @@
                         </li>
                     </ul>
                 </div>
-    
-                <div *ngIf="securityActive" class="desc-p">
-                    <small>Use the form below if you wish to update your password</small>
+
+                <div *ngIf="!passwordUpdated">
+                    <div *ngIf="securityActive" class="desc-p">
+                        <small>Use the form below if you wish to update your password</small>
+                    </div>
+
+                    <form *ngIf="securityActive" class="form-p">
+                        <div class="form-group">
+                            <input type="password" [(ngModel)]="model.oldPassword" name="oldpass" class="form-control" placeholder="Old Password">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" [(ngModel)]="model.newPassword" name="newpass" class="form-control" placeholder="New Password">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" [(ngModel)]="model.verifyPassword" name="newpassCon" class="form-control" placeholder="Confirm New Password">
+                        </div>
+
+                        <button (click)="updatePassword()" class="savePassbtn">SAVE</button>
+                    </form>
                 </div>
-    
-                <form *ngIf="securityActive" class="form-p">
-                    <div class="form-group">
-                        <input type="password" [(ngModel)]="model.oldPassword" name="oldpass" class="form-control" placeholder="Old Password">
+
+                <div *ngIf="passwordUpdated">
+                    <div class="password-updated">
+                        <span>{{ passwordError }}</span>
+                        <button (click)="hidePasswordSection()" class="savePassbtn">Continue</button>
                     </div>
-    
-                    <div class="form-group">
-                        <input type="password" [(ngModel)]="model.newPassword" name="newpass" class="form-control" placeholder="New Password">
-                    </div>
-    
-                    <div class="form-group">
-                        <input type="password" [(ngModel)]="model.verifyPassword" name="newpassCon" class="form-control" placeholder="Confirm New Password">
-                    </div>
-    
-                    <button (click)="updatePassword()" class="savePassbtn">SAVE</button>
-                </form>
+                </div>
             </div>
         </div>
 
