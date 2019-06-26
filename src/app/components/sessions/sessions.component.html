@@ -95,7 +95,9 @@
                     <!-- LIST OF VIDS INSIDE OF SESSION -->
                     <div [hidden]="session.content.length < 1 || !session.expanded">
                         <div *ngFor="let content of session.content; let i = index" class="row dets-ma">
-                            <div class="col-xs-6 sessName">{{ content.name | uppercase }}
+                            <div class="col-xs-6 sessName">
+                                <div class="row">{{ content.name | uppercase }}</div>
+                                <span class="row" style="font-size: 12px;">Reps: {{ content.reps }} | Sets: {{ content.sets }} | Time: {{ content.minutes }}:{{ content.seconds }}</span>
                             </div>
                             <div class="col-xs-5">
                                 <button (click)="startSession(session, i)" class="viewSessbtn pull-right">PLAY</button>

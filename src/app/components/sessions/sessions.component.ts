@@ -43,7 +43,7 @@ export class SessionsComponent implements OnInit {
     defaultTimeout: 1000 * 60
   };
 
-
+  managerProfile = false;
 
   bsModalRef: BsModalRef;
 
@@ -92,6 +92,16 @@ export class SessionsComponent implements OnInit {
   constructor(private dataService: DataService, private modalService: BsModalService) {
     this.getFreeSessions();
     this.getSessions();
+
+    this.dataService.getUserProfile().subscribe(res => {
+      if (!res.success) {
+        return;
+      }
+      var manager = res.user.profiles.find(profile => {
+        return profile.type === 'MANAGER';
+      });
+      this.managerProfile = manager ? true : false;
+    });
   }
 
   selectTag(tag) {
@@ -109,14 +119,16 @@ export class SessionsComponent implements OnInit {
   }
 
   showBanner(sessionId) {
+    if (this.managerProfile) {
+      return; // we dont want to show the banner for maangers
+    }
     this.banner.isActive = true;
-    this.banner.sessionId = sessionId;
 
     if (this.banner.sessionId !== sessionId) {
       this.banner.count = 0;
-    } else {
-      this.banner.count++;
     }
+    this.banner.count++;
+    this.banner.sessionId = sessionId;
 
     if (this.banner.timer) clearTimeout(this.banner.timer);
 
@@ -180,6 +192,9 @@ export class SessionsComponent implements OnInit {
       this.dataService.addContentToSession(session).subscribe((response) => {
         if (!response || !response.success) {
           return reject('Custom session failed to save!');
+        }
+        if (response && response.id) {
+          this.showBanner(response.id);
         }
         resolve(response);
       });
