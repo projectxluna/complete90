@@ -67,7 +67,7 @@
         <div class="meta_item" *ngIf="selectedContent.difficulty">Difficulty</div>
         <div class="meta_item">
           <span>Train Time</span>
-          <span>{{ getTime() }}</span>
+          <span>{{ selectedContent.minutes }}:{{ selectedContent.seconds }}</span>
         </div>
         <div class="meta_item" *ngIf="selectedContent.reps">
           <span>Reps</span>
