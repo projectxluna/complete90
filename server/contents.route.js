@@ -92,6 +92,29 @@ module.exports = function (apiRoutes) {
     });
 
     /**
+     * Edit video parameters content in sessions
+     */
+    apiRoutes.put('/session/content', Auth.isAuthenticated, function (req, res) {
+        if (!req.body || !req.body.sessionId || !req.body.detailedContent) {
+            return res.status(422).send({ success: false });
+        }
+        let id = req.body.sessionId;
+        let detailedContent = req.body.detailedContent;
+        Plan.findOneAndUpdate({
+            _id: mongoose.Types.ObjectId(id),
+            'detailedContent.contentId': detailedContent.contentId
+        }, {
+                $set: { 'detailedContent.$': detailedContent.contentId }
+            }, function (err, plan) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ success: false, message: err.errmsg, code: err.code });
+                }
+                res.json({ success: true, id: plan._id });
+            });
+    });
+
+    /**
      * Delete content from session
      */
     apiRoutes.delete('/session/content', Auth.isAuthenticated, function(req, res) {
@@ -167,6 +190,9 @@ module.exports = function (apiRoutes) {
                         code: err.code
                     });
                 }
+                Assignment.deleteMany({planId: mongoose.Types.ObjectId(req.body.sessionId)}, (err, result) => {
+                    // Not necessary to report result of this action
+                });
                 res.json({
                     success: true,
                 });

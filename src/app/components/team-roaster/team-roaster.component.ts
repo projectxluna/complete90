@@ -185,6 +185,28 @@ export class TeamRoasterComponent implements OnInit {
     });
   }
 
+  deletePlayerFromClub() {
+    if (!this.playerModal.player) {
+      return;
+    }
+    const params = {
+      title: 'Remove from Club',
+      message: 'Are you sure you want to remove player from club?',
+      cancelLabel: 'Back',
+      confirmLabel: 'Confirm'
+    };
+
+    let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params });
+    confirmModal.content.onClose.subscribe(result => {
+      if (result.confirm) {
+        this.dataService.removeFromClub(this.playerModal.player.id).subscribe(res => {
+          this.getTeams();
+          this.closeModal();
+        });
+      }
+    });
+  }
+
   editTeam(team, template) {
     this.teamModal.team = team;
     this.openModal(template);
@@ -219,8 +241,9 @@ export class TeamRoasterComponent implements OnInit {
     confirmModal.content.onClose.subscribe(result => {
       if (result.confirm) {
         this.dataService.deleteTeam(this.teamModal.team._id).subscribe(res => {
-          this.getTeams();
           this.closeModal();
+          this.getUsersWithoutTeam();
+          this.getTeams();
         });
       }
     });

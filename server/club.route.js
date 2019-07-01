@@ -166,12 +166,22 @@ module.exports = function (apiRoutes) {
     
     apiRoutes.delete('/club/team/player', Auth.isAuthenticated, (req, res) => {
         const {playerId} = req.query;
-        User.findByIdAndUpdate(playerId, {teamId: null}, (err, user) => {
+        User.findByIdAndUpdate(playerId, {$unset: {teamId: ''}}, (err, user) => {
             if (err) return res.json({success: false, err});
 
             res.json({success: true, user});
         });
-    })
+    });
+
+    apiRoutes.delete('/club/player', Auth.isAuthenticated, (req, res) => {
+        const {playerId} = req.query;
+        User.findByIdAndUpdate(playerId, {$unset: {clubId: '', clubStatus: ''}}, (err, user) => {
+            if (err) return res.json({success: false, err});
+
+            res.json({success: true, user});
+        });
+    });
+
     apiRoutes.get('/club/team/players', Auth.isAuthenticated, async (req, res) => {
         let players = await findTeamPlayer(req.query.teamId);
         res.json({
@@ -233,7 +243,9 @@ module.exports = function (apiRoutes) {
         const {teamId} = req.query;
         Team.deleteOne({_id: mongoose.Types.ObjectId(teamId)}, (err, result) => {
             if (err) return res.json({success: false, err});
-            res.json({success: true});
+            User.updateMany({teamId: mongoose.Types.ObjectId(teamId)}, {$unset: {teamId: ''}, $set: {clubStatus: CLUB_REQUEST_STATUS.PENDING}}, (err, result) => {
+                res.json({success: true});
+            });
         });
     });
 

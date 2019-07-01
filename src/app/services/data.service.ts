@@ -162,6 +162,17 @@ export class DataService {
       });
   }
 
+  removeFromClub(playerId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {playerId} });
+
+    return this.http
+      .delete('/api/club/player', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   getUsersWithoutTeam(): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
@@ -314,6 +325,17 @@ export class DataService {
 
     return this.http
       .post('/api/session/content', sessions, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  editContentOfSession(sessionId, content): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http
+      .put('/api/session/content', {sessionId, content}, options)
       .map((response: Response) => {
         return response.json();
       });

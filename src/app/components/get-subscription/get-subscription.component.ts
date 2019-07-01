@@ -42,6 +42,7 @@ export class GetSubscriptionComponent implements OnInit {
         this.promoCodeError = 'Promo code activated!!';
         setTimeout(() => {
           this.modalRef.hide();
+          window.location.reload();
         }, 2000);
         this.subscriptionUpdated.emit();
       } else {
@@ -57,5 +58,6 @@ export class GetSubscriptionComponent implements OnInit {
 
   closeModal() {
     this.modalRef.hide();
+    window.location.reload();
   }
 }

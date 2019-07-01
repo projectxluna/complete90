@@ -35,8 +35,8 @@ export class MyClubComponent implements OnInit {
   ngOnInit() {
   }
 
-  getProfile() {
-    this.dataService.getUserProfile().subscribe(res => {
+  getProfile(cache = true) {
+    this.dataService.getUserProfile(cache).subscribe(res => {
       if (!res || !res.success) {
         return;
       }
@@ -72,6 +72,7 @@ export class MyClubComponent implements OnInit {
     this.modalRef.hide();
     this.page = 1;
     this.model.clubName = '';
+    this.getProfile(false);
   }
 
   openModal(template: TemplateRef<any>) {
@@ -106,6 +107,7 @@ export class MyClubComponent implements OnInit {
           this.page = 1;
           this.model.clubName = '';
           this.modalRef.hide();
+          this.getProfile(false);
         }, 3000);
       }
     });

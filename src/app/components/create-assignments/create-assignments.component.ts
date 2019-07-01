@@ -91,12 +91,24 @@ export class CreateAssignmentsComponent implements OnInit {
     this.modal.selectedPlayer = player;
   }
 
+  continueToPage3() {
+    if (!this.modal.selectedPlayer && !this.modal.selectedTeam) {
+      return;
+    }
+    this.modal.page = 3;
+  }
+
   selectTeam(team) {
       if (this.modal.selectedTeam) {
         this.modal.selectedTeam.active = !this.modal.selectedTeam.active;
       }
       team.active = !team.active;
       this.modal.selectedTeam = team;
+  }
+
+  done() {
+    this.closeModal();
+    this.init();
   }
 
   selectPlan(plan, template) {
@@ -132,8 +144,11 @@ export class CreateAssignmentsComponent implements OnInit {
     }
     this.dataService.createAssignment(payload).subscribe(res => {
       if (res.success) {
-        this.closeModal();
-        this.init();
+        this.modal.page = 4;
+        setTimeout(() => {
+          this.closeModal();
+          this.init();
+        }, 3000);
       }
     });
   }

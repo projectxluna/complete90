@@ -137,6 +137,14 @@ export class SessionsComponent implements OnInit {
     }, this.banner.defaultTimeout);
   }
 
+  editContentParam(session, content) {
+    this.dataService.editContentOfSession(session.id, content).subscribe(result => {
+      if (result && result.success) {
+        console.log('Saved new params');
+      }
+    });
+  }
+
   addContentToCustomSession(contentId, content) {
     // prompt user to select which existing session they want to add
     // this content to, or let them start a new session
@@ -259,6 +267,11 @@ export class SessionsComponent implements OnInit {
     session.oldName = session.name;
     session.editMode = !session.editMode ? true : false;
     session.expanded = false;
+  }
+
+  toggleContentEdit(content) {
+    if (!content) return;
+    content.editMode = !content.editMode ? true : false;
   }
 
   save(session, cb = null) {

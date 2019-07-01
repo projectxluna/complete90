@@ -182,7 +182,7 @@
                             Name
                         </td>
                         <td>
-                            Length
+                            Completion
                         </td>
                         <td>
                             Created On
@@ -191,7 +191,7 @@
                             Due Date
                         </td>
                         <td>
-                            Completion
+                            Length
                         </td>
                     </tr>
                     <tr *ngFor="let report of reportModal.report[tab.id]">
@@ -199,7 +199,7 @@
                             {{ report.contentName }}
                         </td>
                         <td>
-                            {{ report.contentLength / 100 | number:'.1-2' }} s
+                            {{ report.completion | number:'.1-2' | percent }}
                         </td>
                         <td>
                             {{ report.createdAt | date }}
@@ -208,7 +208,7 @@
                             {{ report.dueDate | date }}
                         </td>
                         <td>
-                            {{ report.completion | number:'.1-2' | percent }}
+                            {{ report.contentLength / 100 | number:'.1-2' }} s
                         </td>
                     </tr>
                 </table>
@@ -251,6 +251,10 @@
             <!-- <div class="form-group" style="display: flex;">
                 <input [(ngModel)]="teamModal.team.name" name="teamName" class="form-control" placeholder="Team Name">
             </div> -->
+            <div class="row team-control">
+                <!-- <div class="col-sm-6 text-center control" (click)="updateTeam()">Update Team</div> -->
+                <div class="col-sm-12 text-center control" (click)="deletePlayerFromClub()">Remove From Club</div>
+            </div>
             <div class="row team-control">
                 <!-- <div class="col-sm-6 text-center control" (click)="updateTeam()">Update Team</div> -->
                 <div class="col-sm-12 text-center control" (click)="updatePlayer()">Remove From Team</div>

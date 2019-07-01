@@ -43,7 +43,7 @@
                     <span>{{ player.name }} </span>
                 </div>
             </div>
-            <div class="no_club" (click)="modal.page = 3">Continue</div>
+            <div class="no_club" (click)="continueToPage3()">Continue</div>
         </div>
         <div *ngIf="modal.page == 2 && modal.selectedType === 'team'">
             <div class="club-list">
@@ -52,7 +52,7 @@
                     <span>{{ team.name }} </span>
                 </div>
             </div>
-            <div class="no_club" (click)="modal.page = 3">Continue</div>
+            <div class="no_club" (click)="continueToPage3()">Continue</div>
         </div>
         <div *ngIf="modal.page == 3">
             <div class="row form-group">
@@ -66,6 +66,12 @@
                     [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.endDate">
             </div>
             <div class="no_club" (click)="createAssignment()">Continue</div>
+        </div>
+        <div *ngIf="modal.page == 4">
+            <div class="row form-group">
+                The Assignment has been successfully created!
+            </div>
+            <div class="no_club" (click)="done()">Done</div>
         </div>
     </div>
 </ng-template>
