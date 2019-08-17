@@ -135,7 +135,7 @@ function callback() {
 
 var StatsJob = {
     register: function () {
-        var cronJob = cron.job('0 0 0 ? * FRI *', callback); // Every Friday
+        var cronJob = cron.job('0 0 * * 5', callback); // Every Friday
         // var cronJob = cron.job('0-59 * * * *', callback); // For Dev. Runs every 1 minute
         cronJob.start();
     }
