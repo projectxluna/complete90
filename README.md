@@ -6,6 +6,6 @@
 
 ### Setup
 1. Clone repository:
-`git@github.com:projectxluna/complete90.git`
+`git clone git@github.com:projectxluna/complete90.git`
 2. Install node packages
 `npm install`
