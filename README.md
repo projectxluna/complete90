@@ -1,11 +1,11 @@
-# complete90
+### Dependencies
+- git
+- mongo 3.2.22
+- node.js v8.15.0 (install from nvm)
+- angular-cli
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### Setup
+1. Clone repository:
+`git@github.com:projectxluna/complete90.git`
+2. Install node packages
+`npm install`
