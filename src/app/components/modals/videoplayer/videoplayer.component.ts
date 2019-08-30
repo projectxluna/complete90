@@ -239,16 +239,18 @@ export class VideoplayerComponent implements OnInit {
   //   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
   //     let cue = textTrack.currentTarget;
   //     VideoplayerComponent.api.seekTime(cue.endTime); 
-
-
   //   }
   // }
   onExitCuePoint(textTrack) {
     let cue = textTrack.currentTarget;
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
       if (cue.loop && VideoplayerComponent.autoLoop) {
-        
-        VideoplayerComponent.api.seekTime(3);
+
+        // smallest value of time which does not cause recursive buffering on iOS browsers is startTime+0.3s
+        var time = cue.startTime+ 0.3;
+        VideoplayerComponent.api.seekTime(time);
+
+        // This volume feature does not work yet, maybe save to a global variable?
         if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
         // turn off music here
         VideoplayerComponent.api.volume = 0;
@@ -258,8 +260,7 @@ export class VideoplayerComponent implements OnInit {
       }
     } else {
       if (cue.loop && VideoplayerComponent.autoLoop) {
-        
-        VideoplayerComponent.api.seekTime(10);
+        VideoplayerComponent.api.seekTime(cue.startTime);
         if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
         // turn off music here
         VideoplayerComponent.api.volume = 0;
