@@ -235,16 +235,38 @@ export class VideoplayerComponent implements OnInit {
   onEnterCuePoint(textTrack) {
   }
 
+  // onExitCuePointMpbile (textTrack) {
+  //   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  //     let cue = textTrack.currentTarget;
+  //     VideoplayerComponent.api.seekTime(cue.endTime); 
+
+
+  //   }
+  // }
   onExitCuePoint(textTrack) {
     let cue = textTrack.currentTarget;
-    if (cue.loop && VideoplayerComponent.autoLoop) {
-      VideoplayerComponent.api.seekTime(cue.startTime);
-      if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
-      // turn off music here
-      VideoplayerComponent.api.volume = 0;
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      if (cue.loop && VideoplayerComponent.autoLoop) {
+        
+        VideoplayerComponent.api.seekTime(3);
+        if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
+        // turn off music here
+        VideoplayerComponent.api.volume = 0;
+      } else {
+        // Restore old volume here
+        if (VideoplayerComponent.originalVolume) VideoplayerComponent.api.volume = VideoplayerComponent.originalVolume;
+      }
     } else {
-      // Restore old volume here
-      if (VideoplayerComponent.originalVolume) VideoplayerComponent.api.volume = VideoplayerComponent.originalVolume;
+      if (cue.loop && VideoplayerComponent.autoLoop) {
+        
+        VideoplayerComponent.api.seekTime(10);
+        if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
+        // turn off music here
+        VideoplayerComponent.api.volume = 0;
+      } else {
+        // Restore old volume here
+        if (VideoplayerComponent.originalVolume) VideoplayerComponent.api.volume = VideoplayerComponent.originalVolume;
+      }
     }
   }
 
