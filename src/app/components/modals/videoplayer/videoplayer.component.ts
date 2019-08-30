@@ -260,6 +260,10 @@ export class VideoplayerComponent implements OnInit {
       }
     } else {
       if (cue.loop && VideoplayerComponent.autoLoop) {
+<<<<<<< HEAD
+=======
+        
+>>>>>>> c61d9e6e5037952c485c207ea6f2c2a6ae6ee05a
         VideoplayerComponent.api.seekTime(cue.startTime);
         if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
         // turn off music here
