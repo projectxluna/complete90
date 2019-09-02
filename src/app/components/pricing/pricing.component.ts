@@ -13,14 +13,27 @@ export class PricingComponent implements OnInit {
   playerPrice;
   coachPrice;
   plans = {};
-
+  isCoach = false;
   constructor(private dataService: DataService,
     private router: Router) {
     this.dataService.getClient().subscribe((res) => {
       if (res) {
         this.processPlans(res.plans);
+        this.setCycle('monthly');
       }
     });
+    this.dataService.getUserProfile().subscribe(me => {
+      if (me && me.user && me.user.profiles) {
+        this.hasCoachProfile(me.user.profiles);
+      }
+    });
+  }
+
+  hasCoachProfile(profiles) {
+    let profile = profiles.find(profile => {
+      return profile.type === 'MANAGER';
+    });
+    this.isCoach = profile ? true : false;
   }
 
   ngOnInit() {

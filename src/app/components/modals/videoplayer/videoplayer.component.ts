@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { VgAPI } from 'videogular2/core';
 import { DataService } from '../../../services';
@@ -47,7 +47,10 @@ export class Timer {
     s = Math.floor(time / 1000);
     ms = time % 1000;
 
-    newTime = this.pad(h, 2) + ':' + this.pad(m, 2) + ':' + this.pad(s, 2) + ':' + this.pad(ms, 3);
+    if (h > 0) {
+      newTime += this.pad(h, 2) + ':';
+    }
+    newTime = this.pad(m, 2) + ':' + this.pad(s, 2);
     return newTime;
   }
 
@@ -60,12 +63,14 @@ export class Timer {
 @Component({
   selector: 'app-videoplayer',
   templateUrl: './videoplayer.component.html',
-  styleUrls: ['./videoplayer.component.css']
+  styleUrls: ['./videoplayer.component.less']
 })
 export class VideoplayerComponent implements OnInit {
   static api: VgAPI;
   track: TextTrack;
   timer: Timer;
+  longTimer: Timer;
+  mediaLength = 0;
 
   static autoLoop: boolean = true;
   userCreated;
@@ -74,10 +79,12 @@ export class VideoplayerComponent implements OnInit {
     contentId: '',
     currentTime: 0, // seconds
     watchedTotal: 0, // seconds
+    contentLength: 0
   }
 
   selectedIndex;
   selectedContent;
+  assignmentId;
   static originalVolume: any;
 
   constructor(public bsModalRef: BsModalRef, public dataService: DataService) {
@@ -87,6 +94,7 @@ export class VideoplayerComponent implements OnInit {
     this.selectedContent = this.session.content[this.selectedIndex] || this.session.content[0];
     this.sessionStats.contentId = this.selectedContent.id;
     this.timer = new Timer();
+    this.longTimer = new Timer();
   }
 
   toggleAutoLoop() {
@@ -97,28 +105,67 @@ export class VideoplayerComponent implements OnInit {
     return VideoplayerComponent.autoLoop;
   }
 
+  timerText = '0:00'
+  getTimerText() {
+    let t = this.longTimer.formatTime();
+    if (t) {
+      this.timerText = t;
+    }
+    return this.timerText
+  }
+
+  formatTime(time) {
+    var h = 0, m = 0, s = 0;
+    var newTime = '';
+
+    h = Math.floor(time / (60 * 60 * 1000));
+    time = time % (60 * 60 * 1000);
+    m = Math.floor(time / (60 * 1000));
+    time = time % (60 * 1000);
+    s = Math.floor(time / 1000);
+
+    if (h > 0) {
+      newTime += this.pad(h, 2) + ':';
+    }
+    newTime += this.pad(m, 2) + ':' + this.pad(s, 2);
+    return newTime;
+  }
+
+  pad(num, size) {
+    var s = "0000" + num;
+    return s.substr(s.length - size);
+  }
+
+  getTime() {
+    return this.formatTime((this.selectedContent.reps || 1 + this.selectedContent.sets || 1) * this.mediaLength * 1000)
+  }
+
   playNext() {
     if (this.selectedIndex + 1 === this.session.content.length) return;
 
     this.stopTimer();
+    this.longTimer.reset();
 
     this.selectedIndex++;
     this.selectedContent = this.session.content[this.selectedIndex];
     this.removeCuePoits();
     this.addCuePoints();
     VideoplayerComponent.originalVolume = undefined;
+    this.mediaLength = VideoplayerComponent.api.getMasterMedia().duration;
   }
 
   playPrevious() {
     if (this.selectedIndex === 0) return;
     
     this.stopTimer();
+    this.longTimer.reset();
 
     this.selectedIndex--;
     this.selectedContent = this.session.content[this.selectedIndex];
     this.removeCuePoits();
     this.addCuePoints();
     VideoplayerComponent.originalVolume = undefined;
+    this.mediaLength = VideoplayerComponent.api.getMasterMedia().duration;
   }
 
   startTimer() {
@@ -138,12 +185,16 @@ export class VideoplayerComponent implements OnInit {
     this.sessionStats.watchedTotal = watched;
     this.sessionStats.currentTime = VideoplayerComponent.api.getDefaultMedia().currentTime;
     this.sessionStats.contentId = this.selectedContent.id;
-
+    this.sessionStats.contentLength = VideoplayerComponent.api.getDefaultMedia().duration;
     // console.log('Watched time:', this.timer.formatTime(), 'Current time:', this.api.getDefaultMedia().currentTime);
     if (watched < 1) {
       return;
     }
-    this.dataService.saveWatchedStats(this.sessionStats).subscribe(result => {
+    let payload = {
+      contentStats: this.sessionStats,
+      assignmentId: this.assignmentId ? this.assignmentId : null
+    };
+    this.dataService.saveWatchedStats(payload).subscribe(result => {
       if (!result || !result.success) {
         return;
       }
@@ -157,12 +208,14 @@ export class VideoplayerComponent implements OnInit {
   onPlayerReady(api: VgAPI) {
     VideoplayerComponent.api = api;
 
+    this.mediaLength = api.getMasterMedia().duration;
     // register media events 
     api.getDefaultMedia().subscriptions.play.subscribe(
       () => {
         // start or create the timer for this particular video if it doesnt exist already
         // console.log('***PLAY')
         this.startTimer();
+        this.longTimer.start();
       }
     );
     api.getDefaultMedia().subscriptions.ended.subscribe(
@@ -177,6 +230,7 @@ export class VideoplayerComponent implements OnInit {
         // we pause the timer..
         // console.log('***PAUSED')
         this.stopTimer();
+        this.longTimer.stop();
       }
     );
     api.getDefaultMedia().subscriptions.playing.subscribe(

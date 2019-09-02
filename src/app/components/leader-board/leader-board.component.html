@@ -1,0 +1,42 @@
+<div class="box p-a">
+  <div class="box-header">
+      <h3 class="m-0 suggestedHeader"><b>LEADER BOARD</b></h3>
+  </div>
+
+  <div class="row" id="sq-pa">
+    <tabset>
+        <tab *ngFor="let category of categories" [heading]="category.name" [active]="category.active" (select)="changeTab(category)"
+            (deselect)="category.active = false">
+            <div>
+              <table *ngIf="players && players.length">
+                <tr class="leaderboard__row">
+                  <th>Rank</th>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Time Trained</th>
+                </tr>
+                <tr *ngFor="let player of players.slice(0, 5); let i = index" class="leaderboard__row">
+                  <td>
+                    <span class="leaderboard__row-txt">{{ i + 1 }}</span>
+                  </td>
+                  <td>
+                    <div class="leaderboard__row-imgcontainer">
+                      <img [src]="player.photoUrl" class="leaderboard__row-img">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="leaderboard__row-txt">{{ player.name | uppercase }}</div>
+                  </td>
+                  <td>
+                    <div class="leaderboard__row-txt">{{ player.watchedTotal | elapsedTimestamp }}</div>
+                  </td>
+                </tr>
+              </table>
+              <div *ngIf="!players || players.length == 0" class="leaderboard__row">
+                No Leaderboard data. Be the first by watching a training session!
+              </div>
+            </div>
+        </tab>
+    </tabset>
+  </div>
+</div>

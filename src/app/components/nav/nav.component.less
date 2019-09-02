@@ -1,0 +1,181 @@
+.navbar {
+    font-family: 'Montserrat';
+    /*background-color:transparent;*/
+    background-color: #000000cc;
+    margin-bottom: 0px;
+    font-weight: 700;
+}
+
+.navbar-header{
+    position: absolute;
+}
+
+.navbar-nav {
+    li {
+        font-size: 14px;
+        color: white;
+    }
+}
+.navbar-nav>li>a {
+    font-size: 14px;
+    color: white;
+}
+
+.navbar-nav>li>a:hover {
+    color: #f8c809;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    /*border-bottom: 1px solid #ffffff63;*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar-inverse {
+    /*background-color: #222;*/
+    border-color: transparent;
+}
+
+.navbar-inverse .navbar-nav>.active>a{
+    color: #f8c809;
+    background-color: transparent;
+}
+
+.navbar-brand img{
+    max-height: 210%;
+    display: inline;
+    margin-right: 20px;
+}
+
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+    color: #f8c809;
+    background-color: transparent;
+}
+
+.logoTxt{
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.avatar {
+    /* make a square container */
+    width: 30px;
+    height: 30px;
+
+    /* fill the container, preserving aspect ratio, and cropping to fit */
+    background-size: cover;
+
+    /* center the image vertically and horizontally */
+    background-position: top center;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+}
+
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1200px) {
+
+    .logoTxt {
+        font-size: 10px;
+    }
+
+    .navbar-brand img {
+        max-height: 160%;
+        display: inline;
+        margin-right: 20px;
+    }
+
+}
+
+
+@media (max-width: 1180px) {
+    .navbar-header{
+        position: relative;
+    }
+
+}
+
+
+
+
+@media (max-width: 1024px) {
+
+    .navbar-toggle {
+        position: relative;
+        float: right;
+        padding: 9px 10px;
+        margin-top: 18px;
+        margin-right: 15px;
+        margin-bottom: 18px;
+        background-color: transparent;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+}
+
+
+@media (max-width: 840px) {
+    .navbar-nav>li>a {
+        font-size: 9px;
+    }
+
+}
+
+
+
+@media (max-width: 768px) {
+
+    .navbar{
+        font-family: 'Montserrat';
+        /*background-color:transparent;*/
+        background-color: #000000b8;
+        margin-bottom: 0px;
+    }
+
+
+    .navbar .dropdown-menu{
+        text-align: center;
+    }
+
+    .navbar-centered[_ngcontent-c1] .nav[_ngcontent-c1] > li[_ngcontent-c1] > a[_ngcontent-c1] {
+     display: block;
+     text-align: center; 
+    }
+
+    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+        color: white;
+    }
+
+
+}
+
+
+
+
+
+
+@media (max-width: 414px) {
+
+    .navbar-brand img{
+        max-height: 140%;
+        display: inline;
+        margin-right: 20px;
+    }	
+
+}

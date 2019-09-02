@@ -1,0 +1,112 @@
+<div class="box">
+  <div class="box-header">
+      <h3 class="m-0"><b>ASSIGNMENTS</b></h3>
+  </div>
+
+  <div class="box-body">
+      <div class="plans">
+          <div class="plan_row" *ngFor="let plan of plans">
+            <div class="plan_name" *ngIf="plan.content.length">{{ plan.name | uppercase }}</div>
+            <div class="assign_button" (click)="selectPlan(plan, assign)">Assign</div>
+          </div>
+          <div class="plan_row" *ngIf="!plans || plans.length == 0">
+            No Saved Plans. To begin go to the sessions page and create a plan.
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Assign plan to player or team -->
+<ng-template #assign>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center" *ngIf="modal.page == 1">Create Assignment</h4>
+        <h4 class="modal-title text-center" *ngIf="modal.page == 2">Select Player or Team</h4>
+        <h4 class="modal-title text-center" *ngIf="modal.page == 3">Set Due Date</h4>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="modal.page == 1" class="assignment-types">
+            <div class="assignment-type" (click)="setType('player')">
+                Player
+            </div>
+            <div class="assignment-type" (click)="setType('team')">
+                Team
+            </div>
+        </div>
+        <div *ngIf="modal.page == 2 && modal.selectedType === 'player'">
+            <div class="club-list">
+                <div *ngFor="let player of players" class="club-list-item" (click)="selectPlayer(player)"
+                    [ngStyle]="{'background-color': player.active ? '#efefef' : '#ffffff'}">
+                    <img [src]="player.avatarURL">
+                    <span>{{ player.name }} </span>
+                </div>
+            </div>
+            <div class="no_club" (click)="continueToPage3()">Continue</div>
+        </div>
+        <div *ngIf="modal.page == 2 && modal.selectedType === 'team'">
+            <div class="club-list">
+                <div *ngFor="let team of teams" class="club-list-item" (click)="selectTeam(team)"
+                    [ngStyle]="{'background-color': team.active ? '#efefef' : '#ffffff'}">
+                    <span>{{ team.name }} </span>
+                </div>
+            </div>
+            <div class="no_club" (click)="continueToPage3()">Continue</div>
+        </div>
+        <div *ngIf="modal.page == 3">
+            <div class="row form-group">
+                <span class="form-label">From</span>
+                <input type="text" placeholder="Due Date" class="form-control" bsDatepicker
+                    [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.startDate">
+            </div>
+            <div class="row form-group">
+                <span class="form-label">Due Date</span>
+                <input type="text" placeholder="Due Date" class="form-control" bsDatepicker
+                    [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.endDate">
+            </div>
+            <div class="no_club" (click)="createAssignment()">Continue</div>
+        </div>
+        <div *ngIf="modal.page == 4">
+            <div class="row form-group">
+                The Assignment has been successfully created!
+            </div>
+            <div class="no_club" (click)="done()">Done</div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Reports -->
+<ng-template #report>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center">Reports</h4>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="selectedPlan && !selectedPlan.assignments || selectedPlan.assignments.length == 0">
+            This plan has not been assigned yet
+        </div>
+        <div *ngIf="selectedPlan.assignments && selectedPlan.assignments.length">
+            <table>
+                <tr>
+                    <td>Team/Player</td>
+                    <td>Created On</td>
+                    <td>Due Date</td>
+                </tr>
+                <tr *ngFor="let plan of selectedPlan.assignments">
+                    <td>
+                        {{plan.forTeams + plan.forPlayers}}
+                    </td>
+                    <td>
+                        {{plan.createdAt | date}}
+                    </td>
+                    <td>
+                        {{plan.endDate | date}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</ng-template>

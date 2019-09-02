@@ -1,26 +1,65 @@
-<div id="nameSessModal">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="bsModalRef.hide()"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title text-center" id="savedSessModalTitle">NAME SESSION</h4>
+<div *ngIf="page === 1">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="bsModalRef.hide()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title text-center" id="savedSessModalTitle">NAME SESSION</h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="nameSessForm">
+        <div class="form-group" style="max-width: 300px; margin-left: 32%; margin-bottom: 30px;">
+            <input [(ngModel)]="session.name" class="form-control text-center" id="sessionName" placeholder="Session Name" name="name">
+        </div>
     </div>
 
-    <div class="modal-body">
+    <div class="text-center saveSessBtnCont">
+      <button class="saveSessName" (click)="createNewSession()">SAVE</button>
+    </div>
+
+    <div class="addtoSess">
+      <h4 class="modal-title text-center" id="savedSessModalTitle">OR ADD TO SESSION</h4>
+    </div>
+
+    <div *ngFor="let session of customSession" class="row saved-pa" style="color: black;">
+      <div class="col-xs-6 sessName">{{ session.name | uppercase }}<span> ({{ session.content.length }} Videos)</span></div>
+      <div class="col-xs-5"><button class="viewSessbtn pull-right" (click)="addToSession(session.id)">ADD</button></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="page === 2">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="bsModalRef.hide()"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title text-center" id="savedSessModalTitle">REPS & SETS</h4>
+    </div>
+
+    <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <div class="nameSessForm">
           <div class="form-group">
-              <input [(ngModel)]="session.name" class="form-control text-center" id="sessionName" placeholder="Session Name" name="name">
+            <div class="col-lg-6">
+              <span style="color: black;">Min</span>
+              <input [(ngModel)]="session.minutes" class="form-control text-center" placeholder="0" type="number" min=0 max=60>
+            </div>
+            <div class="col-lg-6">
+              <span style="color: black;">Sec</span>
+              <input [(ngModel)]="session.seconds" class="form-control text-center" placeholder="0" type="number" min=0 max=60>
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              <span style="color: black;">Reps</span>
+              <input [(ngModel)]="session.reps" class="form-control text-center" placeholder="0" type="number" min="0">
+            </div>
+            <div style="color: black;">X</div>
+            <div>
+              <span style="color: black;">Sets</span>
+              <input [(ngModel)]="session.sets" class="form-control text-center" placeholder="0" type="number" min="0">
+            </div>
           </div>
       </div>
 
-      <div class="text-center saveSessBtnCont">
-        <button class="saveSessName" (click)="createNewSession()">SAVE</button>
-      </div>
-
-      <div class="addtoSess">
-        <h4 class="modal-title text-center" id="savedSessModalTitle">OR ADD TO SESSION</h4>
-      </div>
-      <div *ngFor="let session of customSession" class="row saved-pa" style="color: black;">
-        <div class="col-xs-6 sessName">{{ session.name | uppercase }}<span> ({{ session.content.length }} Videos)</span></div>
-        <div class="col-xs-5"><button class="viewSessbtn pull-right" (click)="addToSession(session.id)">ADD</button></div>
+      <div class="text-center saveSessBtnCont" style="display: flex; flex-direction: row;">
+        <button class="saveSessName" (click)="setReps()" style="margin-right: 20px;">SKIP</button>
+        <button class="saveSessName" (click)="setReps()">SAVE</button>
       </div>
     </div>
 </div>

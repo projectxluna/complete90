@@ -18,7 +18,12 @@ import { NavComponent } from './components/nav/nav.component';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { FooterComponent } from './components/footer/footer.component';
 
 import { DragAndDropModule } from 'angular-draggable-droppable';
@@ -38,8 +43,15 @@ import { ContactusComponent } from './components/contactus/contactus.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ConfirmComponent } from './components/modals/confirm/confirm.component';
-
-
+import { ProfileComponent } from './components/profile/profile.component';
+import { PlayerAttributesComponent } from './components/player-attributes/player-attributes.component';
+import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
+import { MyClubComponent } from './components/my-club/my-club.component';
+import { TeamRoasterComponent } from './components/team-roaster/team-roaster.component';
+import { CreateAssignmentsComponent } from './components/create-assignments/create-assignments.component';
+import { GetSubscriptionComponent } from './components/get-subscription/get-subscription.component';
+import { ElapsedTimestampPipe } from './pipes/elapsed-timestamp.pipe';
+import { TimeSincePipe } from './pipes/time-since.pipe';
 
 @NgModule({
   declarations: [
@@ -62,13 +74,26 @@ import { ConfirmComponent } from './components/modals/confirm/confirm.component'
     ContactusComponent,
     TermsComponent,
     PrivacyComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ProfileComponent,
+    PlayerAttributesComponent,
+    LeaderBoardComponent,
+    MyClubComponent,
+    TeamRoasterComponent,
+    CreateAssignmentsComponent,
+    GetSubscriptionComponent,
+    ElapsedTimestampPipe,
+    TimeSincePipe
   ],
   imports: [
     BrowserModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    TabsModule.forRoot(),
+    TimepickerModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     VideogularModule,
     HttpModule,
     BrowserAnimationsModule,

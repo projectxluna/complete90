@@ -1,0 +1,170 @@
+div {
+    font-family: 'Montserrat';
+}
+
+h3 {
+    font-size: 18px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+input {
+    width: 250px;
+    outline: 0;
+}
+
+.lowkey {
+    color: #aba8a8;
+}
+
+.rounded,
+.circle {
+    border-radius: 500px;
+}
+
+.fa-plus,
+.fa-pencil {
+    color: #fd1541;
+}
+
+.profile-input {
+    border: none;
+    border-width: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #00000066;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.profile {
+    padding: 20px;
+    color: #0000008a;
+    .name {
+        font-size: 20px;
+        font-weight: 600;
+        padding-bottom: 10px;
+    }
+    .jersey {
+        font-size: 17px;
+    }
+}
+
+.box {
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 1.5rem;
+    color: #00000066;
+    border: 1px solid #f7f7f7;
+    padding: 16px !important;
+    h3 {
+        color: #0000008a;
+    }
+    .box-header {
+        position: relative;
+        padding: 1rem;
+        h3 {
+            font-size: 20px;
+        }
+    }
+    .box-body {
+        padding: 1rem;
+    }
+    .box-tool {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        padding: 1rem;
+    }
+    .items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-left: 40px;
+        padding-bottom: 10px;
+        .item {
+            display: flex;
+            width: 50%;
+            padding: 15px 5px 15px 5px;
+            .title {
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+    }
+    .edit-mode-controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        .save-btn {
+            color: white;
+            background-color: #5cda57;
+            margin-left: 15px;
+            border: 0px;
+            padding: 7px 22px;
+        }
+        .cancel-btn {
+            color: white;
+            background-color: orange;
+            border: 0px;
+            padding: 7px 22px;
+        }
+    }
+}
+
+.upload {
+    .img-circle {
+        border-radius: 50%;
+    }
+    .profilePic {
+        max-width: 40%;
+        opacity: 1;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+        &:hover {
+            opacity: 0.3;
+        }
+    }
+    .uploadIcon {
+        transition: .5s ease;
+        opacity: 0.3;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+@media (max-width: 1024px) {}
+
+@media (max-width: 768px) {
+    .uploadIcon {
+        top: 40%;
+        left: 50%;
+    }
+}
+
+@media (max-width: 414px) {
+    .box-header h3 {
+        font-size: 16px;
+    }
+    .nav>li>a {
+        position: relative;
+        display: block;
+        padding: 5px 10px;
+    }
+    input {
+        width: 270px;
+    }
+    .uploadIcon {
+        top: 40%;
+        left: 50%;
+    }
+}

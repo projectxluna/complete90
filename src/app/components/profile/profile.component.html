@@ -1,0 +1,63 @@
+<div class="box">
+    <div class="box-header">
+        <h3 class="m-0"><b>PROFILE</b></h3>
+    </div>
+
+    <div class="box-tool" (click)="toggleEditMode()">
+        <ul class="nav">
+            <li class="nav-item inline dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-12 text-center">
+        <div class="upload" *ngIf="profile">
+            <img [src]="profile.avatarURL" class="profilePic img-circle" draggable="false">
+            <div class="uploadIcon">
+                <a (click)="addFiles()"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
+                <input type="file" name="profileImg" #file style="display: none" (change)="onFilesAdded()" accept="image/*" />
+            </div>
+        </div>
+        <div class="profile">
+            <div class="row name" *ngIf="profile">
+                <span *ngIf="!editMode">{{ profile.name }}</span>
+                <input class="profile-input" *ngIf="editMode" [(ngModel)]="profile.name" placeholder="Edit Name">
+            </div>
+            <div class="row jersey" *ngIf="playerProfile">
+                <span *ngIf="!editMode">Jersey # {{ playerProfile.jersey || 0 }}</span>
+                <input class="profile-input" *ngIf="editMode" [(ngModel)]="playerProfile.jersey" type="number" placeholder="Edit Jersey #">
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="item" *ngIf="playerProfile">
+            <a class="title">AGE:
+                <span *ngIf="!editMode" class="lowkey">{{ playerProfile.age || ''}}</span>
+            </a>
+            <input class="profile-input" *ngIf="editMode" [(ngModel)]="playerProfile.age" placeholder="Edit Age">
+        </div>
+        <div class="item" *ngIf="playerProfile">
+            <a class="title">POSITION:
+                <span *ngIf="!editMode" class="lowkey">{{ playerProfile.position || ''}}</span>
+            </a>
+            <input class="profile-input" *ngIf="editMode" [(ngModel)]="playerProfile.position" placeholder="Edit Position">
+        </div>
+        <div class="item" *ngIf="profile">
+            <a class="title">NATIONALITY:
+                <span *ngIf="!editMode" class="lowkey">{{ profile.nationality || ''}}</span>
+            </a>
+            <input class="profile-input" *ngIf="editMode" [(ngModel)]="profile.nationality" placeholder="Edit Nationality">
+        </div>
+        <div class="item" *ngIf="coachProfile">
+            <a class="title">COACHING LEVEL:
+                <span *ngIf="!editMode" class="lowkey">{{ coachProfile.level || ''}}</span>
+            </a>
+            <input class="profile-input" *ngIf="editMode" [(ngModel)]="coachProfile.level" placeholder="Edit Level">
+        </div>
+    </div>
+    <div class="edit-mode-controls" *ngIf="editMode">
+        <button (click)="toggleEditMode()" class="cancel-btn">CANCEL</button>
+        <button (click)="updateProfile()" class="save-btn">SAVE</button>
+    </div>
+</div>

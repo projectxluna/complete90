@@ -1,8 +1,6 @@
-// load the things we need
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-
-// define the schema for our user model
+const { CLUB_REQUEST_STATUS } = require('../helpers/pure');
 var userSchema = mongoose.Schema({
     name: {
         type: String,
@@ -19,11 +17,10 @@ var userSchema = mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    teamName: String,
-    companyName: String,
-    height: String,
-    position: String,
-    foot: String,
+    nationality: String,
+    profiles: {
+        type: [{}]
+    },
     avatarURL: String,
     braintree: {
         id: String,
@@ -35,6 +32,18 @@ var userSchema = mongoose.Schema({
     survey: {
         viewed: Boolean,
     },
+    clubId: {
+        type: mongoose.Schema.Types.ObjectId,
+        index: true,
+    },
+    clubStatus: {
+        type: CLUB_REQUEST_STATUS,
+        index: true
+    },
+    teamId: {
+        type: mongoose.Schema.Types.ObjectId,
+        index: true,
+    },
     subscription: Object,
 },
 {
@@ -42,23 +51,17 @@ var userSchema = mongoose.Schema({
     collection: 'user_profile'
 });
 
-// generating a hash
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-// checking if password is valid
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-/**
- * This should be checking against something in the db!
- */
 userSchema.methods.hasCoachSubscription = function() {
     // return true;
-    return (this.braintree.subscription && this.braintree.subscription.planId.includes("coach"));
+    return (this.braintree.subscription && this.braintree.subscription.planId.includes('coach'));
 }
 
-// create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

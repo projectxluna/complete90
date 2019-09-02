@@ -1,44 +1,22 @@
-/*--------------------------TABLE OF CONTENTS-------------------------*/
-/*
-0. GLOBAL CCS
-1. BANNER IMAGE
-2. QUICK STATS TILES
-3. PROFILE & SUGGESTED TILES
-4. SETTING TILES
-5. MANAGER TILES
-
-*/
-
-/*----------------------------0. GOBAL CSSS--------------------------*/
-
-div{
+div {
     font-family: 'Montserrat';
-    /*font-family: 'Roboto', sans-serif;*/
 }
 
-.inactiveLink{
-   pointer-events: none;
-   cursor: default;
-}
-
-.lowkey {
-    color: #aba8a8;
-}
-
-.rounded, .circle {
+.rounded,
+.circle {
     border-radius: 500px;
 }
 
-h4{
+h4 {
     font-size: 14px;
     padding-bottom: 10px;
 }
 
-h3{
+h3 {
     font-size: 18px;
 }
 
-ul{
+ul {
     list-style-type: none;
 }
 
@@ -47,24 +25,25 @@ ul{
     background-color: transparent;
 }
 
-input{
+input {
     width: 250px;
-    outline:0;
+    outline: 0;
 }
 
-.desc-p{
+.desc-p {
     padding: 1rem;
 }
 
-.fa-plus, .fa-pencil{
+.fa-plus,
+.fa-pencil {
     color: #fd1541;
 }
 
-.box h3{
+.box h3 {
     color: #0000008a;
 }
 
-.editbtn{
+.editbtn {
     margin-right: 40px;
 }
 
@@ -78,14 +57,14 @@ input{
     padding: 15px 25px 15px 25px;
 }
 
-.red-btn-modal{
+.red-btn-modal {
     color: white;
     background-color: #fd1541;
     border: transparent;
     margin-right: 5px;
 }
 
-.editBtn{
+.editBtn {
     float: initial;
     font-size: 14px;
     font-weight: 700;
@@ -96,16 +75,15 @@ input{
     opacity: 0.6;
 }
 
-.deleteBtn{
+.deleteBtn {
     color: #9c9c9c;
     background: transparent;
     border: transparent;
 }
 
-
-
 /*----------------------------1. BANNER IMAGE--------------------------*/
-.bannerimage{
+
+.bannerimage {
     padding-top: 120px;
     background-image: url('../../../assets/dashboard-banner.jpg');
     background-repeat: no-repeat;
@@ -116,14 +94,15 @@ input{
     color: white;
 }
 
-
 /*----------------------------2. QUICK STATS TILES--------------------------*/
-.padding{
+
+.padding {
     padding: 24px;
     background-color: #f9f9f9;
 }
 
-.box, .box-color {
+.box,
+.box-color {
     background-color: #fff;
     position: relative;
     margin-bottom: 1.5rem;
@@ -140,7 +119,7 @@ input{
 }
 
 .m-0 {
-    margin: 0 0!important;
+    margin: 0 0 !important;
 }
 
 .clear {
@@ -148,19 +127,25 @@ input{
     overflow: hidden;
 }
 
-.stat1, .stat2, .stat3{
+.stat1,
+.stat2,
+.stat3 {
     margin-top: 20px;
     margin-bottom: 20px;
     /*color: #00000066;*/
 }
 
-.stat1 h1, .stat2 h1, .stat3 h1{
+.stat1 h1,
+.stat2 h1,
+.stat3 h1 {
     font-size: 22px;
-/*	margin-top: 10px;
+    /*	margin-top: 10px;
     margin-bottom: 0px;*/
 }
 
-.stat1 h2, .stat2 h2, .stat3 h2{
+.stat1 h2,
+.stat2 h2,
+.stat3 h2 {
     font-size: 18px;
     /*margin-top: 5px;*/
 }
@@ -189,6 +174,7 @@ input{
 }
 
 /*------------------------3. PROFILE & SUGGESTED TILES---------------------*/
+
 .box-header {
     position: relative;
     padding: 1rem;
@@ -213,34 +199,6 @@ input{
     border-radius: 50%;
 }
 
-.profilePic{
-    max-width: 40%;
-    opacity: 1;
-      width: 100%;
-      height: auto;
-      transition: .5s ease;
-      backface-visibility: hidden;
-}
-
-.uploadIcon {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.uploadOver:hover .profilePic {
-  opacity: 0.3;
-}
-
-.uploadOver:hover .uploadIcon {
-  opacity: 1;
-}
-
 .listProfile {
     padding-left: 0;
     padding-right: 0;
@@ -253,46 +211,39 @@ input{
     padding: 12px 16px;
 }
 
-.list li{
+.list li {
     padding-bottom: 30px;
 }
 
-.profileInput{
+.profileInput {
     border: none;
     border-width: 0;
     box-shadow: none;
     border-bottom: 1px solid #00000066;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-
 }
 
-.profileName{
-    padding-bottom: 20px;
-}
-
-.suggestedHeader{
+.suggestedHeader {
     padding-bottom: 30px;
 }
 
-.listVids{
+.listVids {
     padding-left: 0px;
     padding-top: 22px;
     padding-bottom: 22px;
+    li {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    h4 {
+        font-size: 14px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 }
 
-.listVids li{
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.listVids h4{
-    font-size: 14px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-#vidBG{
+#vidBG {
     background-color: #f9f9f9;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -300,21 +251,20 @@ input{
     margin-right: 0px;
 }
 
-.modal-content  {
-	/* width:inherit;
-	max-width:inherit;
-	height:inherit;
+.modal-content {
+    /* width:inherit;
+    max-width:inherit;
+    height:inherit;
     margin: 0 auto;
-	pointer-events:all; */
-
+    pointer-events:all; */
     -webkit-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
-    border-radius: 0px !important; 
+    border-radius: 0px !important;
 }
 
 .promo-modal {
-	font-family: 'Montserrat';
-	color: #333333;
+    font-family: 'Montserrat';
+    color: #333333;
 }
 
 .modal-body {
@@ -333,10 +283,10 @@ input{
 
 .modal-header {
     padding: 35px 15px 15px 15px;
-    border-bottom: transparent; 
+    border-bottom: transparent;
 }
 
-#vidBG2{
+#vidBG2 {
     background-color: #fd1541;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -344,85 +294,89 @@ input{
     margin-right: 0px;
 }
 
-.vidLink{
+.vidLink {
     /*color: red;*/
     text-decoration: none;
 }
 
-.vidLink2{
+.vidLink2 {
     color: white;
     text-decoration: none;
 }
 
-.vidPic{
+.vidPic {
     max-width: 80%;
 }
 
-.vidName{
+.vidName {
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-#seeMorebtn{
+#seeMorebtn {
     color: #fd1541;
 }
 
-
 /*------------------------4. SETTINGS TILES--------------------------*/
 
-.form-p{
+.form-p {
     padding: 1rem;
     padding-top: 30px;
 }
 
-.form-group{
+.form-group {
     width: 90px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-.form-group input{
+.form-group input {
     border: 0px;
     border-bottom: 1px solid #fd1541;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
-.form-group input:focus{
+.form-group input:focus {
     outline: none;
 }
 
 .form-control {
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.0);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .0);
 }
 
-.savePassbtn{
+.savePassbtn {
     color: white;
     background-color: #5cda57;
     border: 0px;
     padding: 7px 22px;
 }
 
-.currentPaybg{
+.password-updated {
+    display: flex;
+    flex-direction: column;
+}
+
+.currentPaybg {
     background-color: #f9f9f9;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 10px;
 }
 
-.ccFile{
+.ccFile {
     color: #000000a8;
 }
 
-.fa-cc-visa{
+.fa-cc-visa {
     color: #1a1f71;
 }
 
-.fa-cc-paypal{
+.fa-cc-paypal {
     color: #009cde;
 }
 
-.fa-cc-mastercard{
+.fa-cc-mastercard {
     color: #f79f1a;
 }
 
@@ -430,75 +384,47 @@ input{
     font-size: 2.4em;
 }
 
-.updateBtn{
+.updateBtn {
     padding-top: 30px;
 }
 
-.paypalBtn{
+.paypalBtn {
     background-color: #009cde;
     border: 0px;
     color: white;
     padding: 7px 22px;
 }
 
-.no-pa{
+.no-pa {
     padding-top: 20px;
     padding-bottom: 20px;
     padding-right: 0px;
     padding-left: 0px;
 }
 
-
-
 /*------------------------5. MANAGER TILES---------------------*/
-.listSquad{
-    padding-left: 10px;
-    padding-top: 22px;
-    padding-bottom: 22px;
-}
 
-.listSquad li{
-    padding-bottom: 10px;
-}
-
-.listSquad a{
-    color: #0b1c38;
-}
-
-.listDrills li{
-    padding-bottom: 10px;
-}
-
-.listDrills a{
-    text-decoration: none;
-    color: #0b1c38;
-}
-
-.listDrills a:hover{
-    cursor: pointer;
-}
-
-#plypos a{
+#plypos a {
     text-decoration: none;
     color: grey;
 }
 
-#sq-pa{
+#sq-pa {
     padding-left: 26px;
     padding-right: 26px;
 }
 
-.red-btn a{
+.red-btn a {
     color: red;
     cursor: pointer;
 }
 
-#ModalTitle{
+#ModalTitle {
     font-family: 'Montserrat';
     color: #333333;
 }
 
-.drillvTitle{
+.drillvTitle {
     padding-bottom: 0px;
 }
 
@@ -508,17 +434,16 @@ input{
 }
 
 .drillView {
-    background-size:100% auto;
+    background-size: 100% auto;
     height: 485px;
     background-repeat: no-repeat;
 }
 
-.viewBtns{
+.viewBtns {
     display: inline-block;
     padding: 0;
     margin: 0;
-    text-align: center;	
-
+    text-align: center;
 }
 
 .viewBtns>li>a {
@@ -529,7 +454,7 @@ input{
     cursor: pointer;
 }
 
-.viewBtns>li>a:hover{
+.viewBtns>li>a:hover {
     color: white;
     padding: 6px 15px;
     border-radius: 4px;
@@ -537,11 +462,12 @@ input{
     cursor: pointer;
 }
 
-#savebtn{
-    color: #5cda57;;
+#savebtn {
+    color: #5cda57;
+    ;
 }
 
-#exportbtn{
+#exportbtn {
     color: #fd1541;
 }
 
@@ -551,7 +477,7 @@ input{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color:white;
+    background-color: white;
 }
 
 .drill-icons {
@@ -577,85 +503,69 @@ input{
     background-repeat: no-repeat;
 }
 
-.drillName{
+.drillName {
     color: #333333;
 }
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
 @media (max-width: 1024px) {
-    .listVids{
+    .listVids {
         padding-left: 0px;
         padding-top: 0px;
         padding-bottom: 0px;
     }
-
-    .vidName{
+    .vidName {
         padding-top: 24px;
     }
-
 }
 
 @media (max-width: 768px) {
-
-    .bannerimage{
+    .bannerimage {
         padding-top: 120px;
         min-height: 250px;
     }
-
-    .impcont h1{
+    .impcont h1 {
         font-size: 26px;
-    }	
-
-    .vidName{
+    }
+    .vidName {
         padding-top: 53px;
     }
-
     .uploadIcon {
-      top: 35%;
-      left: 50%;
+        top: 35%;
+        left: 50%;
     }
-
 }
 
 @media (max-width: 414px) {
-
-    .bannerimage{
+    .bannerimage {
         padding-top: 90px;
         min-height: 200px;
     }
-
-    .impcont h1{
+    .impcont h1 {
         font-size: 26px;
-    }		
-
-    .vidName{
+    }
+    .vidName {
         padding-top: 14px;
     }
-
     .box-header h3 {
         font-size: 16px;
     }
-
     .nav>li>a {
         position: relative;
         display: block;
         padding: 5px 10px;
     }
-
-    input{
+    input {
         width: 270px;
     }
-
     .uploadIcon {
-      top: 35%;
-      left: 50%;
+        top: 35%;
+        left: 50%;
     }
-
-    .listSquad{
+    .listSquad {
         padding-top: 0px;
         padding-bottom: 0px;
         margin-bottom: 0px;
     }
-
 }

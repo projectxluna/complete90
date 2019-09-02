@@ -17,19 +17,30 @@
                 pass: pass
             }
         });
+        var smtpTransport2 = nodemailer.createTransport({
+            service: config.mailer.SERVICE_PROVIDER,
+            secure: false,
+            auth: {
+                user: email,
+                pass: pass
+            }
+        });
 
-    var handlebarsOptions = {
+        var handlebarsOptions = {
             viewEngine: 'handlebars',
             viewPath: path.join(__dirname, '../templates/'),
             extName: '.html'
         };
 
-        var Mailer = function () {
-            smtpTransport.use('compile', hbs(handlebarsOptions));
-        };
+        var Mailer = function () {};
 
         Mailer.prototype.smtpTransport = function () {
+            smtpTransport.use('compile', hbs(handlebarsOptions));
             return smtpTransport;
+        }
+
+        Mailer.prototype.smtpTransportPure = function () {
+            return smtpTransport2;
         }
 
         return Mailer;

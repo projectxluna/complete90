@@ -1,16 +1,22 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const { PROFILE_TYPE } = require('../helpers/pure');
 
 var promoSchema = mongoose.Schema({
     code: {
         type: String,
         index: true
     },
+    profileType: {
+        type: PROFILE_TYPE
+    },
     values: [{}],
     owner: { 
         type: mongoose.Schema.Types.ObjectId,
         index: true,
     },
-    max_use: Number,
+    maxUse: Number,
+    validFrom: Date,
+    validTo: Date,
 },
 {
     timestamps: true,

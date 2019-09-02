@@ -1,5 +1,13 @@
+const {
+    exposedUserData,
+    exposedClubData,
+    PROFILES,
+    createClub
+} = require('./helpers/pure');
+const User = require('./models/user');
+const Club = require('./models/club');
+
 module.exports = function (app) {
-    var User = require('./models/user');
     var mailer = require('./helpers/mailer');
     var express = require('express');
     var jwt = require('jsonwebtoken');
@@ -7,7 +15,6 @@ module.exports = function (app) {
     var crypto = require('crypto');
     var apiRoutes = express.Router();
     var Auth = require('./helpers/auth');
-    const userHelper = require('./helpers/user');
 
     var config = require('./config').get(process.env.NODE_ENV);
     var mcConfig = config.mailChimp;
@@ -16,20 +23,16 @@ module.exports = function (app) {
     var mailchimp = new Mailchimp(mcConfig.API_KEY);
 
     // un-authenticated routes
-    apiRoutes.post('/login', function (req, res) {
-        User.findOne({
-            'email': req.body.email
-        }, function (err, user) {
-            if (err) {
-                return res.json({
-                    success: false,
-                    message: err
-                });
-            }
-
-            if (!user) {
-                res.json({ success: false, message: 'Authentication failed' });
-            } else if (user) {
+    apiRoutes.post('/login', (req, res) => {
+            User.findOne({
+                email: req.body.email
+            }, (err, user) => {
+                if (err || !user) {
+                    return res.json({
+                        success: false,
+                        message: err || 'Authentication failed'
+                    });
+                }
                 if (!user.validPassword(req.body.password)) {
                     res.json({ success: false, message: 'Authentication failed' });
                 } else {
@@ -41,17 +44,23 @@ module.exports = function (app) {
                         expiresIn: 86400 * 7 // expires in 1 week. *Note: add some sort of auto renewal
                     });
 
-                    res.json({
-                        success: true,
-                        token: token,
-                        profile: userHelper.exposedData(user)
+                    Club.findOne({owner: user._id}, (err, club) => {
+                        var ret = {
+                            success: true,
+                            token: token,
+                            user: exposedUserData(user),
+                            club: exposedClubData(club)
+                        }
+                        if (user.clubStatus && ret.club) {
+                            ret.club.status = user.clubStatus;
+                        }
+                        res.json(ret);
                     });
                 }
-            }
-        });
+            });
     });
 
-    apiRoutes.post('/contactus', function (req, res) {
+    apiRoutes.post('/contactus', (req, res) => {
         var from = req.body.from;
         var name = req.body.name;
         var message = req.body.message;
@@ -68,7 +77,7 @@ module.exports = function (app) {
             }
         };
 
-        mailer.smtpTransport().sendMail(data, function (err) {
+        mailer.smtpTransport().sendMail(data, (err) => {
             if (!err) {
                 return res.json({
                     success: true
@@ -82,48 +91,58 @@ module.exports = function (app) {
         });
     });
 
-    apiRoutes.post('/signup', function (req, res) {
+    apiRoutes.post('/signup', (req, res) => {
         var newUser = new User();
         newUser.name = req.body.name;
         newUser.email = req.body.email;
         newUser.password = newUser.generateHash(req.body.password);
+        newUser.profiles.push(req.body.isManager ? PROFILES.MANAGER : PROFILES.PLAYER);
 
-        User.findOne({
-            'email': req.body.email
-        }, function (err, user) {
-            if (user || err) {
-                return res.json({
-                    success: false,
-                    message: err || 'Email already in use. Please Login'
-                });
-            } else {
-                newUser.save(function (err, user) {
+        try {
+            User.findOne({
+                email: newUser.email
+            }, (err, found) => {
+                if (found || err) {
+                    return res.json({
+                        success: false,
+                        message: err || 'Email already exists!'
+                    });
+                }
+                newUser.save(async (err, user) => {
                     if (err) {
-                        return res.json({
-                            success: false,
-                            message: err.errmsg,
-                            code: err.code
-                        });
+                        console.log(err)
+                        return reject(err);
                     }
                     res.json({
                         success: true
                     });
                     var name = req.body.name.split(' ');
-                    mailchimp.post('/lists/' + mcConfig.SIGN_UP_LIST + '/members', {
+                    var listId;
+                    if (req.body.isManager) {
+                        await createClub(req.body.clubName, user._id);
+                        listId = mcConfig.COACH_SIGN_UP_LIST;
+                    } else {
+                        listId = mcConfig.SIGN_UP_LIST;
+                    }
+                    mailchimp.post('/lists/' + listId + '/members', {
                         email_address: req.body.email,
                         status: 'subscribed',
                         merge_fields: {
                             'FNAME': name[0],
                             'LNAME': name[1]
                         }
-                    }).then(function (results) {
-                        console.log('Added to MailChimp!');
-                    }).catch(function (err) {
+                    }).catch(err => {
                         console.error(err);
                     });
                 });
-            }
-        });
+            });
+        } catch (err) {
+            console.log(err)
+            return res.json({
+                success: false,
+                message: err
+            });
+        }
     });
 
     apiRoutes.post('/forgot_pasword', function (req, res) {
@@ -308,7 +327,9 @@ module.exports = function (app) {
     });
     require('./braintree.route')(apiRoutes);
     require('./contents.route')(apiRoutes);
+    require('./club.route')(apiRoutes);
     require('./user.route')(apiRoutes);
+    require('./report.route')(apiRoutes);
 
     app.use('/api', apiRoutes);
 };

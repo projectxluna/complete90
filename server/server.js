@@ -7,12 +7,14 @@ var mongoose = require('mongoose');
 var config = require('./config').get(process.env.NODE_ENV);
 var path = require('path');
 var PromoJob = require('./jobs/promo.job');
+var TopPlayerJob = require('./jobs/top_player.job');
+var PlayerAttributeJob = require('./jobs/player_attribute.job');
 var port = process.env.PORT || 9000;
 
 // mongoose config
 const options = {
     useMongoClient: true,
-    autoIndex: false, // Don't build indexes
+    autoIndex: true, // Don't build indexes
     reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
     reconnectInterval: 500, // Reconnect every 500ms
     poolSize: 10, // Maintain up to 10 socket connections
@@ -20,6 +22,7 @@ const options = {
     bufferMaxEntries: 0,
     promiseLibrary: global.Promise
 };
+// mongoose.set('debug', true);
 
 // connect to database
 mongoose.connect(config.database, options,function (err) {
@@ -48,4 +51,6 @@ app.get('*', (req, res) => {
 });
 
 PromoJob.register();
+PlayerAttributeJob.register();
+TopPlayerJob.register();
 app.listen(port);

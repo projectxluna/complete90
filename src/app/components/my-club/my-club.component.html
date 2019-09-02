@@ -1,0 +1,135 @@
+<div class="box">
+    <div class="box-header">
+        <h3 class="m-0"><b>MY CLUB</b></h3>
+    </div>
+
+    <div *ngIf="playerProfile && club" class="box-tool">
+        <div class="club_player">
+            <img [src]="club.logoUrl" class="club_player_logo">
+            <div class="club_player_props">
+                <div>{{ club.name }}</div>
+                <div *ngIf="club.team">{{ club.team.name }}</div>
+                <div *ngIf="club.team && club.team.managerName">{{ club.team.managerName }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="coachProfile" class="box-tool">
+        <div class="tool-controls" *ngIf="pendingPlayerRequests && pendingPlayerRequests.length">
+            <div class="assign-team-btn" (click)="openModal(confirmTemplate)">{{ pendingPlayerRequests.length }} PENDING</div>
+        </div>
+        <ul class="nav" (click)="editMode = !editMode">
+            <li class="nav-item inline dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="playerProfile && !club" class="box-body">
+        <div>Not yet a member of a club.</div>
+        <div class="no_club" (click)="openModal(requestTemplate)">Request access</div>
+    </div>
+
+    <div *ngIf="playerProfile && club && club.status == 'ACTIVE'" class="box-body" style="padding-top: 10%;">
+        <table style="width:100%" *ngIf="playerProfile.assignments" class="assignments">
+            <tr>
+              <th>Training</th>
+              <th>Length</th> 
+              <th>Assigned On</th>
+              <th>Due Date</th>
+            </tr>
+            <tr *ngFor="let assignment of playerProfile.assignments">
+              <td><a [routerLink]="['/sessions']">{{ assignment.plan.name }}</a></td>
+              <td>&mdash;</td> 
+              <td>{{ assignment.createdAt | date }}</td>
+              <td>{{ assignment.endDate | date }}</td>
+            </tr>
+        </table>
+        <div *ngIf="assignments" style="padding-top: 20px;">
+            SEE ALL
+        </div>
+        <div *ngIf="!playerProfile || !playerProfile.assignments">
+            No training plans have been assigned to you. Check back later.
+        </div>
+    </div>
+    <div *ngIf="playerProfile && club && club.status == 'PENDING'" class="box-body" style="padding-top: 10%;">
+        <span>Your club request is pending. You'll be notified once accepted</span>
+    </div>
+
+    <div class="box-body" *ngIf="coachProfile">
+        <div class="club_manager">
+            <div class="logo">
+                <img *ngIf="club && club.logoUrl && !editMode" [src]="club.logoUrl" class="club_manager_logo">
+                <div *ngIf="editMode" class="uploadIcon">
+                    <a (click)="addFiles()"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
+                    <input type="file" name="profileImg" #file style="display: none" (change)="onFilesAdded()" accept="image/*" />
+                </div>
+            </div>
+            <div *ngIf="club"class="club_manager_props">
+                <div *ngIf="!editMode" class="club_manager_prop">{{ club.name }}</div>
+                <div *ngIf="!editMode" class="club_manager_prop">Club active since: {{ club.createdAt | timeSince }}</div>
+                <div *ngIf="editMode" class="club_manager_prop"><input [(ngModel)]="club.name" name="clubName" class="form-control" placeholder="name"></div>
+                <div *ngIf="editMode" class="no_club" (click)="updateClub()">Save</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- CLUB REQUEST MODAL -->
+<ng-template #requestTemplate>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 *ngIf="page === 1" class="modal-title text-center">Please enter the club name below</h4>
+        <h4 *ngIf="page === 2" class="modal-title text-center">Confirm Club Details</h4>
+        <h4 *ngIf="page === 3" class="modal-title text-center">Request Recieved</h4>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="page === 1">
+            <div class="promo-fields">
+                <div class="form-group" style="display: flex;">
+                    <input [(ngModel)]="model.clubName" name="clubName" class="form-control" placeholder="name">
+                </div>
+                <div class="no_club" (click)="findClub()">Search</div>
+            </div>
+        </div>
+        <div *ngIf="page === 2">
+            <div class="club-list">
+                <div *ngFor="let club of clubs" class="club-list-item" (click)="club.active = !club.active" [ngStyle]="{'background-color': club.active ? '#efefef' : '#ffffff'}">
+                    <img [src]="club.logoUrl">
+                    <div class="club_desc">
+                        <span class="club_name">{{ club.name }}</span>
+                        <span class="coach_name"> Manager: {{ club.managerName }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="no_club" (click)="confirmRequest()">Confirm Request</div>
+        </div>
+        <div *ngIf="page === 3">
+            Your request has been recieved. Once approved, you'll be notified.
+        </div>
+    </div>
+</ng-template>
+
+<!-- CLUB REQUEST CONFIRMATION MODAL -->
+<ng-template #confirmTemplate>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 *ngIf="page === 1" class="modal-title text-center">All players with pending request</h4>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="club-list">
+                <div *ngFor="let player of pendingPlayerRequests" class="club-list-item">
+                    <img [src]="player.avatarURL">
+                    <span>{{ player.name }} </span>
+                    <div class="no_club" (click)="addToClub(player)">Confirm</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

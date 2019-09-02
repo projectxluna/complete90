@@ -43,20 +43,6 @@
                 </ul>
             </div>
 
-            <!-- FILTER: SKILL LEVEL -->
-            <!-- <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span *ngIf="selectedFilter.skillLevel === ''">Skill Level</span>
-                    <span *ngIf="selectedFilter.skillLevel !== ''">{{ selectedFilter.skillLevel }}</span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li *ngFor="let skillLevel of filters.skillLevel" (click)="selectSkillLevel(skillLevel)">
-                        <a>{{ skillLevel }}</a>
-                    </li>
-                </ul>
-            </div> -->
-
             <!-- CLEAR FILTER BUTTON -->
             <button *ngIf="hasFilter()" type="button" class="btn btn-primary filter-btn" (click)="clearFilter()">
                 CLEAR FILTER
@@ -64,11 +50,7 @@
 
             <!-- CREATE SESSIONS BUTTON -->
             <button id="savedCont" type="button" class="btn btn-primary filter-btn " data-toggle="modal" data-target="#savedSessModal">SAVED SESSIONS</button>
-
         </div>
-        <!-- <div class="clearFilter col-lg-12 text-center">
-            <button>REMOVE FILTERS</button>
-        </div> -->
     </div>
 </div>
 <!-- FILTERS SECTION END -->
@@ -113,7 +95,16 @@
                     <!-- LIST OF VIDS INSIDE OF SESSION -->
                     <div [hidden]="session.content.length < 1 || !session.expanded">
                         <div *ngFor="let content of session.content; let i = index" class="row dets-ma">
-                            <div class="col-xs-6 sessName">{{ content.name | uppercase }}
+                            <div class="col-xs-6 sessName">
+                                <div class="row">{{ content.name | uppercase }}</div>
+                                <span class="row" style="font-size: 12px;">
+                                    <span>Reps: {{ content.reps }} | </span>
+                                    <span>Sets: {{ content.sets }} | </span>
+                                    <span>Time: {{ content.minutes }}:{{ content.seconds }}</span>
+                                    <button [hidden]="session.editMode" class="editSess" (click)="toggleContentEdit(content)">
+                                        <i aria-hidden="true" class="fa fa-pencil"></i>
+                                    </button><br>
+                                </span>
                             </div>
                             <div class="col-xs-5">
                                 <button (click)="startSession(session, i)" class="viewSessbtn pull-right">PLAY</button>
@@ -148,6 +139,36 @@
 
 <!-- VIDEO CONTENT -->
 <div class="container">
+    <!-- Assignments -->
+    <div *ngIf="assignments && assignments.length > 0">
+        <div class="container">
+            <div class="col-lg-12 catTitle">
+                <h1>Assignments</h1>
+            </div>
+        </div>
+    
+        <div class="container cont-hscroll">
+            <div class="row">
+                <div *ngFor="let assignment of assignments; let i = index" class="col-lg-4 col-md-4 col-sm-8">
+                    <div *ngIf="assignment && assignment.plan">
+                        <div class="vid-thumb">
+                            <img class="img-responsive" [src]="assignment.plan.content[0].thumbnail">
+                            <a (click)="openAssignmentModal(assignment)">
+                                <span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-12 videoDes">
+                            <h1>{{ assignment.plan.name | uppercase }}</h1>
+                            <div class="row" style="padding-left: 10px;">
+                                Due Date: {{ assignment.endDate | date }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- FEATURED DRILLS -->
     <div *ngFor="let session of freeSessions" class="col-lg-12 suggVids">
         <div *ngIf="session.content.length > 0" class="container">

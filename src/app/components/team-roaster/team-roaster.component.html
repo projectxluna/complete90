@@ -1,0 +1,264 @@
+<div class="box p-a">
+  <div class="box-header">
+      <h3 class="m-0 suggestedHeader"><b>TEAM ROSTER</b></h3>
+  </div>
+
+  <div class="box-tool">
+      <div *ngIf="teams && teams.length" class="tool-controls">
+          <div class="assign-team-btn" (click)="openModal(createTeamModal)">NEW TEAM</div>
+          <div class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN</div>
+      </div>
+  </div>
+  <div class="row" id="sq-pa">
+    <tabset *ngIf="teams && teams.length">
+        <tab *ngFor="let team of teams" [heading]="team.name" [active]="team.active" (select)="selectTeam(team)"
+            (deselect)="team.active = false">
+            <div class="row team-control">
+                <div class="col-sm-3 text-center control" (click)="editTeam(team, editTeamModal)">Edit Team</div>
+            </div>
+            <table class="listSquad col-lg-6 col-sm-6" style="margin-top: 20px; width: 100%">
+                <tr *ngFor="let player of team.players">
+                  <td>
+                    <div class="leaderboard__row-imgcontainer">
+                        <img [src]="player.avatarURL" class="leaderboard__row-img">
+                    </div>
+                  </td>
+                  <td>
+                      <div>
+                        #{{ player.profiles[0].jersey || 0 }}
+                      </div>
+                  </td> 
+                  <td style="width: 50%;">
+                      {{ player.name }}
+                  </td>
+                  <td>
+                    <div class="actions">
+                        <a class="action" (click)="openPlayerReportModal(player, playerReport)"><i class="fa fa-line-chart"></i></a>
+                        <a class="action" (click)="editPlayer(player, editPlayerModal)"><i class="fa fa-pencil"></i></a>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="!team.players || team.players.length == 0">
+                    <span>
+                        No players on team. Click Assign to begin
+                    </span>
+                </tr>
+            </table>
+        </tab>
+    </tabset>
+    <div *ngIf="!teams || teams.length == 0">
+        No teams yet. To begin, click below.
+        <div class="new_team_btn" (click)="openModal(createTeamModal)">CREATE TEAM</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="squadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center" id="ModalTitle">SQUAD MEMBERS</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row saved-pa">
+                    <div class="col-xs-6">
+                        <a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="drillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center" id="ModalTitle">SAVED DRILLS</h4>
+            </div>
+            <div class="modal-body">
+
+                <!-- 1ST SAVED SESSION -->
+                <div class="row saved-pa">
+                    <div class="col-xs-6 drillName">
+                        DRILL 1
+                        <button class="editBtn"><i aria-hidden="true" class="fa fa-pencil"></i></button>
+                    </div>
+                    <div class="col-xs-5">
+                        <button class="pull-right red-btn-modal">EXPORT</button>
+                        <button class="pull-right red-btn-modal">LOAD</button>
+                    </div>
+                    <div class="col-xs-1">
+                        <button type="button" class="deleteBtn">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CREATE TEAM -->
+<ng-template #createTeamModal>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 *ngIf="page === 1" class="modal-title text-center">Please Enter Team Name</h4>
+    </div>
+    <div class="modal-body">
+        <div class="promo-fields">
+            <div class="form-group" style="display: flex;">
+                <input [(ngModel)]="model.teamName" name="teamName" class="form-control" placeholder="Team Name">
+            </div>
+            <div class="no_club" (click)="createTeam()">Create Team</div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- ASSIGN PLAYERS TO TEAM -->
+<ng-template #assignPlayerModal>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center">Click on user to add them to a team</h4>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="!selectedUser">
+            <div class="club-list" *ngIf="usersWithoutTeam && usersWithoutTeam.length">
+                <div *ngFor="let user of usersWithoutTeam" class="club-list-item" (click)="selectUser(user)"
+                    [ngStyle]="{'background-color': user.active ? '#efefef' : '#ffffff'}">
+                    <img [src]="user.avatarURL">
+                    <span>{{ user.name }} </span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!usersWithoutTeam || usersWithoutTeam.length == 0">
+            No players without team
+        </div>
+        <div *ngIf="selectedUser">
+            <div class="promo-fields">
+                <div class="form-group" style="display: flex;">
+                    <span>Team: </span>
+                    <select [(ngModel)]="model.team">
+                        <option *ngFor="let team of teams" [ngValue]="team">{{ team.name }}</option>
+                    </select>
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <div class="no_club" (click)="deselectUser()" style="margin: 15px;">Back</div>
+                    <div class="no_club" (click)="addUserToTeam()" style="margin: 15px;">Next</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- PLAYER REPORT MODAL -->
+<ng-template #playerReport>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center">Training</h4>
+    </div>
+    <div class="modal-body">
+        <tabset>
+            <tab *ngFor="let tab of reportModal.tabs" [heading]="tab.name" [active]="tab.active" (select)="tab.active = !tab.active"
+                (deselect)="tab.active = false">
+                <table *ngIf="reportModal.report && reportModal.report[tab.id]" class="listSquad col-lg-6 col-sm-6"
+                    style="margin-top: 20px; width: 100%;">
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            Completion
+                        </td>
+                        <td>
+                            Created On
+                        </td>
+                        <td>
+                            Due Date
+                        </td>
+                        <td>
+                            Length
+                        </td>
+                    </tr>
+                    <tr *ngFor="let report of reportModal.report[tab.id]">
+                        <td>
+                            {{ report.contentName }}
+                        </td>
+                        <td>
+                            {{ report.completion | number:'.1-2' | percent }}
+                        </td>
+                        <td>
+                            {{ report.createdAt | date }}
+                        </td>
+                        <td>
+                            {{ report.dueDate | date }}
+                        </td>
+                        <td>
+                            {{ report.contentLength / 100 | number:'.1-2' }} s
+                        </td>
+                    </tr>
+                </table>
+            </tab>
+        </tabset>
+    </div>
+</ng-template>
+
+<!-- EDIT TEAM MODAL -->
+<ng-template #editTeamModal>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center">Edit Team</h4>
+    </div>
+    <div class="modal-body">
+        <div class="promo-fields">
+            <div class="form-group" style="display: flex;">
+                <input [(ngModel)]="teamModal.team.name" name="teamName" class="form-control" placeholder="Team Name">
+            </div>
+            <div class="row team-control">
+                <div class="col-sm-6 text-center control" (click)="updateTeam()">Update Team</div>
+                <div class="col-sm-6 text-center control" (click)="deleteTeam()">Delete Team</div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- EDIT PLAYER MODAL -->
+<ng-template #editPlayerModal>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title text-center">Edit Player</h4>
+    </div>
+    <div class="modal-body">
+        <div class="promo-fields">
+            <!-- <div class="form-group" style="display: flex;">
+                <input [(ngModel)]="teamModal.team.name" name="teamName" class="form-control" placeholder="Team Name">
+            </div> -->
+            <div class="row team-control">
+                <!-- <div class="col-sm-6 text-center control" (click)="updateTeam()">Update Team</div> -->
+                <div class="col-sm-12 text-center control" (click)="deletePlayerFromClub()">Remove From Club</div>
+            </div>
+            <div class="row team-control">
+                <!-- <div class="col-sm-6 text-center control" (click)="updateTeam()">Update Team</div> -->
+                <div class="col-sm-12 text-center control" (click)="updatePlayer()">Remove From Team</div>
+            </div>
+        </div>
+    </div>
+</ng-template>

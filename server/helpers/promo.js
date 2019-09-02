@@ -10,7 +10,7 @@ var subscriptionLeft = function (subscription) {
     var secondDate = new Date();
 
     let daysLeft = firstDate.getTime() - secondDate.getTime();
-    return (daysLeft > 0) ? Math.round( daysLeft / oneDay) : 0;
+    return (daysLeft > 0) ? Math.round(daysLeft / oneDay) : 0;
 };
 
 var PromoController = {
@@ -22,18 +22,20 @@ var PromoController = {
                         err: err || 'Promo code not found'
                     });
                 }
+                let maxUse = promo.maxUse || Number.MAX_SAFE_INTEGER;
+                let validFrom = promo.validFrom;
+                let validTo = promo.validTo;
+                let now = Date.now();
+                let valid = (validFrom && validTo) ? (validFrom < now && validTo > now) : true;
+
                 User.find({ promo_code: code }, (err, users) => {
-                    if (!users || err) {
+                    if (err || !users || users.length >= maxUse || !valid) {
                         return reject({
-                            err: err || 'Promo code already in use'
+                            err: err || 'Expired Promo Code'
                         });
+                    } else {
+                        resolve(promo);
                     }
-                    if (promo.max_use && users.length >= promo.max_use) {
-                        return reject({
-                            err: "Sorry the promo code you've entered is no longer valid"
-                        });
-                    }
-                    resolve(promo);
                 });
             });
         });

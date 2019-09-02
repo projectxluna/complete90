@@ -33,6 +33,7 @@ export class SessionsComponent implements OnInit {
   sessions = [];
   freeSessions = [];
   customSessions = [];
+  assignments = [];
 
   banner = {
     isActive: false,
@@ -42,7 +43,7 @@ export class SessionsComponent implements OnInit {
     defaultTimeout: 1000 * 60
   };
 
-
+  managerProfile = false;
 
   bsModalRef: BsModalRef;
 
@@ -91,6 +92,16 @@ export class SessionsComponent implements OnInit {
   constructor(private dataService: DataService, private modalService: BsModalService) {
     this.getFreeSessions();
     this.getSessions();
+
+    this.dataService.getUserProfile().subscribe(res => {
+      if (!res.success) {
+        return;
+      }
+      var manager = res.user.profiles.find(profile => {
+        return profile.type === 'MANAGER';
+      });
+      this.managerProfile = manager ? true : false;
+    });
   }
 
   selectTag(tag) {
@@ -108,20 +119,30 @@ export class SessionsComponent implements OnInit {
   }
 
   showBanner(sessionId) {
+    if (this.managerProfile) {
+      return; // we dont want to show the banner for maangers
+    }
     this.banner.isActive = true;
-    this.banner.sessionId = sessionId;
 
     if (this.banner.sessionId !== sessionId) {
       this.banner.count = 0;
-    } else {
-      this.banner.count++;
     }
+    this.banner.count++;
+    this.banner.sessionId = sessionId;
 
     if (this.banner.timer) clearTimeout(this.banner.timer);
 
     this.banner.timer = setTimeout(() => {
       this.closeBanner();
     }, this.banner.defaultTimeout);
+  }
+
+  editContentParam(session, content) {
+    this.dataService.editContentOfSession(session.id, content).subscribe(result => {
+      if (result && result.success) {
+        console.log('Saved new params');
+      }
+    });
   }
 
   addContentToCustomSession(contentId, content) {
@@ -134,22 +155,39 @@ export class SessionsComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
     this.bsModalRef.content.onClose.subscribe(result => {
       if (result && result.type === 'new') {
-        this.newSession(result.name, contentId);
+        let newSession = {
+          name: result.name,
+          content:  {
+            contentId,
+            reps: result.session.reps || 0,
+            sets: result.session.sets || 0,
+            seconds: result.session.seconds || 0,
+            minutes: result.session.minutes || 0,
+          }
+        };
+        this.newSession(newSession);
       } else if (result && result.type === 'add') {
-        this.addToExistingSession(result.id, contentId, content);
+        let addContent = {
+          id: result.id,
+          reps: result.session.reps || 0,
+          sets: result.session.sets || 0,
+          seconds: result.session.seconds || 0,
+          minutes: result.session.minutes || 0,
+          contentId: contentId
+        };
+        this.addToExistingSession(addContent).then(response => {
+          this.getSessions();
+        }).catch(error => {
+          console.log(error);
+        });
       }
     });
   }
 
-  newSession(name, contentId) {
-    if (!name || !contentId) return;
+  newSession(session) {
+    if (!session.name || !session.content) return;
 
-    let newSession = {
-      name: name,
-      content: [contentId]
-    }
-
-    this.save(newSession, response => {
+    this.save(session, response => {
       this.getSessions();
       if (response && response.id) {
         this.showBanner(response.id);
@@ -157,38 +195,28 @@ export class SessionsComponent implements OnInit {
     });
   }
 
-  addToExistingSession(id, contentId, content) {
-    if (!id) return;
-
-    let existing = this.customSessions.find((session) => {
-      return session.id === id;
-    });
-
-    let f = _.cloneDeep(existing);
-    let arr = [];
-
-    f.content.forEach(e => {
-      arr.push(e.id);
-    });
-    if (arr.indexOf(contentId) === -1) {
-      arr.push(contentId);
-      f.content = arr;
-      if (content) existing.content.push(content);
-      this.save(f, (response) => {
+  addToExistingSession(session) {
+    return new Promise((resolve, reject) => {
+      this.dataService.addContentToSession(session).subscribe((response) => {
+        if (!response || !response.success) {
+          return reject('Custom session failed to save!');
+        }
         if (response && response.id) {
           this.showBanner(response.id);
         }
+        resolve(response);
       });
-    }
+    });
   }
 
   editSession(session) {
     if (!session) return;
 
-    let sesionToSave = _.cloneDeep(session);
-    sesionToSave.content = this.flatContent(sesionToSave.content);
-
-    this.save(sesionToSave, (response) => {
+    let save = {
+      id: session.id,
+      name: session.name
+    }
+    this.save(save, (response) => {
       session.editMode = false;
     });
   }
@@ -218,18 +246,15 @@ export class SessionsComponent implements OnInit {
           return;
         }
 
-        session.content.splice(index, 1);
-        let sesionToSave = _.cloneDeep(session);
-        sesionToSave.content = this.flatContent(sesionToSave.content);
+        let deleted = session.content.splice(index, 1);
+        let toDelete = {
+          contentId: deleted[0].id,
+          sessionId: session.id
+        }
 
-        this.save(sesionToSave);
+        this.dataService.deleteContentFromSession(toDelete).subscribe(response => {});
       }
     });
-  }
-
-  flatContent(content) {
-    if (!content) return;
-    return content.map(e => e.id);
   }
 
   toggleSessionDetails(session) {
@@ -244,8 +269,13 @@ export class SessionsComponent implements OnInit {
     session.expanded = false;
   }
 
+  toggleContentEdit(content) {
+    if (!content) return;
+    content.editMode = !content.editMode ? true : false;
+  }
+
   save(session, cb = null) {
-    this.dataService.saveSessions(session).subscribe((response) => {
+    this.dataService.createSession(session).subscribe((response) => {
       if (cb) {
         cb(response);
       }
@@ -265,7 +295,6 @@ export class SessionsComponent implements OnInit {
   }
 
   deleteUserSession(sessionId) {
-    // console.log('deleting custom session', sessionId);
     const params = {
       title: 'Delete Session',
       message: 'Are you sure you want to delete this session?',
@@ -306,11 +335,13 @@ export class SessionsComponent implements OnInit {
   }
 
   getSessions(cache: boolean = false) {
+    this.assignments.length = 0;
+
     this.dataService.getSessions(cache).subscribe((response) => {
       if (!response.success) return;
       this.sessions = [];
       this.customSessions = [];
-
+      this.assignments = response.assignments;
       this.collectTagsAndCategories(response.content);
       this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);
@@ -411,6 +442,17 @@ export class SessionsComponent implements OnInit {
       }
     });
     this.openModalWithComponent(session, index)
+  }
+
+  openAssignmentModal(assignment) {
+    const initialState = {
+      session: assignment.plan,
+      selectedIndex: 0,
+      userCreated: true,
+      assignmentId: assignment._id
+    };
+    this.bsModalRef = this.modalService.show(VideoplayerComponent, { initialState, class: 'modal-lg' });
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   openModalWithComponent(session, selectedIndex: number = 0, userCreated = false) {

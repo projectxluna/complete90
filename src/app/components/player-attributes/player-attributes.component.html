@@ -1,0 +1,23 @@
+<div class="box">
+  <div class="box-header">
+    <h3 class="m-0">
+      <b>PLAYER ATTRIBUTES</b>
+    </h3>
+  </div>
+  <div class="box-body">
+    <div class="player-rating">
+      <!-- <div class="player-rating-title">
+        Overall Rating
+        <div class="value">{{ attributes.overallRating || 'N/A' }}</div>
+      </div> -->
+      <div class="player-rating-group">
+        <div class="rating" *ngFor="let category of attributes.categories">
+          <div class="rating_name">{{ category.name | uppercase }}</div>
+          <progressbar [value]="category.value" [type]="getType(category)">
+              <b>{{category.value}}</b>
+          </progressbar>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

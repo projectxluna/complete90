@@ -1,8 +1,65 @@
+const { exposedUserData, exposedClubData } = require('./helpers/pure');
+const path = require('path');
+const Club = require('./models/club');
+const Team = require('./models/team');
+const User = require('./models/user');
+const Assignment = require('./models/assignment');
+const PlayerAttributes = require('./models/player_attribute');
+const mongoose = require('mongoose');
+
+const findClub = (ownerId) => {
+    return new Promise((resolve, reject) => {
+        Club.findOne({owner: ownerId}, (err, club) => {
+            if (err) console.log(err);
+            resolve(club);
+        });
+    });
+}
+
+const findClubById = (id) => {
+    return new Promise((resolve, reject) => {
+        Club.findById(id, (err, club) => {
+            if (err) console.log(err);
+            resolve(club);
+        });
+    });
+}
+
+const findTeamById = (id) => {
+    return Team.findById(id).lean().exec();
+}
+
+const findTeamByIds = (ids) => {
+    return Team.find({_id: {$in: ids} }).lean().exec();
+}
+
+const findUserByIds = (ids) => {
+    return User.find({_id: {$in: ids} }).lean().exec();
+}
+
+const findManager = (id) => {
+    return User.findById(id).lean().exec();
+}
+
+const getAssignment = (userId, teamId) => {
+    return new Promise((resolve, reject) => {
+        let query = {
+            $or: [{forPlayers: mongoose.Types.ObjectId(userId)}]
+        }
+        if (teamId) {
+            query.$or.push({
+                forTeams: mongoose.Types.ObjectId(teamId)
+            });
+        }
+        Assignment.find(query).sort({ _id: -1}).lean().exec((error, assignments) => {
+            if (error) console.error(error)
+            resolve(assignments)
+        });
+    });
+}
+
 module.exports = function (apiRoutes) {
-    const path = require('path');
-    const userHelper = require('./helpers/user');
     var Auth = require('./helpers/auth');
-    var User = require('./models/user');
     var im = require('imagemagick');
     var PromoController = require('./helpers/promo');
     var mailer = require('./helpers/mailer');
@@ -10,14 +67,40 @@ module.exports = function (apiRoutes) {
     /**
      * get user profile
      */
-    apiRoutes.get('/user/me', Auth.isAuthenticated, function (req, res) {
-        User.findOne({ _id: req.decoded.userId }, function (err, user) {
+    apiRoutes.get('/user/me', Auth.isAuthenticated, (req, res) => {
+        User.findOne({ _id: req.decoded.userId }, async (err, user) => {
             if (err) return res.status(500).send(err);
+
+            let club;
+            let teams;
+            if (user.clubId) {
+                club = await findClubById(user.clubId);
+                if (club && user.teamId) {
+                    teams = club.teams.filter(teamId => { return teamId == user.teamId.toString() });
+                }
+            } else {
+                club = await findClub(user._id);
+            }
             try {
-                res.json({
+                let ret = {
                     success: true,
-                    profile: userHelper.exposedData(user)
-                });
+                    user: exposedUserData(user),
+                    club: exposedClubData(club)
+                }
+                if (teams) {
+                    ret.club.teams = undefined;
+                    let team = await findTeamById(teams[0]);
+                    if (team) {
+                        let manager = await findManager(team.managerId);
+                        team.managerName = manager.name;
+                        ret.club.team = team;
+                        ret.assignments = await getAssignment(req.decoded.userId, team._id);
+                    }
+                }
+                if (user.clubStatus) {
+                    ret.club.status = user.clubStatus;
+                }
+                res.json(ret);
             } catch (error) {
                 res.json({success: false, message: error});
             }
@@ -29,20 +112,17 @@ module.exports = function (apiRoutes) {
      */
     apiRoutes.post('/user/me', Auth.isAuthenticated, function (req, res) {
         let name = req.body.name;
-        let foot = req.body.foot;
-        let position = req.body.position;
-        let height = req.body.height;
-        let companyname = req.body.companyName;
-        let teamName = req.body.teamName;
+        let nationality = req.body.nationality;
+        let playerProfile = req.body.playerProfile;
+        let coachProfile = req.body.coachProfile;
 
         var update = {};
-
+        var profiles = []
         if (name) update.name = name;
-        if (foot) update.foot = foot;
-        if (position) update.position = position;
-        if (height) update.height = height;
-        if (companyname) update.companyname = companyname;
-        if (teamName) update.teamName = teamName;
+        if (nationality) update.nationality = nationality;
+        if (playerProfile) profiles.push(playerProfile);
+        if (coachProfile) profiles.push(coachProfile);
+        if (profiles.length) update.profiles = profiles;
 
         User.findOneAndUpdate({ _id: req.decoded.userId }, update,
             {
@@ -53,7 +133,7 @@ module.exports = function (apiRoutes) {
                 try {
                     res.json({
                         success: true,
-                        profile: userHelper.exposedData(user)
+                        user: exposedUserData(user)
                     });
                 } catch (error) {
                     res.json({success: false, message: error});
@@ -94,11 +174,91 @@ module.exports = function (apiRoutes) {
                             }
                         });
                     } catch (error) {
-                        res.json({ success: false, message: error });
+                        // res.json({ success: false, message: error });
                     }
                 });
         }).catch(err => {
             res.json({success: false, message: err});
+        });
+    });
+
+    /**
+     * Get assignments
+     */
+    apiRoutes.get('/user/assignment', Auth.isAuthenticated, (req, res) => {
+        const userId = req.decoded.userId;
+        const planId = req.query.planId;
+        
+        let search = {
+            userId: userId
+        };
+        if (planId) {
+            search.planId = planId;
+        }
+        Assignment.find(search).lean().exec(async (err, assignments) => {
+            if (err) return res.status(400).send(err);
+
+            let playersId = [];
+            let teamsId = [];
+            assignments.forEach(a => {
+                teamsId.push(...a.forTeams);
+                playersId.push(...a.forPlayers);
+            });
+            let teams = await findTeamByIds(teamsId);
+            let players = await findUserByIds(playersId);
+
+            let mappedAssignment = assignments.map(assignment => {
+                assignment.forPlayers = assignment.forPlayers.map(playerId => {
+                    return players.find(player => {return player._id == playerId}).name;
+                });
+                return assignment;
+            })
+            res.json({
+                success: true,
+                assignments: mappedAssignment
+            });
+        });
+    });
+
+    /**
+     * Create assignment
+     */
+    apiRoutes.post('/user/assignment', Auth.isAuthenticated, function (req, res) {
+        const {forTeams, forPlayers, planId, startDate, endDate} = req.body;
+        const userId = req.decoded.userId
+        
+        if (!forTeams && !forPlayers) return res.json({success: false, message: 'player or team required'});
+        if (!planId) return res.json({success: false, message: 'plan required'});
+
+        let assignment = new Assignment();
+        assignment.userId = userId;
+        assignment.planId = planId;
+        assignment.forTeams = forTeams;
+        assignment.forPlayers = forPlayers;
+        assignment.startDate = startDate
+        assignment.endDate = endDate;
+
+        assignment.save((err, saved) => {
+            if (err) return res.json({success: false, message: err});
+            res.json({success: true});
+        });
+    });
+
+    /**
+     * Get player attributes
+     */
+    apiRoutes.get('/user/attributes', Auth.isAuthenticated, (req, res) => {
+        const userId = req.decoded.userId;
+
+        PlayerAttributes.find({
+            userId: mongoose.Types.ObjectId(userId),
+        }).exec((err, playerAttributes) => {
+            if (err) return res.status(400).send(err);
+
+            res.json({
+                success: true,
+                attributes: playerAttributes
+            });
         });
     });
 
@@ -135,7 +295,7 @@ module.exports = function (apiRoutes) {
                     try {
                         res.json({
                             success: true,
-                            profile: userHelper.exposedData(new_user)
+                            user: exposedUserData(new_user)
                         });
                     } catch (error) {
                         res.json({

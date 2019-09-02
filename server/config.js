@@ -3,9 +3,9 @@ var config = {
         secret: 'whendidwestopbeingus',
         database: 'mongodb://localhost:27017/complete90',
         braintree: {
-            merchantId: "64wmhwjzmhx4zpsn",
-            publicKey: "db9j7d8kpm8j8ybj",
-            privateKey: "02015303a86d48d9a3badb0b8b5d81f8"
+            merchantId: "xx",
+            publicKey: "xx",
+            privateKey: "xx"
         },
         aws: {
             PRIVATE_KEY: "APKAJDTCMHD6IPBCKGDQ",
@@ -16,7 +16,13 @@ var config = {
         },
         mailer: {
             EMAIL_ID: "projectxluna@gmail.com",
-            PASSWORD: "**********"
+            PASSWORD: "xx",
+            SERVICE_PROVIDER: "Gmail"
+        },
+        mailChimp: {
+            API_KEY: 'xx-us12',
+            SIGN_UP_LIST: 'xxxx',
+            COACH_SIGN_UP_LIST: 'xxxx',
         },
         URL_EXPIRATION: 5,
     },
@@ -42,7 +48,8 @@ var config = {
         },
         mailChimp: {
             API_KEY: 'apikeyhere-us12',
-            SIGN_UP_LIST: 'XXXXXXXXX'
+            SIGN_UP_LIST: 'XXXXXXXXX',
+            COACH_SIGN_UP_LIST: 'XXXXXXXXX',
         },
 
         URL_EXPIRATION: 5,

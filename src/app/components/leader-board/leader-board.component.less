@@ -1,0 +1,190 @@
+div {
+    font-family: 'Montserrat';
+}
+
+h3 {
+    font-size: 18px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+input {
+    width: 250px;
+    outline: 0;
+}
+
+.lowkey {
+    color: #aba8a8;
+}
+
+.rounded,
+.circle {
+    border-radius: 500px;
+}
+
+.fa-plus,
+.fa-pencil {
+    color: #fd1541;
+}
+
+.profile-input {
+    border: none;
+    border-width: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #00000066;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.profile {
+    padding: 20px;
+    color: #0000008a;
+    .name {
+        font-size: 20px;
+        font-weight: 600;
+        padding-bottom: 10px;
+    }
+    .jersey {
+        font-size: 17px;
+    }
+}
+
+.box {
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 1.5rem;
+    color: #00000066;
+    border: 1px solid #f7f7f7;
+    padding: 16px !important;
+    h3 {
+        color: #0000008a;
+    }
+    .box-header {
+        position: relative;
+        padding: 1rem;
+        h3 {
+            font-size: 20px;
+        }
+    }
+    .box-body {
+        padding: 1rem;
+        max-height: 378px;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        .board {
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            // padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+            box-sizing: content-box; /* So the width will be 100% + 17px */
+        }
+    }
+    .box-tool {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        padding: 1rem;
+        .tool-controls {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            .assign-team-btn {
+                color: white;
+                background-color: #fd1541;
+                margin-left: 15px;
+                border: 0px;
+                padding: 7px 22px;
+            }
+        }
+    }
+    .leaderboard__row {
+        .leaderboard__row-txt {
+            padding: 15px;
+        }
+        .leaderboard__row-imgcontainer {
+            width: 50px;
+            height: 50px;
+            background-color: #90b8d6;
+            border-radius: 50%;
+
+            .leaderboard__row-img {
+                border-radius: 50%;
+                height: 50px;
+                opacity: 1;
+                transition: 0.5s ease;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+        }
+    }
+}
+td, th {
+    padding: 10px;
+}
+
+.listSquad{
+    padding-left: 10px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+
+.listSquad li{
+    padding-bottom: 10px;
+}
+
+.listSquad a{
+    color: #0b1c38;
+}
+
+.listDrills li{
+    padding-bottom: 10px;
+}
+
+.listDrills a{
+    text-decoration: none;
+    color: #0b1c38;
+}
+
+.listDrills a:hover{
+    cursor: pointer;
+}
+
+#plypos a{
+    text-decoration: none;
+    color: grey;
+}
+
+#sq-pa{
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+.suggestedHeader{
+    padding-bottom: 30px;
+}
+
+@media (max-width: 1024px) {}
+
+@media (max-width: 768px) {
+    .uploadIcon {
+        top: 40%;
+        left: 50%;
+    }
+}
+
+@media (max-width: 414px) {
+    .box-header h3 {
+        font-size: 16px;
+    }
+    .nav>li>a {
+        position: relative;
+        display: block;
+        padding: 5px 10px;
+    }
+    input {
+        width: 270px;
+    }
+}

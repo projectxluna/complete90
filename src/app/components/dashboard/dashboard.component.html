@@ -1,428 +1,151 @@
  <!--HERO IMAGE START-->
-    <div class="bannerimage">
-        <div class="container">
-            <div class="impcont col-lg-6 col-md-6">
-                <h1><b>DASHBOARD</b></h1>
-            </div>
+<div class="bannerimage">
+    <div class="container">
+        <div class="impcont col-lg-6 col-md-6">
+            <h1><b>DASHBOARD</b></h1>
         </div>
     </div>
+</div>
 <!-- HERO IMAGE END-->
 
 <!-- DASHBOARD TILES -->
-    <div class="padding">
-        <!-- QUICK STATS TILES -->
-        <div class="row">
-            <div class="col-xs-12 col-sm-4">
-                <div class="box p-a stat1">
-                    <div class="pull-left m-r">
-                        <span class="w-48 rounded  accent">
-                            <i class="fa fa-clock-o fa-2x" style="padding-top: 8px;" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <div class="clear">
-                        <h1 class="m-0">{{ stats.watched }}</h1>
-                        <h2 class="m-0">Total time trained</h2>
-                    </div>
+<div class="padding">
+    <div class="row" *ngIf="!coachProfile">
+        <div class="col-xs-12 col-sm-4">
+            <div class="box p-a stat1">
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded accent">
+                        <i class="fa fa-clock-o fa-2x" style="padding-top: 8px;" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h1 class="m-0">{{ stats.watched }}</h1>
+                    <h2 class="m-0">Total time trained</h2>
                 </div>
             </div>
-
-            <div class="col-xs-12 col-sm-4">
-                <div class="box p-a stat1">
-                    <div class="pull-left m-r">
-                        <span class="w-48 rounded  accent2">
-                            <i class="fa fa-eye fa-2x" style="padding-top: 7px;" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <div class="clear">
-                        <h1 class="m-0">{{ stats.viewedTotal }}</h1>
-                        <h2 class="m-0">Total sessions viewed</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-4">
-                <div class="box p-a stat1">
-                    <div class="pull-left m-r">
-                        <span class="w-48 rounded  accent3">
-                            <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <div class="clear">
-                        <h1 class="m-0">{{ getSubscriptionLeft() }} days</h1>
-                        <h2 class="m-0">Left of membership </h2>
-                    </div>
-                </div>
-            </div>
-
         </div>
-        <!-- QUICK STATS SECTION END-->
-
-        <!-- PROFILE & SUGGESTED TILES -->
-        <div class="row" id="mainTiles">
-            <div class="col-sm-12 col-md-6">
-                <div class="box p-a">
-                    <div class="box-header">
-                        <h3 class="m-0"><b>PROFILE</b></h3>
-                    </div>
-
-                    <div class="box-tool">
-                        <ul class="nav">
-                          <li class="nav-item inline dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                              <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a class="dropdown-item" (click)="toggleEditMode()">Edit Profile</a>
-                                  </li>
-                            </ul>
-                          </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-12 text-center">
-                        <div class="uploadOver">
-                            <img [src]="profile.avatarURL" class="profilePic img-circle">
-                            <div class="uploadIcon">
-                                <a (click)="addFiles()"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></a>
-                                <input type="file" name="profileImg" #file style="display: none" (change)="onFilesAdded()" accept="image/*"/>
-                            </div>
-                        </div>
-                        <div class="profileName">
-                            <h3 *ngIf="!editMode">{{ profile.name }}</h3>
-                            <input *ngIf="editMode" [(ngModel)]="profile.name" class="profileInput" placeholder="Edit Name">
-                        </div>
-                    </div>
-                    <ul class="list">
-                        <li *ngIf="!profile.coach">
-                            <div class="row">
-                                <a class="inactiveLink">POSITION: <span *ngIf="!editMode" class="lowkey">{{ profile.position || ''}}</span></a>
-                                <input *ngIf="editMode" [(ngModel)]="profile.position" class="profileInput" placeholder="Edit Position">
-                            </div>
-                        </li>
-                        <li *ngIf="!profile.coach">
-                            <div class="row">
-                                <a class="inactiveLink">HEIGHT: <span *ngIf="!editMode" class="lowkey">{{ profile.height || ''}}</span></a>
-                                <input *ngIf="editMode" [(ngModel)]="profile.height" class="profileInput" placeholder="Edit Height">
-                            </div>
-                        </li>
-                        <li *ngIf="!profile.coach">
-                            <div class="row">
-                                <a class="inactiveLink">PR. FOOT: <span *ngIf="!editMode" class="lowkey">{{ profile.foot || ''}}</span></a>
-                                <input *ngIf="editMode" [(ngModel)]="profile.foot" class="profileInput" placeholder="Edit Pr. Foot">
-                            </div>
-                        </li>
-                        <li *ngIf="profile.coach">
-                            <div class="row">
-                                <a class="inactiveLink">Team Name: <span *ngIf="!editMode" class="lowkey">{{ profile.teamName || ''}}</span></a>
-                                <input *ngIf="editMode" [(ngModel)]="profile.teamName" class="profileInput" placeholder="Edit Team Name">
-                            </div>
-                        </li>
-                        <li *ngIf="profile.coach">
-                            <div class="row">
-                                <a class="inactiveLink">Business Name: <span *ngIf="!editMode" class="lowkey">{{ profile.companyName || ''}}</span></a>
-                                <input *ngIf="editMode" [(ngModel)]="profile.companyName" class="profileInput" placeholder="Edit Company Name">
-                            </div>
-                        </li>
-                        <li class="text-center editbtn">
-                            <button *ngIf="editMode" (click)="updateProfile()" class="savePassbtn">SAVE</button>
-                            <button *ngIf="editMode" (click)="toggleEditMode()" class="savePassbtn" style="background-color: orange; margin-left: 15px">CANCEL</button>
-                        </li>
-                    </ul>
+        <div class="col-xs-12 col-sm-4">
+            <div class="box p-a stat1">
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded  accent2">
+                        <i class="fa fa-eye fa-2x" style="padding-top: 7px;" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h1 class="m-0">{{ stats.viewedTotal }}</h1>
+                    <h2 class="m-0">Total exercises viewed</h2>
                 </div>
             </div>
-
-            <!-- SUGGESTED VID TILE -->
-            <div *ngIf="hasSubscription() && !profile.coach" class="col-sm-12 col-md-6">
-                <div class="box p-a">
-                    <div class="box-header">
-                        <h3 class="m-0 suggestedHeader"><b>SUGGESTED VIDEOS</b></h3>
-                    </div>
-
-                    <div class="box-tool">
-                        <ul class="nav">
-                            <li class="nav-item inline">
-                                <a class="nav-link" id="seeMorebtn" [routerLink]="['/sessions']">
-                                  SEE MORE
-                                </a>
-                              </li>
-                        </ul>
-                    </div>
-
-                    <ul class="listVids">
-                        <li *ngFor="let content of sessions">
-                            <div class="row text-center" id="vidBG" [routerLink]="['/sessions']">
-                                <div class="col-lg-12 vidName"><a class="vidLink">{{ content.name }}</a></div>
-                            </div>
-                        </li>
-                    </ul>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="box p-a stat1">
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded accent3">
+                        <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h1 *ngIf="stats.attributes" class="m-0">{{ stats.attributes.overallRating || 'N/A' }}</h1>
+                    <h1 class="m-0">N/A</h1>
+                    <h2 class="m-0">Overall Rating</h2>
                 </div>
             </div>
-            <!-- SUGGESTED VID TILE END-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6"><!-- LEFT SIDE -->
+            <profile (profileUpdated)="onProfileUpdated($event)"></profile>
+            <player-attributes *ngIf="hasSubscription() && !coachProfile"></player-attributes>
+            <create-assignments *ngIf="hasSubscription() && coachProfile"></create-assignments>
+        </div>
+        <div class="col-sm-12 col-md-6"><!-- RIGHT SIDE -->
+            <leader-board *ngIf="hasSubscription() && !coachProfile"></leader-board>
+            <club *ngIf="hasSubscription()"></club>
+            <team-roaster *ngIf="hasSubscription() && coachProfile"></team-roaster>
+            <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription()"></subscription>
+        </div>
+    </div>
 
-            <!-- SQUAD TILE -->
-            <div *ngIf="hasSubscription() && profile.coach" class="col-sm-12 col-md-6">
-                <div class="box p-a">
-                    <div class="box-header">
-                        <h3 class="m-0 suggestedHeader"><b>SQUAD MEMBERS</b></h3>
-                    </div>
-
-                    <div class="box-tool">
-                        <ul class="nav">
-                            <li class="nav-item inline red-btn">
-                                <a class="nav-link">SEE ALL</a>
-                              </li>
-                        </ul>
-                    </div>
-                    <div class="row" id="sq-pa">
-                        <ul class="listSquad col-lg-6 col-sm-6">
-                            <!-- <li>
-                                <a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
-                            </li>
-                            <li>
-                                <a>MICHAEL BRADLEY</a>&nbsp;&nbsp;<span id="plypos">CB</span>
-                            </li>
-                            <li>
-                                <a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
-                            </li>
-                            <li>
-                                <a>MICHAEL BRADLEY</a>&nbsp;&nbsp;<span id="plypos">CB</span>
-                            </li>	
-                            <li>
-                                <a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
-                            </li>
-                            <li>
-                                <a>MICHAEL BRADLEY</a>&nbsp;&nbsp;<span id="plypos">CB</span>
-                            </li>											 -->
-                        </ul>
-                    </div>
+    <!-- DRILL MAKER TILE -->
+    <div *ngIf="drillMakerActive" class="row">
+        <div class="col-lg-12">
+            <div class="box p-a">
+                <div class="box-header">
+                    <h3 class="m-0 suggestedHeader"><b>CREATE A DRILL</b></h3>
+                    Click anywhere on the field to drop an item
                 </div>
-            </div>
-            <!-- SQUAD TILE END-->
-
-            <!-- SAVED DRILLS TILE -->
-            <div *ngIf="hasSubscription() && profile.coach" class="col-sm-12 col-md-6">
-                <div class="box p-a">
-                    <div class="box-header">
-                        <h3 class="m-0 suggestedHeader"><b>SAVED DRILLS</b></h3>
-                    </div>
-
-                    <div class="box-tool">
-                        <ul class="nav">
-                            <li class="nav-item inline red-btn">
-                                <a class="nav-link" >SEE MORE</a>
-                              </li>
-                        </ul>
-                    </div>
-
-                    <ul class="listDrills">
-                        <!-- <li>
-                            <a>DEFENSIVE DRILL</a>
-                        </li>
-                        <li>
-                            <a>ATTACKING DRILL</a>
-                        </li> -->
-                    </ul>
-                </div>
-            </div>
-            <!-- SAVED DRILLS TILE END-->
-
-            <div *ngIf="!hasSubscription()" class="col-sm-12 col-md-6">
-                <div class="box p-a">
-                    <div class="box-header">
-                        <h3 class="m-0 suggestedHeader">
-                            <b>NO ACTIVE SUBSCRIPTIONS</b>
-                        </h3>
-                    </div>
-                    <div class="row text-center" id="vidBG2">
-                        <a [routerLink]="['/pricing']" class="vidLink2">
-                            <b>YOU DON'T HAVE A SUBSCRIPTION (click here to begin)</b>
+                <div class="box-tool">
+                    <ul class="nav">
+                      <li class="nav-item inline dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                          <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
                         </a>
-                    </div>
-                    <div class="row text-center" style="padding-top: 15px;">
-                        <button type="button" class="btn btn-primary filter-btn " data-toggle="modal" data-target="#promoCodeModal">
-                            Have a Promo Code? Click here
-                        </button>
-                    </div>
-                </div>
-            
-                <!-- Promo Code Modal -->
-                <div class="modal fade promo-modal" id="promoCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title text-center" id="savedSessModalTitle">Please enter your Promo Code below</h4>
-                            </div>
-                            <div *ngIf="!hasSubscription()" class="modal-body">
-                                <div class="promo-fields">
-                                    <div class="form-group" style="display: flex;">
-                                        <input [(ngModel)]="model.promoCode" name="promocode" class="form-control" placeholder="code">
-                                    </div>
-                                    <div style="display: flex;">
-                                        <button (click)="claimCode()" data-dismiss="modal" class="savePassbtn">ACTIVATE CODE</button>
-                                    </div>
-                                </div>
-                                <div class="modalDesc text-center">
-                                    {{ promoCodeError }}
-                                </div>
-                            </div>
-                            <div *ngIf="hasSubscription()" class="modal-body">
-                                <div class="promo-fields">
-                                    Promo Code Activated!!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Promo Code Modal END -->
-            </div>
-        </div>
-        <!-- PROFILE & SUGGESTED TILES END-->
-
-        <!-- MANAGER PROFILE & SAVED DRILLS TILES -->
-        <div *ngIf="hasSubscription() && profile.coach" class="row">
-            <!-- SQUAD MODAl -->
-            <div class="modal fade" id="squadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title text-center" id="ModalTitle">SQUAD MEMBERS</h4>
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="row saved-pa">
-                                <div class="col-xs-6">
-                                    <a>ANTHONY JONES</a>&nbsp;&nbsp;<span id="plypos">GK</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- SAVED SESSION MODAL END -->
-
-            <!-- SAVED DRILLS MODAl -->
-            <div class="modal fade" id="drillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title text-center" id="ModalTitle">SAVED DRILLS</h4>
-                        </div>
-                        <div class="modal-body">
-
-                            <!-- 1ST SAVED SESSION -->
-                            <div class="row saved-pa">
-                                <div class="col-xs-6 drillName">
-                                    DRILL 1
-                                    <button class="editBtn"><i aria-hidden="true" class="fa fa-pencil"></i></button>
-                                </div>
-                                <div class="col-xs-5">
-                                    <button class="pull-right red-btn-modal">EXPORT</button>
-                                    <button class="pull-right red-btn-modal">LOAD</button>
-                                </div>
-                                <div class="col-xs-1">
-                                    <button type="button" class="deleteBtn">
-                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- SAVED DRILLS MODAL END -->
-
-            <!-- DRILL MAKER TILE -->
-            <div class="col-lg-12">
-                <div class="box p-a">
-                    <div class="box-header">
-                        <h3 class="m-0 suggestedHeader"><b>CREATE A DRILL</b></h3>
-                        Click anywhere on the field to drop an item
-                    </div>
-
-                    <div class="box-tool">
-                        <ul class="nav">
-                          <li class="nav-item inline dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                              <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a class="dropdown-item">Save Drill</a></li>
-                                  <li><a class="dropdown-item" >Export Drill</a></li>
-                            </ul>
-                          </li>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a class="dropdown-item">Save Drill</a></li>
+                              <li><a class="dropdown-item" >Export Drill</a></li>
                         </ul>
-                    </div>
-
-                    <div class="row">
-                        <!-- DRILL FIELD VIEW -->
-                        <div class="col-lg-6">
-                            <!--dropzone-->
-                            <div id="dropzone" #dropzone class="col-lg-12 drillView" (click)="toggleIconList($event)" [ngStyle]="{'background-image': getUrl(this.selectedField || this.drillLayout._full)}">
-                                <div *ngFor="let icon of layout">
-                                    <div mwlDraggable class="drill-icon" (dragEnd)="dragEnd($event, icon)" [style.top.px]="icon.y" [style.left.px]="icon.x" [ngStyle]="{'background-image': getUrl(icon.url) }">
-                                    </div>
+                      </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <!-- DRILL FIELD VIEW -->
+                    <div class="col-lg-6">
+                        <!--dropzone-->
+                        <div id="dropzone" #dropzone class="col-lg-12 drillView" (click)="toggleIconList($event)" [ngStyle]="{'background-image': getUrl(this.selectedField || this.drillLayout._full)}">
+                            <div *ngFor="let icon of layout">
+                                <div mwlDraggable class="drill-icon" (dragEnd)="dragEnd($event, icon)" [style.top.px]="icon.y" [style.left.px]="icon.x" [ngStyle]="{'background-image': getUrl(icon.url) }">
                                 </div>
-                                <div id="iconList" #iconList *ngIf="iconList.isVisible" class="icon-list-view" [style.top.px]="iconList.positionY" [style.left.px]="iconList.positionX">
-                                    <h4 class="text-center">Click an icon to add</h4>
-                                    <div class="drill-icons">
-                                        <div *ngFor="let icon of draggable">
-                                            <div (click)="copyIconToPosition(icon)" class="drill-icon-container" [ngStyle]="{'background-image': getUrl(icon.img)}">
-                                            </div>
+                            </div>
+                            <div id="iconList" #iconList *ngIf="iconList.isVisible" class="icon-list-view" [style.top.px]="iconList.positionY" [style.left.px]="iconList.positionX">
+                                <h4 class="text-center">Click an icon to add</h4>
+                                <div class="drill-icons">
+                                    <div *ngFor="let icon of draggable">
+                                        <div (click)="copyIconToPosition(icon)" class="drill-icon-container" [ngStyle]="{'background-image': getUrl(icon.img)}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-lg-12">
-                                <h4 class="text-center drillvTitle"><b>VIEW</b></h4>
-                                <!-- DRILL VIEW BUTTONS -->
-                                <nav class="col-lg-12 center-pills text-center" id="myScrollspy">
-                                  <ul class="nav nav-pills viewBtns">
-                                      <li (click)="selectedField = drillLayout._full"><a>Full</a></li>
-                                      <li (click)="selectedField = drillLayout._half"><a>Half</a></li>
-                                      <li (click)="selectedField = drillLayout._18yard"><a>18 Yard</a></li>
-                                      <li (click)="selectedField = drillLayout._empty"><a>Empty</a></li>
-                                  </ul>
-                              </nav>
-                            <!-- DRILL VIEW BUTTONS END -->
-                            </div>
                         </div>
-                        <!-- DRILL FIELD VIEW END -->
+                        <div class="col-lg-12">
+                            <h4 class="text-center drillvTitle"><b>VIEW</b></h4>
+                            <!-- DRILL VIEW BUTTONS -->
+                            <nav class="col-lg-12 center-pills text-center" id="myScrollspy">
+                              <ul class="nav nav-pills viewBtns">
+                                  <li (click)="selectedField = drillLayout._full"><a>Full</a></li>
+                                  <li (click)="selectedField = drillLayout._half"><a>Half</a></li>
+                                  <li (click)="selectedField = drillLayout._18yard"><a>18 Yard</a></li>
+                                  <li (click)="selectedField = drillLayout._empty"><a>Empty</a></li>
+                              </ul>
+                          </nav>
+                        <!-- DRILL VIEW BUTTONS END -->
+                        </div>
                     </div>
+                    <!-- DRILL FIELD VIEW END -->
                 </div>
             </div>
-            <!-- DRILL MAKER TILE END-->
         </div>
+    </div>
 
-        <!-- SETTINGS TILES -->
-        <div class="row mainTiles" id="">
-            <div class="col-xs-12 col-md-4">
-                <div class="box p-a">
-                    <div class="box-header" (click)="toggleSecurity()">
-                        <h3 class="m-0"><b>SECURITY</b></h3>
-                    </div>
+    <div class="row mainTiles">
+        <div class="col-xs-12 col-md-4">
+            <div class="box p-a">
+                <div class="box-header" (click)="toggleSecurity()">
+                    <h3 class="m-0">
+                        <b>SECURITY</b>
+                    </h3>
+                </div>
 
-                    <div class="box-tool">
-                        <ul class="nav">
-                            <li class="nav-item inline">
-                                <a class="nav-link">
-                                      <i class="fa fa-plus" [ngClass]="{'fa-minus': securityActive}" aria-hidden="true" (click)="toggleSecurity()"></i>
-                                </a>
-                              </li>
-                        </ul>
-                    </div>
+                <div class="box-tool">
+                    <ul class="nav">
+                        <li class="nav-item inline">
+                            <a class="nav-link">
+                                <i class="fa fa-plus" [ngClass]="{'fa-minus': securityActive}" aria-hidden="true" (click)="toggleSecurity()"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
+                <div *ngIf="!passwordUpdated">
                     <div *ngIf="securityActive" class="desc-p">
                         <small>Use the form below if you wish to update your password</small>
                     </div>
@@ -443,107 +166,117 @@
                         <button (click)="updatePassword()" class="savePassbtn">SAVE</button>
                     </form>
                 </div>
-            </div>
 
-            <div class="col-xs-12 col-md-4">
-                <div class="box p-a">
-                    <div class="box-header" (click)="togglePayment()">
-                        <h3 class="m-0"><b>PAYMENTS</b></h3>
-                    </div>
-
-                    <div class="box-tool">
-                        <ul class="nav">
-                            <li class="nav-item inline">
-                                <a class="nav-link">
-                                      <i class="fa fa-plus" [ngClass]="{'fa-minus': paymentActive}" aria-hidden="true" (click)="togglePayment()"></i>
-                                </a>
-                              </li>
-                        </ul>
-                    </div>
-
-                    <div *ngIf="paymentActive" class="desc-p">
-                        <small>Current payment method</small>
-                    </div>
-
-                    <div *ngIf="paymentActive" class="desc-p currentPaybg">
-                        <div class="row m-0">
-                            <div class="col-lg-3 col-xs-3 text-center">
-                                <h6>Payment</h6>
-                            </div>
-                            <div class="col-lg-6 col-xs-6 text-center">
-                                <h6>Credit Card Ending</h6>
-                            </div>
-                            <div class="col-lg-3 col-xs-3 text-center">
-                                <h6>Expires</h6>
-                            </div>
-                        </div>
-
-                        <div *ngFor="let card of profile.creditCards" class="row m-0">
-                            <div class="col-lg-3 col-xs-3 text-center">
-                                <i *ngIf="card.cardType === 'Visa'" class="fa fa-cc-visa fa-2x" aria-hidden="true"></i>
-                                <i *ngIf="card.cardType === 'Paypal'" class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i>
-                                <i *ngIf="card.cardType === 'Master'" class="fa fa-cc-mastercard fa-2x" aria-hidden="true"></i>
-                            </div>
-                            <div class="col-lg-6 col-xs-6 text-center">
-                                <h5 class="ccFile">**** **** **** {{ card.last4 }}</h5>
-                            </div>
-                            <div class="col-lg-3 col-xs-3 text-center">
-                                <h5 class="ccFile">{{ card.expirationDate }}</h5>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-md-4">
-                <div class="box p-a">
-                    <div class="box-header">
-                        <h3 class="m-0"><b>NOTIFICATIONS</b></h3>
-                    </div>
-
-                    <div class="box-tool">
-                        <ul class="nav">
-                            <li class="nav-item inline">
-                                <a class="nav-link">
-                                      <i class="fa fa-plus" [ngClass]="{'fa-minus': notificationActive}" aria-hidden="true" (click)="toggleNotification()"></i>
-                                </a>
-                              </li>
-                        </ul>
-                    </div>
-
-                    <div *ngIf="notificationActive" class="desc-p">
-                        <small>Below are your notification preferences</small>
-                    </div>
-
-                    <div *ngIf="notificationActive" class="desc-p">
-                        <div class="row m-0">
-                            <!-- <div class="form-group2 col-xs-1 no-pa">
-                                <input type="checkbox" name="emailnews">
-                            </div>
-                            <div class="col-xs-11 no-pa">
-                                <label>Receive newsletter from The Complete 90</label>
-                            </div>
-
-                            <div class="form-group2 col-xs-1 no-pa">
-                                <input type="checkbox" name="emailnews">
-                            </div>
-                            <div class="col-xs-11 no-pa">
-                                <label>Receive newsletter from The Complete 90</label>
-                            </div>
-
-                            <div class="form-group2 col-xs-1 no-pa">
-                                <input type="checkbox" name="emailnews">
-                            </div>
-                            <div class="col-xs-11 no-pa">
-                                <label>Receive newsletter from The Complete 90</label>
-                            </div> -->
-                        </div>
+                <div *ngIf="passwordUpdated">
+                    <div class="password-updated">
+                        <span>{{ passwordError }}</span>
+                        <button (click)="hidePasswordSection()" class="savePassbtn">Continue</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- SETTINGS TILES END -->
+
+        <div class="col-xs-12 col-md-4">
+            <div class="box p-a">
+                <div class="box-header" (click)="togglePayment()">
+                    <h3 class="m-0">
+                        <b>PAYMENTS</b>
+                    </h3>
+                </div>
+    
+                <div class="box-tool">
+                    <ul class="nav">
+                        <li class="nav-item inline">
+                            <a class="nav-link">
+                                <i class="fa fa-plus" [ngClass]="{'fa-minus': paymentActive}" aria-hidden="true" (click)="togglePayment()"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div *ngIf="paymentActive" class="desc-p">
+                    <small>Current payment method</small>
+                </div>
+    
+                <div *ngIf="paymentActive" class="desc-p currentPaybg">
+                    <div class="row m-0">
+                        <div class="col-lg-3 col-xs-3 text-center">
+                            <h6>Payment</h6>
+                        </div>
+                        <div class="col-lg-6 col-xs-6 text-center">
+                            <h6>Credit Card Ending</h6>
+                        </div>
+                        <div class="col-lg-3 col-xs-3 text-center">
+                            <h6>Expires</h6>
+                        </div>
+                    </div>
+    
+                    <div *ngFor="let card of user.creditCards" class="row m-0">
+                        <div class="col-lg-3 col-xs-3 text-center">
+                            <i *ngIf="card.cardType === 'Visa'" class="fa fa-cc-visa fa-2x" aria-hidden="true"></i>
+                            <i *ngIf="card.cardType === 'Paypal'" class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i>
+                            <i *ngIf="card.cardType === 'Master'" class="fa fa-cc-mastercard fa-2x" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-lg-6 col-xs-6 text-center">
+                            <h5 class="ccFile">**** **** **** {{ card.last4 }}</h5>
+                        </div>
+                        <div class="col-lg-3 col-xs-3 text-center">
+                            <h5 class="ccFile">{{ card.expirationDate }}</h5>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="box p-a">
+                <div class="box-header">
+                    <h3 class="m-0">
+                        <b>NOTIFICATIONS</b>
+                    </h3>
+                </div>
+    
+                <div class="box-tool">
+                    <ul class="nav">
+                        <li class="nav-item inline">
+                            <a class="nav-link">
+                                <i class="fa fa-plus" [ngClass]="{'fa-minus': notificationActive}" aria-hidden="true" (click)="toggleNotification()"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div *ngIf="notificationActive" class="desc-p">
+                    <small>Below are your notification preferences</small>
+                </div>
+    
+                <div *ngIf="notificationActive" class="desc-p">
+                    <div class="row m-0">
+                        <!-- <div class="form-group2 col-xs-1 no-pa">
+                                    <input type="checkbox" name="emailnews">
+                                </div>
+                                <div class="col-xs-11 no-pa">
+                                    <label>Receive newsletter from The Complete 90</label>
+                                </div>
+    
+                                <div class="form-group2 col-xs-1 no-pa">
+                                    <input type="checkbox" name="emailnews">
+                                </div>
+                                <div class="col-xs-11 no-pa">
+                                    <label>Receive newsletter from The Complete 90</label>
+                                </div>
+
+                                <div class="form-group2 col-xs-1 no-pa">
+                                    <input type="checkbox" name="emailnews">
+                                </div>
+                                <div class="col-xs-11 no-pa">
+                                    <label>Receive newsletter from The Complete 90</label>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- DASHBOARD TILES END-->
-
-

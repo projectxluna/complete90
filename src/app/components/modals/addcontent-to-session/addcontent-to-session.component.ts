@@ -6,15 +6,21 @@ import { Subject } from 'rxjs/Subject';
 @Component({
   selector: 'app-addcontent-to-session',
   templateUrl: './addcontent-to-session.component.html',
-  styleUrls: ['./addcontent-to-session.component.css']
+  styleUrls: ['./addcontent-to-session.component.less']
 })
 export class AddcontentToSessionComponent implements OnInit {
+
+  page: number = 1;
 
   public onClose: Subject<any>;
   customSession;
 
   session = {
-    name: ''
+    name: '',
+    reps: null,
+    sets: null,
+    minutes: null,
+    seconds: null,
   }
 
   constructor(public bsModalRef: BsModalRef) { }
@@ -23,19 +29,30 @@ export class AddcontentToSessionComponent implements OnInit {
     this.onClose = new Subject();
   }
 
+  response: any;
+
   createNewSession() {
-    this.onClose.next({
+    if (!this.session.name) return;
+
+    this.response = {
       type: 'new',
-      name: this.session.name
-    });
-    this.bsModalRef.hide();
+      name: this.session.name,
+      session: this.session
+    };
+    this.page = 2;
   }
 
   addToSession(id) {
-    this.onClose.next({
+    this.response = {
       type: 'add',
-      id: id
-    });
+      id: id,
+      session: this.session
+    };
+    this.page = 2;
+  }
+  
+  setReps() {
+    this.onClose.next(this.response);
     this.bsModalRef.hide();
   }
 }
