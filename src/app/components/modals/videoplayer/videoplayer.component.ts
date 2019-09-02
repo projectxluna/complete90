@@ -111,7 +111,7 @@ export class VideoplayerComponent implements OnInit {
 
   playPrevious() {
     if (this.selectedIndex === 0) return;
-    
+
     this.stopTimer();
 
     this.selectedIndex--;
@@ -234,14 +234,15 @@ export class VideoplayerComponent implements OnInit {
 
   onEnterCuePoint(textTrack) {
   }
-  
+
   onExitCuePoint(textTrack) {
     let cue = textTrack.currentTarget;
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       if (cue.loop && VideoplayerComponent.autoLoop) {
 
         // smallest value of time which does not cause recursive buffering on iOS browsers is startTime+0.3s
-        var time = cue.startTime+ 0.3;
+        var time = cue.startTime + 0.3;
         VideoplayerComponent.api.seekTime(time);
 
         // This volume feature does not work yet, maybe save to a global variable?
