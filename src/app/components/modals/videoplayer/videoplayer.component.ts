@@ -234,13 +234,7 @@ export class VideoplayerComponent implements OnInit {
 
   onEnterCuePoint(textTrack) {
   }
-
-  // onExitCuePointMpbile (textTrack) {
-  //   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  //     let cue = textTrack.currentTarget;
-  //     VideoplayerComponent.api.seekTime(cue.endTime); 
-  //   }
-  // }
+  
   onExitCuePoint(textTrack) {
     let cue = textTrack.currentTarget;
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -260,10 +254,6 @@ export class VideoplayerComponent implements OnInit {
       }
     } else {
       if (cue.loop && VideoplayerComponent.autoLoop) {
-<<<<<<< HEAD
-=======
-        
->>>>>>> c61d9e6e5037952c485c207ea6f2c2a6ae6ee05a
         VideoplayerComponent.api.seekTime(cue.startTime);
         if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
         // turn off music here
