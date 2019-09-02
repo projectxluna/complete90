@@ -156,7 +156,7 @@ export class VideoplayerComponent implements OnInit {
 
   playPrevious() {
     if (this.selectedIndex === 0) return;
-    
+
     this.stopTimer();
     this.longTimer.reset();
 
@@ -291,14 +291,32 @@ export class VideoplayerComponent implements OnInit {
 
   onExitCuePoint(textTrack) {
     let cue = textTrack.currentTarget;
-    if (cue.loop && VideoplayerComponent.autoLoop) {
-      VideoplayerComponent.api.seekTime(cue.startTime);
-      if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
-      // turn off music here
-      VideoplayerComponent.api.volume = 0;
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      if (cue.loop && VideoplayerComponent.autoLoop) {
+
+        // smallest value of time which does not cause recursive buffering on iOS browsers is startTime+0.3s
+        var time = cue.startTime + 0.3;
+        VideoplayerComponent.api.seekTime(time);
+
+        // This volume feature does not work yet, maybe save to a global variable?
+        if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
+        // turn off music here
+        VideoplayerComponent.api.volume = 0;
+      } else {
+        // Restore old volume here
+        if (VideoplayerComponent.originalVolume) VideoplayerComponent.api.volume = VideoplayerComponent.originalVolume;
+      }
     } else {
-      // Restore old volume here
-      if (VideoplayerComponent.originalVolume) VideoplayerComponent.api.volume = VideoplayerComponent.originalVolume;
+      if (cue.loop && VideoplayerComponent.autoLoop) {
+        VideoplayerComponent.api.seekTime(cue.startTime);
+        if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
+        // turn off music here
+        VideoplayerComponent.api.volume = 0;
+      } else {
+        // Restore old volume here
+        if (VideoplayerComponent.originalVolume) VideoplayerComponent.api.volume = VideoplayerComponent.originalVolume;
+      }
     }
   }
 
