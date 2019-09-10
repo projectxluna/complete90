@@ -374,7 +374,7 @@ module.exports = function (apiRoutes) {
         }
 
         let nodeEnv = process.env.NODE_ENV;
-        if (!nodeEnv || nodeEnv === 'development') {
+        if (!nodeEnv || nodeEnv === 'dev') {
             sortSession(require('../video_structure.json'));
         } else {
             let resourceLocation = config.aws.VIDEO_STRUCTURE;
@@ -392,7 +392,7 @@ module.exports = function (apiRoutes) {
     // load sessions json structure
     function loadSessions(callback) {
         let nodeEnv = process.env.NODE_ENV;
-        if (!nodeEnv || nodeEnv === 'development') {
+        if (!nodeEnv || nodeEnv === 'dev') {
             callback(null, JSON.stringify(require('../video_structure.json')));
         }
         else {
