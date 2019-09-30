@@ -66,7 +66,7 @@ module.exports = function (app) {
         var message = req.body.message;
 
         var data = {
-            to: 'info@thecomplete90.com',
+            to: 'support@thecomplete90.com',
             from: mailer.email,
             template: 'contact-form',
             subject: 'New Contact Request',
