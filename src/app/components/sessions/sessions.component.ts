@@ -7,6 +7,7 @@ import { AddcontentToSessionComponent } from '../modals/addcontent-to-session/ad
 import { ConfirmComponent } from '../modals/confirm/confirm.component';
 import * as _ from 'lodash';
 import { isUndefined } from 'util';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-sessions',
@@ -67,18 +68,35 @@ export class SessionsComponent implements OnInit {
       let clone = _.cloneDeep(this.sessions);
       let filtered = clone.filter(session => {
         let tag = this.selectedFilter.tag;
+        let skillLevel = this.selectedFilter.skillLevel;
+
         let category = this.selectedFilter.category;
 
+
         if (tag) {
-          session.content = session.content.filter(f => {
-            return f.tags && f.tags.indexOf(tag) != -1;
-          });
+          if (skillLevel){
+            session.content = session.content.filter(f => {
+              return f.tags && f.tags.indexOf(tag) != -1  && f.tags.indexOf(skillLevel) != -1;
+            });
+          } else {
+            session.content = session.content.filter(f => {
+              return f.tags && f.tags.indexOf(tag) != -1 ;
+            });
+          }
+        } else {
+          if (skillLevel){
+            session.content = session.content.filter(f => {
+              return f.tags && f.tags.indexOf(skillLevel) != -1 ;
+            });
+          }
         }
         session.chunks.length = 0;
         session.chunks = this.getChunks(session.content, 3);
 
         session.display.length = 0;
         session.display.push(...session.chunks);
+        
+
         if (category) {
           return session.name === this.selectedFilter.category;
         }
@@ -105,7 +123,10 @@ export class SessionsComponent implements OnInit {
   }
 
   selectTag(tag) {
-    this.selectedFilter.tag = tag;
+    // check these 
+    if (tag != 'Beginner' && tag != 'Intermediate' && tag != 'Expert'){
+      this.selectedFilter.tag = tag;
+    }
   }
 
   closeBanner() {
@@ -326,7 +347,10 @@ export class SessionsComponent implements OnInit {
     }
 
     this.filters.tags = tags.filter(function (value, index, self) {
-      return self.indexOf(value) === index;
+      // check this
+      if (value != 'Beginner' && value != 'Intermediate' && value != 'Expert'){
+       return self.indexOf(value) === index;
+      }
     });
 
     this.filters.categories = categories.filter(function (value, index, self) {

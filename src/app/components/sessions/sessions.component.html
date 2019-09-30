@@ -18,7 +18,7 @@
             <!-- FILTER 1 -->
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span *ngIf="selectedFilter.tag === ''">Tags</span>
+                    <span *ngIf="selectedFilter.tag === ''">Player Attributes</span>
                     <span *ngIf="selectedFilter.tag !== ''">{{ selectedFilter.tag }}</span>
                     <span class="caret"></span>
                 </button>
@@ -42,6 +42,20 @@
                     </li>
                 </ul>
             </div>
+
+            <!-- FILTER 3-->
+            <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span *ngIf="selectedFilter.skillLevel === ''"> Skill Level</span>
+                        <span *ngIf="selectedFilter.skillLevel !== ''">{{ selectedFilter.skillLevel }}</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li *ngFor="let skillLevel of filters.skillLevel" (click)="selectSkillLevel(skillLevel)">
+                            <a>{{ skillLevel }}</a>
+                        </li>
+                    </ul>
+                </div>
 
             <!-- CLEAR FILTER BUTTON -->
             <button *ngIf="hasFilter()" type="button" class="btn btn-primary filter-btn" (click)="clearFilter()">
