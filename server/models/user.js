@@ -15,6 +15,15 @@ var userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    // how do you add fields in the database
+    // address: {
+    //     type: String,
+    //     required: true,
+    // },
+    // postalcode: {
+    //     type: String,
+    //     required: true,
+    // },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
     nationality: String,

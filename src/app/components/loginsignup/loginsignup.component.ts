@@ -40,14 +40,42 @@ export class LoginSignupComponent implements OnInit {
         return re.test(String(email).toLowerCase());
     }
 
+    validateBillingInfo (address, postalcode) {
+        // when  necessary incorporate google api, documentation at https://developers.google.com/maps/documentation/geocoding/start?utm_source=google&utm_medium=cpc&utm_campaign=FY18-Q2-global-demandgen-paidsearchonnetworkhouseads-cs-maps_contactsal_saf&utm_content=text-ad-none-none-DEV_c-CRE_315916118069-ADGP_Hybrid+%7C+AW+SEM+%7C+SKWS+~+Address+to+Coordinates-KWID_43700039136946312-kwd-371622337124-userloc_9000984&utm_term=KW_%2Baddress%20%2Bto%20%2Bcoordinates-ST_%2Baddress+%2Bto+%2Bcoordinates&gclid=EAIaIQobChMIt7nWv4XU5AIVtx-tBh34WwMaEAAYASAAEgLEAPD_BwE
+        var pc = postalcode.replace(" ", "");
+        pc = pc.toLowerCase();
+        if (pc.length ==6){
+            return false
+        }
+        for (var i =0; i<pc.length; i++){   
+            //  character with odd index
+            if (i % 2 ==1 ){
+                if (pc.charAt(i).match(/[a-z]/i)){
+                    return false;
+                }
+            } else {
+                if (!isNaN(pc.charAt(i))){
+                    return false;
+                }
+
+            }
+        }
+        return true;
+    }
+
     signUp() {
-        if (!this.model.firstname || !this.model.lastname || !this.model.email || !this.model.password) {
-            this.error = 'Make sure all required fields are completed!';
+        if (!this.model.firstname || !this.model.lastname || 
+            !this.model.email || !this.model.password || !this.model.address || !this.model.postalcode ) {
+                this.error = 'Make sure all required fields are completed!';
             return;
         }
         if (!this.validateEmail(this.model.email)) {
             this.error = 'Please enter a valid email';
             return;
+        }
+        if (!this.validateBillingInfo(this.model.address, this.model.postalcode)){
+            this.error = "Please enter a valid postal code and address!";
+            return 
         }
         if (this.createManagerProfile && !this.model.clubName) {
             this.error = 'Club name is required to create a manager profile';
@@ -57,6 +85,8 @@ export class LoginSignupComponent implements OnInit {
 
         let payload = {
             name: this.model.firstname + ' ' + this.model.lastname,
+            address: this.model.address,
+            postalcode: this.model.postalcode,
             email: this.model.email,
             password: this.model.password,
             isManager: this.createManagerProfile,
