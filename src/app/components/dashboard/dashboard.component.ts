@@ -288,6 +288,8 @@ export class DashboardComponent implements OnInit {
             this.passwordUpdated = false;
           }, 2000);
           this.passwordError = 'Password Successfully Updated';
+          // what do you think about this?
+          alert("Password Successfully Updated!")
         } else {
           //'please try again. something went wrong';
           this.loading = false;
