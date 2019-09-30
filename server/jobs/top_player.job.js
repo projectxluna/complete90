@@ -89,7 +89,7 @@ function callback() {
                 if (err) {
                     // Unable to calculate top players for date
                     var data = {
-                        to: 'info@thecomplete90.com',
+                        to: 'support@thecomplete90.com',
                         from: mailer.email,
                         text: 'Unable to calculate players leader board for ' + key + ' timerange',
                         subject: 'Leaderboard Report Error',
@@ -113,7 +113,7 @@ function callback() {
                     .writeRecords(sorted)
                     .then(()=> {
                         var data = {
-                            to: 'info@thecomplete90.com',
+                            to: 'support@thecomplete90.com',
                             from: mailer.email,
                             subject: key.toUpperCase() + ' Leaderboard Report',
                             attachments: [

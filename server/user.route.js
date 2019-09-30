@@ -157,7 +157,7 @@ module.exports = function (apiRoutes) {
                         res.json({ success: true });
 
                         var data = {
-                            to: 'info@thecomplete90.com',
+                            to: 'support@thecomplete90.com',
                             from: mailer.email,
                             template: 'promo-code-activated',
                             subject: 'The Complete 90 Promo Code Activation',
