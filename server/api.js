@@ -66,7 +66,7 @@ module.exports = function (app) {
         var message = req.body.message;
 
         var data = {
-            to: 'info@thecomplete90.com',
+            to: 'support@thecomplete90.com',
             from: mailer.email,
             template: 'contact-form',
             subject: 'New Contact Request',
@@ -95,6 +95,8 @@ module.exports = function (app) {
         var newUser = new User();
         newUser.name = req.body.name;
         newUser.email = req.body.email;
+        newUser.postalcode = req.body.postalcode;
+        newUser.address = req.body.address;
         newUser.password = newUser.generateHash(req.body.password);
         newUser.profiles.push(req.body.isManager ? PROFILES.MANAGER : PROFILES.PLAYER);
 
@@ -108,33 +110,41 @@ module.exports = function (app) {
                         message: err || 'Email already exists!'
                     });
                 }
-                newUser.save(async (err, user) => {
-                    if (err) {
-                        console.log(err)
-                        return reject(err);
-                    }
-                    res.json({
-                        success: true
-                    });
-                    var name = req.body.name.split(' ');
-                    var listId;
-                    if (req.body.isManager) {
-                        await createClub(req.body.clubName, user._id);
-                        listId = mcConfig.COACH_SIGN_UP_LIST;
-                    } else {
-                        listId = mcConfig.SIGN_UP_LIST;
-                    }
-                    mailchimp.post('/lists/' + listId + '/members', {
-                        email_address: req.body.email,
-                        status: 'subscribed',
-                        merge_fields: {
-                            'FNAME': name[0],
-                            'LNAME': name[1]
+                try {
+                    newUser.save(async (err, user) => {
+                        if (err) {
+                            console.log(err)
+                            return reject(err);
                         }
-                    }).catch(err => {
-                        console.error(err);
+                        res.json({
+                            success: true
+                        });
+                        var name = req.body.name.split(' ');
+                        var listId;
+                        if (req.body.isManager) {
+                            await createClub(req.body.clubName, user._id);
+                            listId = mcConfig.COACH_SIGN_UP_LIST;
+                        } else {
+                            listId = mcConfig.SIGN_UP_LIST;
+                        }
+                        mailchimp.post('/lists/' + listId + '/members', {
+                            email_address: req.body.email,
+                            status: 'subscribed',
+                            merge_fields: {
+                                'FNAME': name[0],
+                                'LNAME': name[1]
+                            }
+                        }).catch(err => {
+                            console.error(err);
+                        });
                     });
-                });
+                } catch (e) {
+                    console.log(e);
+                    return res.json({
+                        success: false,
+                        message: e
+                    });
+                }
             });
         } catch (err) {
             console.log(err)
