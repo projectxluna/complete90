@@ -58,13 +58,14 @@
             <div class="row form-group">
                 <span class="form-label">From</span>
                 <input type="text" placeholder="Due Date" class="form-control" bsDatepicker
-                    [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.startDate">
+                [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.startDate">
             </div>
             <div class="row form-group">
                 <span class="form-label">Due Date</span>
                 <input type="text" placeholder="Due Date" class="form-control" bsDatepicker
-                    [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.endDate">
+                [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.endDate">
             </div>
+            <!-- <button type="button" class="assign_button" *ngIf="modal.page ==3" (click)="sendEmailToAssignee(modal.selectedPlayer.email, modal.startDate, modal.endDate)"></button> -->
             <div class="no_club" (click)="createAssignment()">Continue</div>
         </div>
         <div *ngIf="modal.page == 4">
@@ -75,6 +76,8 @@
         </div>
     </div>
 </ng-template>
+
+
 
 <!-- Reports -->
 <ng-template #report>

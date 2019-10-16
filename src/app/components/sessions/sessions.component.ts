@@ -62,6 +62,23 @@ export class SessionsComponent implements OnInit {
     }
   }
 
+
+  // init() {
+  //   this.loadProfile();
+  //   this.dataService.getWatchedStats().subscribe(result => {
+  //     if (result && result.success) {
+  //       this.stats.watched = this.getHumanTime(result.watchedTotal);
+  //       this.stats.viewedTotal = result.viewedTotal;
+  //     }
+  //   });
+  //   this.dataService.getSessions().subscribe((response) => {
+  //     if (!response.success) return;
+  //     this.sessions = [];
+
+  //     this.groupContent(response.content);
+  //   });
+  // }
+
   getFilteredSessions() {
     if (this.hasFilter()) {
       let clone = _.cloneDeep(this.sessions);
@@ -233,7 +250,7 @@ export class SessionsComponent implements OnInit {
 
     const params = {
       title: 'Delete Session',
-      message: 'Are you sure you want to delete this session?',
+      message: 'Are you sure you want to delete this exercise?',
       cancelLabel: 'Back',
       confirmLabel: 'Confirm'
     };
@@ -297,7 +314,7 @@ export class SessionsComponent implements OnInit {
   deleteUserSession(sessionId) {
     const params = {
       title: 'Delete Session',
-      message: 'Are you sure you want to delete this session?',
+      message: 'Are you sure you want to delete this exercise?',
       cancelLabel: 'Back',
       confirmLabel: 'Confirm'
     };

@@ -146,7 +146,7 @@ const callback = async () => {
         let max = deviations[deviations.length -1];
         values.forEach(v => {
             let value = v.deviationFromMean;
-            let scaled = Math.floor(convertRange(value, [min, max], [1, 10]));
+            let scaled = Math.floor(convertRange(value, [min, max], [5, 10]));
             v.score = scaled;
 
             PlayerAttribute.findOneAndUpdate({
