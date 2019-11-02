@@ -74,6 +74,7 @@ const getAllUserStats = () => {
     });
 }
 
+
 const getMean = (data, field) => {
     if (!data || !data.length) {
         return;
