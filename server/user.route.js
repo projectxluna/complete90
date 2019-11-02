@@ -263,6 +263,40 @@ module.exports = function (apiRoutes) {
     });
 
     /**
+     * Get team attributes
+     */
+    apiRoutes.get('/user/teamAttributes', Auth.isAuthenticated, (req, res) => {
+        const players = req.decoded;
+        var attributes = [];
+
+        players.forEach(player => {
+            PlayerAttributes.find({
+                userId: mongoose.Types.ObjectId(userId),
+            }).exec((err, playerAttributes) => {
+                if (err) return res.status(400).send(err);
+                playerAttributes.forEach( at => {
+                    var found = attributes.find(a => {
+                        return at.tag === a.tag;
+                    });
+                    if (found) {
+                        found.score += at.score;
+                    } else {
+                        var attr  = {};
+                        attr.tag = at.tag;
+                        attr.score = at.score;
+                        attributes.push(attr);
+                    }
+                });
+            });
+        });
+        if (attributes.length === 0) return res.status(400).send(err);
+        res.json({
+            success: true,
+            attributes: attributes
+        });
+    });
+
+    /**
      * upload user image
      */
     apiRoutes.post('/user/profile-img', Auth.isAuthenticated, function (req, res) {
