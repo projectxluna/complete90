@@ -308,17 +308,6 @@ export class DataService {
       });
   }
 
-  getTeamAttributes(teamId): Observable<any> {
-    let headers = new Headers({ 'players': this.getPlayers(teamId) });
-    let options = new RequestOptions({ headers: headers });
-
-    // get sessions from api
-    return this.http.get('/api//user/teamAttributes', options)
-      .map((response: Response) => {
-        return response.json();
-      });
-  }
-
   saveWatchedStats(payload): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
