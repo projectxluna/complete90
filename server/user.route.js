@@ -271,7 +271,7 @@ module.exports = function (apiRoutes) {
 
         players.forEach(player => {
             PlayerAttributes.find({
-                userId: mongoose.Types.ObjectId(userId),
+                userId: mongoose.Types.ObjectId(player.userId),
             }).exec((err, playerAttributes) => {
                 if (err) return res.status(400).send(err);
                 playerAttributes.forEach( at => {
