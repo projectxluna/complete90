@@ -8,6 +8,8 @@ import { DataService } from '../../services';
 })
 export class PlayerAttributesComponent implements OnInit {
 
+  team: any;
+
   @Input() attributes = {
     overallRating: null,
     categories: [
@@ -49,7 +51,30 @@ export class PlayerAttributesComponent implements OnInit {
         if (!found) return;
         found.value = (at.score/10) * 100;
       });
+    });
 
+    dataService.getUserProfile(false).subscribe(res => {
+      if (!res || !res.success) {
+        console.log(res);
+        return;
+      }
+      if (res.club) {
+        this.team = res.club.team;
+      }
+    });
+    
+    dataService.getAverageTeamAttributes(this.team.id).subscribe(res => {
+      if (!res || !res.success) return;
+      let att = res.attributes;
+
+      att.forEach(at => {
+        let found = this.attributes.categories.find(a => {
+          return a.name === at.tag;
+        });
+        if (!found) return;
+        found.value = (at.score/10) * 100;
+        console.log(found.value);
+      });
     });
   }
 
