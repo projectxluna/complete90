@@ -31,6 +31,16 @@ export class DataService {
       });
   }
 
+  findClubById(clubId: string): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {clubId} });
+
+    return this.http.get('/api/club/id', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   findPendingClubRequest(): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
@@ -284,6 +294,34 @@ export class DataService {
       });
   }
 
+  getClubTeams(clubId): Observable<any> {
+    // add authorization header with jwt token
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {clubId}});
+
+    return this.http.get('/api/club/teams', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  getAverageTeamAttributes(clubId): Observable<any> {
+    let teams = this.getClubTeams(clubId);
+    let players = [];
+    teams.forEach(team=>{
+      players.push(this.getPlayers(team));
+    });
+
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {players} });
+
+    // get sessions from api
+    return this.http.get('/api//user/avgTeamAttributes', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   getWatchedStats(): Observable<any> {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
@@ -430,3 +468,5 @@ export class DataService {
       });
   }
 }
+
+

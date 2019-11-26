@@ -23,6 +23,11 @@ module.exports = function (apiRoutes) {
         return Club.find({name: new RegExp(clubName, 'i')}).lean().exec();
     }
 
+    const findClubById = (clubId) => {
+        //return Club.find({clubId: mongoose.Types.ObjectId(clubId)});
+        return Club.findById(clubId).lean().exec();
+    }
+
     const findUser = (userId) => {
         return User.findById(userId).lean().exec();
     }
@@ -52,6 +57,26 @@ module.exports = function (apiRoutes) {
             success: true,
             clubs: clubsMapped
         });
+    });
+
+    apiRoutes.get('/club/teams', Auth.isAuthenticated, async (req, res) => {
+        const { clubId } = req.query;
+        if (!clubId) {
+            return res.status(422).send({
+                message: 'Invalid param: club id is required'
+            });
+        }
+        let club = await findClubById();
+        if(club && club.teams){
+            res.json({
+                success: true,
+                teams: club.teams
+            });
+        } else {
+            return res.status(422).send({
+                message: 'Error: club not found'
+            });
+        }
     });
 
     apiRoutes.put('/club', Auth.isAuthenticated, (req, res) => {
@@ -348,3 +373,5 @@ module.exports = function (apiRoutes) {
         });
     });
 }
+
+

@@ -9,6 +9,7 @@ import { DataService } from '../../services';
 export class PlayerAttributesComponent implements OnInit {
 
   team: any;
+  clubId: any;
 
   @Input() attributes = {
     overallRating: null,
@@ -40,42 +41,46 @@ export class PlayerAttributesComponent implements OnInit {
     ]
   }
   constructor(dataService: DataService) {
-    dataService.getPlayerAttributes().subscribe(res => {
-      if (!res || !res.success) return;
-      let att = res.attributes;
-
-      att.forEach(at => {
-        let found = this.attributes.categories.find(a => {
-          return a.name === at.tag;
-        });
-        if (!found) return;
-        found.value = (at.score/10) * 100;
-      });
-    });
-
-    dataService.getUserProfile(false).subscribe(res => {
-      if (!res || !res.success) {
-        console.log(res);
-        return;
-      }
-      if (res.club) {
-        this.team = res.club.team;
+    dataService.getUserProfile().subscribe(res =>{
+      if(!res || !res.success){
+       console.log("error getting user profile"); 
+      } else {
+        this.clubId = res.club;
       }
     });
-    
-    dataService.getAverageTeamAttributes(this.team.id).subscribe(res => {
-      if (!res || !res.success) return;
-      let att = res.attributes;
-
-      att.forEach(at => {
-        let found = this.attributes.categories.find(a => {
-          return a.name === at.tag;
+    if(this.clubId){
+      console.log("getting average team attributes");
+      dataService.getAverageTeamAttributes(this.clubId).subscribe(res => {
+        if (!res || !res.success) return;
+        let att = res.attributes;
+  
+        att.forEach(at => {
+          let found = this.attributes.categories.find(a => {
+            return a.name === at.tag;
+          });
+          if (!found) return;
+          found.value = (at.score/10) * 100;
+          console.log(found.value);
         });
-        if (!found) return;
-        found.value = (at.score/10) * 100;
-        console.log(found.value);
+        console.log("got team attributes");
       });
-    });
+    } else {
+      console.log("getting fallback individual attributes");
+      dataService.getPlayerAttributes().subscribe(res => {
+        if (!res || !res.success) return;
+        let att = res.attributes;
+  
+        att.forEach(at => {
+          let found = this.attributes.categories.find(a => {
+            return a.name === at.tag;
+          });
+          if (!found) return;
+          found.value = (at.score/10) * 100;
+          console.log(found.value);
+        });
+      });
+  
+    }
   }
 
   ngOnInit() {
@@ -94,3 +99,5 @@ export class PlayerAttributesComponent implements OnInit {
     }
   }
 }
+
+

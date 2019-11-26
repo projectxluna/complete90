@@ -263,11 +263,12 @@ module.exports = function (apiRoutes) {
     });
 
     /**
-     * Get team attributes
+     * Get average team attributes
      */
-    apiRoutes.get('/user/teamAttributes', Auth.isAuthenticated, (req, res) => {
-        const players = req.decoded;
+    apiRoutes.get('/user/avgTeamAttributes', Auth.isAuthenticated, (req, res) => {
+        const players = req.query.players;
         var attributes = [];
+        var numberOfPlayers = players.length;
 
         players.forEach(player => {
             PlayerAttributes.find({
@@ -289,7 +290,10 @@ module.exports = function (apiRoutes) {
                 });
             });
         });
-        if (attributes.length === 0) return res.status(400).send(err);
+        attributes.forEach(at  => {
+            at.score = at.score/numberOfPlayers;
+        });
+        if (attributes.length === 0) return res.status(500).send("no attributes");
         res.json({
             success: true,
             attributes: attributes
@@ -341,3 +345,4 @@ module.exports = function (apiRoutes) {
         });
     });
 };
+
