@@ -3,14 +3,6 @@ var UserStats = require('../models/stats');
 var User = require('../models/user');
 var mailer = require('../helpers/mailer');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-const csvWriter = createCsvWriter({
-    path: '/tmp/leaderboard.csv',
-    header: [
-      {id: 'name', title: 'Name'},
-      {id: 'watchedTotal', title: 'Time'},
-      {id: 'count', title: 'Number of Videos'},
-    ]
-  });
   
 var range = {
     weekly: 1000 * 60 * 60 * 24 * 7,
@@ -109,17 +101,30 @@ function callback() {
                 const mapped = await Promise.all(pArray);
                 let sorted = mapped.filter((a) => {return a != null && a != undefined }).sort((a, b) => {return b.watchedTotal - a.watchedTotal});
 
+                let fileName = `${key}_leaderboard.csv`;
+                let filePath = `/tmp/${fileName}`;
+
+                // Create a new writer for each file name
+                let csvWriter = createCsvWriter({
+                    path: filePath,
+                    header: [
+                      {id: 'name', title: 'Name'},
+                      {id: 'watchedTotal', title: 'Time'},
+                      {id: 'count', title: 'Number of Videos'},
+                    ]
+                  });
                 csvWriter
                     .writeRecords(sorted)
                     .then(()=> {
+                        console.log('saved file to', filePath)
                         var data = {
                             to: 'support@thecomplete90.com',
                             from: mailer.email,
                             subject: key.toUpperCase() + ' Leaderboard Report',
                             attachments: [
                                 {
-                                    filename: key + '-leaderboard.csv',
-                                    path: '/tmp/leaderboard.csv' // stream this file
+                                    filename: fileName,
+                                    path: filePath
                                 }
                             ]
                         };
