@@ -11,6 +11,66 @@ export class PlayerAttributesComponent implements OnInit {
   team: any;
   clubId: any;
 
+  individualAttributes: {
+    overallRating: null,
+    categories: [
+      {
+        name: 'Dribbling',
+        value: number
+      },
+      {
+        name: 'Control',
+        value: number
+      },
+      {
+        name: 'Passing',
+        value: number
+      },
+      {
+        name: 'Speed',
+        value: number
+      },
+      {
+        name: 'Strength',
+        value: number
+      },
+      {
+        name: 'Finishing',
+        value: number
+      }
+    ]
+  };
+
+  clubAttributes: {
+    overallRating: null,
+    categories: [
+      {
+        name: 'Dribbling',
+        value: number
+      },
+      {
+        name: 'Control',
+        value: number
+      },
+      {
+        name: 'Passing',
+        value: number
+      },
+      {
+        name: 'Speed',
+        value: number
+      },
+      {
+        name: 'Strength',
+        value: number
+      },
+      {
+        name: 'Finishing',
+        value: number
+      }
+    ]
+  };
+
   @Input() attributes = {
     overallRating: null,
     categories: [
@@ -55,7 +115,7 @@ export class PlayerAttributesComponent implements OnInit {
         let att = res.attributes;
   
         att.forEach(at => {
-          let found = this.attributes.categories.find(a => {
+          let found = this.clubAttributes.categories.find(a => {
             return a.name === at.tag;
           });
           if (!found) return;
@@ -63,7 +123,38 @@ export class PlayerAttributesComponent implements OnInit {
           console.log(found.value);
         });
         console.log("got team attributes");
+      }).then(function (){
+        console.log("getting individual attributes");
+        dataService.getPlayerAttributes().subscribe(res => {
+          if (!res || !res.success) return;
+          let att = res.attributes;
+  
+          att.forEach(at => {
+            let found = this.individualAttributes.categories.find(a => {
+              return a.name === at.tag;
+            });
+            if (!found) return;
+            found.value = (at.score/10) * 100;
+            console.log(found.value);
+          });
+          console.log("got individual attributes");
+        })
+      }).then(function (){
+        this.individualAttributes.forEach(att => {
+          let clubAtt = this.clubAttributes.categories.find(a => {
+            return a.name === att.name;
+          });
+
+          let found = this.attributes.categories.find(a => {
+            return a.name === att.name;
+          });
+
+          found.value = (att.value/clubAtt.value) * 100;
+          console.log(found.value);
+
+        });
       });
+
     } else {
       console.log("getting fallback individual attributes");
       dataService.getPlayerAttributes().subscribe(res => {
