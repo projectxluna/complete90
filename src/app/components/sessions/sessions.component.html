@@ -5,6 +5,8 @@
             <h1>
                 <b>SESSIONS/TRAINING</b>
             </h1>
+            <!-- <button (click)="getAssignment()" class="viewSessbtn pull-right">Get Assignment</button> -->
+
         </div>
     </div>
 </div>
@@ -64,10 +66,47 @@
 
             <!-- CREATE SESSIONS BUTTON -->
             <button id="savedCont" type="button" class="btn btn-primary filter-btn " data-toggle="modal" data-target="#savedSessModal">SAVED SESSIONS</button>
+            
+            <!-- <p class="hspace"></p> -->
+            <!-- ASSIGNEMNTS BUTTON` -->
+            <button id="assignments" type="button" class="btn btn-primary filter-btn " data-toggle="modal" (click)="processAssignments" data-target="#assignmentModal">
+                ASSIGNMENTS</button>
+
         </div>
     </div>
 </div>
 <!-- FILTERS SECTION END -->
+
+<!-- ASSINGMENTS MODAL -->
+
+
+<div class="modal fade" id="assignmentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-center" id="assignmentModalTitle">SAVED SESSIONS</h4>
+                </div>
+                <div class="modal-body">
+                    <div *ngFor="let session of assignments">
+                        <div class="row saved-pa">
+                            <div class="col-xs-7 sessName">
+                                <span>{{ session.plan.name | uppercase }}</span>
+                                <!-- <span *ngIf="!session.editMode"> ({{ session.content.length }} Videos)</span> -->
+                                <!-- <input *ngIf="session.editMode" [(ngModel)]="session.name" class="profileInput" placeholder="{{ session.name }}"> -->
+                                <!-- <button [hidden]="session.editMode" class="editSess" (click)="toggleSessionEdit(session)"> -->
+                                    <!-- <i aria-hidden="true" class="fa fa-pencil"></i> -->
+                                <!-- </button><br> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ASSIGNMENTS MODAL END -->
 
 <!-- SAVED SESSION MODAl -->
 <div class="modal fade" id="savedSessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

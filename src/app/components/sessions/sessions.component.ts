@@ -7,7 +7,6 @@ import { AddcontentToSessionComponent } from '../modals/addcontent-to-session/ad
 import { ConfirmComponent } from '../modals/confirm/confirm.component';
 import * as _ from 'lodash';
 import { isUndefined } from 'util';
-import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-sessions',
@@ -35,6 +34,7 @@ export class SessionsComponent implements OnInit {
   freeSessions = [];
   customSessions = [];
   assignments = [];
+  assignemntEdit = [];
 
   banner = {
     isActive: false,
@@ -63,40 +63,39 @@ export class SessionsComponent implements OnInit {
     }
   }
 
+  // init() {
+  //   this.loadProfile();
+  //   this.dataService.getWatchedStats().subscribe(result => {
+  //     if (result && result.success) {
+  //       this.stats.watched = this.getHumanTime(result.watchedTotal);
+  //       this.stats.viewedTotal = result.viewedTotal;
+  //     }
+  //   });
+  //   this.dataService.getSessions().subscribe((response) => {
+  //     if (!response.success) return;
+  //     this.sessions = [];
+
+  //     this.groupContent(response.content);
+  //   });
+  // }
+
   getFilteredSessions() {
     if (this.hasFilter()) {
       let clone = _.cloneDeep(this.sessions);
       let filtered = clone.filter(session => {
         let tag = this.selectedFilter.tag;
-        let skillLevel = this.selectedFilter.skillLevel;
-
         let category = this.selectedFilter.category;
 
-
         if (tag) {
-          if (skillLevel){
-            session.content = session.content.filter(f => {
-              return f.tags && f.tags.indexOf(tag) != -1  && f.tags.indexOf(skillLevel) != -1;
-            });
-          } else {
-            session.content = session.content.filter(f => {
-              return f.tags && f.tags.indexOf(tag) != -1 ;
-            });
-          }
-        } else {
-          if (skillLevel){
-            session.content = session.content.filter(f => {
-              return f.tags && f.tags.indexOf(skillLevel) != -1 ;
-            });
-          }
+          session.content = session.content.filter(f => {
+            return f.tags && f.tags.indexOf(tag) != -1;
+          });
         }
         session.chunks.length = 0;
         session.chunks = this.getChunks(session.content, 3);
 
         session.display.length = 0;
         session.display.push(...session.chunks);
-        
-
         if (category) {
           return session.name === this.selectedFilter.category;
         }
@@ -123,12 +122,16 @@ export class SessionsComponent implements OnInit {
   }
 
   selectTag(tag) {
-    // check these 
-    if (tag != 'Beginner' && tag != 'Intermediate' && tag != 'Expert'){
-      this.selectedFilter.tag = tag;
-    }
+    this.selectedFilter.tag = tag;
   }
 
+  // getAssignment() {
+  //   this.dataService.getAssignment().subscribe((response) => {
+  //     console
+      
+  //   })
+
+  // }
   closeBanner() {
     this.banner = {
       isActive: false,
@@ -242,6 +245,31 @@ export class SessionsComponent implements OnInit {
     });
   }
 
+  processAssignments() {
+    console.log("butthole")
+    var assignments = [];
+    var temp = [];
+    var count =-1;
+    for (var i =0; i<this.assignments.length; i++){
+      var assignmentObj = {
+        assignment: null,
+        name: null,
+      }
+      if (assignments.includes(this.assignments[i])){
+        i++;
+        assignmentObj.assignment = this.assignments[i];
+        assignmentObj.name = this.assignments[i].plan.name
+        assignments[count] = assignmentObj;
+      }
+      
+    }
+    for (var i =0; i< assignments.length; i++) {
+      temp[i] =  assignments[i].assignment
+    }
+    
+    this.assignments = [];
+  }
+
   revertEdit(session) {
     if (!session) return;
 
@@ -251,13 +279,24 @@ export class SessionsComponent implements OnInit {
 
   removeFromSession(session, index) {
     if (!session || session.content.length < 1 || isUndefined(index)) return;
-
-    const params = {
-      title: 'Delete Session',
-      message: 'Are you sure you want to delete this session?',
-      cancelLabel: 'Back',
-      confirmLabel: 'Confirm'
+    var params = {
     };
+    if (this.managerProfile){
+      params = {
+        title: 'Delete Session',
+        message: 'Are you sure you want to delete this exercise? (Will remove this video from all related assingments and reports.)',
+        cancelLabel: 'Back',
+        confirmLabel: 'Confirm'
+      };
+    } else {
+      params = {
+        title: 'Delete Session',
+        message: 'Are you sure you want to delete this exercise?',
+        cancelLabel: 'Back',
+        confirmLabel: 'Confirm'
+      };      
+    }
+
 
     let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params, class: 'modal-sm' });
     confirmModal.content.onClose.subscribe(result => {
@@ -281,13 +320,30 @@ export class SessionsComponent implements OnInit {
   toggleSessionDetails(session) {
     if (!session) return;
     session.expanded = !session.expanded ? true : false;
+    console.log("SDFSDFSDFSDFSDFSD");
+    console.log(this.assignments)
+    console.log(this.customSessions)
   }
-
+                                                                                                                 
+  toggleAssignmentDetails(assignment) {
+    if (!assignment) return;
+    assignment.expanded = !assignment.expanded ? true : false;
+    console.log("SDFSDFSDFSDFSDFSD");
+    console.log(this.assignments)
+    console.log(this.customSessions)
+  }
+                                                                                                                 
   toggleSessionEdit(session) {
     if (!session) return;
     session.oldName = session.name;
     session.editMode = !session.editMode ? true : false;
     session.expanded = false;
+  }
+                                                                                                                 
+  toggleAssignmentEdit(assignment) {
+    if (!assignment) return;
+    assignment.editMode = !assignment.editMode ? true : false;
+    assignment.expanded = false;
   }
 
   toggleContentEdit(content) {
@@ -316,12 +372,23 @@ export class SessionsComponent implements OnInit {
   }
 
   deleteUserSession(sessionId) {
-    const params = {
+    var params = {
+
+    };
+    params = {
       title: 'Delete Session',
-      message: 'Are you sure you want to delete this session?',
+      message: 'Are you sure you want to delete this exercise?',
       cancelLabel: 'Back',
       confirmLabel: 'Confirm'
     };
+    if (this.managerProfile){
+      params = {
+        title: 'Delete Session',
+        message: 'Are you sure you want to delete this exercise? (Will remove this video from all related assingments and reports.)',  
+        cancelLabel: 'Back',
+        confirmLabel: 'Confirm'
+      };
+    }
 
     let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params, class: 'modal-sm' });
     confirmModal.content.onClose.subscribe(result => {
@@ -347,10 +414,7 @@ export class SessionsComponent implements OnInit {
     }
 
     this.filters.tags = tags.filter(function (value, index, self) {
-      // check this
-      if (value != 'Beginner' && value != 'Intermediate' && value != 'Expert'){
-       return self.indexOf(value) === index;
-      }
+      return self.indexOf(value) === index;
     });
 
     this.filters.categories = categories.filter(function (value, index, self) {
@@ -358,7 +422,7 @@ export class SessionsComponent implements OnInit {
     });
   }
 
-  getSessions(cache: boolean = false) {
+  getSessions(cache: boolean = false){
     this.assignments.length = 0;
 
     this.dataService.getSessions(cache).subscribe((response) => {

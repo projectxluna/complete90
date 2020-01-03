@@ -100,9 +100,8 @@ export class TeamRoasterComponent implements OnInit {
   }
 
   deselectUser() {
-    if (this.selectedUser) {
-      this.selectedUser.active = false;
-    }
+    this.selectedUser = null;
+    console.log(this.selectedUser);
   }
 
   selectTeam(team) {
@@ -196,10 +195,10 @@ export class TeamRoasterComponent implements OnInit {
       confirmLabel: 'Confirm'
     };
 
-    let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params });
-    confirmModal.content.onClose.subscribe(result => {
+    let confirmModalClub = this.modalService.show(ConfirmComponent, { initialState: params });
+    confirmModalClub.content.onClose.subscribe(result => {
       if (result.confirm) {
-        this.dataService.removeFromClub(this.playerModal.player.id).subscribe(res => {
+        this.dataService.removeFromTeam(this.playerModal.player.id).subscribe(res => {
           this.getTeams();
           this.closeModal();
         });

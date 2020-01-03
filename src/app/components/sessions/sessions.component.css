@@ -79,6 +79,9 @@ button:focus{
 	padding-bottom: 20px;
 }
 
+/* .hspace{
+	margin-right: 5px;
+} */
 .filter-btn {
 	background-color: #fd1541;
 	padding-top: 4px;
@@ -133,6 +136,10 @@ button:focus{
 }
 
 #savedSessModalTitle{
+	font-family: 'Montserrat';
+	color: #333333;
+}
+#assignmentModalTitle{
 	font-family: 'Montserrat';
 	color: #333333;
 }
@@ -420,6 +427,9 @@ input{
 }
 
 #savedSessModalTitle{
+	color: #333333;
+}
+#assignmentModalTitle{
 	color: #333333;
 }
 

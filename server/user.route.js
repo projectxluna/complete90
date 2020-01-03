@@ -57,6 +57,9 @@ const getAssignment = (userId, teamId) => {
         });
     });
 }
+// const getAssignmentFromID = (userId, teamId) => {
+//     return new Promise((resolve, reject) => {
+// }
 
 module.exports = function (apiRoutes) {
     var Auth = require('./helpers/auth');
@@ -183,6 +186,28 @@ module.exports = function (apiRoutes) {
     });
 
     /**
+     * Get players per assignemnts
+     */    
+
+// get the user plan air jordan w id = 5d92b29a7ea4211796e097a7
+    apiRoutes.get('/users/for_assignment', Auth.isAuthenticated, function(req, res){
+        // try shit out to see what returns the right value.
+        id = "5d92b29a7ea4211796e097a7";
+        return new Promise((resolve, reject) => {
+            Assignment.findById(id, (err, assignment) => {
+                if(err) console.log(err);
+                resolve(assignment)
+            })
+        });
+
+        return new Promise((resolve, reject) => {
+            UserAssignemnts.findById(id, (err, club) => {
+                if (err) console.log(err);
+                resolve(club);
+            });
+        });
+    })    
+    /**
      * Get assignments
      */
     apiRoutes.get('/user/assignment', Auth.isAuthenticated, (req, res) => {
@@ -243,7 +268,6 @@ module.exports = function (apiRoutes) {
             res.json({success: true});
         });
     });
-
     /**
      * Get player attributes
      */
@@ -261,6 +285,41 @@ module.exports = function (apiRoutes) {
             });
         });
     });
+    
+    /**
+     * Get team attributes
+     */
+    // apiRoutes.get('/user/teamAttributes', Auth.isAuthenticated, (req, res) => {
+    //     const players = req.decoded;
+    //     var attributes = [];
+
+    //     players.forEach(player => {
+    //         PlayerAttributes.find({
+    //             userId: mongoose.Types.ObjectId(player.userId),
+    //         }).exec((err, playerAttributes) => {
+    //             if (err) return res.status(400).send(err);
+    //             playerAttributes.forEach( at => {
+    //                 var found = attributes.find(a => {
+    //                     return at.tag === a.tag;
+    //                 });
+    //                 if (found) {
+    //                     found.score += at.score;
+    //                 } else {
+    //                     var attr  = {};
+    //                     attr.tag = at.tag;
+    //                     attr.score = at.score;
+    //                     attributes.push(attr);
+    //                 }
+    //             });
+    //         }
+    //         );
+    //     });
+    //     if (attributes.length === 0) return res.status(400).send(err);
+    //     res.json({
+    //         success: true,
+    //         attributes: attributes
+    //     });
+    // });
 
     /**
      * upload user image
