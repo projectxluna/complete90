@@ -1,6 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { DataService } from '../../services';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DataService, RoutingState } from '../../services'
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthenticationService } from '../../services';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'create-assignments',
@@ -8,7 +12,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./create-assignments.component.less']
 })
 export class CreateAssignmentsComponent implements OnInit {
-
+  public token: string;
   plans: any[];
   teams: any;
   players: any = [];
@@ -24,7 +28,15 @@ export class CreateAssignmentsComponent implements OnInit {
     endDate: new Date()
   }
 
-  constructor(private dataService: DataService, private modalService: BsModalService) {
+  constructor( 
+    private modalService: BsModalService,
+    private dataService: DataService, 
+        private router: Router,
+        private http: Http,
+        private authenticationService: AuthenticationService,
+        private routingState: RoutingState
+    ) {
+      this.token = localStorage.getItem('token');
     this.init();
   }
   init() {
@@ -151,5 +163,13 @@ export class CreateAssignmentsComponent implements OnInit {
         }, 3000);
       }
     });
+    var email = this.modal.selectedPlayer.email;
+    var startDate = this.modal.startDate;
+    var endDate = this.modal.endDate;
+    
+    return this.http.post('/api/createAssignment', { email: email, startDate: startDate, endDate: endDate })
+    .map((response: Response) => {
+        return response.json();
+      });
   }
 }

@@ -6,8 +6,18 @@
   <div class="box-tool">
       <div *ngIf="teams && teams.length" class="tool-controls">
           <div class="assign-team-btn" (click)="openModal(createTeamModal)">NEW TEAM</div>
-          <div class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN</div>
-      </div>
+          <div *ngIf="players == 0" id="assign" class="cant-assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN </div>
+          <div *ngIf="players == 1" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (1) </div>
+          <div *ngIf="players == 2" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (2) </div>
+          <div *ngIf="players == 3" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (3) </div>
+          <div *ngIf="players == 4" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (4) </div>
+          <div *ngIf="players == 5" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (5) </div>
+          <div *ngIf="players == 6" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (6) </div>
+          <div *ngIf="players == 7" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (7) </div>
+          <div *ngIf="players == 8" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (8) </div>
+          <div *ngIf="players == 9" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (9) </div>
+          <div *ngIf="players >= 10" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (10+) </div>
+        </div>
   </div>
   <div class="row" id="sq-pa">
     <tabset *ngIf="teams && teams.length">

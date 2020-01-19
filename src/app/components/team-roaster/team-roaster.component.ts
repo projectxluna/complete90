@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../../services';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ConfirmComponent } from '../modals/confirm/confirm.component';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'team-roaster',
@@ -11,6 +12,7 @@ import { ConfirmComponent } from '../modals/confirm/confirm.component';
 export class TeamRoasterComponent implements OnInit {
 
   teams: any[];
+  players: number;
   modalRef: BsModalRef;
   model = {
     teamName: '',
@@ -63,6 +65,8 @@ export class TeamRoasterComponent implements OnInit {
         return;
       }
       this.usersWithoutTeam = res.users;
+      this.players = 0;
+      this.players = this.usersWithoutTeam.length;
     });
   }
 
