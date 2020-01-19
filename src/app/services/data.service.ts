@@ -61,6 +61,23 @@ export class DataService {
       });
   }
 
+  // findPlayersForAssignment(planID): Observale<any> {
+  //   let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+  //   let options = new RequestOptions({ headers: headers, params: {planId} });
+
+  // } 
+
+
+  // getPlayersAssigned(planId): Observable<any> {
+  //   let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+  //   let options = new RequestOptions({ headers: headers });
+
+  //   return this.http.post('/api/user/assignment', planId, options)
+  //     .map((response: Response) => {
+  //       return response.json();
+  //     });
+  // }
+
   getAssignments(planId): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers, params: {planId} });
@@ -76,6 +93,24 @@ export class DataService {
     let options = new RequestOptions({ headers: headers, params: {playerId} });
 
     return this.http.get('/api/report/assignment', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+  getAssignmentPlayers(playerId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {playerId} });
+
+    return this.http.get('/api/report/assignment', options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+  getAssignmentPlans(playerId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {playerId} });
+
+    return this.http.get('/api/user/getAssignmentFromID', options)
       .map((response: Response) => {
         return response.json();
       });
@@ -306,6 +341,17 @@ export class DataService {
       .map((response: Response) => {
         return response.json();
       });
+  }
+
+  getAssignment() {
+    // add authorization header with jwt token
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+    return 'sadfasdfasdfasd';
+    return this.http.get('/api//user/for_assignment', options)
+    .map((response: Response) => {
+      return response.json();
+    });
   }
 
   saveWatchedStats(payload): Observable<any> {

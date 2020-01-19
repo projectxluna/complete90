@@ -7,26 +7,33 @@
       <div class="plans">
           <div class="plan_row" *ngFor="let plan of plans">
             <div class="plan_name" *ngIf="plan.content.length">{{ plan.name | uppercase }}</div>
-            <div class="assign_button" (click)="selectPlan(plan, assign)">Assign</div>
+            <div class="see_details_button" (click)="selectPlan(plan, assign)">See Details</div>
+            <div class="assign_button" (click)="seeAssigned(plan, assign)">Assign</div>
           </div>
           <div class="plan_row" *ngIf="!plans || plans.length == 0">
             No Saved Plans. To begin go to the sessions page and create a plan.
           </div>
       </div>
   </div>
-</div>
+</div> 
 
 <!-- Assign plan to player or team -->
 <ng-template #assign>
-    <div class="modal-header">
+
+    <div  class="modal-header">
         <button type="button" class="close" (click)="closeModal()">
             <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title text-center" *ngIf="modal.page == 1">Create Assignment</h4>
-        <h4 class="modal-title text-center" *ngIf="modal.page == 2">Select Player or Team</h4>
-        <h4 class="modal-title text-center" *ngIf="modal.page == 3">Set Due Date</h4>
+        <h4 class="modal-title text-center" *ngIf="!details">Players Assigned</h4>
+        <h4 class="modal-title text-center" *ngIf="modal.page == 1 && details">Create Assignment</h4>
+        <h4 class="modal-title text-center" *ngIf="modal.page == 2 && details" >Select Player or Team</h4>
+        <h4 class="modal-title text-center" *ngIf="modal.page == 3 && details">Set Due Date</h4>
+
     </div>
-    <div class="modal-body">
+    <div *ngIf='!details' class="modal-body">
+        
+    </div>
+    <div *ngIf="details" class="modal-body">
         <div *ngIf="modal.page == 1" class="assignment-types">
             <div class="assignment-type" (click)="setType('player')">
                 Player

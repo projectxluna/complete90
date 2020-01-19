@@ -11,6 +11,7 @@ export class CreateAssignmentsComponent implements OnInit {
 
   plans: any[];
   teams: any;
+  details =false;
   players: any = [];
 
   modalRef: BsModalRef;
@@ -115,6 +116,13 @@ export class CreateAssignmentsComponent implements OnInit {
     this.modal.plan = plan;
     this.getTeams().then(() => {
       this.openModal(template);
+    });
+  }
+  seeAssigned(plan, template) {
+    this.details = true;
+    this.selectPlan(plan, template);
+    this.dataService.getAssignments(plan.id).subscribe(res => {
+      plan.assignments = res.assignments;
     });
   }
 
