@@ -90,45 +90,6 @@ module.exports = function (app) {
             }
         });
     });
-    
-    apiRoutes.post('/createAssignment', (req, res) => {
-        // var from = req.body.from;
-        // var name = req.body.name;
-        // var message = req.body.message;
-        // var dueDate = req.dueDate;
-
-        var to = req.email;
-        var start = req.startDate;
-        var end = req.endDate;
-
-        var to = to; 
-        var from = mailer.email;
-        var message = "You have a new assignemnt which starts on " + start + " and ends on " + end;
-        var dueDate = '2019-10-28';
-        var data = {
-            to: to,
-            from: from,
-            template: 'contact-form',
-            subject: 'New Assignment Due: ' + dueDate,
-            context: {
-                message: message,
-                name: name,
-                from: from
-            }
-        };
-        mailer.smtpTransport().sendMail(data, (err) => {
-            if (!err) {
-                return res.json({
-                    success: true
-                });
-            } else {
-                console.log(err);
-                return res.json({
-                    success: false
-                });
-            }
-        });
-    });
 
     apiRoutes.post('/signup', (req, res) => {
         var newUser = new User();

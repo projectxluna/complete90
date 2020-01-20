@@ -238,6 +238,34 @@ module.exports = function (apiRoutes) {
         assignment.startDate = startDate
         assignment.endDate = endDate;
 
+        // var to = to; 
+        // var from = mailer.email;
+        // var message = "You have a new assignemnt which starts on " + start + " and ends on " + end;
+        // var dueDate = '2019-10-28';
+        // var data = {
+        //     to: to,
+        //     from: from,
+        //     template: 'contact-form',
+        //     subject: 'New Assignment Due: ' + dueDate,
+        //     context: {
+        //         message: message,
+        //         name: name,
+        //         from: from
+        //     }
+        // };
+        // mailer.smtpTransport().sendMail(data, (err) => {
+        //     if (!err) {
+        //         return res.json({
+        //             success: true
+        //         });
+        //     } else {
+        //         console.log(err);
+        //         return res.json({
+        //             success: false
+        //         });
+        //     }
+        // });
+
         assignment.save((err, saved) => {
             if (err) return res.json({success: false, message: err});
             res.json({success: true});

@@ -163,13 +163,5 @@ export class CreateAssignmentsComponent implements OnInit {
         }, 3000);
       }
     });
-    var email = this.modal.selectedPlayer.email;
-    var startDate = this.modal.startDate;
-    var endDate = this.modal.endDate;
-    
-    return this.http.post('/api/createAssignment', { email: email, startDate: startDate, endDate: endDate })
-    .map((response: Response) => {
-        return response.json();
-      });
   }
 }

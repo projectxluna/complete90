@@ -37,14 +37,14 @@ const getPlans = (planIds = []) => {
     return Plan.find(query).exec();
 }
 
-const mapAssignment = (a, mapedPlans, mapedStats) => {
-    let plan = mapedPlans[a.planId] || [];
-    let stats = mapedStats[a._id];
+const mapAssignment = (assignment, mapedPlans, mapedStats) => {
+    let plan = mapedPlans[assignment.planId] || [];
+    let stats = mapedStats[assignment._id];
     if (!stats) {
         return {
             contentName: plan.name,
-            createdAt: a.createdAt,
-            dueDate: a.endDate,
+            createdAt: assignment.createdAt,
+            dueDate: assignment.endDate,
             contentLength: 0,
             completion: 0
         };
@@ -67,9 +67,9 @@ const mapAssignment = (a, mapedPlans, mapedStats) => {
     let totalLength = (stats.map(s => s.content.contentLength).reduce((acc, cur) => acc + cur) || 1) * multi;
 
     return {
-        contentName: plan.name,
-        createdAt: a.createdAt,
-        dueDate: a.endDate,
+        contentName: plan.name, // assignment name
+        createdAt: assignment.createdAt,
+        dueDate: assignment.endDate,
         contentLength: totalLength,
         completion: avg
     };
@@ -97,10 +97,10 @@ module.exports = function (apiRoutes) {
             let mapedPlans = {};
             let plans = await getPlans(planIds);
             plans.map(p => mapedPlans[p._id] = p);
-    
+
             let stats = {
-                player: playerAssignments.map(a => mapAssignment(a, mapedPlans, mapedStats)),
-                team: teamAssignments.map(a => mapAssignment(a, mapedPlans, mapedStats))
+                player: playerAssignments.map(assignment => mapAssignment(assignment, mapedPlans, mapedStats)),
+                team: teamAssignments.map(assignment => mapAssignment(assignment, mapedPlans, mapedStats))
             }
             res.json({ success: true, stats});
         } catch (error) {

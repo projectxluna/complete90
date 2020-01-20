@@ -9,7 +9,7 @@ import { AuthenticationService } from '../../services';
   styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
-  avatarUrl = "/public/imgs/profile/default.jpg";
+  avatarUrl = '/public/imgs/profile/default.jpg';
   userProfile = {
     subscription: undefined,
   };
@@ -47,7 +47,7 @@ export class NavComponent implements OnInit {
       if(!this.userProfile.subscription && !this.activeRequest) {
         this.activeRequest = true;
         this.hasSubscription((res) => {
-          if (!res.success) {
+          if (!res || !res.success) {
             return;
           }
           this.avatarUrl = res.user.avatarURL;
