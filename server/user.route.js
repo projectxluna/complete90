@@ -58,6 +58,27 @@ const getAssignment = (userId, teamId) => {
     });
 }
 
+const findEmails = (forTeams, forPlayers) => {
+    forTeams = forTeams.filter(i => {return (i != null)});
+    forPlayers = forPlayers.filter(i => {return (i != null)});
+
+    return new Promise((resolve, reject) => {
+        let query = {
+            $or: [{_id: {$in: forPlayers}}]
+        }
+        if (forTeams && forTeams.length > 0) {
+            query.$or.push({
+                teamId: {$in: forTeams}
+            });
+        }
+        User.find(query).lean().exec((error, users) => {
+            if (error) console.error(error)
+            let emails = users.map(u => u.email);
+            resolve(emails)
+        });
+    });
+}
+
 module.exports = function (apiRoutes) {
     var Auth = require('./helpers/auth');
     var im = require('imagemagick');
@@ -223,7 +244,7 @@ module.exports = function (apiRoutes) {
     /**
      * Create assignment
      */
-    apiRoutes.post('/user/assignment', Auth.isAuthenticated, function (req, res) {
+    apiRoutes.post('/user/assignment', Auth.isAuthenticated, async (req, res) => {
         const {forTeams, forPlayers, planId, startDate, endDate} = req.body;
         const userId = req.decoded.userId
         
@@ -238,36 +259,24 @@ module.exports = function (apiRoutes) {
         assignment.startDate = startDate
         assignment.endDate = endDate;
 
-        // var to = to; 
-        // var from = mailer.email;
-        // var message = "You have a new assignemnt which starts on " + start + " and ends on " + end;
-        // var dueDate = '2019-10-28';
-        // var data = {
-        //     to: to,
-        //     from: from,
-        //     template: 'contact-form',
-        //     subject: 'New Assignment Due: ' + dueDate,
-        //     context: {
-        //         message: message,
-        //         name: name,
-        //         from: from
-        //     }
-        // };
-        // mailer.smtpTransport().sendMail(data, (err) => {
-        //     if (!err) {
-        //         return res.json({
-        //             success: true
-        //         });
-        //     } else {
-        //         console.log(err);
-        //         return res.json({
-        //             success: false
-        //         });
-        //     }
-        // });
+        let message = 'You have a new assignemnt which starts on ' + new Date(startDate).toDateString() + ' and ends on ' + new Date(endDate).toDateString();
+        let emails = await findEmails(forTeams, forPlayers);
 
         assignment.save((err, saved) => {
             if (err) return res.json({success: false, message: err});
+            let data = {
+                to: emails,
+                from: mailer.email,
+                template: 'new-assignment',
+                subject: 'New Assignment Due: ' + new Date(endDate).toDateString(),
+                context: {
+                    message: message
+                }
+            };
+            mailer.smtpTransport().sendMail(data, (err) => {
+                if (!err) {
+                }
+            });
             res.json({success: true});
         });
     });
