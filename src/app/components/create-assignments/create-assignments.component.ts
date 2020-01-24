@@ -28,15 +28,7 @@ export class CreateAssignmentsComponent implements OnInit {
     endDate: new Date()
   }
 
-  constructor( 
-    private modalService: BsModalService,
-    private dataService: DataService, 
-        private router: Router,
-        private http: Http,
-        private authenticationService: AuthenticationService,
-        private routingState: RoutingState
-    ) {
-      this.token = localStorage.getItem('token');
+  constructor(private modalService: BsModalService, private dataService: DataService) {
     this.init();
   }
   init() {

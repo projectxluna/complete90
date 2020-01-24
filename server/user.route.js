@@ -64,7 +64,12 @@ const findEmails = (forTeams, forPlayers) => {
 
     return new Promise((resolve, reject) => {
         let query = {
-            $or: [{_id: {$in: forPlayers}}]
+            $or: []
+        }
+        if (forPlayers && forPlayers.length > 0) {
+            query.$or.push({
+                _id: {$in: forPlayers}
+            });
         }
         if (forTeams && forTeams.length > 0) {
             query.$or.push({
@@ -265,7 +270,7 @@ module.exports = function (apiRoutes) {
         assignment.save((err, saved) => {
             if (err) return res.json({success: false, message: err});
             let data = {
-                to: emails,
+                to: emails, // Maybe bcc
                 from: mailer.email,
                 template: 'new-assignment',
                 subject: 'New Assignment Due: ' + new Date(endDate).toDateString(),
