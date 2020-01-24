@@ -119,7 +119,7 @@
         <button type="button" class="close" (click)="closeModal()">
             <span aria-hidden="true">&times;</span>
         </button>
-        <h4 *ngIf="page === 1" class="modal-title text-center">All players with pending request</h4>
+        <h4 *ngIf="page === 1" class="modal-title text-center">Accept player(s) with pending request?</h4>
     </div>
     <div class="modal-body">
         <div>
@@ -127,7 +127,9 @@
                 <div *ngFor="let player of pendingPlayerRequests" class="club-list-item">
                     <img [src]="player.avatarURL">
                     <span>{{ player.name }} </span>
-                    <div class="no_club" (click)="addToClub(player)">Confirm</div>
+                    <div class="no_club" (click)="addToClub(player)">Yes</div>
+                    <p class="space" ></p> 
+                    <div class="no_club_decline" (click)="removeFromClub(player)">No</div>
                 </div>
             </div>
         </div>

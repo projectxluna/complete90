@@ -1,10 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { DataService, RoutingState } from '../../services'
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthenticationService } from '../../services';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { DataService } from '../../services'
 
 @Component({
   selector: 'create-assignments',
@@ -12,7 +8,6 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
   styleUrls: ['./create-assignments.component.less']
 })
 export class CreateAssignmentsComponent implements OnInit {
-  public token: string;
   plans: any[];
   teams: any;
   players: any = [];
@@ -28,7 +23,7 @@ export class CreateAssignmentsComponent implements OnInit {
     endDate: new Date()
   }
 
-  constructor(private modalService: BsModalService, private dataService: DataService) {
+  constructor(private dataService: DataService, private modalService: BsModalService) {
     this.init();
   }
   init() {

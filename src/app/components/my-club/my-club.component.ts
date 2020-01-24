@@ -126,6 +126,19 @@ export class MyClubComponent implements OnInit {
     });
   }
 
+
+  removeFromClub(player) {
+    if (!player) {
+      return;
+    }
+    this.dataService.removePlayerFromClub(player.id).subscribe(response => {
+      if (response.success) {
+        this.modalRef.hide();
+        window.location.reload();
+      }
+    });
+  }
+
   updateClub() {
     this.loading = true;
     let club = {
