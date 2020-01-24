@@ -103,9 +103,10 @@ export class TeamRoasterComponent implements OnInit {
   }
 
   deselectUser() {
-    if (this.selectedUser) {
-      this.selectedUser.active = false;
-    }
+    // if (this.selectedUser) {
+    //   this.selectedUser.active = false;
+    // }
+    this.selectedUser = null;
   }
 
   selectTeam(team) {

@@ -51,6 +51,16 @@ export class DataService {
       });
   }
 
+  removePlayerFromClub(userId): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/club/cancel-request', {userId}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   createAssignment(payload): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });

@@ -19,11 +19,12 @@ const getPlayerAssignment = (playerId) => {
     return Assignment.find(query).sort({ _id: -1}).lean().exec();
 }
 
-const getWatchedStats = (assignmentIds = []) => {
+const getWatchedStats = (assignmentIds = [], playerId) => {
     let query = {
         assignmentId: {
             $in: assignmentIds
-        }
+        },
+        userId: playerId
     }
     return WatchedStats.find(query).exec();
 }
@@ -84,13 +85,13 @@ module.exports = function (apiRoutes) {
             return res.status(400).send('Require player id');
         }
         try {
-            let user = await User.findById(playerId).exec();
-            let playerAssignments = await getPlayerAssignment(user._id) || [];
-            let teamAssignments = await getTeamAssignment(user.teamId) || [];
+            let player = await User.findById(playerId).exec();
+            let playerAssignments = await getPlayerAssignment(player._id) || [];
+            let teamAssignments = await getTeamAssignment(player.teamId) || [];
 
             let assignmentIds = playerAssignments.map(a => a._id).concat(teamAssignments.map(a => a._id));
             let mapedStats = {};
-            let watchedStats = await getWatchedStats(assignmentIds);
+            let watchedStats = await getWatchedStats(assignmentIds, player._id);
             watchedStats.map(stat => !mapedStats[stat.assignmentId] ? mapedStats[stat.assignmentId] = [stat] : mapedStats[stat.assignmentId].push(stat));
     
             let planIds = playerAssignments.map(a => a.planId).concat(teamAssignments.map(a => a.planId));

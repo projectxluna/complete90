@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <div class="row" id="sq-pa">
+    <div class="row" id="sq-pa" style="max-height: 298px; overflow-y: scroll;">
         <tabset *ngIf="teams && teams.length">
             <tab *ngFor="let team of teams" [heading]="team.name" [active]="team.active" (select)="selectTeam(team)"
                 (deselect)="team.active = false">
@@ -176,10 +176,10 @@
         <button type="button" class="close" (click)="closeModal()">
             <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title text-center">Training</h4>
+        <h4 class="modal-title text-center">{{ reportModal.player.firstName }}'s Training History</h4>
     </div>
     <div class="modal-body">
-        <tabset>
+        <tabset style="min-width: 530px;">
             <tab *ngFor="let tab of reportModal.tabs" [heading]="tab.name" [active]="tab.active"
                 (select)="tab.active = !tab.active" (deselect)="tab.active = false">
                 <table *ngIf="reportModal.report && reportModal.report[tab.id]" class="listSquad col-lg-6 col-sm-6"
@@ -197,9 +197,6 @@
                         <td>
                             Due Date
                         </td>
-                        <!-- <td>
-                            Length
-                        </td> -->
                     </tr>
                     <tr *ngFor="let report of reportModal.report[tab.id]">
                         <td>
@@ -214,9 +211,6 @@
                         <td>
                             {{ report.dueDate | date }}
                         </td>
-                        <!-- <td>
-                            {{ report.contentLength / 10 | number:'.1-2' }} s
-                        </td> -->
                     </tr>
                 </table>
             </tab>
