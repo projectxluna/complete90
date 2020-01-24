@@ -1,66 +1,63 @@
 <div class="box p-a">
-  <div class="box-header">
-      <h3 class="m-0 suggestedHeader"><b>TEAM ROSTER</b></h3>
-  </div>
-
-  <div class="box-tool">
-      <div *ngIf="teams && teams.length" class="tool-controls">
-          <div class="assign-team-btn" (click)="openModal(createTeamModal)">NEW TEAM</div>
-          <div *ngIf="players == 0" id="assign" class="cant-assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN </div>
-          <div *ngIf="players == 1" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (1) </div>
-          <div *ngIf="players == 2" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (2) </div>
-          <div *ngIf="players == 3" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (3) </div>
-          <div *ngIf="players == 4" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (4) </div>
-          <div *ngIf="players == 5" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (5) </div>
-          <div *ngIf="players == 6" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (6) </div>
-          <div *ngIf="players == 7" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (7) </div>
-          <div *ngIf="players == 8" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (8) </div>
-          <div *ngIf="players == 9" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (9) </div>
-          <div *ngIf="players >= 10" id="assign" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN (10+) </div>
-        </div>
-  </div>
-  <div class="row" id="sq-pa">
-    <tabset *ngIf="teams && teams.length">
-        <tab *ngFor="let team of teams" [heading]="team.name" [active]="team.active" (select)="selectTeam(team)"
-            (deselect)="team.active = false">
-            <div class="row team-control">
-                <div class="col-sm-3 text-center control" (click)="editTeam(team, editTeamModal)">Edit Team</div>
-            </div>
-            <table class="listSquad col-lg-6 col-sm-6" style="margin-top: 20px; width: 100%">
-                <tr *ngFor="let player of team.players">
-                  <td>
-                    <div class="leaderboard__row-imgcontainer">
-                        <img [src]="player.avatarURL" class="leaderboard__row-img">
-                    </div>
-                  </td>
-                  <td>
-                      <div>
-                        #{{ player.profiles[0].jersey || 0 }}
-                      </div>
-                  </td> 
-                  <td style="width: 50%;">
-                      {{ player.name }}
-                  </td>
-                  <td>
-                    <div class="actions">
-                        <a class="action" (click)="openPlayerReportModal(player, playerReport)"><i class="fa fa-line-chart"></i></a>
-                        <a class="action" (click)="editPlayer(player, editPlayerModal)"><i class="fa fa-pencil"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <tr *ngIf="!team.players || team.players.length == 0">
-                    <span>
-                        No players on team. Click Assign to begin
-                    </span>
-                </tr>
-            </table>
-        </tab>
-    </tabset>
-    <div *ngIf="!teams || teams.length == 0">
-        No teams yet. To begin, click below.
-        <div class="new_team_btn" (click)="openModal(createTeamModal)">CREATE TEAM</div>
+    <div class="box-header">
+        <h3 class="m-0 suggestedHeader"><b>TEAM ROSTER</b></h3>
     </div>
-  </div>
+
+    <div class="box-tool">
+        <div *ngIf="teams && teams.length" class="tool-controls">
+            <div class="assign-team-btn" (click)="openModal(createTeamModal)">NEW TEAM</div>
+            <div *ngIf="players == 0" class="cant-assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">
+                ASSIGN
+            </div>
+            <div *ngIf="players > 0" class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">
+                ASSIGN ({{ players < 10? players : 10+'+' }})
+            </div>
+        </div>
+    </div>
+    <div class="row" id="sq-pa">
+        <tabset *ngIf="teams && teams.length">
+            <tab *ngFor="let team of teams" [heading]="team.name" [active]="team.active" (select)="selectTeam(team)"
+                (deselect)="team.active = false">
+                <div class="row team-control">
+                    <div class="col-sm-3 text-center control" (click)="editTeam(team, editTeamModal)">Edit Team</div>
+                </div>
+                <table class="listSquad col-lg-6 col-sm-6" style="margin-top: 20px; width: 100%">
+                    <tr *ngFor="let player of team.players">
+                        <td>
+                            <div class="leaderboard__row-imgcontainer">
+                                <img [src]="player.avatarURL" class="leaderboard__row-img">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                #{{ player.profiles[0].jersey || 0 }}
+                            </div>
+                        </td>
+                        <td style="width: 50%;">
+                            {{ player.name }}
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a class="action" (click)="openPlayerReportModal(player, playerReport)"><i
+                                        class="fa fa-line-chart"></i></a>
+                                <a class="action" (click)="editPlayer(player, editPlayerModal)"><i
+                                        class="fa fa-pencil"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="!team.players || team.players.length == 0">
+                        <span>
+                            No players on team. Click Assign to begin
+                        </span>
+                    </tr>
+                </table>
+            </tab>
+        </tabset>
+        <div *ngIf="!teams || teams.length == 0">
+            No teams yet. To begin, click below.
+            <div class="new_team_btn" (click)="openModal(createTeamModal)">CREATE TEAM</div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="squadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -183,8 +180,8 @@
     </div>
     <div class="modal-body">
         <tabset>
-            <tab *ngFor="let tab of reportModal.tabs" [heading]="tab.name" [active]="tab.active" (select)="tab.active = !tab.active"
-                (deselect)="tab.active = false">
+            <tab *ngFor="let tab of reportModal.tabs" [heading]="tab.name" [active]="tab.active"
+                (select)="tab.active = !tab.active" (deselect)="tab.active = false">
                 <table *ngIf="reportModal.report && reportModal.report[tab.id]" class="listSquad col-lg-6 col-sm-6"
                     style="margin-top: 20px; width: 100%;">
                     <tr>

@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../../services';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ConfirmComponent } from '../modals/confirm/confirm.component';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'team-roaster',
