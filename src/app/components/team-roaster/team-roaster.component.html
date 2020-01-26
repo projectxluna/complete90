@@ -14,43 +14,45 @@
             </div>
         </div>
     </div>
-    <div class="row" id="sq-pa" style="max-height: 298px; overflow-y: scroll;">
+    <div class="row" id="sq-pa">
         <tabset *ngIf="teams && teams.length">
             <tab *ngFor="let team of teams" [heading]="team.name" [active]="team.active" (select)="selectTeam(team)"
                 (deselect)="team.active = false">
                 <div class="row team-control">
                     <div class="col-sm-3 text-center control" (click)="editTeam(team, editTeamModal)">Edit Team</div>
                 </div>
-                <table class="listSquad col-lg-6 col-sm-6" style="margin-top: 20px; width: 100%">
-                    <tr *ngFor="let player of team.players">
-                        <td>
-                            <div class="leaderboard__row-imgcontainer">
-                                <img [src]="player.avatarURL" class="leaderboard__row-img">
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                #{{ player.profiles[0].jersey || 0 }}
-                            </div>
-                        </td>
-                        <td style="width: 50%;">
-                            {{ player.name }}
-                        </td>
-                        <td>
-                            <div class="actions">
-                                <a class="action" (click)="openPlayerReportModal(player, playerReport)"><i
-                                        class="fa fa-line-chart"></i></a>
-                                <a class="action" (click)="editPlayer(player, editPlayerModal)"><i
-                                        class="fa fa-pencil"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr *ngIf="!team.players || team.players.length == 0">
-                        <span>
-                            No players on team. Click Assign to begin
-                        </span>
-                    </tr>
-                </table>
+                <div style="max-height: 260px; overflow-y: scroll;">
+                    <table class="listSquad col-lg-6 col-sm-6" style="margin-top: 20px; width: 100%">
+                        <tr *ngFor="let player of team.players">
+                            <td>
+                                <div class="leaderboard__row-imgcontainer">
+                                    <img [src]="player.avatarURL" class="leaderboard__row-img">
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    #{{ player.profiles[0].jersey || 0 }}
+                                </div>
+                            </td>
+                            <td style="width: 50%;">
+                                {{ player.name }}
+                            </td>
+                            <td>
+                                <div class="actions">
+                                    <a class="action" (click)="openPlayerReportModal(player, playerReport)"><i
+                                            class="fa fa-line-chart"></i></a>
+                                    <a class="action" (click)="editPlayer(player, editPlayerModal)"><i
+                                            class="fa fa-pencil"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!team.players || team.players.length == 0">
+                            <span>
+                                No players on team. Click Assign to begin
+                            </span>
+                        </tr>
+                    </table>
+                </div>
             </tab>
         </tabset>
         <div *ngIf="!teams || teams.length == 0">
@@ -176,7 +178,7 @@
         <button type="button" class="close" (click)="closeModal()">
             <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title text-center">{{ reportModal.player.firstName }}'s Training History</h4>
+        <h4 class="modal-title text-center">{{ reportModal.player? reportModal.player.firstName+"'s" : '' }} Training History</h4>
     </div>
     <div class="modal-body">
         <tabset style="min-width: 530px;">

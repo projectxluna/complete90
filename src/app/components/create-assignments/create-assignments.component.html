@@ -7,7 +7,7 @@
         <div class="plans">
             <div class="plan_row" *ngFor="let plan of plans">
                 <div class="plan_name" *ngIf="plan.content.length">{{ plan.name | uppercase }}</div>
-                <div class="assign_button" (click)="selectPlan(plan, assign)">See Details</div>
+                <div class="assign_button" (click)="selectPlan(plan, assign)">Assign</div>
             </div>
             <div class="plan_row" *ngIf="!plans || plans.length == 0">
                 No Saved Plans. To begin go to the sessions page and create a plan.
