@@ -35,7 +35,7 @@
                 Team
             </div>
         </div>
-        <div *ngIf="modal.page == 2 && modal.selectedType === 'player'">
+        <div *ngIf="modal.page == 2 && modal.selectedType === 'player'" style="max-height: 400px; overflow-y: scroll;">
             <div class="club-list">
                 <div *ngFor="let player of players" class="club-list-item" (click)="selectPlayer(player)"
                     [ngStyle]="{'background-color': player.active ? '#efefef' : '#ffffff'}">
@@ -45,7 +45,7 @@
             </div>
             <div class="no_club" (click)="continueToPage3()">Continue</div>
         </div>
-        <div *ngIf="modal.page == 2 && modal.selectedType === 'team'">
+        <div *ngIf="modal.page == 2 && modal.selectedType === 'team'" style="max-height: 400px; overflow-y: scroll;">
             <div class="club-list">
                 <div *ngFor="let team of teams" class="club-list-item" (click)="selectTeam(team)"
                     [ngStyle]="{'background-color': team.active ? '#efefef' : '#ffffff'}">

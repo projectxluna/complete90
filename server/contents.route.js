@@ -211,12 +211,15 @@ module.exports = function (apiRoutes) {
             },
             {
                 $group: {
-                    _id: null,
-                    watchedTotal: { $sum: '$content.watchedTotal' },
-                    count: { $sum: 1 }
+                    _id: {
+                        userId: '$userId',
+                        contentId: '$content.id'
+                    },
+                    watchedTotal: { $sum: '$content.watchedTotal' }
                 }
             }
-        ], function (err, stats) {
+        ], (err, stats) => {
+            console.log(stats)
             if (err) {
                 return res.json({
                     success: false,
@@ -231,10 +234,11 @@ module.exports = function (apiRoutes) {
                     viewedTotal: 0
                 });
             }
+            let watchedTotal = stats.map(s => s.watchedTotal).reduce((acc, cur) => acc + cur);
             res.json({
                 success: true,
-                watchedTotal: stats[0].watchedTotal,
-                viewedTotal: stats[0].count
+                watchedTotal: watchedTotal,
+                viewedTotal: stats.length
             });
         });
     });
@@ -246,14 +250,16 @@ module.exports = function (apiRoutes) {
         const {contentStats, assignmentId} = req.body;
         let userId = req.decoded.userId;
 
-        UserStats.findOneAndUpdate({ 'userId': userId, 'content.id': contentStats.contentId }, {
-            userId: userId,
-            'content.id': contentStats.contentId,
-            'content.currentTime': contentStats.currentTime,
-            'content.contentLength': contentStats.contentLength,
-            $inc: { 'content.watchedTotal': contentStats.watchedTotal },
-            assignmentId: mongoose.Types.ObjectId(assignmentId)
-        }, { upsert: true }, function (err, numberAffected, raw) {
+        let newStat = new UserStats();
+        newStat.userId = userId;
+        newStat.content = {
+            id : contentStats.contentId,
+            currentTime : contentStats.currentTime,
+            contentLength : contentStats.contentLength,
+            watchedTotal : contentStats.watchedTotal
+        };
+        newStat.assignmentId = mongoose.Types.ObjectId(assignmentId)
+        newStat.save(function (err, plan) {
             if (err) {
                 return res.json({
                     success: false,
@@ -295,7 +301,7 @@ module.exports = function (apiRoutes) {
 
         let match = {};
         if (timestamp && timestamp > 0) {
-            match.updatedAt = {
+            match.createdAt = {
                 $gte: new Date(Date.now() - timestamp),
             } 
         }
@@ -325,8 +331,7 @@ module.exports = function (apiRoutes) {
                 $group: {
                     _id: '$userId',
                     userId: { $first: '$userId' },
-                    watchedTotal: { $sum: '$content.watchedTotal' },
-                    count: { $sum: 1 }
+                    watchedTotal: { $sum: '$content.watchedTotal' }
                 }
             }
         ], async (err, stats) => {
@@ -343,8 +348,7 @@ module.exports = function (apiRoutes) {
                 return {
                     name: user.name,
                     photoUrl: user.avatarURL || '/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg',
-                    watchedTotal: stat.watchedTotal,
-                    count: stat.count
+                    watchedTotal: stat.watchedTotal
                 };
             });
             const mapped = await Promise.all(pArray);

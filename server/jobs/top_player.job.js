@@ -1,6 +1,8 @@
 var cron = require('cron');
 var UserStats = require('../models/stats');
 var User = require('../models/user');
+var Club = require('../models/club');
+var Team = require('../models/team')
 var mailer = require('../helpers/mailer');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
   
@@ -33,6 +35,19 @@ function findUser(userId) {
     });
 }
 
+const findClubById = (id) => {
+    return new Promise((resolve, reject) => {
+        Club.findById(id, (err, club) => {
+            if (err) console.log(err);
+            resolve(club);
+        });
+    });
+}
+
+const findTeamById = (id) => {
+    return Team.findById(id).lean().exec();
+}
+
 function elapsedTime(time) {
     var h = 0, m = 0, s = 0;
     var newTime = '';
@@ -62,7 +77,7 @@ function callback() {
             let date = new Date(Date.now() - range[key]);
 
             let match = {
-                updatedAt: {
+                createdAt: {
                     $gte: date,
                 }
             };
@@ -71,10 +86,12 @@ function callback() {
                 { $match: match },
                 {
                     $group: {
-                        _id: '$userId',
+                        _id: {
+                            userId: '$userId',
+                            contentId: '$content.id'
+                        },
                         userId: { $first: '$userId' },
-                        watchedTotal: { $sum: '$content.watchedTotal' },
-                        count: { $sum: 1 }
+                        watchedTotal: { $sum: '$content.watchedTotal' }
                     }
                 }
             ], async (err, stats) => {
@@ -89,13 +106,41 @@ function callback() {
                     await sendMail(data);
                     return;
                 }
-                const pArray = stats.map(async (stat) => {
-                    let user =  await findUser(stat.userId)
-                    if (!user) return
+                let mapedStats = {};
+                stats.map(stat => {
+                    let userId = stat._id.userId;
+                    if (!mapedStats[userId]) {
+                        mapedStats[userId] = {
+                            count: 1,
+                            watchedTotal: stat.watchedTotal
+                        };
+                    } else {
+                        let m = mapedStats[userId];
+                        m.count += 1;
+                        m.watchedTotal += stat.watchedTotal;
+                    }
+                });
+                const pArray = Object.keys(mapedStats).map(async (statUserId) => {
+                    let user =  await findUser(statUserId);
+                    if (!user) return;
+
+                    let club, team;
+
+                    if (user.clubId) {
+                        club = await findClubById(user.clubId);
+                    }
+                    if (user.teamId) {
+                        team = await findTeamById(user.teamId);
+                    }
+
+                    let playerProfile = user.profiles.find(f => f.type === 'PLAYER');
                     return {
                         name: user.name,
-                        watchedTotal: elapsedTime(stat.watchedTotal),
-                        count: stat.count
+                        watchedTotal: elapsedTime(mapedStats[statUserId].watchedTotal),
+                        count: mapedStats[statUserId].count,
+                        position: playerProfile.position,
+                        clubName: club.name,
+                        teamName: team.name
                     };
                 });
                 const mapped = await Promise.all(pArray);
@@ -109,6 +154,9 @@ function callback() {
                     path: filePath,
                     header: [
                       {id: 'name', title: 'Name'},
+                      {id: 'clubName', title: 'Club Name'},
+                      {id: 'teamName', title: 'Team Name'},
+                      {id: 'position', title: 'Position'},
                       {id: 'watchedTotal', title: 'Time'},
                       {id: 'count', title: 'Number of Videos'},
                     ]

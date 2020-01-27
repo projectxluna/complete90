@@ -214,6 +214,9 @@
                             {{ report.dueDate | date }}
                         </td>
                     </tr>
+                    <tr *ngIf="!reportModal.report[tab.id] || reportModal.report[tab.id].length == 0">
+                        <span style="padding-left: 15px; color: gray;">No assignments to report on!</span>
+                    </tr>
                 </table>
             </tab>
         </tabset>
