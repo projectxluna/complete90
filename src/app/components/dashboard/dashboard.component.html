@@ -59,9 +59,9 @@
             <create-assignments *ngIf="hasSubscription() && coachProfile"></create-assignments>
         </div>
         <div class="col-sm-12 col-md-6"><!-- RIGHT SIDE -->
-            <leader-board *ngIf="hasSubscription()"></leader-board>
             <club *ngIf="hasSubscription()"></club>
             <team-roaster *ngIf="hasSubscription() && coachProfile"></team-roaster>
+            <leader-board *ngIf="hasSubscription()"></leader-board>
             <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription()"></subscription>
         </div>
     </div>

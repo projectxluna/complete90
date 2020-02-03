@@ -160,7 +160,7 @@ function callback() {
                       {id: 'watchedTotal', title: 'Time'},
                       {id: 'count', title: 'Number of Videos'},
                     ]
-                  });
+                });
                 csvWriter
                     .writeRecords(sorted)
                     .then(()=> {
