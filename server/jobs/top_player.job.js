@@ -138,9 +138,9 @@ function callback() {
                         name: user.name,
                         watchedTotal: elapsedTime(mapedStats[statUserId].watchedTotal),
                         count: mapedStats[statUserId].count,
-                        position: playerProfile.position,
-                        clubName: club.name,
-                        teamName: team.name
+                        position: playerProfile? playerProfile.position : 'N/A',
+                        clubName: club? club.name : 'N/A',
+                        teamName: team? team.name : 'N/A'
                     };
                 });
                 const mapped = await Promise.all(pArray);
