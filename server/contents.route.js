@@ -6,6 +6,7 @@ var AWS = require('./helpers/aws');
 
 var Plan = require('./models/plan');
 var User = require('./models/user');
+const Club = require('./models/club');
 var Assignment = require('./models/assignment');
 var UserStats = require('./models/stats');
 var mongoose = require('mongoose');
@@ -295,28 +296,51 @@ module.exports = function (apiRoutes) {
         });
     }
 
+    const findClub = (ownerId) => {
+        return new Promise((resolve, reject) => {
+            Club.findOne({owner: ownerId}, (err, club) => {
+                if (err) console.log(err);
+                resolve(club);
+            });
+        });
+    }
+
     apiRoutes.get('/session/leaderboard', Auth.isAuthenticated, async (req, res) => {
-        const { timestamp, club } = req.query;
+        const { startDate, endDate, club } = req.query;
         let userId = req.decoded.userId;
 
         let match = {};
-        if (timestamp && timestamp > 0) {
+
+        if (startDate && endDate) {
+            let from = new Date(parseInt(startDate))
+            let to = new Date(parseInt(endDate))
             match.createdAt = {
-                $gte: new Date(Date.now() - timestamp),
-            } 
+                $gte: from,
+                $lt: to
+            }
         }
+
         if (club) {
             try {
                 let user = await findUser(userId);
-                if (user && user.clubId && user.clubStatus === CLUB_REQUEST_STATUS.ACTIVE) {
-                    let clubUser = await findUserInClub(user.clubId);
+                let playerProfile = user.profiles.find(f => f.type === 'PLAYER');
+                let clubUser;
+                if (user && user.clubId && user.clubStatus === CLUB_REQUEST_STATUS.ACTIVE && playerProfile) {
+                    clubUser = await findUserInClub(user.clubId);
+                } else {
+                    let managerClub = await findClub(user._id);
+                    if (managerClub) {
+                        clubUser = await findUserInClub(managerClub._id);
+                    }
+                }
+                if (clubUser) {
                     let userIds = clubUser.map(u => u._id);
                     if (userIds && userIds.length) {
                         match.userId = {$in: userIds};
                     }
                 }
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
         }
         if (Object.keys(match).length == 0 && !timestamp) {

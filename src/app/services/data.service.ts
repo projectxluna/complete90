@@ -283,10 +283,10 @@ export class DataService {
         return this.cachedSessions;
       });
   }
-  getLeaderBoard(timestamp, club): Observable<any> {
+  getLeaderBoard(filter): Observable<any> {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
-    let options = new RequestOptions({ headers: headers, params: {timestamp, club}});
+    let options = new RequestOptions({ headers: headers, params: filter});
 
     return this.http.get('/api/session/leaderboard', options)
       .map((response: Response) => {
