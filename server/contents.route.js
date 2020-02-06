@@ -343,7 +343,7 @@ module.exports = function (apiRoutes) {
                 console.error(err);
             }
         }
-        if (Object.keys(match).length == 0 && !timestamp) {
+        if (Object.keys(match).length == 0 && (!startDate || !endDate)) {
             return res.json({
                 success: true,
                 leaderboard: []
