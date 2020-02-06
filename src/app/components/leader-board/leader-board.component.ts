@@ -92,8 +92,16 @@ export class LeaderBoardComponent implements OnInit {
     ];
   }
 
+  loading: boolean = false;
+
   fetchLeaderBoard(filter) {
+    if (this.loading) {
+      return;
+    }
+    this.loading = true;
+
     this.dataService.getLeaderBoard(filter).subscribe(response => {
+      this.loading = false;
       this.players.length = 0;
       this.players = response.leaderboard || [];
       this.players.sort((a, b) => {

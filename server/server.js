@@ -10,7 +10,7 @@ var path = require('path');
 var PromoJob = require('./jobs/promo.job');
 var TopPlayerJob = require('./jobs/top_player.job');
 var PlayerAttributeJob = require('./jobs/player_attribute.job');
-var LeaderboardJob = require('./jobs/leaderboard.job');
+// var LeaderboardJob = require('./jobs/leaderboard.job');
 
 var port = process.env.PORT || 9000;
 
@@ -56,5 +56,5 @@ app.get('*', (req, res) => {
 PromoJob.register();
 PlayerAttributeJob.register();
 TopPlayerJob.register();
-LeaderboardJob.register();
+// LeaderboardJob.register();
 app.listen(port);
