@@ -270,7 +270,7 @@ module.exports = function (apiRoutes) {
         assignment.save((err, saved) => {
             if (err) return res.json({success: false, message: err});
             let data = {
-                to: emails, // Maybe bcc
+                bcc: emails,
                 from: mailer.email,
                 template: 'new-assignment',
                 subject: 'New Assignment Due: ' + new Date(endDate).toDateString(),
