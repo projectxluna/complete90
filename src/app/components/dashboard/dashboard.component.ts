@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService, DataService } from '../../services';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,7 +39,8 @@ export class DashboardComponent implements OnInit {
 
   stats = {
     watched: '',
-    viewedTotal: 0
+    viewedTotal: 0,
+    overallRating: 0
   }
   model: any = {};
   loading: boolean = false;
@@ -71,6 +71,36 @@ export class DashboardComponent implements OnInit {
       img: "assets/line2-icon.png"
     }
   ];
+
+  calculatedAttributes = {
+    overallRating: null,
+    categories: [
+      {
+        name: 'Dribbling',
+        value: 0
+      },
+      {
+        name: 'Control',
+        value: 0
+      },
+      {
+        name: 'Passing',
+        value: 0
+      },
+      {
+        name: 'Speed',
+        value: 0
+      },
+      {
+        name: 'Strength',
+        value: 0
+      },
+      {
+        name: 'Finishing',
+        value: 0
+      }
+    ]
+  };
 
   iconList = {
     isVisible: false,
@@ -139,10 +169,7 @@ export class DashboardComponent implements OnInit {
   }
 
   dragEnd(event, item) {
-    // console.log('Element was dragged', event);
-    // console.log('item', item);
     let rect = this.dropZone.nativeElement.getBoundingClientRect();
-    // console.log('dropZone', JSON.stringify(rect))
 
     let position = this.getPosition(this.dropZone.nativeElement);
 
@@ -172,8 +199,7 @@ export class DashboardComponent implements OnInit {
   }
 
   constructor(private dataService: DataService,
-    private authenticationService: AuthenticationService,
-    private router: Router) {
+    private authenticationService: AuthenticationService) {
       this.init();
   }
 
@@ -193,6 +219,22 @@ export class DashboardComponent implements OnInit {
       this.sessions = [];
 
       this.groupContent(response.content);
+    });
+    this.dataService.getPlayerAttributes().subscribe(res => {
+      if (!res || !res.success) return;
+      let att = res.attributes;
+
+      let overallRating = 0;
+      att.forEach(at => {
+        let found = this.calculatedAttributes.categories.find(a => {
+          return a.name === at.tag;
+        });
+        if (!found) return;
+        found.value = (at.score/10) * 100;
+        overallRating += found.value;
+      });
+      let avg = (overallRating/(att.length || 1));
+      this.stats.overallRating = avg;
     });
   }
 
