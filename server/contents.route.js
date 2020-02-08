@@ -296,9 +296,18 @@ module.exports = function (apiRoutes) {
         });
     }
 
-    const findClub = (ownerId) => {
+    const findClubByOwnerId = (ownerId) => {
         return new Promise((resolve, reject) => {
             Club.findOne({owner: ownerId}, (err, club) => {
+                if (err) console.log(err);
+                resolve(club);
+            });
+        });
+    }
+
+    const findClubById = (clubId) => {
+        return new Promise((resolve, reject) => {
+            Club.findById(clubId, (err, club) => {
                 if (err) console.log(err);
                 resolve(club);
             });
@@ -328,7 +337,7 @@ module.exports = function (apiRoutes) {
                 if (user && user.clubId && user.clubStatus === CLUB_REQUEST_STATUS.ACTIVE && playerProfile) {
                     clubUser = await findUserInClub(user.clubId);
                 } else {
-                    let managerClub = await findClub(user._id);
+                    let managerClub = await findClubByOwnerId(user._id);
                     if (managerClub) {
                         clubUser = await findUserInClub(managerClub._id);
                     }
@@ -367,12 +376,26 @@ module.exports = function (apiRoutes) {
                 });
             }
             const pArray = stats.map(async (stat) => {
-                let user =  await findUser(stat.userId)
-                if (!user) return
+                let user =  await findUser(stat.userId);
+                if (!user) return;
+
+                let club
+
+                try {
+                    if (user.clubId) {
+                        club = await findClubById(user.clubId);
+                    }
+                } catch (err) {
+                    console.error(err);
+                }
+                let playerProfile = user.profiles.find(f => f.type === 'PLAYER');
+
                 return {
                     name: user.name,
                     photoUrl: user.avatarURL || '/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg',
-                    watchedTotal: stat.watchedTotal
+                    watchedTotal: stat.watchedTotal,
+                    clubName: club ? club.name : null,
+                    position: playerProfile ? playerProfile.position : null
                 };
             });
             const mapped = await Promise.all(pArray);
