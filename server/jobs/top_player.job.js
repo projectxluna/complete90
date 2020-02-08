@@ -83,10 +83,7 @@ function elapsedTime(time) {
     time = time % (60 * 1000);
     s = Math.floor(time / 1000);
 
-    if (h > 0) {
-      newTime += pad(h, 2) + ':';
-    }
-    newTime += pad(m, 2) + ':' + pad(s, 2);
+    newTime += `${pad(h, 2)}:${pad(m, 2)}:${pad(s, 2)}`;
     return newTime;
 }
 
