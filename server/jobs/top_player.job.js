@@ -221,7 +221,7 @@ var StatsJob = {
             weeklyJob = cron.job('0-59 * * * *', runWeeklyReport); // For Dev. Runs every 1 minute
             monthlyJob = cron.job('0-59 * * * *', runMonthlyReport); // For Dev. Runs every 1 minute
         } else {
-            weeklyJob = cron.job('0 0 * * 5', runWeeklyReport); // Every Friday
+            weeklyJob = cron.job('0 5 * * 5', runWeeklyReport); // Every Friday
             monthlyJob = cron.job('0 0 1 * *', runMonthlyReport); // Every 1st of the Month
         }
 
