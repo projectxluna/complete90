@@ -218,11 +218,11 @@ var StatsJob = {
         let monthlyJob, weeklyJob;
 
         if (!ENV || ENV === 'dev' || ENV === 'development') {
-            weeklyJob = cron.job('0-59 * * * *', runWeeklyReport); // For Dev. Runs every 1 minute
-            monthlyJob = cron.job('0-59 * * * *', runMonthlyReport); // For Dev. Runs every 1 minute
+            weeklyJob = cron.job('* 0-59 * * * *', runWeeklyReport); // For Dev. Runs every 1 minute
+            monthlyJob = cron.job('* 0-59 * * * *', runMonthlyReport); // For Dev. Runs every 1 minute
         } else {
-            weeklyJob = cron.job('0 5 * * 1', runWeeklyReport); // Every Sunday at Midnight
-            monthlyJob = cron.job('0 5 1 * *', runMonthlyReport); // Every 1st of the Month
+            weeklyJob = cron.job('0 0 5 * * 1', runWeeklyReport); // Every Sunday at Midnight at 5AM, because the server is in UTC
+            monthlyJob = cron.job('0 0 5 1 * *', runMonthlyReport); // Every 1st of the Month
         }
 
         monthlyJob.start();
