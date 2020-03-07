@@ -4,7 +4,6 @@ import { DataService, RoutingState } from '../../services'
 import { AuthenticationService } from '../../services';
 import { FormControl, Validators, NgForm } from '@angular/forms';
 declare var jQuery: any;
-
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
