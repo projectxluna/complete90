@@ -95,7 +95,6 @@ export class SessionsComponent implements OnInit {
 
         session.display.length = 0;
         session.display.push(...session.chunks);
-        
 
         if (category) {
           return session.name === this.selectedFilter.category;
@@ -123,10 +122,7 @@ export class SessionsComponent implements OnInit {
   }
 
   selectTag(tag) {
-    // check these 
-    if (tag != 'Beginner' && tag != 'Intermediate' && tag != 'Expert'){
-      this.selectedFilter.tag = tag;
-    }
+    this.selectedFilter.tag = tag;
   }
 
   closeBanner() {
@@ -252,12 +248,23 @@ export class SessionsComponent implements OnInit {
   removeFromSession(session, index) {
     if (!session || session.content.length < 1 || isUndefined(index)) return;
 
-    const params = {
-      title: 'Delete Session',
-      message: 'Are you sure you want to delete this session?',
-      cancelLabel: 'Back',
-      confirmLabel: 'Confirm'
-    };
+    let params;
+
+    if (this.managerProfile){
+      params = {
+        title: 'Delete Session',
+        message: 'Are you sure you want to delete this exercise? (Will remove this video from all related assingments and reports.)',
+        cancelLabel: 'Back',
+        confirmLabel: 'Confirm'
+      };
+    } else {
+      params = {
+        title: 'Delete Session',
+        message: 'Are you sure you want to delete this exercise?',
+        cancelLabel: 'Back',
+        confirmLabel: 'Confirm'
+      };
+    }
 
     let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params, class: 'modal-sm' });
     confirmModal.content.onClose.subscribe(result => {
@@ -316,12 +323,22 @@ export class SessionsComponent implements OnInit {
   }
 
   deleteUserSession(sessionId) {
-    const params = {
-      title: 'Delete Session',
-      message: 'Are you sure you want to delete this session?',
-      cancelLabel: 'Back',
-      confirmLabel: 'Confirm'
-    };
+    var params;
+    if (this.managerProfile){
+      params = {
+        title: 'Delete Session',
+        message: 'Are you sure you want to delete this exercise? (Will remove this video from all related assingments and reports.)',  
+        cancelLabel: 'Back',
+        confirmLabel: 'Confirm'
+      };
+    } else {
+      params = {
+        title: 'Delete Session',
+        message: 'Are you sure you want to delete this exercise?',
+        cancelLabel: 'Back',
+        confirmLabel: 'Confirm'
+      };
+    }
 
     let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params, class: 'modal-sm' });
     confirmModal.content.onClose.subscribe(result => {
@@ -347,10 +364,7 @@ export class SessionsComponent implements OnInit {
     }
 
     this.filters.tags = tags.filter(function (value, index, self) {
-      // check this
-      if (value != 'Beginner' && value != 'Intermediate' && value != 'Expert'){
-       return self.indexOf(value) === index;
-      }
+      return self.indexOf(value) === index;
     });
 
     this.filters.categories = categories.filter(function (value, index, self) {

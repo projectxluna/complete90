@@ -123,7 +123,29 @@ module.exports = function (apiRoutes) {
             });
         });
     });
-    
+
+    apiRoutes.post('/club/cancel-request', Auth.isAuthenticated, (req, res) => {
+        let ownerId = req.decoded.userId;
+        const {userId} = req.body;
+        Club.findOne({owner: mongoose.Types.ObjectId(ownerId)}, (err, club) => {
+            if (err || !club) {
+                return res.status(422).send({
+                    message: err
+                });
+            }
+            User.update({_id: mongoose.Types.ObjectId(userId)}, { $unset: {clubStatus: 1 }}, (err, saved) => {
+                if (err) {
+                    return res.status(422).send({
+                        message: err
+                    });
+                }
+                res.json({
+                    success: true
+                });
+            });
+        });
+    });
+
     apiRoutes.post('/club/team', Auth.isAuthenticated, (req, res) => {
         let ownerId = req.decoded.userId;
         const {teamName} = req.body

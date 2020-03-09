@@ -45,8 +45,7 @@
                     </span>
                 </div>
                 <div class="clear">
-                    <h1 *ngIf="stats.attributes" class="m-0">{{ stats.attributes.overallRating || 'N/A' }}</h1>
-                    <h1 class="m-0">N/A</h1>
+                    <h1 class="m-0">{{ stats.overallRating || 'N/A' }}</h1>
                     <h2 class="m-0">Overall Rating</h2>
                 </div>
             </div>
@@ -55,13 +54,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-6"><!-- LEFT SIDE -->
             <profile (profileUpdated)="onProfileUpdated($event)"></profile>
-            <player-attributes *ngIf="hasSubscription() && !coachProfile"></player-attributes>
+            <player-attributes *ngIf="hasSubscription() && !coachProfile" [attributes]="calculatedAttributes"></player-attributes>
             <create-assignments *ngIf="hasSubscription() && coachProfile"></create-assignments>
         </div>
         <div class="col-sm-12 col-md-6"><!-- RIGHT SIDE -->
-            <leader-board *ngIf="hasSubscription() && !coachProfile"></leader-board>
             <club *ngIf="hasSubscription()"></club>
             <team-roaster *ngIf="hasSubscription() && coachProfile"></team-roaster>
+            <leader-board *ngIf="hasSubscription()"></leader-board>
             <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription()"></subscription>
         </div>
     </div>

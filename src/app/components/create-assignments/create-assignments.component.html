@@ -1,19 +1,19 @@
 <div class="box">
-  <div class="box-header">
-      <h3 class="m-0"><b>ASSIGNMENTS</b></h3>
-  </div>
+    <div class="box-header">
+        <h3 class="m-0"><b>ASSIGNMENTS</b></h3>
+    </div>
 
-  <div class="box-body">
-      <div class="plans">
-          <div class="plan_row" *ngFor="let plan of plans">
-            <div class="plan_name" *ngIf="plan.content.length">{{ plan.name | uppercase }}</div>
-            <div class="assign_button" (click)="selectPlan(plan, assign)">Assign</div>
-          </div>
-          <div class="plan_row" *ngIf="!plans || plans.length == 0">
-            No Saved Plans. To begin go to the sessions page and create a plan.
-          </div>
-      </div>
-  </div>
+    <div class="box-body">
+        <div class="plans">
+            <div class="plan_row" *ngFor="let plan of plans">
+                <div class="plan_name" *ngIf="plan.content.length">{{ plan.name | uppercase }}</div>
+                <div class="assign_button" (click)="selectPlan(plan, assign)">Assign</div>
+            </div>
+            <div class="plan_row" *ngIf="!plans || plans.length == 0">
+                No Saved Plans. To begin go to the sessions page and create a plan.
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Assign plan to player or team -->
@@ -35,7 +35,7 @@
                 Team
             </div>
         </div>
-        <div *ngIf="modal.page == 2 && modal.selectedType === 'player'">
+        <div *ngIf="modal.page == 2 && modal.selectedType === 'player'" style="max-height: 400px; overflow-y: scroll;">
             <div class="club-list">
                 <div *ngFor="let player of players" class="club-list-item" (click)="selectPlayer(player)"
                     [ngStyle]="{'background-color': player.active ? '#efefef' : '#ffffff'}">
@@ -45,7 +45,7 @@
             </div>
             <div class="no_club" (click)="continueToPage3()">Continue</div>
         </div>
-        <div *ngIf="modal.page == 2 && modal.selectedType === 'team'">
+        <div *ngIf="modal.page == 2 && modal.selectedType === 'team'" style="max-height: 400px; overflow-y: scroll;">
             <div class="club-list">
                 <div *ngFor="let team of teams" class="club-list-item" (click)="selectTeam(team)"
                     [ngStyle]="{'background-color': team.active ? '#efefef' : '#ffffff'}">
@@ -58,12 +58,12 @@
             <div class="row form-group">
                 <span class="form-label">From</span>
                 <input type="text" placeholder="Due Date" class="form-control" bsDatepicker
-                    [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.startDate">
+                [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.startDate">
             </div>
             <div class="row form-group">
                 <span class="form-label">Due Date</span>
                 <input type="text" placeholder="Due Date" class="form-control" bsDatepicker
-                    [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.endDate">
+                [bsConfig]="{ adaptivePosition: true }" [(ngModel)]="modal.endDate">
             </div>
             <div class="no_club" (click)="createAssignment()">Continue</div>
         </div>

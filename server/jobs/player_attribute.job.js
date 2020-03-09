@@ -167,8 +167,8 @@ const callback = async () => {
 
 var PlayerAttributeJob = {
     register: function () {
-        // var cronJob = cron.job('0 */12 * * 0-6', callback); // For prod. Every 12 hrs
-        var cronJob = cron.job('0-59 * * * *', callback); // For Dev. Runs every 1 minute
+        var cronJob = cron.job('0 */12 * * 0-6', callback); // For prod. Every 12 hrs
+        // var cronJob = cron.job('0-59 * * * *', callback); // For Dev. Runs every 1 minute
         cronJob.start();
     }
 }
