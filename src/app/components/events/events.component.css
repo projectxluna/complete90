@@ -29,7 +29,7 @@ p {
 }
 
 .container-fluid{
-	padding: 0px;
+	/* padding: 0px; */
 }
 
 .ma-l{
@@ -92,6 +92,11 @@ button:focus{
 	display: none;
 }
 
+.owl-img {
+	min-width: 180px !important;
+    height: 180px !important;
+    object-fit: cover !important;
+}
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
