@@ -29,7 +29,7 @@ p {
 }
 
 .container-fluid{
-	padding: 0px;
+	/* padding: 0px; */
 }
 
 .ma-l{
@@ -92,6 +92,16 @@ button:focus{
 	display: none;
 }
 
+.owl-img {
+	min-width: 180px !important;
+    height: 180px !important;
+    object-fit: cover !important;
+}
+
+.register-section h4 {
+	font-weight: bold;
+	margin-top: 20px;
+}
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
@@ -188,7 +198,7 @@ button:focus{
 
 /*--------------------------5. REGISTER SECTION ------------------------*/
 .register-section {
-	padding-top: 25px;
+	padding: 25px 30px;
     color: #484848;
     font-size: 16px;
 }
@@ -230,7 +240,7 @@ button:focus{
 }
 
 .container-fluid.old-events {
-	padding: 80px 150px;
+	padding: 80px 170px;
 }
 
 /*--------------------------5. REGISTER MODAL ------------------------*/
