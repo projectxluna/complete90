@@ -98,6 +98,11 @@ button:focus{
     object-fit: cover !important;
 }
 
+.register-section h4 {
+	font-weight: bold;
+	margin-top: 20px;
+}
+
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
 	padding-top: 120px;
@@ -193,7 +198,7 @@ button:focus{
 
 /*--------------------------5. REGISTER SECTION ------------------------*/
 .register-section {
-	padding-top: 25px;
+	padding: 25px 30px;
     color: #484848;
     font-size: 16px;
 }
@@ -235,7 +240,7 @@ button:focus{
 }
 
 .container-fluid.old-events {
-	padding: 80px 150px;
+	padding: 80px 170px;
 }
 
 /*--------------------------5. REGISTER MODAL ------------------------*/
