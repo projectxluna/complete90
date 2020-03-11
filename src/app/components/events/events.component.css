@@ -227,7 +227,7 @@ button:focus{
 }
 
 .mt-5 {
-	margin-top: 50px;
+	margin-top: 120px;
 }
 
 .pt-25 {
@@ -356,13 +356,11 @@ input{
 	margin-bottom: 26px;
 }
 
-/* .videoWrapper iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 90%;
-	height: 100%;
-} */
+.videoWrapper iframe {
+	width: 100%;
+    max-width: 100%;
+    height: 315px;
+}
 
 .vid-pa{
 	margin: auto;
