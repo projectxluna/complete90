@@ -364,7 +364,8 @@ input{
 
 .vid-pa{
 	margin: auto;
-    float: none;
+	float: none;
+	margin-bottom: 15px;
 }
 
 .gallerypics img{
