@@ -117,7 +117,7 @@ button:focus{
 
 /*----------------------------2. EVENTS TITLE--------------------------*/
 .eventsTitle{
-	padding-top: 80px;
+	padding-top: 45px;
 }
 
 .eventsTitle h1{
@@ -198,14 +198,14 @@ button:focus{
 
 /*--------------------------5. REGISTER SECTION ------------------------*/
 .register-section {
-	padding: 25px 30px;
+	padding: 25px 30px 0px 30px;
     color: #484848;
     font-size: 16px;
 }
 
 .new-event {
 	background: #FBFBFF;
-	padding: 80px 156px 80px 156px;
+	padding: 60px 156px 60px 156px;
 }
 
 .new-event-title {
@@ -227,7 +227,7 @@ button:focus{
 }
 
 .mt-5 {
-	margin-top: 120px;
+	margin-top: 60px;
 }
 
 .pt-25 {
@@ -240,7 +240,7 @@ button:focus{
 }
 
 .container-fluid.old-events {
-	padding: 80px 170px;
+	padding: 60px 170px;
 }
 
 /*--------------------------5. REGISTER MODAL ------------------------*/
@@ -304,7 +304,7 @@ input{
 /*--------------------------6. SPONSOR SECTION ------------------------*/
 .sponsorBG {
 	background-color: #fff;
-	padding: 0px 32px 40px 32px;
+	padding: 0px 32px 20px 32px;
 }
 
 .sponsorBG.odd {
@@ -365,7 +365,7 @@ input{
 .vid-pa{
 	margin: auto;
 	float: none;
-	margin-bottom: 15px;
+	margin-bottom: 26px;
 }
 
 .gallerypics img{
@@ -411,7 +411,7 @@ input{
 }
 
 #mc_embed_signup {
-	padding: 80px 156px !important;
+	padding: 60px 156px !important;
 	background-color: #fbfbff !important;
 }
 
@@ -436,7 +436,7 @@ input{
 }
 
 .testimonials-section {
-	padding: 80px 32px;
+	padding: 60px 32px 0px 32px;
 }
 
 .btn-lg {
@@ -482,8 +482,9 @@ input{
 	}
 
 	.sponLogo2 img {
-		max-width: 22%;
+		max-width: 50%;
 		padding-bottom: 30px;
+		margin-top: 5px;
 	}
 
 

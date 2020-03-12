@@ -34,7 +34,7 @@ export class EventsComponent implements OnInit {
         responsive:{
             0:{
                 items:3,
-                nav:true
+                nav:false
             },
             600:{
                 items:3,
@@ -42,7 +42,7 @@ export class EventsComponent implements OnInit {
             },
             1000:{
                 items:3,
-                nav:true,
+                nav:false,
                 loop:false
             }
         }
