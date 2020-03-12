@@ -79,14 +79,13 @@ export class EventsComponent implements OnInit {
 
 
       jQuery(".previous-slide").on("click", function() {
-        current_img = current_img.prev(".owl-item").length != 0 ? current_img.prev(".owl-item") : current_img;
+        current_img = current_img.prev(".owl-item").length != 0 ? current_img.prev(".owl-item") : current_img.closest(".owl-stage").find(".owl-item:last-child");;
         jQuery('.zoomed').attr("src", current_img.find("img").attr("src"));
       });
 
 
       jQuery(".next-slide").on("click", function() {
-        current_img = current_img.next(".owl-item").length != 0 ? current_img.next(".owl-item") : current_img;
-        
+        current_img = current_img.next(".owl-item").length != 0 ? current_img.next(".owl-item") : current_img.closest(".owl-stage").find(".owl-item:first-child");
         jQuery('.zoomed').attr("src", current_img.find("img").attr("src")); 
       });
 
