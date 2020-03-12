@@ -580,6 +580,18 @@ input{
 	.container-fluid.old-events {
 		padding: 40px 24px;
 	}
+
+
+	.sponLogo1 img {
+		max-width: 100%;
+	}
+
+	.sponLogo2 img {
+		max-width: 100%;
+	}
+
+
+
 }
 
 
