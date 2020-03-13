@@ -54,7 +54,7 @@ export class EventsComponent implements OnInit {
         responsive: {
             0:{
                 items:1,
-                nav:true
+                nav:false
             },
             600:{
                 items:1,
@@ -62,7 +62,7 @@ export class EventsComponent implements OnInit {
             },
             1000:{
                 items:2,
-                nav:true,
+                nav:false,
                 loop:false
             }
         }
