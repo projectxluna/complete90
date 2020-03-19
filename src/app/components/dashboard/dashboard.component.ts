@@ -77,27 +77,27 @@ export class DashboardComponent implements OnInit {
     categories: [
       {
         name: 'Dribbling',
-        value: 10
+        value: 50
       },
       {
         name: 'Control',
-        value: 10
+        value: 50
       },
       {
         name: 'Passing',
-        value: 10
+        value: 50
       },
       {
         name: 'Speed',
-        value: 10
+        value: 50
       },
       {
         name: 'Strength',
-        value: 10
+        value: 50
       },
       {
         name: 'Finishing',
-        value: 10
+        value: 50
       }
     ]
   };
@@ -230,7 +230,7 @@ export class DashboardComponent implements OnInit {
           return a.name === at.tag;
         });
         if (!found) return;
-        found.value = (at.score/10) * 100;
+        found.value = (at.score/50) * 100;
         overallRating += found.value;
       });
       let avg = (overallRating/(att.length || 1));

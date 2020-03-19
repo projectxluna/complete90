@@ -221,7 +221,7 @@ var StatsJob = {
             weeklyJob = cron.job('* 0-59 * * * *', runWeeklyReport); // For Dev. Runs every 1 minute
             monthlyJob = cron.job('* 0-59 * * * *', runMonthlyReport); // For Dev. Runs every 1 minute
         } else {
-            weeklyJob = cron.job('0 0 5 * * 1', runWeeklyReport); // Every Sunday at Midnight at 5AM, because the server is in UTC
+            weeklyJob = cron.job('0 0 4 * * 1', runWeeklyReport); // Every Sunday at Midnight at 5AM, because the server is in UTC
             monthlyJob = cron.job('0 0 5 1 * *', runMonthlyReport); // Every 1st of the Month
         }
 
