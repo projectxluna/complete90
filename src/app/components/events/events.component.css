@@ -18,13 +18,18 @@ div{
 	font-family: 'Montserrat';
 }
 
+p {
+	color: #484848;
+    font-size: 16px;
+}
+
 .inactiveLink{
    pointer-events: none;
    cursor: default;
 }
 
 .container-fluid{
-	padding: 0px;
+	/* padding: 0px; */
 }
 
 .ma-l{
@@ -45,6 +50,59 @@ button:focus{
     border-radius: 0px !important; 
 }
 
+.m-0 {
+	margin: 0px !important;
+}
+
+.zoomed {
+	max-width: 100%;
+    width: 100%;
+}
+
+.previous-slide {
+	color: black;
+    font-size: 40px;
+    position: absolute;
+    top: 48%;
+    left: 1%;
+}
+
+.next-slide {
+	color: black;
+    font-size: 40px;
+    position: absolute;
+    top: 48%;
+    right: 1%;
+}
+
+.slider-direction {
+	cursor: pointer;
+}
+
+
+.site-btn {
+	background-color: #FD1541;
+	color:white;
+	font-size: 15px;
+    text-transform: capitalize;
+    border: 0px;
+}
+
+.sub-succ-msg, .sub-error-msg {
+	display: none;
+}
+
+.owl-img {
+	min-width: 180px !important;
+    height: 180px !important;
+    object-fit: cover !important;
+}
+
+.register-section h4 {
+	font-weight: bold;
+	margin-top: 20px;
+}
+
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
 	padding-top: 120px;
@@ -59,7 +117,7 @@ button:focus{
 
 /*----------------------------2. EVENTS TITLE--------------------------*/
 .eventsTitle{
-	padding-top: 80px;
+	padding-top: 45px;
 }
 
 .eventsTitle h1{
@@ -70,7 +128,7 @@ button:focus{
 
 /*--------------------------3. EVENTS DESCRIPTION------------------------*/
 .eventsDesc{
-	padding-top: 60px;
+	padding-top: 20px;
 	padding-bottom: 60px;
 	color: #484848;
 	font-size: 16px;	
@@ -137,6 +195,54 @@ button:focus{
 	padding: 6px 13px;
 }
 
+
+/*--------------------------5. REGISTER SECTION ------------------------*/
+.register-section {
+	padding: 25px 30px 0px 30px;
+    color: #484848;
+    font-size: 16px;
+}
+
+.new-event {
+	background: #FBFBFF;
+	padding: 60px 156px 60px 156px;
+}
+
+.new-event-title {
+	margin-bottom: 30px;
+}
+
+.new-event-title h1 {
+	color: #252525;
+	font-size: 26px;
+	margin-top: 0px;
+}
+
+.mb-2 {
+	margin-bottom: 25px;
+}
+
+.mt-2 {
+	margin-top: 25px;
+}
+
+.mt-5 {
+	margin-top: 60px;
+}
+
+.pt-25 {
+	padding-top: 25px;
+}
+
+.old-events {
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+.container-fluid.old-events {
+	padding: 60px 170px;
+}
+
 /*--------------------------5. REGISTER MODAL ------------------------*/
 .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
     color: #fd1541;
@@ -168,9 +274,9 @@ input{
 
 .form-group{
 	max-width: 300px;
-	margin-left: 23%;
 	margin-bottom: 30px;
 }
+
 
 .registerForm input{
 	border: none; 
@@ -196,8 +302,20 @@ input{
 
 
 /*--------------------------6. SPONSOR SECTION ------------------------*/
-.sponsorBG{
+.sponsorBG {
+	background-color: #fff;
+	padding: 0px 32px 20px 32px;
+}
+
+.sponsorBG.odd {
 	background-color: #fbfbff;
+}
+
+.sponLogo1, .sponLogo2 {
+	display: flex;
+	align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .sponLogo1 img{
@@ -205,14 +323,16 @@ input{
 }
 
 .sponLogo2 img{
-	max-width:22%;
+	max-width:40%;
 }
 
 .sponTitle h1{
 	color: #252525;
     font-size: 26px;
-    padding-top: 20px;
-    padding-bottom: 40px;
+	padding-top: 0px;
+	margin-top: 0px;
+	padding-bottom: 80px;
+	text-align: center;
 }
 
 .sponRow{
@@ -233,21 +353,19 @@ input{
 /*----------------------------8. CAMP RECAP SECTION---------------------------*/
 .videoWrapper {
 	position: relative;
-	padding-bottom: 56.25%; /* 16:9 */
-	padding-top: 25px;
-	height: 0;
+	margin-bottom: 26px;
 }
 
 .videoWrapper iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
-	height: 100%;
+    max-width: 100%;
+    height: 315px;
 }
 
 .vid-pa{
-	padding-bottom: 40px;
+	margin: auto;
+	float: none;
+	margin-bottom: 26px;
 }
 
 .gallerypics img{
@@ -257,8 +375,9 @@ input{
 }
 
 
+
 .testimonials{
-	padding: 60px 15px 0px 15px;
+	padding: 0px 15px 0px 15px;
     color: #484848;
     font-size: 12px;
 }
@@ -268,10 +387,72 @@ input{
 }
 
 
+/* MAILCHIMPS */
+.newsletter-section {
+	background-color: #fbfbff !important;
+}
+#mc_embed_signup h2, #mc_embed_signup .mc-field-group label {
+	color: #252525;
+}
+#mc_embed_signup h2 {
+	font-size: 26px;
+	font-weight: 400;
+	margin-bottom: 30px;
+}
+	
+
+#mc_embed_signup .button {
+	background: #fd1541;
+	border-radius: 0px;
+}
+
+#mc_embed_signup .button:hover {
+	background: #204d74;
+}
+
+#mc_embed_signup {
+	padding: 60px 156px !important;
+	background-color: #fbfbff !important;
+}
+
+.odd {
+	background-color: #fbfbff !important;
+}
+
+#mc_embed_signup form {
+	padding: 0px 14px !important;
+}
+
+#mc_embed_signup .clear {
+	margin-top: 25px;
+}
+
+.mt-3 {
+	margin-top: 30px;
+}
+
+.owl-item {
+	margin-right: 50px;
+}
+
+.testimonials-section {
+	padding: 60px 32px 0px 32px;
+}
+
+.btn-lg {
+	padding: 10px 50px;
+}
+
+.quote {
+	padding: 40px 0px;
+}
+
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
-@media (max-width: 1024px) {
-
+@media (max-width: 991px) {
+	.container-fluid.old-events {
+		padding: 80px 20px;
+	}
 
 
 }
@@ -283,26 +464,88 @@ input{
 
 @media (max-width: 768px) {
 
-	.bannerimage{
+	.new-event {
+		padding: 40px 25px;
+	}
+
+	.bannerimage {
 		padding-top: 120px;
 		min-height: 250px;
 	}
 
-	.impcont h1{
+	.impcont h1 {
 		font-size: 26px;
 	}
 
-	.sponLogo1 img{
-		max-width:40%;
-		padding-bottom: 60px;
+	.sponLogo1 img {
+		max-width:50%;
 	}
 
-	.sponLogo2 img{
-		max-width: 22%;
+	.sponLogo2 img {
+		max-width: 50%;
 		padding-bottom: 30px;
+		margin-top: 5px;
 	}
 
 
+	.new-event-title {
+		text-align: left;
+	}
+
+	.vid-pa {
+		float: left;
+	}
+
+	#mc_embed_signup {
+		padding: 40px 25px;
+	}
+
+	.container.old-events {
+		padding: 40px 18px;
+	}
+
+
+	.container-fluid.old-events {
+		padding: 40px 26px;
+	}
+
+
+	#mc_embed_signup {
+		padding: 40px 0px !important;
+	}
+
+	.videoWrapper {
+		text-align: center;
+	}
+
+	.videoWrapper iframe { width: 100%; }
+
+	.old-events {
+		padding-bottom: 40px;
+		padding-top: 40px;
+	}
+
+	.sponsorBG:last-child {
+		padding-bottom: 0px;
+	}
+
+	.sponsorBG, .sponsorBG.odd {
+		padding: 0px 10px;
+	}
+
+	.sponTitle h1 {
+		padding-bottom: 40px;
+	}
+
+	.eventsDesc { padding-bottom: 40px; }
+
+	.testimonials-section {
+		padding: 40px 32px;
+	}
+
+	.eventsTitle {
+		padding-top: 40px;
+	}
 
 }
 
@@ -317,7 +560,7 @@ input{
 	    font-size: 9px;
 	}	
 
-	.bannerimage{
+	.bannerimage {
 		padding-top: 90px;
 		min-height: 200px;
 	}
@@ -328,16 +571,34 @@ input{
 	    margin-bottom: 30px;
 	}
 
+
+	.container.old-events {
+		padding: 40px 24px;
+	}
+
+
+	.container-fluid.old-events {
+		padding: 40px 24px;
+	}
+
+
+	.sponLogo1 img {
+		max-width: 100%;
+	}
+
+	.sponLogo2 img {
+		max-width: 100%;
+	}
+
+
+
 }
 
 
 @media (max-width: 375px) {
-
 	.form-group {
 	    max-width: 300px;
 	    margin-left: 0%;
 	    margin-bottom: 30px;
 	}
-
-
 }
