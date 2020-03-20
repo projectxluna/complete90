@@ -230,7 +230,8 @@ export class DashboardComponent implements OnInit {
           return a.name === at.tag;
         });
         if (!found) return;
-        found.value = (at.score/50) * 100;
+        let scaled = (at.score/10) * 100;
+        found.value = scaled < 50 ? 50 : scaled;
         overallRating += found.value;
       });
       let avg = (overallRating/(att.length || 1));
