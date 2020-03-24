@@ -1,0 +1,304 @@
+{
+    "sessions": 
+    [
+        {
+            "name": "Featured",
+            "alwaysActive": true,
+            "free": true,
+            "content" : [
+                {
+                    "id": "fe71e181-13ca-4725-80ce-6840df169e6a",
+                    "name": "Highlight",
+                    "description": "Frano the star",
+                    "link": "https://s3.us-east-2.amazonaws.com/complete90/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": true,
+                    "free": true
+                }
+            ]
+        },
+        {
+            "name": "Dribbling",
+            "alwaysActive": true,
+            "content" : [
+                {
+                    "id": "15cbb27c-2e4a-4157-837c-44f1c43ee8cc",
+                    "name": "Intro to dribbling",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "tags": ["basic", "intro", "dribbling"],
+                    "alwaysActive": true,
+                    "markers": [
+                        {
+                            "title": "Introduction",
+                            "startTime": 5,
+                            "endTime": 11,
+                            "description": "",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "5b6d43d2-18e0-4f36-9a62-d26700dd9ecf",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "7e0db533-3576-49c1-9622-0506672bc65c",
+                    "name": "Intro to dribbling",
+                    "description": "In this drill you'll learn the technical and practical application of dribbling",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "tags": ["basic", "intro", "dribbling"],
+                    "alwaysActive": true,
+                    "markers": [
+                        {
+                            "title": "Introduction",
+                            "startTime": 5,
+                            "endTime": 11,
+                            "description": "",
+                            "loop": true
+                        },
+                        {
+                            "title": "Mid",
+                            "startTime": 15,
+                            "endTime": 17,
+                            "description": "Some stuff here",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "15cbb27c-2e4a-4157-837c-44f1c43ee8cc",
+                    "name": "Intro to dribbling",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "tags": ["basic", "intro", "dribbling"],
+                    "alwaysActive": true,
+                    "markers": [
+                        {
+                            "title": "Introduction",
+                            "startTime": 5,
+                            "endTime": 11,
+                            "description": "",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "5b6d43d2-18e0-4f36-9a62-d26700dd9ecf",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "7e0db533-3576-49c1-9622-0506672bc65c",
+                    "name": "Intro to dribbling",
+                    "description": "In this drill you'll learn the technical and practical application of dribbling",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "tags": ["basic", "intro", "dribbling"],
+                    "alwaysActive": true,
+                    "markers": [
+                        {
+                            "title": "Introduction",
+                            "startTime": 5,
+                            "endTime": 11,
+                            "description": "",
+                            "loop": true
+                        },
+                        {
+                            "title": "Mid",
+                            "startTime": 15,
+                            "endTime": 17,
+                            "description": "Some stuff here",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "3e2b24b9-1986-425b-b458-9ba94992d807",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                }
+            ]
+        },
+        {
+            "name": "Ball Control",
+            "alwaysActive": true,
+            "content" : [
+                {
+                    "id": "a4f7aa4a-d637-4fd3-a828-fa90808f8b2d",
+                    "name": "Intro to ball control",
+                    "description": "In this drill you'll learn the technical and practical application of dribbling",
+                    "link": "/videos/ball+control/frano.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "tags": ["basic", "intro", "ball control"],
+                    "alwaysActive": true
+                },
+                {
+                    "id": "0df4eada-5ec6-45ef-a13c-5a3d337fa67d",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                },
+                {
+                    "id": "06a68f95-c8f0-4faa-ae98-e06f50158823",
+                    "name": "Intro to ball control",
+                    "description": "In this drill you'll learn the technical and practical application of dribbling",
+                    "link": "/videos/ball+control/frano.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "tags": ["basic", "intro", "ball control"],
+                    "alwaysActive": true,
+                    "markers": [
+                        {
+                            "title": "Introduction",
+                            "startTime": 5,
+                            "endTime": 11,
+                            "description": "",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "2faec6c4-c3de-4c58-8601-44e21bc99f83",
+                    "name": "Do it like Ronaldo",
+                    "description": "its about to get real",
+                    "link": "/videos/dribbling/Highlights.mp4",
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete90/photos/video-thumb.png",
+                    "alwaysActive": false,
+                    "enableAfter": 1,
+                    "tags": ["basic", "intro", "dribbling"]
+                }
+            ]
+        }
+    ]
+}
