@@ -6,9 +6,11 @@ const mongoose = require('mongoose');
 const path = require('path');
 const im = require('imagemagick');
 const { exposedUserData, CLUB_REQUEST_STATUS } = require('./helpers/pure');
+const SignupPromo = require('./models/signup_promo');
 
 module.exports = function (apiRoutes) {
-
+    var mailer = require('./helpers/mailer');
+    var randomize = require('randomatic');
     const findTeamPlayer = (teamId) => {
         return new Promise((resolve, reject) => {
             User.find({teamId: mongoose.Types.ObjectId(teamId)}, (err, users) => {
@@ -123,32 +125,11 @@ module.exports = function (apiRoutes) {
             });
         });
     });
-
-    apiRoutes.post('/club/cancel-request', Auth.isAuthenticated, (req, res) => {
-        let ownerId = req.decoded.userId;
-        const {userId} = req.body;
-        Club.findOne({owner: mongoose.Types.ObjectId(ownerId)}, (err, club) => {
-            if (err || !club) {
-                return res.status(422).send({
-                    message: err
-                });
-            }
-            User.update({_id: mongoose.Types.ObjectId(userId)}, { $unset: {clubStatus: 1 }}, (err, saved) => {
-                if (err) {
-                    return res.status(422).send({
-                        message: err
-                    });
-                }
-                res.json({
-                    success: true
-                });
-            });
-        });
-    });
-
+    
     apiRoutes.post('/club/team', Auth.isAuthenticated, (req, res) => {
         let ownerId = req.decoded.userId;
-        const {teamName} = req.body
+        var newPromo = new SignupPromo();
+        const {teamName} = req.body;
         if (!teamName) {
             return res.status(422).send({
                 message: 'Invalid Param: Team name is required'
@@ -178,11 +159,60 @@ module.exports = function (apiRoutes) {
                 if (team) {
                     let teams = club.teams || [];
                     teams.push(team._id);
+                    
                     Club.findOneAndUpdate({_id: club._id}, {teams: teams}, (err, cb) =>{
                         console.log('updated club with new team id')
                     });
+
+
+                    //console.log("Team ID: ", team._id);
+                    
+                    newPromo.code = 'cm90' + randomize('*', 4);
+                    newPromo.profileType = 'PLAYER';
+                    newPromo.club = club._id;
+                    newPromo.teamId = mongoose.Types.ObjectId(team._id);
+                    newPromo.activated = false;
+                    newPromo.save();
                 }
             });
+            
+
+
+            // var from = 'support@thecomplete90.com';
+            // var name = 'The Complete 90';
+            // var message = "Send this email to player for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
+
+
+            // User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
+            //     var data = {
+            //         to: user.email,
+            //         from: mailer.email,
+            //         template: 'contact-form',
+            //         subject: 'Coach Signup Form',
+            //         context: {
+            //             message: message,
+            //             name: name,
+            //             from: from
+            //         }
+            //     };
+    
+            //     mailer.smtpTransport().sendMail(data, (err) => {
+            //         if (!err) {
+            //             return res.json({
+            //                 success: true
+            //             });
+            //         } else {
+            //             console.log(err);
+            //             return res.json({
+            //                 success: false
+            //             });
+            //         }
+            //     });
+            // });
+            
+
+
+
         });
     });
     
@@ -231,8 +261,10 @@ module.exports = function (apiRoutes) {
                     message: err
                 });
             }
+            console.log(club);
             User.find({
-                clubId: club._id,
+                //email: "playertest23@hotmail.com",
+                clubId: mongoose.Types.ObjectId(club._id),
                 clubStatus: CLUB_REQUEST_STATUS.ACTIVE,
                 $or: [
                     {teamId: {$exists: false}},
@@ -244,6 +276,7 @@ module.exports = function (apiRoutes) {
                         message: err
                     });
                 }
+                console.log("Users: ", users);
                 let cleanedUsers = users.map(user => exposedUserData(user))
                 res.json({
                     success: true,

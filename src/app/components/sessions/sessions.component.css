@@ -60,6 +60,23 @@ button:focus{
 	margin-right: 0px;
 }
 
+.exercises-main-filter {
+    margin-bottom: 0px !important;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-backdrop {
+	z-index: 0 !important;
+}
+
+#custom_sessions_modal {
+	color: black;
+}
+
+#custom_sessions_modal .modal-body {
+	overflow: hidden !important;
+}
+
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
 	padding-top: 120px;
@@ -201,7 +218,7 @@ button:focus{
  	float: none;
 }
 
-.catTitle{
+.catTitle, .exercise-title{
 	margin-bottom: 20px;
 }
 
@@ -210,6 +227,49 @@ button:focus{
 	font-size: 20px;
 	padding-bottom: 15px;
 	border-bottom: 1px solid #0000001a;
+}
+
+.exercise-section .row {
+	margin-bottom: 25px;
+}
+
+.exercise-title h1{
+	color: #333;
+	font-size: 24px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #0000001a;
+} 
+
+.exercise-tab {
+	font-size: 16px;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+	cursor: pointer;
+	padding: 20px;
+}
+
+.exercise-tab:hover, .exercise-tab.active {
+	background: #fd1541;
+	color: white;
+}
+
+.exercise-cat-section .row {
+	margin-bottom: 25px;
+}
+
+.exercise-cat-tab {
+	font-size: 14px;
+	font-weight: bold;
+	color: #444;
+	text-align: center;
+    cursor: pointer;
+    padding: 20px;
+}
+
+.exercise-cat-tab:hover, .exercise-cat-tab.active {
+	background: #fd1541;
+	color: white;
 }
 
 .catTitle h2{
@@ -229,18 +289,31 @@ button:focus{
 }
 
 
+.signup-to-view {
+	display: inline;
+	background: rgba(120, 120, 120, 0.8);
+	font-weight: bold;
+	cursor: pointer;
+}
+
+
 .vid-thumb{
     position: relative;
     /*display: inline-block;*/
 	overflow: hidden;	
 }
 
-.vid-thumb a span{
+.vid-thumb a span, .vid-thumb a i{
     top: 50%;
     position: absolute;
     left: 0;
     right: 0;
     transform: translateY(-50%);	
+}
+
+.vid-thumb a i{
+	top: 36%;
+    font-size: 26px;
 }
 
 .vid-thumb a{

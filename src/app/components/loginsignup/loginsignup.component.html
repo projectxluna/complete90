@@ -39,6 +39,12 @@
                     <input class="form-control" id="Lname" placeholder="Last Name" [(ngModel)]="model.lastname" name="lastname">
                 </div>
                 <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <input class="form-control" id="Baddress" placeholder="Address" [(ngModel)]="model.address" name="address">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <input class="form-control" id="Pcode" placeholder="Postal Code" [(ngModel)]="model.postalcode" name="postalcode">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center email">
                     <!-- <label for="exampleInputEmail1">Email address</label> -->
                     <input type="email" class="form-control" autocomplete="email" aria-describedby="emailHelp" placeholder="Enter email"
                     [(ngModel)]="model.email" name="email" email>
@@ -46,21 +52,29 @@
                 <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="model.password" name="password">
                 </div>
-                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <input class="form-control" id="Baddress" placeholder="Address" [(ngModel)]="model.address" name="address">
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center repass">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password" [(ngModel)]="model.repassword" name="repassword">
                 </div>
-                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <input class="form-control" id="Pcode" placeholder="Postal Code" [(ngModel)]="model.postalcode" name="postalcode">
-                </div>
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                
+                <!-- <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
                     <a *ngIf="!createManagerProfile" class="form-text text-muted" id="" (click)="createManagerProfile = !createManagerProfile">Do you want to create a manager profile?</a>
                     <a *ngIf="createManagerProfile" class="form-text text-muted" id="" (click)="createManagerProfile = !createManagerProfile">Switch to player profile?</a>
-                </div>
+                </div> -->
+
+
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-centerp">
+                    <label for="exampleFormControlSelect1" class="text-dark">Select Plan</label>
+                    <select class="form-control" id="plan" name="planType" [(ngModel)]="planType">
+                      <option value="amateur-trial">Amateur - $15</option>
+                      <option value="pro-trial">Pro - $25</option>
+                    </select>
+                  </div>
+
                 <div *ngIf="createManagerProfile" class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
                     <input name="clubName" class="form-control" placeholder="Enter Club Name" [(ngModel)]="model.clubName">
                 </div>
                 <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
-                    <button type="submit" class="btn btn-primary" id="btn1" data-toggle="modal" data-target="#termsModal">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="btn1" data-toggle="modal" data-target="#termsModal" [disabled]="disabled" >Submit</button>
                     <button class="btn btn-primary" id="btn2" (click)="toggleSignup()">Already have an account</button>
                 </div>
                 <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
@@ -159,7 +173,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary abtn" data-dismiss="modal" (click)="signUp()">I AGREE</button>
+                        <button type="button" class="btn btn-primary abtn" data-dismiss="modal" (click)="setCycle('monthly');selectPlan('player')">I AGREE</button>
                         <button type="button" class="btn btn-primary dbtn" data-dismiss="modal" (click)="toggleSignup()">DECLINE</button>
                     </div>
                 </div>

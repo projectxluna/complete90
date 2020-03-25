@@ -1,0 +1,38 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    
+     <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" (click)="toggle()" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" [routerLink]="['/']" (click)="collapse()">
+      	<img src="assets/complete90logo-alt.png"><a class="logoTxt">THE<b>COMPLETE 90</b>
+      		</a>
+      </a>
+    </div>
+
+
+    <div class="navbar-collapse" [ngClass]="{collapse: collapsed}">
+	    	<ul class="nav navbar-nav navbar-centered">
+	       	<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']" (click)="collapse()">HOME <span class="sr-only">(current)</span></a></li>
+					<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/events']" (click)="collapse()">EVENTS</a></li>
+					<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/sessions']" (click)="collapse()">SESSIONS</a></li>
+					<li *ngIf="!isLoggedIn() || !userProfile.subscription" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/pricing']" (click)="collapse()">PRICING/PLANS</a></li>
+					<li *ngIf="isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/dashboard']" (click)="collapse()">DASHBOARD</a></li>
+					<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/training']" (click)="collapse()">PERS. TRAINING</a></li>
+		    	<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/about']" (click)="collapse()">ABOUT US</a></li>
+				
+					<li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/login_signup']" (click)="collapse()">LOGIN/SIGNUP</a></li>
+					<li *ngIf="isLoggedIn()" class="dropdown navbar-right" dropdown>
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+						<ul class="dropdown-menu">
+							<li><a (click)="logout()">LOGOUT</a></li>
+						</ul>
+					</li>
+	    	</ul> 
+    </div>
+  </div>
+</nav>

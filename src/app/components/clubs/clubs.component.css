@@ -1,0 +1,168 @@
+/*--------------------------TABLE OF CONTENTS-------------------------*/
+/*
+0. GLOBAL CCS
+1. BANNER IMAGE
+2. ABOUT FOUNDER
+3. FAQ SECTION
+4. AFFILIATES SECTION
+5. PLAYER/COACH SECTION
+6. QUOTE SECTION
+
+
+*/ 
+
+/*----------------------------0. GOBAL CSSS--------------------------*/
+
+div{
+	font-family: 'Montserrat';
+}
+
+.inactiveLink{
+   pointer-events: none;
+   cursor: default;
+}
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*----------------------------1. BANNER IMAGE--------------------------*/
+.bannerimage{
+	padding-top: 120px;
+	background-image: url('../../../assets/aboutus-banner.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 250px;
+	width: 100%;
+	color: white;
+}
+
+.text-black{
+	color:black;
+}
+
+/*----------------------------6. QUOTE SECTION---------------------------*/
+.quoteStyle h1{
+	padding-top: 40px;
+	padding-bottom: 40px;
+	font-size: 20px;
+	color: #484848;
+}
+
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+
+
+@media (max-width: 1200px) {
+	.coachPromo .PromoSignbtn a{
+	    font-size: 10px;
+	}
+	
+	.aboutG{
+			font-size: 11px;
+		}
+
+
+}
+
+@media (max-width: 1024px) {
+
+	.aboutNum h2{
+		background-color: #fd1541;
+		border: 1px solid #fd1541;
+		border-radius: 50px;
+		color: white;
+		font-size: 30px;
+		padding-top: 22px;
+		padding-bottom: 22px;
+	}
+
+	.persTrain h1{
+		padding-top: 20px;
+	}
+
+	.coachPromo img{
+		padding-top: 15px;
+		max-width: 100%;
+	}	
+
+	#lg-ad{
+		display: none;
+	}
+
+	#sm-ad{
+		display: block;
+	}
+
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+	.bannerimage{
+		padding-top: 120px;
+		min-height: 250px;
+	}	
+	
+	.impcont h1{
+		font-size: 26px;
+	}	
+
+	.aboutNum h2{
+		background-color: #fd1541;
+		border: 1px solid #fd1541;
+		border-radius: 50px;
+		color: white;
+		font-size: 14px;
+		padding-top: 22px;
+		padding-bottom: 22px;
+	}
+
+	.sponLogo1 img{
+		padding-bottom: 80px;
+	}
+
+
+}
+
+
+
+
+
+
+@media (max-width: 414px) {
+
+	.aboutG {
+	    font-size: 12px;
+	}
+
+	#faqSec{
+		font-size: 12px !important;
+	}
+
+	.bannerimage{
+		padding-top: 90px;
+		min-height: 200px;
+	}	
+
+	.playerPromoText h1 {
+	    padding-top: 90px;
+	}
+
+	.coachPromoText h1 {
+	    padding-top: 90px;
+	}
+
+	.rightDesc img{
+	    padding-top: 40px;
+	}
+
+}

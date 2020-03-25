@@ -7,11 +7,30 @@
     </div>
 </div>
 <!-- HERO IMAGE END-->
-
+<style type="text/css">
+    /*.overlay{
+        opacity: 0.2
+    }*/
+    .overlay {
+      position: absolute; /* Sit on top of the page content */
+      display: block; /* Hidden by default */
+      width: 99%; /* Full width (cover the whole page) */
+      height: 28%; /* Full height (cover the whole page) */
+      opacity: 0.5;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+      z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer; /* Add a pointer on hover */
+    }
+</style>
 <!-- DASHBOARD TILES -->
 <div class="padding">
     <div class="row" *ngIf="!coachProfile">
         <div class="col-xs-12 col-sm-4">
+            <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}"></div>
             <div class="box p-a stat1">
                 <div class="pull-left m-r">
                     <span class="w-48 rounded accent">
@@ -23,8 +42,12 @@
                     <h2 class="m-0">Total time trained</h2>
                 </div>
             </div>
+             <amateur *ngIf="hasSubscription() && !isAuthenticatedToSee() && !adminProfile && !coachProfile"></amateur>
+            
+             <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
         <div class="col-xs-12 col-sm-4">
+            <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}"></div>
             <div class="box p-a stat1">
                 <div class="pull-left m-r">
                     <span class="w-48 rounded  accent2">
@@ -36,8 +59,11 @@
                     <h2 class="m-0">Total exercises viewed</h2>
                 </div>
             </div>
+            <amateur *ngIf="hasSubscription() &&!isAuthenticatedToSee() && !adminProfile && !coachProfile"></amateur>
+             <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
         <div class="col-xs-12 col-sm-4">
+            <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}"></div>
             <div class="box p-a stat1">
                 <div class="pull-left m-r">
                     <span class="w-48 rounded accent3">
@@ -45,23 +71,27 @@
                     </span>
                 </div>
                 <div class="clear">
-                    <h1 class="m-0">{{ stats.overallRating || 'N/A' }}</h1>
+                    <h1 *ngIf="stats.attributes" class="m-0">{{ stats.attributes.overallRating || 'N/A' }}</h1>
+                    <h1 class="m-0">N/A</h1>
                     <h2 class="m-0">Overall Rating</h2>
                 </div>
             </div>
+            <amateur *ngIf="hasSubscription() &&!isAuthenticatedToSee() && !adminProfile && !coachProfile"></amateur>
+            <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-6"><!-- LEFT SIDE -->
             <profile (profileUpdated)="onProfileUpdated($event)"></profile>
-            <player-attributes *ngIf="hasSubscription() && !coachProfile" [attributes]="calculatedAttributes"></player-attributes>
+            <player-attributes *ngIf="hasSubscription() && !coachProfile"></player-attributes>
             <create-assignments *ngIf="hasSubscription() && coachProfile"></create-assignments>
         </div>
         <div class="col-sm-12 col-md-6"><!-- RIGHT SIDE -->
+            <leader-board *ngIf="hasSubscription() && !coachProfile"></leader-board>
             <club *ngIf="hasSubscription()"></club>
-            <team-roaster *ngIf="hasSubscription() && coachProfile"></team-roaster>
-            <leader-board *ngIf="hasSubscription()"></leader-board>
-            <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription()"></subscription>
+            <team-roaster *ngIf="coachProfile"></team-roaster>
+            <amateur *ngIf="hasSubscription() &&!isAuthenticatedToSee() && !adminProfile && !coachProfile"></amateur>
+            <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
     </div>
 
@@ -125,8 +155,19 @@
         </div>
     </div>
 
+    <div class="row py-5"  >
+
+        <div class="col-xs-12 col-sm-4" *ngIf="!hasSubscription()">
+            <div class="alert alert-success text-center" role="alert">
+                {{adminProfile ? 'Admin Account' : '' + coachProfile ? 'Coach Account' : '' + playerProfile ? 'Player Account' : '' }}
+              </div>
+            <a  class="btn btn-primary btn-lg btn-block" [routerLink]="['/proAccount']" *ngIf="playerProfile">Upgrade to Pro</a>
+        </div>
+    </div>
+<br>
     <div class="row mainTiles">
         <div class="col-xs-12 col-md-4">
+            <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}"></div>
             <div class="box p-a">
                 <div class="box-header" (click)="toggleSecurity()">
                     <h3 class="m-0">
@@ -173,9 +214,12 @@
                     </div>
                 </div>
             </div>
+            <amateur *ngIf="hasSubscription() &&!isAuthenticatedToSee() && !adminProfile && !coachProfile"></amateur>
+            <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
 
         <div class="col-xs-12 col-md-4">
+            <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}"></div>
             <div class="box p-a">
                 <div class="box-header" (click)="togglePayment()">
                     <h3 class="m-0">
@@ -226,9 +270,12 @@
     
                 </div>
             </div>
+            <amateur *ngIf="hasSubscription() &&!isAuthenticatedToSee() && !adminProfile && !coachProfile"></amateur>
+            <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
 
         <div class="col-xs-12 col-md-4">
+            <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}"></div>
             <div class="box p-a">
                 <div class="box-header">
                     <h3 class="m-0">
@@ -275,6 +322,8 @@
                     </div>
                 </div>
             </div>
+            <amateur *ngIf="hasSubscription() &&!isAuthenticatedToSee() && !adminProfile && !coachProfile"></amateur>
+            <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
     </div>
 </div>

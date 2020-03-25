@@ -1,5 +1,6 @@
 var User = require('../models/user')
 var Club = require('../models/club')
+const mongoose = require('mongoose');
 
 const isEmptyObj = (obj) => {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
@@ -34,9 +35,9 @@ const exposedClubData = (club) => {
     };
 }
 
-const createClub = (name, ownerId) => {
+const createClub = (name, email, phone, ownerId) => {
     return new Promise((resolve, reject) => {
-        var club = new Club({name: name, owner: ownerId})
+        var club = new Club({name: name, email: email, phoneNumber: phone, owner: mongoose.Types.ObjectId(ownerId)})
         club.save((err, club) => {
             if (err) {
                 return reject(err);
@@ -45,6 +46,29 @@ const createClub = (name, ownerId) => {
         });
     });
 }
+
+const updateClub = (clubId, owner) => {
+    return new Promise((resolve, reject) => {
+        var owners = [];
+        Club.findOne({_id: clubId}, (err, clubs) =>{
+            owners.push(clubs.owner[0]);
+            // clubs.owner.forEach(function(own){
+            //     owners.push(own);
+            // });
+
+            owners.push(owner);
+            Club.findOneAndUpdate({_id: clubId}, {owner: owners}, (err, club) =>{
+                resolve(club);
+            });
+
+
+        });
+
+        
+    });
+}
+
+
 
 const findClub = (ownerId) => {
     return new Promise((resolve, reject) => {
@@ -100,6 +124,7 @@ exports.exposedUserData = exposedUserData;
 exports.exposedClubData = exposedClubData
 exports.findClub = findClub
 exports.createClub = createClub
+exports.updateClub = updateClub
 exports.findUserByEmail = findUserByEmail
 exports.PROFILES = PROFILES;
 exports.PROFILE_TYPE = PROFILE_TYPE;

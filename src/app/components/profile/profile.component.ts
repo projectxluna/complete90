@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
         return;
       }
       this.profile = res.user;
+      console.log("Profile: ", this.profile);
       this.playerProfile = res.user.profiles.find(profile => {
         return profile.type === 'PLAYER';
       });
@@ -35,6 +36,19 @@ export class ProfileComponent implements OnInit {
       });
     });
   }
+  
+
+  isAuthenticatedToSee() {
+    if(this.profile.subscription != null) {
+      if((this.profile.subscription.planId == 'player-monthly-amateur' || this.profile.subscription.planId == 'player-monthly-amateur-trial') && this.profile.subscription.status == 'Active') {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
+
 
   ngOnInit() {
   }

@@ -141,6 +141,30 @@
 </div>
 <!-- SAVED SESSION MODAL END -->
 
+
+ <!-- Modal -->
+ <div class="modal fade" id="custom_sessions_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center" id="savedSessModalTitle">PURCHASE SUBSCRIPTION</h4>
+            </div>
+            <div class="modal-body">
+                Purchase subscription in order to “create your own custom session”.
+            </div>
+
+            <div class="modal-footer">
+                <a [routerLink]="['/pricing']" type="button" class="btn btn-primary purchase-sub">Purchase</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- INSTRUCTION SENTENCE -->
 <div class="container">
     <div class="col-xs-12 text-center createDesc">
@@ -183,48 +207,139 @@
             </div>
         </div>
     </div>
-    <!-- FEATURED DRILLS -->
+
+
+    <!-- WEEKLY FEATURED/ TRAIN LIKE A PRO DRILLS -->
     <div *ngFor="let session of freeSessions" class="col-lg-12 suggVids">
         <div *ngIf="session.content.length > 0" class="container">
             <div class="col-lg-12 catTitle">
-                <h1>{{ session.name }}</h1>
+                <h1>{{ session.name + " - Remaining: " + session.remaining }}</h1>
             </div>
         </div>
 
-        <div *ngIf="session.content.length > 0" class="container cont-hscroll">,
-            <div class="row">
+        <div class="container">
+            <div [hidden]="session.display.length > 0 || hasFilter()" class="row">
                 <!-- TRAINING VIDEO -->
-                <div *ngFor="let content of session.content; let i = index" class="col-lg-4 col-md-4 col-sm-8">
-                    <div *ngIf="!content.free" class="add-btn-cont col-lg-11">
-                        <div class="pull-right">
-                            <button class="add-btn" (click)="addContentToCustomSession(content.id, content)">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                <!-- <i class="fa fa-check" aria-hidden="true"></i> -->
-                            </button>
+                <div *ngFor="let content of (session.content ? session.content.slice(0, 3) : []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
+                    <div>
+                    
+                        <div *ngIf="(content.free && content.alwaysActive === true) || isLoggedIn()" class="add-btn-cont col-lg-11">
+                            <div class="pull-right">
+                                <button class="add-btn" *ngIf="isLoggedIn()" (click)="addContentToCustomSession(content.id, content)">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    <!-- <i class="fa fa-check" aria-hidden="true"></i> -->
+                                </button>
+
+
+                                <button class="add-btn" *ngIf="!isLoggedIn()" data-toggle="modal" data-target="#custom_sessions_modal">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    <!-- <i class="fa fa-check" aria-hidden="true"></i> -->
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="vid-thumb">
-                        <img class="img-responsive" [src]="content.thumbnail">
-                        <!-- PLAY BTN -->
-                        <a (click)="openModalWithComponent(session, i)">
-                            <span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
-                        </a>
-                    </div>
-        
-                    <div class="col-lg-12 videoDes">
-                        <h1>{{ content.name | uppercase }}</h1>
-                        <div class="row">
+                        <div class="vid-thumb">
+                            <img class="img-responsive" [src]="content.thumbnail">
+                            <!-- PLAY BTN -->
+                            <a *ngIf="isLoggedIn() || content.alwaysActive === true" (click)="openModalWithComponent(session, i)">
+                                <span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
+                            </a>
+
+                            <a [routerLink]="['/login_signup']" *ngIf="!isLoggedIn() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <i class="fa fa-lock"></i>
+                                <span>Signup to View</span>  
+                            </a>
+
+                            <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && !hasSubscription() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <i class="fa fa-lock"></i>
+                                <span>Please buy subscription to have full access.</span>  
+                            </a>
+
+
+                            <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && hasSubscription() && (user.subscription.planId=='player-monthly-amateur' || user.subscription.planId=='coach-monthly-amateur') && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <i class="fa fa-lock"></i>
+                                <span>Upgrade your account to pro for full access</span>  
+                            </a>
+
+                        </div>
+
+                        <div class="col-lg-12 videoDes">
+                            <h1>{{ content.name | uppercase }}</h1>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!----------- ROWS FOR SEE ALL BUTTON -------------->
+            <div *ngIf="session.display.length > 0">
+                <div *ngFor="let row of session.display" class="row">
+                    <div *ngFor="let content of row" class="col-lg-4 col-md-4 col-sm-8">
+                        <div *ngIf="(content.free && content.alwaysActive === true) || isLoggedIn()" class="add-btn-cont col-lg-11">
+                            <div class="pull-right">
+                                <button class="add-btn" (click)="addContentToCustomSession(content.id, content)">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="vid-thumb">
+                            <img class="img-responsive" [src]="content.thumbnail">
+                            <!-- PLAY BTN -->
+                            <a *ngIf="isLoggedIn() || content.alwaysActive === true" (click)="openModalWithComponent(session, i)">
+                                <span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
+                            </a>
+
+                            <a [routerLink]="['/login_signup']" *ngIf="!isLoggedIn() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <span>Signup to View</span>  
+                            </a>
+
+                            <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && !hasSubscription() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <span>Please buy subscription to have full access.</span>  
+                            </a>
+
+
+                            <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && hasSubscription() && (user.subscription.planId=='player-monthly-amateur' || user.subscription.planId=='coach-monthly-amateur') && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <span>Upgrade your account to pro for full access</span>  
+                            </a>
+                        </div>
+
+                        <div class="col-lg-12 videoDes">
+                            <h1>{{ content.name | uppercase }}</h1>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <!----------- ROWS FOR SEE ALL BUTTON END---------->
+        </div>
+        <div class="row">
+            <div class="col-lg-12 catTitle">
+                <a *ngIf="session.chunks.length > 0" (click)="showMore(session)"><h2>SHOW MORE</h2></a>
+                <a style="padding-left: 15px;" *ngIf="session.display.length" (click)="showLess(session)"><h2>SHOW LESS</h2></a>
+            </div>
         </div>
     </div>
+    
+
+    <div class="col-lg-12 exercise-section" *ngIf="hasSubscription() || adminProfile || coachProfile">
+        <div class="exercise-title">
+            <h1>Exercises</h1>
+        </div>
+        <div class="row exercises-main-filter">
+            <div class="col-md-4 exercise-tab" [ngClass]="{'active': selectedExercisesCategories.exerciseName === exercise.name}" *ngFor="let exercise of exercisesArray.exercises" (click)="selectExercise(exercise)">{{exercise.name}}</div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 exercise-cat-section">
+        <div class="row">
+            <div class="col-md-3 exercise-cat-tab" *ngFor="let category of selectedExercisesCategories.exercise.categories" (click)="selectExerciseCat(category)" [ngClass]="{'active': selectedExercisesCategories.category === category.name}">{{category.name}}</div>
+        </div>
+    </div>
+<!-- usm80.siteground.biz nly56678 18765 -->
+    <!-- 5fF)r)IAzs_n -->
+    <!-- https://www.a2hosting.com/kb/installable-applications/manual-installations/installing-node-js-on-managed-hosting-accounts -->
     <!-- SUGGESTED DRILLS -->
-    <div *ngFor="let session of getFilteredSessions()" class="col-lg-12 suggVids">
+    <div *ngFor="let session of selectedExerciseCat" class="col-lg-12 suggVids">
         <div *ngIf="session.content.length > 0" class="container box">
             <div class="col-lg-12 catTitle">
-                <h1>{{ session.name }}</h1>
+                <h1>{{ session.name + " - Remaining: " + session.remaining  }}</h1>
                 <!-- <a *ngIf="session.chunks.length > 0" (click)="showMore(session)"><h2>SHOW MORE</h2></a> -->
             </div>
         </div>

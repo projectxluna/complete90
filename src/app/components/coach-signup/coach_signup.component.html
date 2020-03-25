@@ -1,0 +1,134 @@
+<div class="loginbg">
+    <!-- LOGIN FORM -->
+    <div class="container" >
+        <!-- SIGN UP FORM -->
+        <div *ngIf="signup" class="container signup">
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+            <form class="col-lg-12">
+                <div class="loginTitle col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <span>Signup</span>
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <input class="form-control" id="Fname" placeholder="First Name" [(ngModel)]="model.firstname" name="firstname">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <input class="form-control" id="Lname" placeholder="Last Name" [(ngModel)]="model.lastname" name="lastname">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <!-- <label for="exampleInputEmail1">Email address</label> -->
+                    <input type="email" class="form-control" autocomplete="email" aria-describedby="emailHelp" placeholder="Enter email"
+                    [(ngModel)]="model.email" name="email" email>
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="model.password" name="password">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <input class="form-control" id="Baddress" placeholder="Address" [(ngModel)]="model.address" name="address">
+                </div>
+                <div class="form-group col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <input class="form-control" id="Pcode" placeholder="Postal Code" [(ngModel)]="model.postalcode" name="postalcode">
+                </div>
+
+                <div class="formbts col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <button type="submit" class="btn btn-primary" id="btn1" data-toggle="modal" data-target="#termsModal">Submit</button>
+                </div>
+        
+            </form>
+        </div>
+        <!-- SINGUP FORM END -->
+    </div>
+    <!-- LOGIN FORM END -->
+
+    <!-- SAVED SESSION MODAl -->
+    <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="termsModalTitle">TERMS OF USE</h4>
+                </div>
+                <div class="modal-body ter">
+                    <i>Last Update: December 4, 2018</i><br>
+                    <br>
+                    IMPORTANT! BY ACCESSING, BROWSING AND/OR USING THIS WEBSITE OR ANY PART OF IT (HEREINAFTER THE “SITE”), YOU ACKNOWLEDGE THAT YOU HAVE READ AND UNDERSTAND THESE TERMS OF USE (“AGREEMENT”), AND THAT YOU AGREE TO ACCEPT AND BE BOUND BY THE AGREEMENT. CAREFULLY READ ALL OF THE FOLLOWING TERMS OF USE BEFORE PROCEEDING. ACCESSING THIS SITE BY CLICKING THE “I Accept” BUTTON, BELOW, IS THE EQUIVALENT OF YOUR SIGNATURE AND INDICATES YOUR ACCEPTANCE OF THESE TERMS OF USE AND THAT YOU INTEND TO BE LEGALLY BOUND BY THEM. IF YOU DO NOT AGREE WITH THESE TERMS AND CONDITIONS, PLEASE CLICK ON THE “Exit” BUTTON BELOW.<br>
+                    <br>
+                    <b>The Complete 90</b> (collectively, the “Provider”, “We”, “Our” and “Us”) is committed to improving soccer skills through the Site by providing an online service (the “Service”) by which You may access individual and group personal training, goalkeeper training, soccer camps, and an online library of training session videos to improve your soccer skills, which for the most part requires You to purchase a membership subscription.<br>
+                    <br>
+                    As used herein, the term “You” refers to you, the user and/or subscriber of the Site, if you are 18 years of age or older, or, as applicable, your child on whose behalf you agree to these Terms of Use. The effective date of this Agreement is when You accept this Agreement in accordance with the procedure set forth above.<br>
+                    <br>
+                    <b>1. &nbsp;&nbsp;&nbsp;Eligibility.</b>&nbsp;&nbsp;&nbsp; The content and information on the Site and available through the Service is provided solely for informational and educational purposes only and is intended for individuals of all ages. However, any access to the membership area of the Service by anyone under eighteen (18) years of age, without the permission of his or her parent or legal guardian, is unlicensed and unauthorized and should not be undertaken. IF YOU ARE UNDER THE AGE OF 18 YOU MUST NOT USE THE SERVICE ON THIS SITE WITHOUT PERMISSION OF A PARENT OR GUARDIAN.<br>
+                    <br>
+                    <b>2. &nbsp;&nbsp;&nbsp;Membership Subscription.</b>&nbsp;&nbsp;&nbsp; While browsing the Site does not require a membership subscription, accessing most of the features of the Site and available through the Service require You to sign up for a subscription membership. We reserve the right to terminate your membership without prior notice if, in our sole discretion, You engage in any conduct through the Site or the Service that is unlawful, harassing, obscene, lewd, defamatory, adversely affects the computer systems through which the Site and the Services are provided, or otherwise contrary to sportsmanlike principles, the vision of the Provider, or the guidelines on user conduct specified below. In consideration of your use of the Site, You agree to (a) provide accurate, current and complete information about You as may be prompted by any subscription registration forms on the Site (“Subscription Data”); (b) maintain the security of your password and identification; (c) maintain and promptly update the Subscription Data, and any other information You provide to us, to keep it accurate, current and complete; and (d) be fully responsible for all use of your account and for any actions that take place using your account. You agree not to share your username and password with any other person, as each membership subscription entitles only one person (and his or her parent, as applicable) to access the Site and the Service.<br>
+                    <br>
+                    <b>3. &nbsp;&nbsp;&nbsp;Warranty of Sufficient Physical Fitness.</b>&nbsp;&nbsp;&nbsp; You represent and warrant that You (or your child, as applicable) are in sufficiently good physical condition to engage in the strenuous physical activity involved with playing competitive soccer, or to engage in any of the activities promoted by the Site or the Service. All of the information provided on the Site is for informational and educational purposes only. You further represent and warrant that You (or your child, as applicable) have consulted with a qualified physician who has determined that You (or your child, as applicable) are in sufficient form to engage in the strenuous physical activity involved with playing competitive soccer. In no event shall the Provider or any individual or company involved with the Provider be liable for special, indirect, incidental or consequential damages of any nature, including but not limited to personal injury arising from the Service. IF YOU (OR YOUR CHILD, AS APPLICABLE) ARE NOT IN SUFFICIENT PHYSICAL CONDITION TO ENGAGE IN THE STRENUOUS PHYSICAL ACTIVITY INVOLVED WITH PLAYING COMPETITIVE SOCCER OR IN UNDERTAKING THE ACTIVITIES PROMOTED BY THE SITE OR THE SERVICE, YOU (OR YOUR CHILD, AS APPLICABLE) SHOULD NOT ENGAGE IN THE ACTIVITIES DEMONSTRATED ON THE SITE.<br>
+                    <br>
+                    <b>4. &nbsp;&nbsp;&nbsp;Proprietary Rights in Site Content; Limited License.</b>&nbsp;&nbsp;&nbsp; All content on the Site and available through the Service, including designs, text, graphics, pictures, video, information, applications, software, music, sound and other files, and their selection and arrangement (hereinafter called the “Site Content”), are the proprietary property of the Provider, its users or its licensors with all rights reserved. Under no circumstances will You acquire any ownership rights or other interest in any Site Content by or through your use of this Site. Except as stated herein, no Site Content may be modified, copied, distributed, framed, reproduced, republished, downloaded, scraped, displayed, posted, transmitted, or sold in any form or by any means, in whole or in part, without the Provider’s prior written permission. You may not upload or republish Site Content on any Internet, Intranet or Extranet site or incorporate the information in any other database or compilation, and any other use of the Site Content is strictly prohibited. Such license is subject to these Terms of Use and does not permit use of any data mining, robots, scraping or similar data gathering or extraction methods. Any use of the Site or the Site Content other than as specifically authorized herein, without the prior written permission of Provider, is strictly prohibited and will terminate the license granted herein. Such unauthorized use may also violate applicable laws including copyright and trademark laws and applicable communications regulations and statutes. Unless explicitly stated herein, nothing in these Terms of Use shall be construed as conferring any license to intellectual property rights, whether by estoppel, implication or otherwise. This license is revocable at any time without notice and with or without cause.<br>
+                    <br>
+                    <b>5. &nbsp;&nbsp;&nbsp;Trademarks, etc.</b>&nbsp;&nbsp;&nbsp; The trademarks, service marks, logos and graphics (collectively the “Trademarks”) used or appearing on this Site are the registered and unregistered trademarks of Provider, or third parties. No license or right is granted by implication, or any other means to use any of the Trademarks appearing on this Site. Any unauthorized use of any Site Content on this Site may violate copyright laws, trademark laws, the laws of privacy and publicity, and communications regulations and statutes.<br>
+                    <br>
+                    <b>6. &nbsp;&nbsp;&nbsp;User Conduct & Restrictions On Use.</b>&nbsp;&nbsp;&nbsp; You understand that the Service and the Site are available for your personal, non-commercial use only. You agree that You will not:<br>
+                    <br>
+                    (i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; distribute the Site Content for any purpose including, without limitation, compiling an internal database, redistributing or reproduction of the Site Content by the press or media or through any commercial network, cable or satellite system; or<br>
+                    <br>
+                    (ii)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create derivative works of, reverse engineer, decompile, disassemble, adapt, translate, transmit, arrange, modify, copy, bundle, sell, sub-license, export, merge, transfer, adapt, loan, rent, lease, assign, share, outsource, host, publish, make available to any person or otherwise use, either directly or indirectly, the Site Content in whole or in part, in any form or by any means whatsoever, be they physical, electronic or otherwise. You shall not permit, allow or do anything that would infringe or otherwise prejudice the proprietary rights of Provider, or third parties or allow any other party to access the Site Content. The restrictions set out in this Agreement shall not apply to the limited extent the restrictions are prohibited by applicable law.<br>
+                    <br>
+                    (iii)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; use any device, software or technique to interfere with or attempt to interfere with the proper working of this Site.<br>
+                    <br>
+                    (iv)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; post or send to the Site any unlawful, fraudulent, harassing, libellous or obscene information of any kind.<br>
+                    <br>
+                    (v)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; post or send to the Site any information that contains a virus, bug or other harmful item.<br>
+                    <br>
+                    (vi)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; use any device or technology to provide repeated automated attempts to access password-protected portions of this Site.<br>
+                    <br>
+                    <b>7. &nbsp;&nbsp;&nbsp;Password-Protected Areas.</b>&nbsp;&nbsp;&nbsp; If You are allowed access to password-protected membership areas of the Site, You agree to keep your password confidential, to notify Provider in writing within 24 hours if your password is compromised. Unauthorized individuals attempting to access these areas of the Site may be subject to prosecution.<br>
+                    <br>
+                    <b>8. &nbsp;&nbsp;&nbsp;Computer Viruses.</b>&nbsp;&nbsp;&nbsp; While every effort is made to ensure that all Site Content on this Site does not contain computer viruses, You should take reasonable and appropriate precautions to scan for computer viruses and should ensure that You have a complete and current backup of the applicable items of information contained on your computer system. You should pay specific attention to some of the newer viruses that have been written to automatically execute when an infected word processing document is loaded into certain word processing programs.<br>
+                    <br>
+                    <b>9. &nbsp;&nbsp;&nbsp;Site Maintenance.</b>&nbsp;&nbsp;&nbsp; The Site and the Service may be temporarily unavailable from time to time for maintenance or other reasons. We assume no responsibility for any error, omission, interruption, deletion, defect, delay in operation or transmission, communications line failure, theft or destruction or unauthorized access to, or alteration of, your communications. The Provider is not responsible for any technical malfunction or other problems of any telephone network or service, computer systems, servers or providers, computer or mobile phone equipment, software, failure of email or players on account of technical problems or traffic congestion on the Internet or at the Site or combination thereof, including injury or damage to your or to any other person’s computer, mobile phone, or other hardware or software, related to or resulting from using or downloading materials in connection with the web and/or in connection with the Service.<br>
+                    <br>
+                    <b>10. &nbsp;&nbsp;&nbsp;Limitations on Liability and Disclaimers.</b><br>
+                    (i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; THERE IS NO GUARANTEE THAT PERSONAL INFORMATION ON THIS SITE OR ON THE INTERNET WILL BE MAINTAINED CONFIDENTIAL AND SECURE. THE USE OF THIS SITE AND THE SITE CONTENT IS AT YOUR OWN RISK AND PROVIDER ASSUMES NO LIABILITY OR RESPONSIBILITY PERTAINING TO THE SITE CONTENT, YOUR USE OF THE SITE OR THE RECEIPT, STORAGE, TRANSMISSION OR OTHER USE OF YOUR PERSONAL INFORMATION.<br>
+                    <br>
+                    (ii)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ALTHOUGH THIS SITE CONTAINS INFORMATION OBTAINED FROM OR BASED UPON SOURCES BELIEVED TO BE RELIABLE AND HAS BEEN PREPARED IN GOOD FAITH AND WITH ALL REASONABLE CARE, THIS SITE AND ALL SITE CONTENT, PRODUCTS, SERVICES AND SOFTWARE ON THIS SITE OR MADE AVAILABLE THROUGH THIS SITE ARE PROVIDED “AS IS” WITHOUT ANY REPRESENTATIONS, WARRANTIES, GUARANTEES OR CONDITIONS, OF ANY KIND, WHETHER EXPRESS OR IMPLIED, STATUTORY OR OTHERWISE, INCLUDING BUT NOT LIMITED TO, WARRANTIES AS TO UNINTERRUPTED OR ERROR FREE OPERATION, AVAILABILITY, ACCURACY, COMPLETENESS, CURRENTNESS, RELIABILITY, TIMELINESS, LEGALITY, SUITABILITY, PRIVACY, SECURITY, MERCHANTABILITY, QUALITY, TITLE, NON-INFRINGEMENT OR FITNESS FOR A PARTICULAR PURPOSE, OR THOSE ARISING OUT OF A COURSE OF DEALING OR USAGE OF TRADE.<br>
+                    <br>
+                    (iii)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IN NO EVENT WILL PROVIDER, ITS AFFILIATES, AGENTS, LICENSORS, SUPPLIERS, OR THEIR RESPECTIVE DIRECTORS, OFFICERS OR EMPLOYEES BE LIABLE TO YOU FOR ANY SPECIAL, INDIRECT, INCIDENTAL, PUNITIVE, EXEMPLARY, AGGRAVATED, ECONOMIC OR CONSEQUENTIAL DAMAGES, HOWSOEVER CAUSED, RESULTING FROM YOUR USE OF OR RELIANCE ON THIS SITE, OR ANY OTHER HYPERLINKED WEBSITE, INCLUDING BUT NOT LIMITED TO: DAMAGES FOR LOSS OF USE, LOST PROFITS OR LOST SAVINGS, EVEN IF PROVIDER OR ANY OF ITS LAWFUL AGENTS OR EMPLOYEES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR CLAIM. IN NO EVENT WILL WE BE LIABLE FOR ANY ERRORS IN PROCESSING OF YOUR CREDIT CARD INFORMATION UNDERTAKEN BY ANY THIRD- PARTY PROVIDER WITH WHOM WE CONTRACT TO PROVIDE SUCH SERVICES.<br>
+                    <br>
+                    (iv)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IN NO EVENT WILL PROVIDER, ITS AFFILIATES, AGENTS, LICENSORS, SUPPLIERS, OR THEIR RESPECTIVE DIRECTORS, OFFICERS OR EMPLOYEES, BE LIABLE FOR DAMAGES OR LOSSES RESULTING FROM: VIRUSES, DATA CORRUPTION, FAILED MESSAGES, TRANSMISSION ERRORS OR PROBLEMS; TELECOMMUNICATIONS SERVICE PROVIDERS; LINKS TO THIRD-PARTY WEBSITES; THE INTERNET BACKBONE; PERSONAL INJURY; THIRD- PARTY CONTENT, PRODUCTS OR SERVICES; DAMAGES OR LOSSES CAUSED BY YOU, OR YOUR RESPECTIVE EMPLOYEES, AGENTS OR SUBCONTRACTORS; LOSS OF USE OR LACK OF AVAILABILITY OF FACILITIES INCLUDING COMPUTER RESOURCES, ROUTERS AND STORED DATA; THE USE OR INABILITY TO USE THIS SITE OR THE SITE CONTENT; ANY OTHER WEBSITE ACCESSED TO OR FROM THIS SITE; OR EVENTS BEYOND THE REASONABLE CONTROL OF PROVIDER, EVEN IF PROVIDER OR ANY OF ITS LAWFUL AGENTS, OR EMPLOYEES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR CLAIM.<br>
+                    <br>
+                    (v)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; THE SITE CONTENT MAY BE CHANGED WITHOUT NOTICE TO YOU. PROVIDER IS NOT RESPONSIBLE FOR ANY SITE CONTENT THAT YOU MAY FIND UNDESIRABLE OR OBJECTIONABLE. PROVIDER DISCLAIMS ANY LIABILITY FOR UNAUTHORIZED USE OR REPRODUCTION OF ANY PORTION OF THE SITE.<br>
+                    <br>
+                    <b>11. &nbsp;&nbsp;&nbsp;Third Party Websites and Content.</b>&nbsp;&nbsp;&nbsp; The Site may provide links to other websites or resources. Because we have no control over such sites and resources, You acknowledge and agree that we are not responsible for the availability of such external sites or resources, and do not endorse and are not responsible or liable for any content, advertising, products, or other materials on or available from such sites or resources. Other websites may provide links to the Site with or without our authorization. We have no control over sites that provide links to the Site, and You acknowledge and agree that we do not necessarily endorse such sites and are not responsible for any links from those sites to the Site or for any content, advertising, products, or other materials available on such other sites. You further acknowledge and agree that we shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or inability to use (i) any sites or resources that we provide links to or that provide links to the Site, or (ii) any content, goods, or services available on or through any such sites or resources. We shall have the right, at any time and in our sole discretion, to block links through technological or other means, without prior notice.<br>
+                    <br>
+                    <b>12. &nbsp;&nbsp;&nbsp;Your Privacy.</b>&nbsp;&nbsp;&nbsp; Your privacy is important to us, and we take certain steps to ensure your personally identifiable information is protected in compliance with applicable law. You hereby agree and accept the terms of our Privacy Policy, as amended from time to time, which can be found at <a href="https://www.thecomplete90.com/privacypolicy" target="_blank">https://www.thecomplete90.com/privacypolicy.</a><br>
+                    <br>
+                    <b>13. Termination.</b><br>
+                    (i) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This Agreement is effective until terminated by Provider, with or without cause, in Provider’s sole and unfettered discretion, subject to the terms and conditions contained in any applicable agreements between You and Provider. Provider may terminate this Agreement without notice to You if You fail to comply with any of its terms. Any such termination by Provider shall be in addition to and without prejudice to any other rights and remedies that may be available to Provider, including an injunction and other equitable remedies.<br>
+                    <br>
+                    (ii) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The disclaimers, limitations on liability, ownership, termination, interpretation, Your warranty and the indemnity provisions of this Agreement shall survive the termination or expiry of this Agreement.<br>
+                    <br>
+                    <b>14. &nbsp;&nbsp;&nbsp;Indemnity.</b>&nbsp;&nbsp;&nbsp; You agree at all times to indemnify, defend and hold harmless Provider, its agents, suppliers, affiliates and their respective directors, officers and employees against all actions, proceedings, costs, claims, damages, demands, liabilities and expenses whatsoever (including legal and other fees and disbursements) sustained, incurred or paid by Provider directly or indirectly in respect of:<br>
+                    <br>
+                    (a) any information or other content You provide on or through this Site or which is sent to Provider by e-mail or other correspondence; or<br>
+                    <br>
+                    (b) Your use or misuse of the Site Content or this Site, including without limitation infringement claims.<br>
+                    <br>
+                    <b>15. &nbsp;&nbsp;&nbsp;Governing Law.</b>&nbsp;&nbsp;&nbsp; Provider, this Site and the Site Content (excluding linked websites or its content) are physically located within the Province of Ontario, Canada. This Agreement will be governed by the laws of the Province of Ontario and shall be treated in all respects as an Ontario contract, without reference to the principles of conflicts of law.<br>
+                    <br>
+                    <b>16. &nbsp;&nbsp;&nbsp;Interpretation.</b>&nbsp;&nbsp;&nbsp; The division of this Agreement into sections and the insertion of headings are for convenience of reference only and shall not affect the construction or interpretation of this Agreement. In this Agreement, words importing the singular number include the plural and vice versa, words importing gender include all genders; and words importing persons include individuals, sole proprietors, partnerships, corporations, trusts and unincorporated associations.<br>
+                    <br>
+                    <b>17. &nbsp;&nbsp;&nbsp;No Waiver.</b>&nbsp;&nbsp;&nbsp; The failure of Provider to exercise or enforce any right or provision of these Terms of Use shall not constitute a waiver of such right or provision in that or any other instance.<br>
+                    <br>
+                    <b>18. &nbsp;&nbsp;&nbsp;Severability.</b>&nbsp;&nbsp;&nbsp; Any provision of this Agreement which is prohibited or unenforceable in any jurisdiction shall, as to that jurisdiction, be ineffective to the extent of such prohibition or unenforceability and shall otherwise be enforced to the maximum extent permitted by law, all without affecting the remaining provisions of this Agreement or affecting the validity or enforceability of such provision in any other jurisdiction.<br>
+                    <br>
+                    <b>19. &nbsp;&nbsp;&nbsp;Enurement.</b>&nbsp;&nbsp;&nbsp; This Agreement shall inure to the benefit of and be binding upon each of Us and our respective successors and permitted assigns. You acknowledge having read this Agreement before accepting it, having the authority to accept this Agreement and having received a copy of this Agreement.
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary abtn" data-dismiss="modal" (click)="signUp()">I AGREE</button>
+                        <button type="button" class="btn btn-primary dbtn" data-dismiss="modal" (click)="toggleSignup()">DECLINE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SAVED SESSION MODAL END -->
+</div>

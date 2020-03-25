@@ -51,16 +51,6 @@ export class DataService {
       });
   }
 
-  removePlayerFromClub(userId): Observable<any> {
-    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.post('/api/club/cancel-request', {userId}, options)
-      .map((response: Response) => {
-        return response.json();
-      });
-  }
-
   createAssignment(payload): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
@@ -101,6 +91,18 @@ export class DataService {
       });
   }
 
+
+  getClubs(): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/getClubs', {}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+
   createTeam(teamName): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
@@ -110,6 +112,9 @@ export class DataService {
         return response.json();
       });
   }
+
+
+
 
   updateTeam(team): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
@@ -283,10 +288,10 @@ export class DataService {
         return this.cachedSessions;
       });
   }
-  getLeaderBoard(filter): Observable<any> {
+  getLeaderBoard(timestamp, club): Observable<any> {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
-    let options = new RequestOptions({ headers: headers, params: filter});
+    let options = new RequestOptions({ headers: headers, params: {timestamp, club}});
 
     return this.http.get('/api/session/leaderboard', options)
       .map((response: Response) => {
@@ -426,11 +431,11 @@ export class DataService {
       });
   }
 
-  beginSubscription(payload, planId): Observable<any> {
+  beginSubscription(payload, planId, user): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
     // get users from api
-    return this.http.post('api/braintree/subsribe', { paymentPayload: payload, planId: planId }, options)
+    return this.http.post('api/braintree/subsribe', { paymentPayload: payload, planId: planId, user: user }, options)
       .map((response: Response) => {
         if (response.json() && response.json().success) {
           return response.json();

@@ -11,7 +11,6 @@ import { ConfirmComponent } from '../modals/confirm/confirm.component';
 export class TeamRoasterComponent implements OnInit {
 
   teams: any[];
-  players: number;
   modalRef: BsModalRef;
   model = {
     teamName: '',
@@ -60,12 +59,11 @@ export class TeamRoasterComponent implements OnInit {
 
   getUsersWithoutTeam() {
     this.dataService.getUsersWithoutTeam().subscribe(res => {
+      console.log("Team: ", res);
       if (!res || !res.success) {
         return;
       }
       this.usersWithoutTeam = res.users;
-      this.players = 0;
-      this.players = this.usersWithoutTeam.length;
     });
   }
 
@@ -103,10 +101,9 @@ export class TeamRoasterComponent implements OnInit {
   }
 
   deselectUser() {
-    // if (this.selectedUser) {
-    //   this.selectedUser.active = false;
-    // }
-    this.selectedUser = null;
+    if (this.selectedUser) {
+      this.selectedUser.active = false;
+    }
   }
 
   selectTeam(team) {

@@ -41,6 +41,14 @@ form, span{
     text-align: center;
 }
 
+select {
+	color: black;
+}
+
+.planGroup {
+	display: none;
+}
+
 /*----------------------------1. BACKGROUND--------------------------*/
 .loginbg{
 	background-image: url('../../../assets/login-bg.jpg');
@@ -57,7 +65,7 @@ form, span{
 
 /*----------------------------2. LOGIN DIV--------------------------*/
 .login, .signup{
-	padding-top: 290px;
+	padding-top: 150px;
 	padding-bottom: 290px;
 	height: 100vh;
 }
@@ -96,6 +104,14 @@ form, span{
 	border: 1px solid #fd1541;
 	/*border-radius: 0px;*/
 	border:none;	
+}
+
+.email {
+	margin-top: 40px;
+}
+
+.repass {
+	margin-bottom: 40px;
 }
 
 

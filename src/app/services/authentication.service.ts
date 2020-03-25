@@ -43,6 +43,32 @@ export class AuthenticationService {
       });
   }
 
+  createClub(profile): Observable<any> {
+    return this.http.post('/api/createClubs', profile)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  
+
+
+  clubSignup(payload): Observable<any> {
+    return this.http.post('/api/clubSignup', payload)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+
+  getSignupPromo(payload): Observable<any> {
+    return this.http.post('/api/getSignupPromo', payload)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+
   contactus(payload): Observable<any> {
     return this.http.post('/api/contactus', payload)
       .map((response: Response) => {

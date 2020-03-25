@@ -18,16 +18,40 @@ export class LoginSignupComponent implements OnInit {
     createManagerProfile = false;
     email = new FormControl('', [Validators.required, Validators.email]);
     previousRoute: string;
+
+
+    isYearly = false;
+    playerPrice;
+    coachPrice;
+    plans = {};
+    isCoach = false;
+    planType = 'pro-trial';
+    isTrial = '';
+    disabled = true;
+
     constructor(
         private dataService: DataService, 
         private router: Router,
         private authenticationService: AuthenticationService,
-        private routingState: RoutingState) { }
+        private routingState: RoutingState) { 
+            this.dataService.getClient().subscribe((res) => {
+                if (res) {
+                    this.processPlans(res.plans);
+                    this.setCycle('monthly');
+                    console.log(this.plans);
+                    this.disabled = false;
+                }
+            });
+        }
 
     ngOnInit() {
         // reset login status
         //this.authenticationService.logout();
         this.previousRoute = this.routingState.getPreviousUrl();
+        if(this.previousRoute == '/sessions') {
+            this.signup = !this.signup;
+        }
+
     }
 
     toggleSignup() {
@@ -61,61 +85,68 @@ export class LoginSignupComponent implements OnInit {
     }
 
     signUp() {
+        console.log(this.model);
         if (!this.model.firstname || !this.model.lastname || 
-            !this.model.email || !this.model.password || !this.model.address || !this.model.postalcode ) {
+            !this.model.email || !this.model.password || !this.model.repassword || !this.model.address || !this.model.postalcode ) {
                 this.error = 'Make sure all required fields are completed!';
-            return;
+            return false;
         }
         if (!this.validateEmail(this.model.email)) {
             this.error = 'Please enter a valid email';
-            return;
+            return false;
         }
+
+        if (this.model.password != this.model.repassword) {
+            this.error = 'Passwords don\'t match. Please correct!';
+            return false;
+        }
+
         if (!this.validateBillingInfo(this.model.address, this.model.postalcode)){
             this.error = "Please enter a valid postal code and address!";
-            return 
+            return false;
         }
         if (this.createManagerProfile && !this.model.clubName) {
             this.error = 'Club name is required to create a manager profile';
-            return;
+            return false;
         }
-        this.loading = true;
+        // this.loading = true;
 
-        let payload = {
-            name: this.model.firstname + ' ' + this.model.lastname,
-            address: this.model.address,
-            postalcode: this.model.postalcode,
-            email: this.model.email,
-            password: this.model.password,
-            isManager: this.createManagerProfile,
-            clubName: this.model.clubName
-        };
-        this.authenticationService.signup(payload)
-            .subscribe(result => {
-                if (result && result.success == true) {
-                    /**
-                     * we should actually send them to a temp page
-                     * that will ask them to confirm their email or 
-                     * some other user validation step. then shortly
-                     * after send them to the home page
-                     */
-                    this.signup = false;
-                    this.loading = false;
-                    this.error = '';
-                } else if (result && result.success !== true) {
-                    switch(result.code) {
-                        case 11000:
-                            this.error = 'Your email is already in use. Please click forgot password or use a different email';
-                            break;
-                        default:
-                            this.error = result.message
-                            break;
-                    }
-                    this.loading = false;
-                } else {
-                    this.error = 'Please try again. something went wrong';
-                    this.loading = false;
-                }
-            });
+        // let payload = {
+        //     name: this.model.firstname + ' ' + this.model.lastname,
+        //     address: this.model.address,
+        //     postalcode: this.model.postalcode,
+        //     email: this.model.email,
+        //     password: this.model.password,
+        //     isManager: this.createManagerProfile,
+        //     clubName: this.model.clubName
+        // };
+        // this.authenticationService.signup(payload)
+        //     .subscribe(result => {
+        //         if (result && result.success == true) {
+        //             /**
+        //              * we should actually send them to a temp page
+        //              * that will ask them to confirm their email or 
+        //              * some other user validation step. then shortly
+        //              * after send them to the home page
+        //              */
+        //             this.signup = false;
+        //             this.loading = false;
+        //             this.error = '';
+        //         } else if (result && result.success !== true) {
+        //             switch(result.code) {
+        //                 case 11000:
+        //                     this.error = 'Your email is already in use. Please click forgot password or use a different email';
+        //                     break;
+        //                 default:
+        //                     this.error = result.message
+        //                     break;
+        //             }
+        //             this.loading = false;
+        //         } else {
+        //             this.error = 'Please try again. something went wrong';
+        //             this.loading = false;
+        //         }
+        //     });
     }
 
     login() {
@@ -146,4 +177,63 @@ export class LoginSignupComponent implements OnInit {
     getErrorMessage() {
         return this.email.hasError('required') ? 'You must enter a value' : (this.email.hasError('email') ? 'Not a valid email' : '');
     }
+
+
+
+    setCycle(cycle) {
+        this.coachPrice = this.plans['coach-'+cycle].price;
+        this.playerPrice = this.plans['player-'+cycle].price;
+        
+        this.isYearly = cycle === 'yearly';
+    }
+      
+    
+    processPlans(plans) {
+        plans.forEach(f => {
+            this.plans[f.id] = f;
+        });
+        this.setCycle('monthly');
+    }
+
+    setTrial() {
+        this.isTrial = '-trial';
+    }
+
+    onChange(t) {
+        console.log(this.planType);
+    }
+
+    selectPlan(type) {
+
+        if (this.signUp() == false ) {
+            return;
+        }
+    
+        let id = '';
+
+        if (type && type === 'player' && this.isYearly) {
+            id = 'player-yearly'
+        } else if (type && type === 'coach' && this.isYearly) {
+            id = 'coach-yearly';
+        } else if (type && type === 'player' && !this.isYearly) {
+            id = 'player-monthly-' + this.planType + this.isTrial;
+        } else if (type && type === 'coach' && !this.isYearly) {
+            id = 'coach-monthly-' + this.planType + this.isTrial;
+        }
+
+        let payload = {
+            id: id,
+            name: this.model.firstname + ' ' + this.model.lastname,
+            address: this.model.address,
+            postalcode: this.model.postalcode,
+            email: this.model.email,
+            password: this.model.password,
+            isManager: this.createManagerProfile,
+            clubName: this.model.clubName
+        };
+        console.log("Pay now");
+        this.router.navigate(['/paynow'], { queryParams: payload});
+    }
+
+
 }

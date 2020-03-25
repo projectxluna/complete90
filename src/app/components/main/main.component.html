@@ -13,70 +13,88 @@
 <!-- HERO IMAGE END-->
 
 
-<!-- DESCRIPTION SECTION -->
-	<div class="container descTitle">
-		<h1>THE<b>COMPLETE 90</b></h1>
-	</div>
-
-
-
-	<div class="container">
-		<div class="col-lg-6 col-md-6 col-sm-6 descpic">
-			<img src="assets/hero-2.png">
+<!-- POST CARD -->
+<div class="container-fluid post-card">
+	<div class="row steps-row">
+		<div class="col-md-2">
+			<h1 class="post-card-title"><span>How</span> it works</h1>
 		</div>
+		<div class="col-md-10">
+			<div class="row">
+				<div class="col-md-3 step">
+					<span class="step-number">STEP 1</span>
+					<i class="fa fa-user" aria-hidden="true"></i>
+					<span class="step-des">
+						Personalize Your Profile
+					</span>
+				</div>
 
-		<div class="col-lg-5 col-md-5 descpara">
-			<p>
-			<!-- <b>THE COMPLETE 90</b> will take the time to significantly improve a players technique and skill set in an individual or small group environment, that is most beneficial for their development to play at the next level as a soccer player. <br>
-			<br><br> -->
-			<b><i class="fa fa-video-camera"></i>&nbsp; HD Video Content</b><br>
-			Have access to over 90+ HD drills. All of which are categorized into Ball Mastery, Wall Work,  and Core.
-			<br><br>
-			<b><i class="fa fa-cogs"></i>&nbsp; Custom Sessions</b><br>
-			Create a custom session with the drills you want to improve on. Revisit these sessions as muany times as you like or create new ones.
-			<br><br>
-			<b><i class="fa fa-bar-chart"></i>&nbsp; Track Your Progress</b><br>
-			All sessions are set up on a timer so you can keep track of your dedication to training.
-			<br><br>
-			<b><i class="fa fa-user"></i>&nbsp; Personalized Profile</b><br>
-			Keep your profile up to date with current player attributes. Be sure to access your profile frequently to view new suggested drills.
-			</p>
+				<div class="col-md-3 step">
+					<span class="step-number">STEP 2</span>
+					<i class="fa fa-video-camera" aria-hidden="true"></i>
+					<span class="step-des">
+						Personalize Your Profile
+					</span>
+				</div>
 
-			<div class="readMore">
-				<a [routerLink]="['/pricing']" > SIGN UP ></a>
-			</div>
+				<div class="col-md-3 step">
+					<span class="step-number">STEP 3</span>
+					<i class="fa fa-cogs" aria-hidden="true"></i>
+					<span class="step-des">
+						Personalize Your Profile
+					</span>
+				</div>
 
-			<!-- <div class="offerTitle">
-				<a class="inactiveLink">TRAINING WE OFFER</a>
-				<p><br>
-					•First Touch on the Ball<br>
-					•Movement & Spacing<br>
-					•Dribbling with Speed<br>
-					•Finishing<br>
-				</p>
-			</div>
-			<div class="readMore">
-				<a [routerLink]="['/training']" > READ MORE ></a>
-			</div> -->
+				<div class="col-md-3 step">
+					<span class="step-number">STEP 4</span>
+					<i class="fa fa-bar-chart" aria-hidden="true"></i>
+					<span class="step-des">
+						Personalize Your Profile
+					</span>
+				</div>
+				
+			</div>	
 		</div>
 	</div>
-<!-- DESCRIPTION SECTION END-->
 
 
-
-<!-- VIDEO SHOWCASE -->
-	<div class="vidShowcasebg">
-			<!-- <div class="videoWrapper">
-				<iframe width="560" height="315" scrolling="yes" src="https://vimeo.com/user92504425/review/304736375/97a54daf8c?showinfo=0&controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-			</div> -->
-			<video width="100%" controls controlsList="nodownload" loop muted>
-				<source src="https://s3.us-east-2.amazonaws.com/complete09/Public/The+Complete+90+Promo+Video+Final.mp4" type="video/mp4">
-					Your browser does not support HTML5 Video.
-			</video>
+	<div class="row features">
+		<div class="col-md-12">
+			<h1><span>Features</span></h1>
+		</div>
+		
 	</div>
-<!-- VIDEO SHOWCASE END -->
 
 
+	<div class="row features-details">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-6 for-coaches">
+					<h4 class="features-title">For <span>Coaches</span></h4>
+					<i class="fa fa-file-text-o" aria-hidden="true"></i>
+					<span class="features-desc">Manage Team Roasters</span>
+
+					<i class="fa fa-clock-o" aria-hidden="true"></i>
+					<span class="features-desc">Monitor Progress</span>
+				</div>
+				<div class="col-md-6 for-players">
+					<h4 class="features-title">For <span>Players</span></h4>
+					<i class="fa fa-futbol-o" aria-hidden="true"></i>
+					<span class="features-desc">Leaderboards</span>
+
+					<i class="fa fa-clock-o" aria-hidden="true"></i>
+					<span class="features-desc">Player Attributes</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<img src="assets/Post-Card-Reverse(2).png" alt="" class="img-responsive" style="max-width: 450px; margin: auto;width: 100%;">
+		</div>
+	</div>
+
+</div>
+
+<!-- POST CARD END -->
 
 <!-- PLAYER/COACH SECTION-->
 <div class="playercoachCont container-fluid">
@@ -86,14 +104,14 @@
 		<div class="playerPromoCont" id="sm-ad">
 			<div class="col-sm-12 playerPromo">
 
-				<div class="col-lg-5 col-md-6 col-sm-6 playerPromoText">
+				<div class="col-lg-6 col-md-6 col-sm-6 playerPromoText">
 					<a href="" class="inactiveLink">PLAYER</a>
 					<h1>THE<b>COMPLETE 90</b> for players</h1>
 					<div class="PromoSignbtn">
 						<a [routerLink]="['/login_signup']">SIGN UP</a>
 					</div>
 				</div>
-				<div class="col-lg-6 col-sm-6">
+				<div class="col-lg-6 col-sm-6 playerPromoImage">
 					<img src="assets/playereditpic.png">
 				</div>
 
@@ -103,14 +121,14 @@
 		<div class="coachPromoCont" id="sm-ad">
 			<div class="col-sm-12 coachPromo">
 
-				<div class="col-lg-5 col-md-5 col-sm-5 coachPromoText">
-					<a href="" class="inactiveLink">MANAGER</a>
-					<h1>THE<b>COMPLETE 90</b> for managers</h1>
+				<div class="col-lg-6 col-md-6 col-sm-6 coachPromoText">
+					<a href="" class="inactiveLink">CLUB</a>
+					<h1>THE<b>COMPLETE 90</b> for clubs</h1>
 					<div class="PromoSignbtn">
 						<a href="#" onclick="return false;">COMING SOON</a>
 					</div>
 				</div>
-				<div class="col-lg-6 col-sm-6">
+				<div class="col-lg-6 col-sm-6 coachPromoImage">
 					<img src="assets/coachpic.png">
 				</div>
 
@@ -121,28 +139,28 @@
 		<ul class="flexlist" id="lg-ad">
 			<!-- PLAYER SIDE -->
 			<li class="flexlist-item playerPromo">
-				<div class="col-lg-5 col-md-6 col-sm-6 playerPromoText">
+				<div class="col-lg-6 col-md-6 col-sm-6 playerPromoText">
 					<a href="" class="inactiveLink">PLAYER</a>
 					<h1>THE<b>COMPLETE 90</b> for players</h1>
 					<div class="PromoSignbtn">
 						<a [routerLink]="['/login_signup']">SIGN UP</a>
 					</div>
 				</div>
-				<div class="col-lg-6 col-sm-6">
+				<div class="col-lg-6 col-sm-6 playerPromoImage">
 					<img src="assets/playereditpic.png">
 				</div>
 			</li>
 
 			<!-- COACH SIDE -->
 		    <li class="flexlist-item coachPromo">
-		    	<div class="col-lg-5 col-md-5 col-sm-5 coachPromoText">
-					<a href="" class="inactiveLink">MANAGER</a>
-					<h1>THE<b>COMPLETE 90</b> for managers</h1>
+		    	<div class="col-lg-6 col-md-6 col-sm-6 coachPromoText">
+					<a href="" class="inactiveLink">CLUB</a>
+					<h1>THE<b>COMPLETE 90</b> for clubs</h1>
 					<div class="PromoSignbtn">
 						<a onclick="return false;">COMING SOON</a>
 					</div>
 				</div>
-				<div class="col-lg-6 col-sm-6">
+				<div class="col-lg-6 col-sm-6 coachPromoImage">
 					<img src="assets/coachpic.png">
 				</div>
 		    </li> 
@@ -150,6 +168,94 @@
 	<!-- </div> -->
 </div>
 <!-- PLAYER/COACH SECTION END -->
+
+
+<!-- VIDEO SHOWCASE -->
+<div class="vidShowcasebg">
+	<!-- <div class="videoWrapper">
+		<iframe width="560" height="315" scrolling="yes" src="https://vimeo.com/user92504425/review/304736375/97a54daf8c?showinfo=0&controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+	</div> -->
+	<video width="100%" controls controlsList="nodownload" loop muted>
+		<source src="https://s3.us-east-2.amazonaws.com/complete09/Public/The+Complete+90+Promo+Video+Final.mp4" type="video/mp4">
+			Your browser does not support HTML5 Video.
+	</video>
+</div>
+<!-- VIDEO SHOWCASE END -->
+
+
+
+
+<!-- NEWSLETTER -->
+
+<!-- Begin Mailchimp Signup Form -->
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+
+<div class="container-fluid newsletter-section">
+	<div class="row m-0">
+		<div class="col-md-6">
+			<!-- Begin Mailchimp Signup Form -->
+
+			<div id="mc_embed_signup">
+			<form #f="ngForm" (ngSubmit)="mailchimpSubmit(f)" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+				<div id="mc_embed_signup_scroll">
+				<h2>Subscribe</h2>
+			<div class="indicates-required"></div>
+			<div class="mc-field-group">
+				<label for="mce-EMAIL">Email Address <span class="asterisk">*</span>
+			</label>
+				<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" ngModel required>
+			</div>
+			<div class="mc-field-group">
+				<label for="mce-FNAME">First Name <span class="asterisk">*</span></label>
+				<input type="text" value="" name="FNAME" class="" id="mce-FNAME" ngModel required>
+			</div>
+			<div class="mc-field-group">
+				<label for="mce-LNAME">Last Name  <span class="asterisk">*</span></label>
+				<input type="text" value="" name="LNAME" class="" id="mce-LNAME" ngModel required>
+			</div>
+			<div class="mc-field-group">
+				<label for="mce-PHONE">Phone Number <span class="asterisk">*</span></label>
+				<input type="text" name="PHONE" class="" value="" id="mce-PHONE" ngModel required>
+			</div>
+
+			<div class="alert alert-danger sub-error-msg" role="alert">
+				Please fill in all required fields!
+			  </div>
+			<div class="alert alert-success sub-succ-msg" role="alert">
+				Thank you for subscribing!
+			</div>
+				<div id="mce-responses" class="clear">
+					<div class="response" id="mce-error-response" style="display:none"></div>
+					<div class="response" id="mce-success-response" style="display:none"></div>
+				</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+				<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_18e4ef69694befc5389a215f1_298bc9542e" tabindex="-1" value=""></div>
+				<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+				</div>
+			</form>
+			</div>
+			<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[4]='PHONE';ftypes[4]='phone';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+			<!--End mc_embed_signup-->
+
+		</div>
+		<div class="col-md-6 text-center">
+			<img src="../../../assets/subscribe-image.png" class="subscribe-img" alt="" style="width: 80%">
+		</div>
+	</div>
+</div>
+
+
+
+<!--End mc_embed_signup-->
+
+<!-- NEWSLETTER END -->
+
+
 
 
 

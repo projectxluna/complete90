@@ -389,6 +389,12 @@ input{
 
 
 /* MAILCHIMPS */
+
+.subscribe-img {
+	width: 80%;
+	margin-top: 15px;
+}
+
 .newsletter-section {
 	background-color: #fbfbff !important;
 }
@@ -412,7 +418,7 @@ input{
 }
 
 #mc_embed_signup {
-	padding: 60px 156px !important;
+	padding: 60px 100px !important;
 	background-color: #fbfbff !important;
 }
 
@@ -495,10 +501,6 @@ input{
 
 	.vid-pa {
 		float: left;
-	}
-
-	#mc_embed_signup {
-		padding: 40px 25px;
 	}
 
 	.container.old-events {

@@ -1,0 +1,326 @@
+/*--------------------------TABLE OF CONTENTS-------------------------*/
+/*
+0. GLOBAL CCS
+1. BANNER IMAGE
+2. PRICING SECTION
+3. COMAPRE SECTION
+4. QUOTE SECTION
+
+
+
+*/
+
+
+
+/*----------------------------0. GOBAL CSSS--------------------------*/
+
+div{
+	font-family: 'Montserrat';
+}
+
+.inactiveLink{
+   pointer-events: none;
+   cursor: default;
+}
+
+.ph{
+	margin: 0px;
+}
+
+
+/*----------------------------1. BANNER IMAGE--------------------------*/
+.bannerimage{
+	padding-top: 120px;
+	background-image: url('../../../assets/pricing-banner.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 250px;
+	width: 100%;
+	color: white;
+}
+
+
+/*----------------------------2. PRICING SECTION--------------------------*/
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: #fd1540;
+    border-radius: 0px;
+}
+
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: #fd1540;
+    border-radius: 0px;
+    color: white;
+}
+
+.nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+     font-size: 12px;
+}
+
+a{
+	color: #fd1540;
+}
+
+.nav-pills {
+    text-align:center;
+}
+
+.pricingSect{
+	padding-bottom: 80px;
+}
+
+.pricingTitle p{
+	color: #484848;
+	padding: 100px 0px 50px 0px;
+	line-height: 2.5em;
+	font-size: 15px;
+}
+
+.pricingCont{
+	color: #252525;
+	/*color: white;*/
+	margin-top: 60px;
+	margin-bottom: 60px;
+	/*background-color: #0b1c38;*/
+	/*border: 1px solid #0b1c38;*/
+}
+
+.pricingCont img{
+	max-width: 30%;
+	padding-bottom: 40px;
+}
+
+.pricingCont button{
+	margin-top: 10px;
+	color: #fd1541;
+	padding: 7px 25px;
+	border: 2px solid #fd1541;
+}
+
+.pricingCont button:hover{
+	margin-top: 10px;
+	color: white;
+	padding: 7px 25px;
+	border: 2px solid #fd1541;
+	background-color: #fd1541;
+}
+
+.pricingCont h1,h5{
+	color: #182c4d;
+	/*color: #46a7f9;*/
+}
+
+.pricingCont h4{
+	color: #0e0e0e78;
+}
+
+.pricingCont h2, h3{
+	font-size: 11px;
+	color: #979797;
+}
+
+.pricingCont h4,h3,h2{
+	border-bottom: 1px solid #0000001a;
+	padding-bottom: 20px;
+	margin-bottom: 0px;
+}
+
+.pricingCont h1,h2,h3,h4,h5{
+	margin-left: 110px;
+	margin-right: 110px;
+}
+
+/*#p2{
+	border-left: 1px solid #0000001a;
+	border-right: 1px solid #0000001a;	
+}*/
+
+#p1{
+	border-right: .5px solid #0000001a;
+}
+
+#p3{
+	border-left: .5px solid #0000001a;	
+}
+
+
+/*----------------------------3. COMPARE SECTION--------------------------*/
+.compareSectBG{
+	background-color: #fbfbff;
+}
+
+.compareSectBG h1{
+    margin-top: 80px;
+    font-size: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #fd1541;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #0000001a;
+}
+
+.compareSect{
+	padding-bottom: 80px;
+}
+
+.compareSect p{
+	padding-top: 15px;
+}
+
+.playerSub{
+	/*color: white;*/
+	color: #484848;
+	padding-bottom: 50px;
+}
+
+.coachSub{
+	/*color: white;*/
+	color: #474747;
+}
+
+
+
+
+
+
+
+
+
+/*----------------------------4. QUOTE SECTION---------------------------*/
+.quoteStyle h1{
+	padding-top: 40px;
+	padding-bottom: 40px;
+	font-size: 20px;
+	color: #484848;
+}
+
+
+
+
+
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1024px) {
+	.pricingCont img{
+		max-width: 40%;
+		padding-bottom: 40px;
+	}
+
+	.pricingTitle p{
+		font-size: 13px;
+	}
+
+	.pricingCont h2, h3{
+		font-size: 9px;
+	}
+
+	.pricingCont h1{
+		font-size: 22px;
+	}	
+
+	.pricingCont h1,h2,h3,h4,h5{
+		margin-left: 20px;
+		margin-right: 20px;
+	}	
+
+	.pricingCont button{
+		margin-top: 10px;
+		color: #fd1541;
+		padding: 7px 25px;
+		border: 2px solid #fd1541;
+		background-color: white;
+	}
+
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+	.bannerimage{
+		padding-top: 120px;
+		min-height: 250px;
+	}
+
+	.impcont h1{
+		font-size: 26px;
+	}	
+
+	.pricingCont img{
+		max-width: 70%;
+		padding-bottom: 40px;
+	}
+
+}
+
+
+
+
+
+
+@media (max-width: 414px) {
+
+	.bannerimage{
+		padding-top: 90px;
+		min-height: 200px;
+	}	
+
+	.impcont h1{
+		font-size: 26px;
+	}
+
+
+	.pricingCont{
+		margin-left: 50px;
+		margin-right: 50px;
+	}
+
+	.pricingCont button{
+		margin-bottom: 40px;
+	}
+
+/*	#p1{
+		border-bottom: 1px solid #0000001a;
+	}
+
+	#p2{
+		border-bottom: 1px solid #0000001a;
+		border-right: 0px;
+		border-left: 0px; 
+	}
+
+	#p3{
+		border-bottom: 1px solid #0000001a;	
+		border-right: 0px;
+	}*/
+
+	#p1{
+		border-bottom: 1px solid #0000001a;
+		border-right: 0px;
+	}
+
+	#p3{
+		border-left: 0px;	
+	}
+
+}
+
+
+@media (max-width: 320px) {
+	
+	.pricingCont{
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+}

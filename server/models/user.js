@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 const { CLUB_REQUEST_STATUS } = require('../helpers/pure');
+mongoose.Promise = global.Promise;
 var userSchema = mongoose.Schema({
     name: {
         type: String,
@@ -48,6 +49,11 @@ var userSchema = mongoose.Schema({
         type: CLUB_REQUEST_STATUS,
         index: true
     },
+    // clubId: String,
+    // clubStatus: {
+    //     type: CLUB_REQUEST_STATUS,
+    //     index: true
+    // },
     teamId: {
         type: mongoose.Schema.Types.ObjectId,
         index: true,

@@ -38,7 +38,7 @@
         <vg-mute></vg-mute>
         <vg-fullscreen></vg-fullscreen>
       </vg-controls>
-      <video [src]="selectedContent.link" [vgMedia]="media" #media id="singleVideo" preload="auto">
+      <video [src]="selectedContent.link" [vgMedia]="media" #media id="singleVideo" preload="auto" controlslist="download" download>
       </video>
     </vg-player>
     <button type="button" class="btn btn-primary" (click)="playNext()">
@@ -53,10 +53,10 @@
       </div>
       <div class="footer__meta-container">
         <div class="meta_item" *ngIf="selectedContent.tags">
-          <!-- <span>LTPD</span>
+          <span>LTPD</span>
           <div *ngFor="let tag of selectedContent.tags" style="display: flex; flex-direction: row;">
             {{ tag }}
-          </div> -->
+          </div>
         </div>
         <div class="meta_item" *ngIf="selectedContent.category">
           <span>Category</span>
@@ -65,16 +65,16 @@
           </div>
         </div>
         <div class="meta_item" *ngIf="selectedContent.difficulty">Difficulty</div>
-        <!-- <div class="meta_item">
+        <div class="meta_item">
           <span>Train Time</span>
           <span>{{ selectedContent.minutes }}:{{ selectedContent.seconds }}</span>
-        </div> -->
+        </div>
         <div class="meta_item" *ngIf="selectedContent.reps">
-          <span>Reps:  {{ selectedContent.reps }}</span>
+          <span>Reps</span>
           <span>{{ selectedContent.reps }}</span>
         </div>
         <div class="meta_item" *ngIf="selectedContent.sets">
-          <span>Sets:</span>
+          <span>Sets</span>
           <span>{{ selectedContent.sets }}</span>
         </div>
       </div>

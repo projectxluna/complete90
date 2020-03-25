@@ -1,0 +1,98 @@
+ <!--HERO IMAGE START-->
+<div class="bannerimage">
+    
+    <div class="container">
+        <div class="impcont col-lg-6 col-md-6">
+            <h1><b>PRICING/PLANS</b></h1>
+        </div>
+    </div>
+</div>
+<!-- HERO IMAGE END-->
+
+<!-- PRICING SECTION -->
+<div class="container pricingSect">
+
+    <div class="col-lg-12 col-sm-12 pricingTitle text-center">
+        <p>The Complete 90 offers you monthly or yearly memberships for both players and coaches. <br>Below you can compare and choose the right plan for you to take your game to the next level!</p>
+    </div>
+
+    <!-- PLAYER PRCING -->
+    <div class="container">
+        <div class="col-lg-4 col-lg-offset-4">
+            <ul class="nav nav-pills text-center">
+                <!-- <li role="presentation" (click)="setCycle('yearly')" [ngClass]="{'active': isYearly}"><a>YEARLY</a></li> -->
+                <li role="presentation" (click)="setCycle('monthly')" [ngClass]="{'active': !isYearly}"><a>MONTHLY</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-12 pricingBG">
+        <div class="col-lg-6 col-md-6 col-sm-6 pricingCont text-center" id="p1">
+            <img src="assets/player-pic.png">
+            <h4><b>PLAYER</b></h4>
+            <h3>ACCESS TO ALL<br>VIDEO CONTENT</h3>
+            <h2>CREATE CUSTOM SESSIONS</h2>
+            <h2>JOIN THE TRAINING LEADERBOARD</h2>
+            <h2>IMPROVE YOUR PLAYER ATTRIBUTES</h2>
+            <h1>${{ playerPrice }}</h1>
+            <h5 *ngIf="!isYearly">monthly</h5>
+            <!-- <h5 *ngIf="isYearly">yearly</h5> -->
+            <button *ngIf="!isCoach" (click)="selectPlan('player')">SELECT</button>
+        </div>
+
+        <!-- COACH PRICING -->
+        <div class="col-lg-6 col-md-6 col-sm-6 pricingCont text-center" id="p3">
+            <img src="assets/player-pic.png">
+            <h4><b>MANAGER</b></h4>
+            <h3>FULL ACCESS TO ALL<br>VIDEO CONTENT</h3>
+            <h2>CREATE CUSTOM SESSIONS</h2>
+            <h2>MONITOR TEAM PROGRESS</h2>
+            <!-- <h2>DESIGN DRILLS</h2> -->
+            <h1 class="ph">&nbsp;</h1>
+
+            <h1>$ {{ coachPrice }}</h1>
+            <h5 *ngIf="!isYearly">monthly</h5>
+            <!-- <h5 *ngIf="isYearly">yearly</h5> -->
+            <button *ngIf="isCoach" (click)="selectPlan('coach')">SELECT</button>
+        </div>
+    </div>
+</div>
+<!-- PRICING SECTION END -->
+
+
+<!-- COMPARE SECTION -->
+<div class="compareSectBG">
+    <div class="container compareSect">
+        <div class="col-lg-12 playerSub">
+            <div class="col-lg-12">
+                <h1><b>Player Subscription</b></h1>
+            </div>
+            <div class="col-lg-12">
+                <p>Our player subscription will give you full access to our library of ball mastery, dribbling, juggling, passing, core, agility, strength, and mobility exercises. After selecting your favourite drills and creating sessions that will challenge you, our team will monitor and track your total time trained and place you on your global leaderboard.  
+                </p>
+            </div>
+        </div>
+
+        <div class="col-lg-12 coachSub">
+            <div class="col-lg-12">
+                <h1><b>Manager Subscription</b> (Coming Soon)</h1>
+            </div>
+            <div class="col-lg-12">
+                <p>Our Manager Subscription will allow you to create, design, and organize any individual or team drills or training sessions.  If you are a 1 on 1 trainer then you will conveniently have access to our library of ball mastery, dribbling, juggling, passing, core, agility, strength, and mobility exercises. As a manager you will also have the ability to assign specific exercise and continuously track your team/players that have a players subscription.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- COMPARE SECTION END -->
+
+
+<!-- QUOTE SECTION -->
+    <div class="container">
+        <div class="col-lg-12 quoteStyle text-center">
+            <div>
+                <h1><b>"Football is a simple game, the hard part is making it look simple.”</b> - RON GREENWOOD</h1>
+            </div>
+        </div>
+    </div>
+<!-- QUOTE SECTION END-->

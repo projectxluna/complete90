@@ -6,7 +6,6 @@ var AWS = require('./helpers/aws');
 
 var Plan = require('./models/plan');
 var User = require('./models/user');
-const Club = require('./models/club');
 var Assignment = require('./models/assignment');
 var UserStats = require('./models/stats');
 var mongoose = require('mongoose');
@@ -212,15 +211,12 @@ module.exports = function (apiRoutes) {
             },
             {
                 $group: {
-                    _id: {
-                        userId: '$userId',
-                        contentId: '$content.id'
-                    },
-                    watchedTotal: { $sum: '$content.watchedTotal' }
+                    _id: null,
+                    watchedTotal: { $sum: '$content.watchedTotal' },
+                    count: { $sum: 1 }
                 }
             }
-        ], (err, stats) => {
-            console.log(stats)
+        ], function (err, stats) {
             if (err) {
                 return res.json({
                     success: false,
@@ -235,11 +231,10 @@ module.exports = function (apiRoutes) {
                     viewedTotal: 0
                 });
             }
-            let watchedTotal = stats.map(s => s.watchedTotal).reduce((acc, cur) => acc + cur);
             res.json({
                 success: true,
-                watchedTotal: watchedTotal,
-                viewedTotal: stats.length
+                watchedTotal: stats[0].watchedTotal,
+                viewedTotal: stats[0].count
             });
         });
     });
@@ -251,16 +246,14 @@ module.exports = function (apiRoutes) {
         const {contentStats, assignmentId} = req.body;
         let userId = req.decoded.userId;
 
-        let newStat = new UserStats();
-        newStat.userId = userId;
-        newStat.content = {
-            id : contentStats.contentId,
-            currentTime : contentStats.currentTime,
-            contentLength : contentStats.contentLength,
-            watchedTotal : contentStats.watchedTotal
-        };
-        newStat.assignmentId = mongoose.Types.ObjectId(assignmentId)
-        newStat.save(function (err, plan) {
+        UserStats.findOneAndUpdate({ 'userId': userId, 'content.id': contentStats.contentId }, {
+            userId: userId,
+            'content.id': contentStats.contentId,
+            'content.currentTime': contentStats.currentTime,
+            'content.contentLength': contentStats.contentLength,
+            $inc: { 'content.watchedTotal': contentStats.watchedTotal },
+            assignmentId: mongoose.Types.ObjectId(assignmentId)
+        }, { upsert: true }, function (err, numberAffected, raw) {
             if (err) {
                 return res.json({
                     success: false,
@@ -296,63 +289,31 @@ module.exports = function (apiRoutes) {
         });
     }
 
-    const findClubByOwnerId = (ownerId) => {
-        return new Promise((resolve, reject) => {
-            Club.findOne({owner: ownerId}, (err, club) => {
-                if (err) console.log(err);
-                resolve(club);
-            });
-        });
-    }
-
-    const findClubById = (clubId) => {
-        return new Promise((resolve, reject) => {
-            Club.findById(clubId, (err, club) => {
-                if (err) console.log(err);
-                resolve(club);
-            });
-        });
-    }
-
     apiRoutes.get('/session/leaderboard', Auth.isAuthenticated, async (req, res) => {
-        const { startDate, endDate, club } = req.query;
+        const { timestamp, club } = req.query;
         let userId = req.decoded.userId;
 
         let match = {};
-
-        if (startDate && endDate) {
-            let from = new Date(parseInt(startDate))
-            let to = new Date(parseInt(endDate))
-            match.createdAt = {
-                $gte: from,
-                $lt: to
-            }
+        if (timestamp && timestamp > 0) {
+            match.updatedAt = {
+                $gte: new Date(Date.now() - timestamp),
+            } 
         }
-
         if (club) {
             try {
                 let user = await findUser(userId);
-                let playerProfile = user.profiles.find(f => f.type === 'PLAYER');
-                let clubUser;
-                if (user && user.clubId && user.clubStatus === CLUB_REQUEST_STATUS.ACTIVE && playerProfile) {
-                    clubUser = await findUserInClub(user.clubId);
-                } else {
-                    let managerClub = await findClubByOwnerId(user._id);
-                    if (managerClub) {
-                        clubUser = await findUserInClub(managerClub._id);
-                    }
-                }
-                if (clubUser) {
+                if (user && user.clubId && user.clubStatus === CLUB_REQUEST_STATUS.ACTIVE) {
+                    let clubUser = await findUserInClub(user.clubId);
                     let userIds = clubUser.map(u => u._id);
                     if (userIds && userIds.length) {
                         match.userId = {$in: userIds};
                     }
                 }
             } catch (err) {
-                console.error(err);
+                console.log(err);
             }
         }
-        if (Object.keys(match).length == 0 && (!startDate || !endDate)) {
+        if (Object.keys(match).length == 0 && !timestamp) {
             return res.json({
                 success: true,
                 leaderboard: []
@@ -364,7 +325,8 @@ module.exports = function (apiRoutes) {
                 $group: {
                     _id: '$userId',
                     userId: { $first: '$userId' },
-                    watchedTotal: { $sum: '$content.watchedTotal' }
+                    watchedTotal: { $sum: '$content.watchedTotal' },
+                    count: { $sum: 1 }
                 }
             }
         ], async (err, stats) => {
@@ -376,26 +338,13 @@ module.exports = function (apiRoutes) {
                 });
             }
             const pArray = stats.map(async (stat) => {
-                let user =  await findUser(stat.userId);
-                if (!user) return;
-
-                let club
-
-                try {
-                    if (user.clubId) {
-                        club = await findClubById(user.clubId);
-                    }
-                } catch (err) {
-                    console.error(err);
-                }
-                let playerProfile = user.profiles.find(f => f.type === 'PLAYER');
-
+                let user =  await findUser(stat.userId)
+                if (!user) return
                 return {
                     name: user.name,
                     photoUrl: user.avatarURL || '/public/imgs/profile/cropped5ac0f4d48a2a273cd5f7b71a1526154727.jpg',
                     watchedTotal: stat.watchedTotal,
-                    clubName: club ? club.name : null,
-                    position: playerProfile ? playerProfile.position : null
+                    count: stat.count
                 };
             });
             const mapped = await Promise.all(pArray);
@@ -474,6 +423,8 @@ module.exports = function (apiRoutes) {
                             content.defaultView = session.defaultView;
                         }
                         content.group = session.name;
+                        content.exercise = session.exercises;
+                        content.exercisesCat = session.exercisesCat;     
                         content.link = AWS.signUrl(content.link);
                         contents.push(content);
                     }
@@ -506,6 +457,7 @@ module.exports = function (apiRoutes) {
         });
 
         let userPlan = plans.map(plan => {return mapPlanToContent(plan, contents)});
+        console.log("User Plans", userPlan);
         callback(null, contents, userPlan, assignments);
     }
 

@@ -1,0 +1,282 @@
+ <!--HERO IMAGE START-->
+<div class="bannerimage">
+    <div class="container">
+        <div class="impcont col-lg-6 col-md-6">
+            <h1><b>DASHBOARD</b></h1>
+        </div>
+    </div>
+</div>
+<!-- HERO IMAGE END-->
+
+<!-- DASHBOARD TILES -->
+<div class="padding">
+    <div class="row" *ngIf="!coachProfile">
+        <div class="col-xs-12 col-sm-4">
+            <div class="box p-a stat1">
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded accent">
+                        <i class="fa fa-clock-o fa-2x" style="padding-top: 8px;" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h1 class="m-0">{{ stats.watched }}</h1>
+                    <h2 class="m-0">Total time trained</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="box p-a stat1">
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded  accent2">
+                        <i class="fa fa-eye fa-2x" style="padding-top: 7px;" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h1 class="m-0">{{ stats.viewedTotal }}</h1>
+                    <h2 class="m-0">Total exercises viewed</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="box p-a stat1">
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded accent3">
+                        <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h1 *ngIf="stats.attributes" class="m-0">{{ stats.attributes.overallRating || 'N/A' }}</h1>
+                    <h1 class="m-0">N/A</h1>
+                    <h2 class="m-0">Overall Rating</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6"><!-- LEFT SIDE -->
+            <profile (profileUpdated)="onProfileUpdated($event)"></profile>
+            <player-attributes *ngIf="hasSubscription() && !coachProfile"></player-attributes>
+            <create-assignments *ngIf="hasSubscription() && coachProfile"></create-assignments>
+        </div>
+        <div class="col-sm-12 col-md-6"><!-- RIGHT SIDE -->
+            <leader-board *ngIf="hasSubscription() && !coachProfile"></leader-board>
+            <club *ngIf="hasSubscription()"></club>
+            <team-roaster *ngIf="hasSubscription() && coachProfile"></team-roaster>
+            <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription()"></subscription>
+        </div>
+    </div>
+
+    <!-- DRILL MAKER TILE -->
+    <div *ngIf="drillMakerActive" class="row">
+        <div class="col-lg-12">
+            <div class="box p-a">
+                <div class="box-header">
+                    <h3 class="m-0 suggestedHeader"><b>CREATE A DRILL</b></h3>
+                    Click anywhere on the field to drop an item
+                </div>
+                <div class="box-tool">
+                    <ul class="nav">
+                      <li class="nav-item inline dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                          <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a class="dropdown-item">Save Drill</a></li>
+                              <li><a class="dropdown-item" >Export Drill</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <!-- DRILL FIELD VIEW -->
+                    <div class="col-lg-6">
+                        <!--dropzone-->
+                        <div id="dropzone" #dropzone class="col-lg-12 drillView" (click)="toggleIconList($event)" [ngStyle]="{'background-image': getUrl(this.selectedField || this.drillLayout._full)}">
+                            <div *ngFor="let icon of layout">
+                                <div mwlDraggable class="drill-icon" (dragEnd)="dragEnd($event, icon)" [style.top.px]="icon.y" [style.left.px]="icon.x" [ngStyle]="{'background-image': getUrl(icon.url) }">
+                                </div>
+                            </div>
+                            <div id="iconList" #iconList *ngIf="iconList.isVisible" class="icon-list-view" [style.top.px]="iconList.positionY" [style.left.px]="iconList.positionX">
+                                <h4 class="text-center">Click an icon to add</h4>
+                                <div class="drill-icons">
+                                    <div *ngFor="let icon of draggable">
+                                        <div (click)="copyIconToPosition(icon)" class="drill-icon-container" [ngStyle]="{'background-image': getUrl(icon.img)}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <h4 class="text-center drillvTitle"><b>VIEW</b></h4>
+                            <!-- DRILL VIEW BUTTONS -->
+                            <nav class="col-lg-12 center-pills text-center" id="myScrollspy">
+                              <ul class="nav nav-pills viewBtns">
+                                  <li (click)="selectedField = drillLayout._full"><a>Full</a></li>
+                                  <li (click)="selectedField = drillLayout._half"><a>Half</a></li>
+                                  <li (click)="selectedField = drillLayout._18yard"><a>18 Yard</a></li>
+                                  <li (click)="selectedField = drillLayout._empty"><a>Empty</a></li>
+                              </ul>
+                          </nav>
+                        <!-- DRILL VIEW BUTTONS END -->
+                        </div>
+                    </div>
+                    <!-- DRILL FIELD VIEW END -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mainTiles">
+        <div class="col-xs-12 col-md-4">
+            <div class="box p-a">
+                <div class="box-header" (click)="toggleSecurity()">
+                    <h3 class="m-0">
+                        <b>SECURITY</b>
+                    </h3>
+                </div>
+
+                <div class="box-tool">
+                    <ul class="nav">
+                        <li class="nav-item inline">
+                            <a class="nav-link">
+                                <i class="fa fa-plus" [ngClass]="{'fa-minus': securityActive}" aria-hidden="true" (click)="toggleSecurity()"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div *ngIf="!passwordUpdated">
+                    <div *ngIf="securityActive" class="desc-p">
+                        <small>Use the form below if you wish to update your password</small>
+                    </div>
+
+                    <form *ngIf="securityActive" class="form-p">
+                        <div class="form-group">
+                            <input type="password" [(ngModel)]="model.oldPassword" name="oldpass" class="form-control" placeholder="Old Password">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" [(ngModel)]="model.newPassword" name="newpass" class="form-control" placeholder="New Password">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" [(ngModel)]="model.verifyPassword" name="newpassCon" class="form-control" placeholder="Confirm New Password">
+                        </div>
+
+                        <button (click)="updatePassword()" class="savePassbtn">SAVE</button>
+                    </form>
+                </div>
+
+                <div *ngIf="passwordUpdated">
+                    <div class="password-updated">
+                        <span>{{ passwordError }}</span>
+                        <button (click)="hidePasswordSection()" class="savePassbtn">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="box p-a">
+                <div class="box-header" (click)="togglePayment()">
+                    <h3 class="m-0">
+                        <b>PAYMENTS</b>
+                    </h3>
+                </div>
+    
+                <div class="box-tool">
+                    <ul class="nav">
+                        <li class="nav-item inline">
+                            <a class="nav-link">
+                                <i class="fa fa-plus" [ngClass]="{'fa-minus': paymentActive}" aria-hidden="true" (click)="togglePayment()"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div *ngIf="paymentActive" class="desc-p">
+                    <small>Current payment method</small>
+                </div>
+    
+                <div *ngIf="paymentActive" class="desc-p currentPaybg">
+                    <div class="row m-0">
+                        <div class="col-lg-3 col-xs-3 text-center">
+                            <h6>Payment</h6>
+                        </div>
+                        <div class="col-lg-6 col-xs-6 text-center">
+                            <h6>Credit Card Ending</h6>
+                        </div>
+                        <div class="col-lg-3 col-xs-3 text-center">
+                            <h6>Expires</h6>
+                        </div>
+                    </div>
+    
+                    <div *ngFor="let card of user.creditCards" class="row m-0">
+                        <div class="col-lg-3 col-xs-3 text-center">
+                            <i *ngIf="card.cardType === 'Visa'" class="fa fa-cc-visa fa-2x" aria-hidden="true"></i>
+                            <i *ngIf="card.cardType === 'Paypal'" class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i>
+                            <i *ngIf="card.cardType === 'Master'" class="fa fa-cc-mastercard fa-2x" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-lg-6 col-xs-6 text-center">
+                            <h5 class="ccFile">**** **** **** {{ card.last4 }}</h5>
+                        </div>
+                        <div class="col-lg-3 col-xs-3 text-center">
+                            <h5 class="ccFile">{{ card.expirationDate }}</h5>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="box p-a">
+                <div class="box-header">
+                    <h3 class="m-0">
+                        <b>NOTIFICATIONS</b>
+                    </h3>
+                </div>
+    
+                <div class="box-tool">
+                    <ul class="nav">
+                        <li class="nav-item inline">
+                            <a class="nav-link">
+                                <i class="fa fa-plus" [ngClass]="{'fa-minus': notificationActive}" aria-hidden="true" (click)="toggleNotification()"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div *ngIf="notificationActive" class="desc-p">
+                    <small>Below are your notification preferences</small>
+                </div>
+    
+                <div *ngIf="notificationActive" class="desc-p">
+                    <div class="row m-0">
+                        <!-- <div class="form-group2 col-xs-1 no-pa">
+                                    <input type="checkbox" name="emailnews">
+                                </div>
+                                <div class="col-xs-11 no-pa">
+                                    <label>Receive newsletter from The Complete 90</label>
+                                </div>
+    
+                                <div class="form-group2 col-xs-1 no-pa">
+                                    <input type="checkbox" name="emailnews">
+                                </div>
+                                <div class="col-xs-11 no-pa">
+                                    <label>Receive newsletter from The Complete 90</label>
+                                </div>
+
+                                <div class="form-group2 col-xs-1 no-pa">
+                                    <input type="checkbox" name="emailnews">
+                                </div>
+                                <div class="col-xs-11 no-pa">
+                                    <label>Receive newsletter from The Complete 90</label>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- DASHBOARD TILES END-->

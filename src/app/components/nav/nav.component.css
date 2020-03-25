@@ -58,9 +58,13 @@
 
 .logoTxt{
 	text-decoration: none;
-	color: white;
+	color: white !important;
 	font-size: 14px;
 	font-weight: 300;
+}
+
+.logoTxt b {
+	font-weight: bold;
 }
 
 .avatar {

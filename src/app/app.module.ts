@@ -9,6 +9,8 @@ import { VideogularModule }from './modules/videogular/videogular.module';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { LoginSignupComponent } from './components/loginsignup';
+import { CoachSignupComponent } from './components/coach-signup/coach_signup.component';
+
 
 import { AuthGuard } from './guards';
 import { DataService, AuthenticationService, RoutingState } from './services';
@@ -23,6 +25,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import 'owl.carousel';
+
+import { ProgramComponent } from './components/programs/program.component';
 
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -32,6 +37,10 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { SessionsComponent } from './components/sessions/sessions.component';
 import { PricingComponent } from './components/pricing/pricing.component';
+
+import { ClubsComponent } from './components/clubs/clubs.component';
+import { ProAccountComponent } from './components/proAccount/proAccount.component';
+
 import { TrainingComponent } from './components/training/training.component';
 import { PaymentComponent } from './components/pricing/payment/payment.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -50,6 +59,7 @@ import { MyClubComponent } from './components/my-club/my-club.component';
 import { TeamRoasterComponent } from './components/team-roaster/team-roaster.component';
 import { CreateAssignmentsComponent } from './components/create-assignments/create-assignments.component';
 import { GetSubscriptionComponent } from './components/get-subscription/get-subscription.component';
+import { GetAmateurSubscriptionComponent } from './components/get-amateur-subscription/get-amateur-subscription.component';
 import { ElapsedTimestampPipe } from './pipes/elapsed-timestamp.pipe';
 import { TimeSincePipe } from './pipes/time-since.pipe';
 
@@ -57,6 +67,7 @@ import { TimeSincePipe } from './pipes/time-since.pipe';
   declarations: [
     AppComponent,
     LoginSignupComponent,
+    CoachSignupComponent,
     MainComponent,
     ForgotComponent,
     NavComponent,
@@ -70,6 +81,8 @@ import { TimeSincePipe } from './pipes/time-since.pipe';
     SettingsComponent,
     EventsComponent,
     VideoplayerComponent,
+    ClubsComponent,
+    ProAccountComponent,   
     AddcontentToSessionComponent,
     ContactusComponent,
     TermsComponent,
@@ -82,8 +95,10 @@ import { TimeSincePipe } from './pipes/time-since.pipe';
     TeamRoasterComponent,
     CreateAssignmentsComponent,
     GetSubscriptionComponent,
+    GetAmateurSubscriptionComponent,
     ElapsedTimestampPipe,
-    TimeSincePipe
+    TimeSincePipe,
+    ProgramComponent
   ],
   imports: [
     BrowserModule,
