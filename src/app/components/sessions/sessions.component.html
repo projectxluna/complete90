@@ -184,7 +184,7 @@
                 <h1>Assignments</h1>
             </div>
         </div>
-
+    
         <div class="container cont-hscroll">
             <div class="row">
                 <div *ngFor="let assignment of assignments; let i = index" class="col-lg-4 col-md-4 col-sm-8">
@@ -222,7 +222,7 @@
                 <!-- TRAINING VIDEO -->
                 <div *ngFor="let content of (session.content ? session.content.slice(0, 3) : []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
                     <div>
-
+                    
                         <div *ngIf="(content.free && content.alwaysActive === true) || isLoggedIn()" class="add-btn-cont col-lg-11">
                             <div class="pull-right">
                                 <button class="add-btn" *ngIf="isLoggedIn()" (click)="addContentToCustomSession(content.id, content)">
@@ -246,18 +246,18 @@
 
                             <a [routerLink]="['/login_signup']" *ngIf="!isLoggedIn() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
                                 <i class="fa fa-lock"></i>
-                                <span>Signup to View</span>
+                                <span>Signup to View</span>  
                             </a>
 
                             <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && !hasSubscription() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
                                 <i class="fa fa-lock"></i>
-                                <span>Please buy subscription to have full access.</span>
+                                <span>Please buy subscription to have full access.</span>  
                             </a>
 
 
                             <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && hasSubscription() && (user.subscription.planId=='player-monthly-amateur' || user.subscription.planId=='coach-monthly-amateur') && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
                                 <i class="fa fa-lock"></i>
-                                <span>Upgrade your account to pro for full access</span>
+                                <span>Upgrade your account to pro for full access</span>  
                             </a>
 
                         </div>
@@ -288,16 +288,19 @@
                             </a>
 
                             <a [routerLink]="['/login_signup']" *ngIf="!isLoggedIn() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
-                                <span>Signup to View</span>
+                                <i class="fa fa-lock"></i>
+                                <span>Signup to View</span>  
                             </a>
 
                             <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && !hasSubscription() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
-                                <span>Please buy subscription to have full access.</span>
+                                <i class="fa fa-lock"></i>
+                                <span>Please buy subscription to have full access.</span>  
                             </a>
 
 
                             <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && hasSubscription() && (user.subscription.planId=='player-monthly-amateur' || user.subscription.planId=='coach-monthly-amateur') && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
-                                <span>Upgrade your account to pro for full access</span>
+                                <i class="fa fa-lock"></i>
+                                <span>Upgrade your account to pro for full access</span>  
                             </a>
                         </div>
 
@@ -316,7 +319,7 @@
             </div>
         </div>
     </div>
-
+    
 
     <div class="col-lg-12 exercise-section" *ngIf="hasSubscription() || adminProfile || coachProfile">
         <div class="exercise-title">
@@ -329,7 +332,7 @@
 
     <div class="col-lg-12 exercise-cat-section">
         <div class="row">
-          <div class="col-md-3 exercise-cat-tab" *ngFor="let category of selectedExercisesCategories.exercise['categories']" (click)="selectExerciseCat(category)" [ngClass]="{'active': selectedExercisesCategories.category === category.name}">{{category.name}}</div>
+            <div class="col-md-3 exercise-cat-tab" *ngFor="let category of selectedExercisesCategories.exercise['categories']" (click)="selectExerciseCat(category)" [ngClass]="{'active': selectedExercisesCategories.category === category.name}">{{category.name}}</div>
         </div>
     </div>
 <!-- usm80.siteground.biz nly56678 18765 -->

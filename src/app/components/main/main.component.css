@@ -640,6 +640,9 @@ video {
 		padding: 40px 0px !important;
 	}
 
+	.playerPromoImage, .coachPromoImage {
+		padding-top: 50px;
+	}
 	
 
 }

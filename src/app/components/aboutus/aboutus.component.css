@@ -413,6 +413,10 @@ div{
 		padding-bottom: 80px;
 	}
 
+	.playerPromoImage, .coachPromoImage {
+		padding-top: 50px;
+	}
+
 
 }
 
