@@ -42,6 +42,8 @@ export class LoginSignupComponent implements OnInit {
                     this.disabled = false;
                 }
             });
+
+            
         }
 
     ngOnInit() {
@@ -161,6 +163,8 @@ export class LoginSignupComponent implements OnInit {
                 if (result === true) {
                     this.dataService.getUserProfile().subscribe((me) => {
                         this.router.navigate(['/dashboard']);
+                        //window.location.replace("/dashboard");
+                        
                     });
                 } else {
                     this.error = 'username or password is incorrect';

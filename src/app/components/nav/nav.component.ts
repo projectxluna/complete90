@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
   };
   playerProfile: any;
   coachProfile: any;
-  adminProfile: any;
+  adminProfile = false;
 
 
   collapsed = true;
@@ -38,11 +38,10 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadProfile();
   }
 
   init() {
-    this.loadProfile();
-    
     
   }
 
@@ -89,7 +88,7 @@ export class NavComponent implements OnInit {
   }
 
   loadProfile() {
-    this.dataService.getUserProfile(false).subscribe(res => {
+    this.dataService.getUserProfile(true).subscribe(res => {
       this.onProfileUpdated(res.user);
       console.log("User: ", this.user.subscription.planId);
     });
