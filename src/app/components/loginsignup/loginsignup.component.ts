@@ -163,6 +163,9 @@ export class LoginSignupComponent implements OnInit {
                 if (result === true) {
                     this.dataService.getUserProfile().subscribe((me) => {
                         this.router.navigate(['/dashboard']);
+                        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                            this.router.navigate(['/dashboard']);
+                        }); 
                         //window.location.replace("/dashboard");
                         
                     });

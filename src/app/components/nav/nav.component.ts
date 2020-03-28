@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { DataService } from '../../services'
 import { AuthenticationService } from '../../services';
 
@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
   };
   playerProfile: any;
   coachProfile: any;
-  adminProfile = false;
+  adminProfile;
 
 
   collapsed = true;
@@ -34,15 +34,20 @@ export class NavComponent implements OnInit {
     private router: Router,
     public dataService: DataService,
     public authenticationService: AuthenticationService) {
+      this.router.events.subscribe((ev) => {
+        if (ev instanceof NavigationEnd) { 
+          this.loadProfile();
+        }
+      });
       this.init();
   }
 
   ngOnInit() {
-    this.loadProfile();
+    
   }
 
   init() {
-    
+    this.loadProfile();
   }
 
   hasSubscription(cb) {
