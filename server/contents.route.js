@@ -377,15 +377,16 @@ module.exports = function (apiRoutes) {
         if (!nodeEnv || nodeEnv === 'dev') {
             sortSession(require('../video_structure.json'));
         } else {
-            let resourceLocation = config.aws.VIDEO_STRUCTURE;
-            request(resourceLocation, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    sortSession(JSON.parse(body))
-                }
-                else {
-                    callback(error);
-                }
-            });
+            // let resourceLocation = config.aws.VIDEO_STRUCTURE;
+            // request(resourceLocation, function (error, response, body) {
+            //     if (!error && response.statusCode == 200) {
+            //         sortSession(JSON.parse(body))
+            //     }
+            //     else {
+            //         callback(error);
+            //     }
+            // });
+            sortSession(require('../video_structure.json'));
         }
     }
 
