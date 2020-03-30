@@ -50,7 +50,7 @@ export class LoginSignupComponent implements OnInit {
         // reset login status
         //this.authenticationService.logout();
         this.previousRoute = this.routingState.getPreviousUrl();
-        if(this.previousRoute == '/sessions') {
+        if(this.previousRoute == '/sessions' || this.previousRoute == '/pricing') {
             this.signup = !this.signup;
         }
 
