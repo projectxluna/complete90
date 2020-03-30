@@ -2,7 +2,7 @@
     "sessions":
     [
         {
-            "name": "Featured Weekly Sessions",
+            "name": "Featured",
             "alwaysActive": true,
             "free": true,
             "content" : [
