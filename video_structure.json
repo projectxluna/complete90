@@ -1,11 +1,11 @@
 {
-    "sessions": 
+    "sessions":
     [
         {
-            "name": "Featured Weekly Sessions",
+            "name": "Featured Weekly Sessions ",
             "alwaysActive": true,
             "free": true,
-            "content" : 
+            "content" :
             [
                 {
                     "id": "fe71e181-13ca-4725-80ce-6840df169e6a",
@@ -60,7 +60,7 @@
             "name": "Train Like a Pro",
             "alwaysActive": true,
             "free": true,
-            "content" : 
+            "content" :
             [
                 {
                     "id": "fe71e181-13ca-4725-80ce-6840df169e6b",
@@ -102,15 +102,15 @@
                 }
             ]
         },
-        {  
+        {
             "name": "Ball Mastery",
             "alwaysActive": true,
             "defaultView": 6,
             "exercises": "Individual",
             "exercisesCat": ["Technical 1", "Strength 1"],
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "d2941462-48e5-4021-94bb-4e10f2fe9674",
                     "name": "Toe Touches",
                     "description": "A beginner level skill that develops a feel for the ball using the soles of your feet. For an advanced variation refer to: Advanced Toe Touches.",
@@ -162,7 +162,7 @@
                             "description":"A beginner level skill that develops a feel for the ball using the insteps of your feet.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "85db25f5-b4d8-4cd5-9697-eb0fe0324cdb",
@@ -180,7 +180,7 @@
                             "description":"A beginner level skill that develops good contact with your laces. For an advanced variation refer to: LVL Combo.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "ba58dbbf-36fa-4e14-8c6a-3ef302c88770",
@@ -198,7 +198,7 @@
                             "description":"An intermediate level skill that can be performed to keep your body in-between the ball and the defender. For a more advanced variation refer to: L Turn Rolls.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "d3b9fe8b-5a2b-4686-9328-6ee7d080ab36",
@@ -216,7 +216,7 @@
                             "description":"An expert level skill that develops foot coordination and mental strength. For a simplified variation refer to: Laces or V-Tap or L Turn.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "bc11ef9d-f0dc-4021-ae6d-4dcc677a0ac5",
@@ -234,7 +234,7 @@
                             "description":"An intermediate level skill that can be performed to keep your body in-between the ball and the defender. For a more advanced variation refer to: L Turn Rolls.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "d59bd9da-18ae-4dd0-a90f-a9223444ea79",
@@ -252,7 +252,7 @@
                             "description":"An expert level skill that that can be performed to protect the ball, while at the same time misdirecting a defender. For a simplified version refer to: L Turns. For an advanced variation refer to: LVL Combo.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "b1db769d-73c0-4232-817f-071fae529e2c",
@@ -270,7 +270,7 @@
                             "description":"A beginner level skill that can be performed to manoeuver around a defender's outreached foot. For an advanced variation refer to: V Tap.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "23f75797-b9be-416f-a82a-74c0d73baacd",
@@ -288,7 +288,7 @@
                             "description":"A beginner level skill that can be performed to manoeuver around a defender's outreached foot. For an advanced variation refer to: V Tap Reverse.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "522defbc-d774-4a82-98d5-5b9952a10052",
@@ -306,7 +306,7 @@
                             "description":"An intermediate level skill that can be performed to manoeuver around a defender's outreached foot. For a simplified variation refer to: V Tap. For an advanced variation refer to: LVL Combo.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "7b1bc055-1d4a-49e5-b886-9cbcf41de105",
@@ -324,7 +324,7 @@
                             "description":"An expert level skill that develops balance, stability and foot coordination. For a simplified variation refer to: Advanced Cone Circle.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "5e20ffcf-9f26-4580-8d67-e60924c0d013",
@@ -342,7 +342,7 @@
                             "description":"A beginner level skill that develops lateral agility. This skill can be performed to avoid a defender that is closing you down at a high speed. For an advanced variation refer to: Roll Cut Scissors.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "ffa9c30b-d066-45b8-838d-1f6728a664d8",
@@ -360,7 +360,7 @@
                             "description":"An intermediate level skill that develops lateral agility and coordination. This skill can be performed to avoid a defender that is closing you down at a high speed. For a simplified variation refer to: Roll Cuts.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "ab8db445-f019-4568-af8c-6d5a69c1c10d",
@@ -378,7 +378,7 @@
                             "description":"An expert level skill that is designed to make your defender believe you're are passing the ball to a teammate.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "9727eae0-f2e8-41a7-85d8-e994472d4527",
@@ -396,7 +396,7 @@
                             "description":"A beginner level skill that develops balance, stability and foot coordination. For an advanced variation refer to: Advanced Cone Circle.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "70eab411-3fb3-4cd4-9ee8-89cab47f35f1",
@@ -414,7 +414,7 @@
                             "description":"An intermediate level skill that develops balance, stability and foot coordination. For a simplified variation refer to: Cone Circle. For an advanced variation refer to: Single Foot Cone Circle.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "09d5e094-b564-42a2-944c-39123ee6042a",
@@ -432,7 +432,7 @@
                             "description":"A beginner level skill that can be performed to manouver around a defenders outreached foot. For an advanced variation refer to: Advanced Opposite Drag.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "b93d6b60-fda5-4b18-8570-157441b50284",
@@ -450,7 +450,7 @@
                             "description":"An intermediate level skill that develops balance and a feel for the ball using the soles of your feet. For a simplified variation refer to: Sole Drags. For an advanced variation refer to: Sole Drag Catch.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "ac31b90a-e0d4-492e-be07-9c88398f9a1c",
@@ -468,7 +468,7 @@
                             "description":"An intermediate level skill that is designed to misdirect your opponent. When performing this skill, it is important to drop your shoulder in the direction you are faking.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "acc05825-cc9c-401b-81ff-aa3d520b2c0f",
@@ -486,7 +486,7 @@
                             "description":"A beginner level skill that develops a feel for the ball using the soles of your feet. For an advanced variation refer to: Double Sole Drag.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "cf3deceb-5505-42b8-a6e5-1ee6171de763",
@@ -504,7 +504,7 @@
                             "description":"An intermediate level skill that can be performed to manoeuver around a defender's outreached foot. For a simplified variation refer to: Opposite Drag.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "9a772338-be7a-444f-9325-4a85dd0440c8",
@@ -522,7 +522,7 @@
                             "description":"An expert level skill that develops quick feet. This skill can be performed to misdirect an opponent with a sudden change of direction of the ball.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "7740f55f-38b8-4ef6-b40b-e5a8e5d2461a",
@@ -540,7 +540,7 @@
                             "description":"An expert level skill that is designed to make your defender believe you're are passing the ball to a teammate.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "f0f49b9e-0426-4ea0-9cc1-9ebaf990f273",
@@ -558,7 +558,7 @@
                             "description":"An expert level skill that develops a feel for the ball using the soles of your feet. For a simplified variation refer to: Double Sole Drag.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "34913284-a512-43c3-8e05-1c3ef26e8659",
@@ -576,7 +576,7 @@
                             "description":"An expert level skill that develops balance and foot coordination. For an advanced variation refer to: Sole to Robana Advanced.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "7ff20c6a-6dbd-457c-93b6-ab0020865f82",
@@ -594,7 +594,7 @@
                             "description":"An expert level skill that develops balance and foot coordination. For a simplified variation refer to: Sole to Robana.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {   "id": "4627da17-2dc8-4d42-9d3e-039b9e42599e",
                     "name": "La Croqueta",
@@ -611,7 +611,7 @@
                             "description":"An intermediate level skill that is most effective when attacking a defender with speed and performing the skill the moment a tackle is put in.",
                             "loop": true
                         }
-                    ]  
+                    ]
 
                 },
                 {
@@ -630,7 +630,7 @@
                             "description":"An intermediate level skill that develops lateral agility and coordination. This skill can be performed to avoid a defender that is closing you down at a high speed.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "7d7a1692-765f-4533-a51a-4155df14bcf1",
@@ -648,7 +648,7 @@
                             "description":"An expert level skill that develops creativity on the ball and an understanding of different ways the ball can be manoeuvered.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "55eae466-84b2-43d6-a66e-849e11af175d",
@@ -666,18 +666,18 @@
                             "description":"An expert level skill that develops creativity on the ball and an understanding of different ways the ball can be manoeuvered.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 }
-            ]      
+            ]
         },
         {
             "name": "Juggling",
             "exercises": "Individual",
             "exercisesCat": ["Prehab 1", "Finishing 1"],
             "alwaysActive": true,
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "16b1c2d9-5a87-4af5-bb35-6232cb2ce996",
                     "name": "Ball Toss",
                     "description": "Before we learn to juggle with our feet it is important to build an relationship with the ball by understanding it's weight, size, bounce, and flight. For an advanced variation refer to: Ball Toss Advanced.",
@@ -713,7 +713,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "29be0024-571a-4ecf-9e4b-0eecfa794610",
                     "name": "Bounce Kick Up - BIH",
                     "description": "The most basic juggling technique that will allow you to get comfortable with the feel of the ball at your foot. The Ball in Hand Series (BIH) is a great way for beginners to avoid extra difficulties and to focus on their contact with the ball. For an advanced variation refer to: Laces Juggle.",
@@ -749,7 +749,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "81959df1-8859-47e7-b133-956cd179ab7e",
                     "name": "Right Laces Progression - BIH",
                     "description": "This exercise will be a good baseline test for how well your right foot juggling is improving. The key to improving with this exercise is adding one juggle at a time without skipping any numbers as you progress. The Ball in Hand Series (BIH) is a great way for beginners to avoid extra difficulties and to focus on their contact with the ball. To Improve your left foot, refer to: Left Laces Progression. For a simplified variation refer to: Laces Juggle - BIH.",
@@ -785,7 +785,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "0c1bdb8d-7343-4ab1-8b65-6f3d96b1c204",
                     "name": "Thigh Juggle - BIH",
                     "description": "This exercise will improve the contact you make on the ball with your thigh and prepare you for repeated juggling without the use of your hands. The Ball in Hand Series (BIH) is a great way for beginners to avoid extra difficulties and to focus on their contact with the ball. For an advanced variation refer to: Thigh Juggle Alternating.",
@@ -821,7 +821,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "13ff382d-f02b-4e64-8034-10c5504c9d19",
                     "name": "Left Thigh Progression - BIH",
                     "description": "This exercise will be a good baseline test for how well your left thigh juggling is improving. The key to improving with this exercise is adding one juggle at a time without skipping any numbers as you progress. The Ball in Hand Series (BIH) is a great way for beginners to avoid extra difficulties and to focus on their contact with the ball. To Improve your right thigh, refer to: Right Thigh Progression. For a simplified variation refer to: Thigh Juggle - BIH.",
@@ -857,7 +857,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "01092bcb-eb0a-414b-9a62-265ab902a43f",
                     "name": "Outside Trap - BIH",
                     "description": "The trapping technique is one of the most important when it comes to controlling a ball. Trapping will allow you to get a bouncing ball under control in order to perform higher percentage plays. When the ball is not directly in front of you it may be necessary to trap the ball with the outside of your foot.",
@@ -893,7 +893,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "8f218dca-a68f-4239-8592-d685aff17f6e",
                     "name": "Cruyff Trap - BIH",
                     "description": "The trapping technique is one of the most important when it comes to controlling a ball. Trapping will allow you to get a bouncing ball under control in order to perform higher percentage plays. The Cruyff trap is one of the most difficult trapping techniques however is the most effective when under pressure from a defender.",
@@ -929,7 +929,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "eabdfe1a-9f09-4feb-92b2-0411f213178c",
                     "name": "Bounce Juggle",
                     "description": "Improve the contact you make on the ball with your laces in order to prepare yourself for repeated juggling without the use of a bounce.  For a simplified variation refer to: Bounce Kick Up - BIH. For an advanced variation refer to: Bounce Juggle Progression.",
@@ -965,7 +965,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "8a4a4774-9aa1-42ba-a0f1-252d19615199",
                     "name": "Bounce Juggle Progression Alt",
                     "description": "Improve the contact you make on the ball with your laces in order to prepare yourself for repeated juggling without the use of a bounce.  For a simplified variation refer to: Bounce Juggle Progression. For an advanced variation refer to: Laces Juggling Progression.",
@@ -1001,7 +1001,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "345206b1-830e-4e50-afb6-17fb827eff2c",
                     "name": "Thigh Juggle Alternating",
                     "description": "As your contact with the ball improves, you will need to include a component of finesse to your juggle, making sure to take a touch that will set you up for success in your next juggle. For a simplified variation refer to: Left/Right Thigh Progression. For an advances variation refer to: Sitting Right Foot Juggle.",
@@ -1037,7 +1037,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "d51712af-5fa3-498b-821b-c322a2222c81",
                     "name": "Shoulder Juggle",
                     "description": "Juggling with your shoulders requires a great deal of technique and practice. Be sure to get comfortable juggling with your feet, thighs and head before moving on to your shoulders.",
@@ -1073,7 +1073,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "d1cae435-b5f2-4693-a442-3b77b76406ee",
                     "name": "Freestyle Juggle",
                     "description": "After learning and practicing how to juggle with all parts of your body it's time to tie them all together. Be creative and juggle in any and all ways possible.",
@@ -1109,7 +1109,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "37efea5a-bd59-45bc-8685-4ae87688d1a8",
                     "name": "Sitting Left Foot Juggle",
                     "description": "Juggling while sitting down removes your ability to reposition your body behind the ball in order to fix a bad touch. This will give you a great idea of how good your juggling and touch really is.",
@@ -1150,9 +1150,9 @@
         {
             "name": "Dribbling",
             "alwaysActive": true,
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "",
                     "name": "Body Faint",
                     "description": "",
@@ -1170,7 +1170,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Double Body Faint",
                     "description": "",
@@ -1188,7 +1188,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Scissor",
                     "description": "",
@@ -1206,7 +1206,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Double Scissor",
                     "description": "",
@@ -1224,7 +1224,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Henry Drag - Scissor",
                     "description": "",
@@ -1242,7 +1242,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Henry Drag - Scoop",
                     "description": "",
@@ -1260,7 +1260,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Rivelino",
                     "description": "",
@@ -1278,7 +1278,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Ronaldo Chop",
                     "description": "",
@@ -1296,7 +1296,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Roll",
                     "description": "",
@@ -1314,7 +1314,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Roll - Scissor",
                     "description": "",
@@ -1332,7 +1332,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Roll - Ronaldo Chop",
                     "description": "",
@@ -1350,7 +1350,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Misdirection",
                     "description": "",
@@ -1368,7 +1368,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Stop And Go",
                     "description": "",
@@ -1386,7 +1386,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Elastico",
                     "description": "",
@@ -1404,7 +1404,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Reverse Elastico",
                     "description": "",
@@ -1422,7 +1422,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Hocus Pocus",
                     "description": "",
@@ -1440,7 +1440,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Roulette",
                     "description": "",
@@ -1458,7 +1458,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "La Croqueta",
                     "description": "",
@@ -1476,7 +1476,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "The Knock",
                     "description": "",
@@ -1494,7 +1494,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "",
                     "name": "Manji",
                     "description": "",
@@ -1512,14 +1512,14 @@
                         }
                     ]
                 }
-            ]        
+            ]
         },
-        {    
+        {
             "name": "Wall Work",
             "alwaysActive": true,
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "1bb9afd8-5f75-4b89-8184-8106fdc4b5e8",
                     "name": "Instep One Touch",
                     "description": "A beginner level technique that develops accurate passing with the instep of your foot. For an advanced variation refer to: Instep Alternating.",
@@ -2045,9 +2045,9 @@
         {
             "name": "Core",
             "alwaysActive": true,
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "f7daa3a6-8e06-4309-9e5f-1386c8146b27",
                     "name": "Mountain Climber",
                     "description": "progressions: mountain climber, pike up, frog",
@@ -2476,7 +2476,7 @@
                             "description":"",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "063eddc7-b6c1-499e-80b5-448087436fd7",
@@ -2591,9 +2591,9 @@
         {
             "name": "Yoga",
             "alwaysActive": true,
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "98174670-1864-4fe8-bc4a-797afdd5e5e5",
                     "name": "Yoga For Legs",
                     "description": "Leg-strengthening yoga poses for beginners. Your legs support you in everyday activity and need to be strong to power through competition. Standing yoga poses will build lower-body power and flexibility in your quadriceps, hamstrings, and calves.",
@@ -2611,7 +2611,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "52da8fb6-40e9-434d-8059-9706b09da037",
                     "name": "Yoga For Hips",
                     "description": "Hip-opening yoga poses for beginners. Sitting for extensive periods will cause the muscles to relax and deactivate resulting in tight hips and shorter running strides when the time come to play. These poses will loosen tight hips, improve your range of motion and circulation, and alleviate back pain.",
@@ -2629,7 +2629,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "0108dfdb-c307-40da-b105-e27b9c2bfa51",
                     "name": "Yoga For Back",
                     "description": "Back-strengthening yoga poses for beginners. Back pain often occurs because something is off in the way your spinal joints, muscles, discs, and nerves fit together and move. These poses are great for pain relief but are significantly more important for preventative care for these types of issues.",
@@ -2647,7 +2647,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "4c1d7b91-8eb7-4a18-abba-0c5fe915090e",
                     "name": "Yoga For Hamstrings",
                     "description": "Hamstring-stretching yoga poses for beginners. Hamstrings can get shorter or “tight” when you sit too much or when you over train your quads without counter stretching. When this happens, the hamstrings begin to pull down on the “sit” bones, making the pelvis and hips tight while flattening the low back curvature in your lumbar area. These poses will help to counter act these effects and prolong your career as an athlete.",
@@ -2665,7 +2665,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "18020b7a-2fcf-4ad9-a151-2a7edb80e571",
                     "name": "Yoga For Shoulders",
                     "description": "Shoulder-relief yoga poses for beginners. Pain in the shoulder can have many potential causes, including muscle injury and torn ligaments. Shoulder stretches are an amazing way to release tension in your head and neck while rehabbing any injuries or pain.",
@@ -2684,6 +2684,6 @@
                     ]
                 }
             ]
-        }        
+        }
     ]
 }
