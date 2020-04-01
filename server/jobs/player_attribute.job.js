@@ -35,17 +35,16 @@ const loadContent = () => {
             resolve(collectTags(devContentStructure));
         }
         else {
-            // let resourceLocation = config.aws.VIDEO_STRUCTURE;
-            // request(resourceLocation, (error, response, body) => {
-            //     if (!error && response.statusCode == 200) {
-            //         resolve(collectTags(JSON.parse(body)));
-            //     }
-            //     else {
-            //         reject(error);
-            //     }
-            // });
-            const devContentStructure = require('../../video_structure.json');
-            resolve(collectTags(devContentStructure));
+            let resourceLocation = config.aws.VIDEO_STRUCTURE;
+            request(resourceLocation, (error, response, body) => {
+                if (!error && response.statusCode == 200) {
+                    resolve(collectTags(JSON.parse(body)));
+                }
+                else {
+                    reject(error);
+                }
+            });
+     
         }
     });
 }
