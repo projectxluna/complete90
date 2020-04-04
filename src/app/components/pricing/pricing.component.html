@@ -86,7 +86,8 @@
                         <li><i class="fas fa-times times-icon"></i></li>
                         <li><i class="fas fa-times times-icon"></i></li>
                         <li><i class="fas fa-times times-icon"></i></li>
-                        <li class="sticky"><a class="purchase-btn1 text-white" (click)="setTrial('amateur');setCycle('monthly');selectPlan('player');">Start 7-Day free Trial</a></li>
+                        <!--  (click)="setTrial('amateur');setCycle('monthly');selectPlan('player');"  -->
+                        <li class="sticky"><a class="purchase-btn1 text-white" [routerLink]="['/login_signup']">Start 7-Day free Trial</a></li>
                     </ul>
                   </div>
                   <!-- <a href="" class="box-btn">purchase now</a> -->
@@ -109,7 +110,8 @@
                         <li><i class="fas fa-check check-icon"></i></li>
                         <li><i class="fas fa-check check-icon"></i></li>
                         <li><i class="fas fa-check check-icon"></i></li>
-                        <li class="sticky"><a class="purchase-btn1 text-white" (click)="setTrial('pro');setCycle('monthly');selectPlan('player');">Start 7-Day free Trial</a></li>
+                        <!-- (click)="setTrial('pro');setCycle('monthly');selectPlan('player');" -->
+                        <li class="sticky"><a class="purchase-btn1 text-white"  [routerLink]="['/login_signup']">Start 7-Day free Trial</a></li>
                     </ul>
                   </div>
                </div>

@@ -375,7 +375,7 @@ module.exports = function (apiRoutes) {
 
         let nodeEnv = process.env.NODE_ENV;
         if (!nodeEnv || nodeEnv === 'dev') {
-            sortSession(require('../video_structure.json'));
+            sortSession(require('../staging_video_structure.json'));
         } else {
             let resourceLocation = config.aws.VIDEO_STRUCTURE;
             request(resourceLocation, function (error, response, body) {
@@ -386,6 +386,7 @@ module.exports = function (apiRoutes) {
                     callback(error);
                 }
             });
+           
         }
     }
 
@@ -393,7 +394,7 @@ module.exports = function (apiRoutes) {
     function loadSessions(callback) {
         let nodeEnv = process.env.NODE_ENV;
         if (!nodeEnv || nodeEnv === 'dev') {
-            callback(null, JSON.stringify(require('../video_structure.json')));
+            callback(null, JSON.stringify(require('../staging_video_structure.json')));
         }
         else {
             let resourceLocation = config.aws.VIDEO_STRUCTURE;

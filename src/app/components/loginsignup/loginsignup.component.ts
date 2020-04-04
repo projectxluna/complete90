@@ -42,13 +42,15 @@ export class LoginSignupComponent implements OnInit {
                     this.disabled = false;
                 }
             });
+
+            
         }
 
     ngOnInit() {
         // reset login status
         //this.authenticationService.logout();
         this.previousRoute = this.routingState.getPreviousUrl();
-        if(this.previousRoute == '/sessions') {
+        if(this.previousRoute == '/sessions' || this.previousRoute == '/pricing') {
             this.signup = !this.signup;
         }
 
@@ -161,6 +163,11 @@ export class LoginSignupComponent implements OnInit {
                 if (result === true) {
                     this.dataService.getUserProfile().subscribe((me) => {
                         this.router.navigate(['/dashboard']);
+                        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                            this.router.navigate(['/dashboard']);
+                        }); 
+                        //window.location.replace("/dashboard");
+                        
                     });
                 } else {
                     this.error = 'username or password is incorrect';
