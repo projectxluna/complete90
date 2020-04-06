@@ -362,11 +362,11 @@ input{
     height: 315px;
 }
 
-.vid-pa{
+.vid-pa {
 	margin: auto;
 	float: none;
 	margin-bottom: 26px;
-	z-index: 123123123;
+	z-index: 1;
 }
 
 .gallerypics img{

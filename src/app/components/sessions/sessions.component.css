@@ -246,11 +246,11 @@ button:focus{
 	color: black;
 	text-align: center;
 	cursor: pointer;
-	padding: 20px;
+	padding: 100px 20px;
 }
 
 .exercise-tab:hover, .exercise-tab.active {
-	background: #fd1541;
+	background: rgba(120, 120, 120, 0.8);
 	color: white;
 }
 
@@ -264,11 +264,11 @@ button:focus{
 	color: #444;
 	text-align: center;
     cursor: pointer;
-    padding: 20px;
+    padding: 100px 20px;
 }
 
 .exercise-cat-tab:hover, .exercise-cat-tab.active {
-	background: #fd1541;
+	background: rgba(120, 120, 120, 0.8);
 	color: white;
 }
 
