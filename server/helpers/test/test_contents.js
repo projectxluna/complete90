@@ -1,7 +1,7 @@
 var request = require('request');
 var AWS = require('../aws');
 
-let resourceLocation = 'https://s3.us-east-2.amazonaws.com/complete90/config/video_structure.json';
+let resourceLocation = 'https://s3.us-east-2.amazonaws.com/complete90/config/staging_video_structure.json';
 
 // request(resourceLocation, function (error, response, body) {
 //     if (!error && response.statusCode == 200) {
@@ -12,7 +12,7 @@ let resourceLocation = 'https://s3.us-east-2.amazonaws.com/complete90/config/vid
 //         });
 //     }
 // });
-var content = require('../../../video_structure.json')
+var content = require('../../../staging_video_structure.json')
 signLinks(JSON.stringify(content), (err, result) => {
     if (!err) {
         console.log(JSON.stringify(result));
