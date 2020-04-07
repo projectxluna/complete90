@@ -106,7 +106,7 @@
 
 				<div class="col-lg-6 col-md-6 col-sm-6 playerPromoText">
 					<a href="" class="inactiveLink">PLAYER</a>
-					<h1>THE<b>COMPLETE 90</b> for players</h1>
+					<h1>THE <b>COMPLETE 90</b> for players</h1>
 					<div class="PromoSignbtn">
 						<a [routerLink]="['/login_signup']">SIGN UP</a>
 					</div>
@@ -123,9 +123,9 @@
 
 				<div class="col-lg-6 col-md-6 col-sm-6 coachPromoText">
 					<a href="" class="inactiveLink">CLUB</a>
-					<h1>THE<b>COMPLETE 90</b> for clubs</h1>
+					<h1>THE <b>COMPLETE 90</b> for clubs</h1>
 					<div class="PromoSignbtn">
-						<a href="#" onclick="return false;">COMING SOON</a>
+						<a href="#" onclick="return false;">CONTACT US</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-sm-6 coachPromoImage">
@@ -157,7 +157,7 @@
 					<a href="" class="inactiveLink">CLUB</a>
 					<h1>THE<b>COMPLETE 90</b> for clubs</h1>
 					<div class="PromoSignbtn">
-						<a onclick="return false;">COMING SOON</a>
+						<a onclick="return false;">CONTACT US</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-sm-6 coachPromoImage">
@@ -170,13 +170,14 @@
 <!-- PLAYER/COACH SECTION END -->
 
 
+
 <!-- VIDEO SHOWCASE -->
 <div class="vidShowcasebg">
 	<!-- <div class="videoWrapper">
 		<iframe width="560" height="315" scrolling="yes" src="https://vimeo.com/user92504425/review/304736375/97a54daf8c?showinfo=0&controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 	</div> -->
-	<video width="100%" controls controlsList="nodownload" loop muted>
-		<source src="https://s3.us-east-2.amazonaws.com/complete09/Public/The+Complete+90+Promo+Video+Final.mp4" type="video/mp4">
+	<video width="100%" controls controlsList="nodownload" loop muted poster="assets/header_image.png">
+		<source src="https://s3.us-east-2.amazonaws.com/complete09/Public/The+Complete+90+Promo+Video+Final.mp4" type="video/mp4" >
 			Your browser does not support HTML5 Video.
 	</video>
 </div>
@@ -235,7 +236,7 @@
 					<div class="response" id="mce-success-response" style="display:none"></div>
 				</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 				<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_18e4ef69694befc5389a215f1_298bc9542e" tabindex="-1" value=""></div>
-				<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+				<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" (click)="downloadFile()"></div>
 				</div>
 			</form>
 			</div>
@@ -267,4 +268,4 @@
 			</div>
 		</div>
 	</div>
-<!-- QUOTE SECTION END-->
+<!-- QUOTE SECTION END -->

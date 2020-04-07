@@ -67,11 +67,12 @@ video {
 	color: #fd1541;
 }
 .programs{
-box-shadow: 0px 2px 16px lightgrey;
+	box-shadow: 0px 2px 16px lightgrey;
     padding: 30px 20px;
     margin: 0px auto 40px auto;
     float: none !important;
-    color: #7d7373;
+	color: #7d7373;
+	border-radius: 5px;
 }
 .programs h3{
 	color: #fd1541;
@@ -83,12 +84,18 @@ box-shadow: 0px 2px 16px lightgrey;
 
 /*Rates*/
 
-.rate {
+.desc {
 	display: none;
+	margin-top: 15px;
 }
 
 .expand {
 	cursor: pointer;
+	margin: 0px !important;
+}
+
+.expand span {
+	float: right;
 }
 
 @media only screen and (max-width: 1200px){

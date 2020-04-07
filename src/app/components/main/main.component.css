@@ -393,8 +393,12 @@ video {
 
 /*----------------------------5. POST CARD---------------------------*/
 .post-card {
-	background: #2f4054;
-	
+	/* background: #2f4054; */
+}
+
+.post-card-title {
+	font-size: 30px;
+	color: #2c2c2c;
 }
 
 .post-card .row {
@@ -402,8 +406,8 @@ video {
 }
 
 .steps-row {
-	background: #262626;
-	padding: 30px 100px;
+	/* background: #262626; */
+	padding: 40px 100px;
 }
 
 .post-card-title {
@@ -431,20 +435,25 @@ video {
 	margin-bottom: 36px;
 }
 
+.features-details {
+	padding-top: 30px;
+}
+
 .step-number, .features-title {
 	font-weight: bold;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 24px;
+	font-size: 20px;
 	display: block;
 	text-align: center;
 	margin-bottom: 10px;
+	color: #2c2c2c;
 }
 
 .step-des, .features-desc {
 	font-style: italic;
 	color: #3b90c7;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: bold;
 	display: block;
 	text-align: center;
@@ -459,7 +468,7 @@ video {
 .features h1 span {
 	color: #262624;
 	font-style: italic;
-	background: #8f989f;
+	/* background: #8f989f; */
 	padding: 0px 10px;
 }
 
@@ -470,7 +479,7 @@ video {
 
 
 .features-details .fa {
-	color: white;
+	color: #262624;
 	font-size: 62px;
 	margin-top: 25px;
 	margin-bottom: 15px;
@@ -481,7 +490,7 @@ video {
 }
 
 .features-desc {
-	color: white;
+	color: #2c2c2c;
 }
 
 

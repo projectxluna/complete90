@@ -51,15 +51,14 @@ export class SessionsComponent implements OnInit {
   selectExercise(exercise) {
     this.selectedExercisesCategories.exercise = exercise;
     this.selectedExercisesCategories.exerciseName = exercise.name;
-    
   }
   selectExerciseCat(category) {
     this.selectedExercisesCategories.category = category.name;
     this.selectedExerciseCat = this.getSelectedExerciseCatSessions();
     console.log("Exercises: ", this.selectedExerciseCat);
   }
-
-
+  
+  
 
 
   // encryptData(data) {
@@ -165,50 +164,50 @@ export class SessionsComponent implements OnInit {
 
                                   ],
                   }, 
-                  {
-                    "name": 'Partner',
-                    "categories": [
-                                    {
-                                      "name": "Prehab 2",
-                                      "subCategories": ["Ball Mastery", "Juggling"]
-                                    },
-                                    {
-                                      "name": "Technical 2",
-                                      "subCategories": ["Dribbling", "Wall Work"]
-                                    },
-                                    {
-                                      "name": "Finishing 2",
-                                      "subCategories": ["Core", "Juggling"]
-                                    },
-                                    {
-                                      "name": "Strength 2",
-                                      "subCategories": ["Ball Mastery", "Juggling"]
-                                    },
+                  // {
+                  //   "name": 'Partner',
+                  //   "categories": [
+                  //                   {
+                  //                     "name": "Prehab 2",
+                  //                     "subCategories": ["Ball Mastery", "Juggling"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Technical 2",
+                  //                     "subCategories": ["Dribbling", "Wall Work"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Finishing 2",
+                  //                     "subCategories": ["Core", "Juggling"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Strength 2",
+                  //                     "subCategories": ["Ball Mastery", "Juggling"]
+                  //                   },
 
-                                  ],
-                  }, 
-                  {
-                    "name": 'Challenge',
-                    "categories": [
-                                    {
-                                      "name": "Prehab 3",
-                                      "subCategories": ["Ball Mastery", "Juggling"]
-                                    },
-                                    {
-                                      "name": "Technical 3",
-                                      "subCategories": ["Dribbling", "Wall Work"]
-                                    },
-                                    {
-                                      "name": "Finishing 3",
-                                      "subCategories": ["Core", "Juggling"]
-                                    },
-                                    {
-                                      "name": "Strength 3",
-                                      "subCategories": ["Ball Mastery", "Juggling"]
-                                    },
+                  //                 ],
+                  // }, 
+                  // {
+                  //   "name": 'Challenge',
+                  //   "categories": [
+                  //                   {
+                  //                     "name": "Prehab 3",
+                  //                     "subCategories": ["Ball Mastery", "Juggling"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Technical 3",
+                  //                     "subCategories": ["Dribbling", "Wall Work"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Finishing 3",
+                  //                     "subCategories": ["Core", "Juggling"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Strength 3",
+                  //                     "subCategories": ["Ball Mastery", "Juggling"]
+                  //                   },
 
-                                  ],
-                  }, 
+                  //                 ],
+                  // }, 
                 ],
               };
 
@@ -236,6 +235,9 @@ export class SessionsComponent implements OnInit {
         jQuery("body").removeClass("modal-open");
       });
     });
+
+    this.selectExercise(this.exercisesArray.exercises[0]);
+
   }
 
   hasFilter() {
@@ -562,7 +564,7 @@ export class SessionsComponent implements OnInit {
       this.collectTagsAndCategories(response.content);
       this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);
-      console.log("Custom Sessions", this.customSessions);
+      console.log("Assignment Sessions", this.assignments);
     });
   }
 
