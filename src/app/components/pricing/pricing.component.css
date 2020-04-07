@@ -19,16 +19,17 @@ h3{
 .p-0{
 	padding: 0 !important;
 }
-.pricing-tabs .nav-item{
-		background: #fd1541;
-	}
+
+.nav-tabs {
+	border-bottom: 0px;
+}
 	.pricing-tabs .nav-item img{
 		height: 100px;
 	}
 	.pricing-tabs .nav-item.active .nav-link{
-		background: #0e233e;
-		/*color: white;*/
-		border:none;
+		border-bottom: 1px solid #eee;
+		box-shadow: 0px 24px 40px 0px #eee;
+    	color: #000;
 	}
 	.free-trial{
 		margin: auto !important;
@@ -41,16 +42,19 @@ h3{
 		margin-top: 0px !important;
 	}
 	.pricing-tabs .nav-item.active .nav-link h3{
-		color: white;
+		color: #000;
 	}
 	.pricing-tabs .nav-item .nav-link{
 		border:none;
 	}
 	.pricing-tabs .nav-item .nav-link:hover{
-		background:  #fd1541 !important;
+		border-bottom: 1px solid #eee;
+		box-shadow: 0px 24px 40px 0px #eee;
+    	color: #000;
 	}
 	.pricing-tabs .nav-item.active .nav-link:hover{
-		background:  #0e233e !important;
+		border-bottom: 1px solid #eee;
+		box-shadow: 0px 0px 0px #000;
 	}
 	.pricing-tabs .nav-item {
 		color: white;
@@ -59,33 +63,36 @@ h3{
 		/*border:0px;*/
 	}
 	.pricing-tabs .nav-item{
-	width: 50% !important;
-}
+		width: 48% !important;
+	}
+
+	.pricing-tabs .nav-item:nth-child(1){
+		margin-right: 2%;
+	}
+
 	.pricing-tabs .nav-item .nav-link{
 		margin: 0px;
 		padding: 30px;
 	}
 	.pricing-tabs .nav-item .nav-link h3{
-		padding-top: 20px;
+		font-size: 32px;
 	}
-.pricing-tabs-content{
-	    box-shadow: 0px 2px 12px lightgrey;
-}
+
+	
 .pricing-tabs-content img{
     object-fit: cover;
     width: 100%;
     height: 300px;
 }
 .pricing-tabs-content a{
-	background: #fd1541;
 	color: white;
 	padding: 10px 25px;
 	text-decoration: none;
 	font-size: 16px;
-	border: 1px solid #fd1541;
 	font-weight: 500;
 	transition: all 0.5s;
 	display: inline-block;
+	background: #fd1541;
 }
 .pricing-tabs-content a:hover{
 	background: transparent;
@@ -96,6 +103,10 @@ h3{
 	    color: #1e1e1e;
     font-size: 16px;
     line-height: 1.7em;
+}
+
+.testimonials p {
+	font-size: 12px;
 }
 
 .testimonials_title {
@@ -255,6 +266,7 @@ a.box-btn:hover, a.border-btn:hover {
 	border-right: 2px solid white;
 	font-weight: bold;
 	width: 50%;
+	background: #eee;
 }
 
 .sticky {

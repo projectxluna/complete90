@@ -13,7 +13,15 @@ export class ProgramComponent implements OnInit {
   ngOnInit() {
     jQuery(document).ready(function(){
       jQuery(".expand").on("click", function(){
-        jQuery(this).closest("div").find(".rate").slideToggle();
+        if(jQuery(this).hasClass("expanded")){
+          jQuery(this).find("span").text("+");
+          jQuery(this).removeClass("expanded");
+        } else {
+          jQuery(this).find("span").text("-");
+          jQuery(this).addClass("expanded");
+        }
+        jQuery(this).next("div.desc").slideToggle();
+        
       });
     });
   }
