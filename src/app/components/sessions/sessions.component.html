@@ -332,7 +332,7 @@
         </div>
     </div>
 
-    <div class="col-lg-12 exercise-cat-section">
+    <div class="col-lg-12 exercise-cat-section" *ngIf="hasSubscription() || adminProfile || coachProfile">
         <div class="row">
             <div class="col-md-3 exercise-cat-tab" *ngFor="let category of selectedExercisesCategories.exercise['categories']" (click)="selectExerciseCat(category)" [ngClass]="{'active': selectedExercisesCategories.category === category.name}">{{category.name}}</div>
         </div>
