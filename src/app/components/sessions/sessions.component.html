@@ -109,7 +109,7 @@
                     <!-- LIST OF VIDS INSIDE OF SESSION -->
                     <div [hidden]="session.content.length < 1 || !session.expanded">
                         <div *ngFor="let content of session.content; let i = index" class="row dets-ma">
-                            <div *ngIf="content.name !== null">
+                            <div *ngIf=" content !== null ">
                                 <div class="col-xs-6 sessName">
                                     <div class="row">{{ content.name | uppercase }}</div>
                                     <span class="row" style="font-size: 12px;">
