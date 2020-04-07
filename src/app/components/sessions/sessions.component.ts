@@ -564,7 +564,7 @@ export class SessionsComponent implements OnInit {
       this.collectTagsAndCategories(response.content);
       this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);
-      console.log("Assignment Sessions", this.assignments);
+      console.log("Custom Sessions", this.customSessions);
     });
   }
 
