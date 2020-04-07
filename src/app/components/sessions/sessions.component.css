@@ -265,7 +265,8 @@ button:focus{
 	color: #444;
 	text-align: center;
     cursor: pointer;
-    padding: 100px 20px;
+	padding: 100px 20px;
+	border: 1px solid #eee;
 }
 
 .exercise-cat-tab:hover, .exercise-cat-tab.active {
