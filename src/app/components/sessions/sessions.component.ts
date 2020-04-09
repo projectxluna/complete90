@@ -17,7 +17,49 @@ declare var jQuery: any;
   styleUrls: ['./sessions.component.css'],
   entryComponents: [VideoplayerComponent, AddcontentToSessionComponent]
 })
-export class SessionsComponent implements OnInit {
+  export class SessionsComponent implements OnInit {
+
+    constructor(private dataService: DataService, private modalService: BsModalService, public authenticationService: AuthenticationService) {
+      this.getFreeSessions();
+
+      if(this.isLoggedIn()) {
+        this.getSessions();
+        this.dataService.getUserProfile().subscribe(res => {
+          if (!res.success) {
+            return;
+          }
+          var manager = res.user.profiles.find(profile => {
+            return profile.type === 'MANAGER';
+          });
+          this.managerProfile = manager ? true : false;
+        });
+      } 
+      
+    }
+
+
+
+    ngOnInit() {
+      this.init();
+    }
+
+    init() {
+      if(this.isLoggedIn()){
+        this.loadProfile();
+      }
+      
+      jQuery(document).ready(function(){
+        jQuery(".purchase-sub").on("click", function(){
+          jQuery(".modal-backdrop").remove();
+          jQuery("body").removeClass("modal-open");
+        });
+      });
+
+      //this.selectExercise(this.exercisesArray.exercises[0]);
+
+  }
+
+
   encryptSecretKey = "abc123zyx654";
   //CryptoJS = require("crypto-js");
   @ViewChild(ModalDirective) modal: ModalDirective;
@@ -57,32 +99,6 @@ export class SessionsComponent implements OnInit {
     this.selectedExerciseCat = this.getSelectedExerciseCatSessions();
     console.log("Exercises: ", this.selectedExerciseCat);
   }
-  
-  
-
-
-  // encryptData(data) {
-
-  //   try {
-  //     return this.CryptoJS.AES.encrypt(JSON.stringify(data), this.encryptSecretKey).toString();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
-
-  // decryptData(data) {
-
-  //   try {
-  //     const bytes = this.CryptoJS.AES.decrypt(data, this.encryptSecretKey);
-  //     if (bytes.toString()) {
-  //       return JSON.parse(bytes.toString(this.CryptoJS.enc.Utf8));
-  //     }
-  //     return data;
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
-
 
 
   getSelectedExerciseCatSessions() {
@@ -223,22 +239,7 @@ export class SessionsComponent implements OnInit {
 
   bsModalRef: BsModalRef;
 
-  ngOnInit() {
-    this.init();
-  }
-
-  init() {
-    this.loadProfile();
-    jQuery(document).ready(function(){
-      jQuery(".purchase-sub").on("click", function(){
-        jQuery(".modal-backdrop").remove();
-        jQuery("body").removeClass("modal-open");
-      });
-    });
-
-    this.selectExercise(this.exercisesArray.exercises[0]);
-
-  }
+  
 
   hasFilter() {
     return this.selectedFilter.tag != '' || this.selectedFilter.category != '' || this.selectedFilter.skillLevel != '';
@@ -296,20 +297,7 @@ export class SessionsComponent implements OnInit {
     return this.sessions;
   }
 
-  constructor(private dataService: DataService, private modalService: BsModalService, public authenticationService: AuthenticationService) {
-    this.getFreeSessions();
-    this.getSessions();
-
-    this.dataService.getUserProfile().subscribe(res => {
-      if (!res.success) {
-        return;
-      }
-      var manager = res.user.profiles.find(profile => {
-        return profile.type === 'MANAGER';
-      });
-      this.managerProfile = manager ? true : false;
-    });
-  }
+  
 
   selectTag(tag) {
     // check these 
@@ -762,7 +750,7 @@ onProfileUpdated(user) {
 
 
   isLoggedIn() {
-    if (!this.authenticationService.token) {
+    if (!this.authenticationService.token || this.authenticationService.token == null) {
       return false;
     } else {
       return true;

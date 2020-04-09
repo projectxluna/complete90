@@ -36,7 +36,9 @@ export class NavComponent implements OnInit {
     public authenticationService: AuthenticationService) {
       this.router.events.subscribe((ev) => {
         if (ev instanceof NavigationEnd) { 
-          this.loadProfile();
+          if(this.isLoggedIn()) {
+            this.loadProfile();
+          }
         }
       });
       this.init();
@@ -47,7 +49,10 @@ export class NavComponent implements OnInit {
   }
 
   init() {
-    this.loadProfile();
+    if(this.isLoggedIn()) {
+      this.loadProfile();
+    }
+      
   }
 
   hasSubscription(cb) {
@@ -69,7 +74,7 @@ export class NavComponent implements OnInit {
   }
 
   isLoggedIn() {
-    if (this.authenticationService.token) {
+    if (this.authenticationService.token && this.authenticationService.token != null) {
       if(!this.userProfile.subscription && !this.activeRequest) {
         this.activeRequest = true;
         this.hasSubscription((res) => {

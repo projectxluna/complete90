@@ -159,7 +159,8 @@ button:focus{
     position: relative;
     padding: 15px 25px 15px 25px;
     overflow: scroll;
-    height: 500px;
+	height: auto;
+	min-height: 200px;
 }
 
 .modal-header {

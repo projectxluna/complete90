@@ -9,14 +9,14 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" [routerLink]="['/']" (click)="collapse()">
-      	<img src="assets/complete90logo-alt.png"><a class="logoTxt">THE<b>COMPLETE 90</b>
+      	<img src="assets/complete90logo-alt.png"><a class="logoTxt">THE <b>COMPLETE 90</b>
       		</a>
       </a>
     </div>
 
 
     <div class="navbar-collapse" [ngClass]="{collapse: collapsed}">
-	    	<ul class="nav navbar-nav navbar-right">
+	    	<ul class="nav navbar-nav navbar-center"  [ngClass]="{loggedIn: isLoggedIn()}" id="main-nav">
 			   <li *ngIf="!isLoggedIn()"   [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']" (click)="collapse()">HOME <span class="sr-only">(current)</span></a></li>
 
 			   		<li *ngIf="isLoggedIn() && adminProfile" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/clubs']" (click)="collapse()">CLUBS</a></li>
@@ -29,15 +29,15 @@
 
 					<li *ngIf="isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/dashboard']" (click)="collapse()">DASHBOARD</a></li>
 
-					<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/programs']" (click)="collapse()">PROGRAMS</a></li>
+					<li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/programs']" (click)="collapse()">PROGRAMS</a></li>
 
-					<li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/training']" (click)="collapse()">PERS. TRAINING</a></li>
+					<!-- <li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/training']" (click)="collapse()">PERS. TRAINING</a></li> -->
 
 		    		<li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/about']" (click)="collapse()">ABOUT US</a></li>
 				
-					<li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/login_signup']" (click)="collapse()">LOGIN/SIGNUP</a></li>
+					<li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="floated_right"><a [routerLink]="['/login_signup']" (click)="collapse()">LOGIN/SIGNUP</a></li>
 
-					<li *ngIf="isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a (click)="logout()">LOGOUT</a></li>
+					<li *ngIf="isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"  class="floated_right"><a (click)="logout()">LOGOUT</a></li>
 
 					<!-- <li *ngIf="isLoggedIn()" class="dropdown navbar-right" dropdown>
 						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
