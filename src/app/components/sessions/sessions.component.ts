@@ -55,7 +55,7 @@ declare var jQuery: any;
         });
       });
 
-      //this.selectExercise(this.exercisesArray.exercises[0]);
+      this.selectExercise(this.exercisesArray.exercises[0]);
 
   }
 
@@ -162,20 +162,28 @@ declare var jQuery: any;
                     "name": 'Individual',
                     "categories": [
                                     {
-                                      "name": "Prehab 1",
-                                      "subCategories": ["Ball Mastery", "Juggling"]
+                                      "name": "Ball Mastery",
+                                      "subCategories": ["Ball Mastery"]
                                     },
                                     {
-                                      "name": "Technical 1",
-                                      "subCategories": ["Dribbling", "Wall Work"]
+                                      "name": "Juggling",
+                                      "subCategories": ["Juggling"]
                                     },
                                     {
-                                      "name": "Finishing 1",
-                                      "subCategories": ["Core", "Juggling"]
+                                      "name": "Dribbling",
+                                      "subCategories": ["Dribbling"]
                                     },
                                     {
-                                      "name": "Strength 1",
-                                      "subCategories": ["Ball Mastery", "Juggling"]
+                                      "name": "Wall Work",
+                                      "subCategories": ["Wall Work"]
+                                    },
+                                    {
+                                      "name": "Core",
+                                      "subCategories": ["Core"]
+                                    },
+                                    {
+                                      "name": "Yoga",
+                                      "subCategories": ["Yoga"]
                                     },
 
                                   ],
@@ -295,6 +303,27 @@ declare var jQuery: any;
       return filtered;
     }
     return this.sessions;
+  }
+
+
+
+  getFilteredExercises() {
+    var sess = this.getFilteredSessions();
+    if(this.selectedExerciseCat != undefined) {
+      let clonedSelectedExercise = _.cloneDeep(this.selectedExerciseCat);
+      let returnSession = [];
+      sess.forEach(function(s){
+        //console.log("Session name: ", session.name.trim());
+        if(s.name.trim() == clonedSelectedExercise[0].name.trim()) {
+          returnSession.push(s);
+          console.log(returnSession);
+        }
+      });
+      return returnSession;
+      //console.log(clonedSelectedExercise[0].name.trim());
+    } else {
+      return [];
+    }
   }
 
   
@@ -552,7 +581,7 @@ declare var jQuery: any;
       this.collectTagsAndCategories(response.content);
       this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);
-      console.log("Custom Sessions", this.customSessions);
+      console.log("Custom Sessions", this.sessions);
     });
   }
 
