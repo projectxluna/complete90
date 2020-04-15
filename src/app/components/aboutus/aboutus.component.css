@@ -12,9 +12,14 @@
 */
 
 /*----------------------------0. GOBAL CSSS--------------------------*/
+body {
+	overflow-x: hidden !important;
+}
 
 div{
 	font-family: 'Montserrat';
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .inactiveLink{
@@ -170,7 +175,7 @@ div{
 }
 
 .sponLogo1 img{
-    max-width: 40%;
+    max-width: 100px;
 }
 
 .sponLogo2 img{

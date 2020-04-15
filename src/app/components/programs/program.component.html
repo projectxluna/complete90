@@ -10,8 +10,23 @@
 <!-- HERO IMAGE END-->
 
 <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <div class="content" style="margin-top: 50px;">
+                        <h1 class="text-dark">We offer 4 different types of Programs for our clients</h1>
+                        <h4 class="text-dark">These programs are only available for locals within the Greater Toronto Area.</h4>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
         <div class="container programs-container">
             <div class="row">
+                <div class="col-md-10 mx-auto">
+
+                </div>
                 <div class="col-md-10 mx-auto mt-5 programs">
                     <h3 class="expand">1 on 1 Session <span>+</span></h3>
                     <div class="desc">
@@ -24,16 +39,16 @@
                                 <div class="col-md-4">
                                     <h4>Rates</h4>
                                     <p>
-                                        $60 - 1 Hour Session<br>
-                                        $80 - 1.5 Hour Session<br>
-                                        $100 - 2 Hour Session
+                                        $80 - 1 Hour Session<br>
+                                        $100 - 1.5 Hour Session<br>
+                                        $120 - 2 Hour Session
                                     </p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="#" class="events-btn float-right">Contact Us</a>
+                                    <a [routerLink]="['/contact']" class="events-btn float-right">Contact Us</a>
                                 </div>
                             </div>
                     </div>
@@ -49,27 +64,28 @@
                                 <h4 >Rate</h4>
                                 <p>
                                     <b>2 players</b><br>
-$40 each - 1 Hour Session<br>
-$50 each - 1.5 Hours Session<br>
-$60 each - 2 Hours Session<br>
+$50 each - 1 Hour Session<br>
+$60 each - 1.5 Hours Session<br>
+$70 each - 2 Hours Session<br>
 <br>
 <b>3+ players</b><br>
-$30 each - 1 Hour Session<br>
-$40 each - 1.5 Hour Session<br>
-$50 each - 2 Hours Session<br>
+$40 each - 1 Hour Session<br>
+$50 each - 1.5 Hour Session<br>
+$60 each - 2 Hours Session<br>
                                 </p>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="#" class="events-btn float-right">Contact Us</a>
+                                <a [routerLink]="['/contact']" class="events-btn float-right">Contact Us</a>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-10 mx-auto mt-5 programs">
-                    <h3 class="expand">The Athelet Program <span>+</span></h3>
+                    <h3 class="expand">Elite Program <span>+</span></h3>
                     <div class="desc">
                         <p class="py-2">
                             It is rare to find good goalkeeper coaches in Ontario but at THECOMPLETE 90 we have one of the best. The latest modern goalkeeper training methods and drills are so beneficial and fun that all our coaches jump into net from time to time.
@@ -96,11 +112,48 @@ $100 - 2 Hour Sessio
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="#" class="events-btn float-right">Contact Us</a>
+                                <a [routerLink]="['/contact']" class="events-btn float-right">Contact Us</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-md-10 mx-auto mt-5 programs">
+                    <h3 class="expand">Camps <span>+</span></h3>
+                    <div class="desc">
+                        <p class="py-2">
+                            It is rare to find good goalkeeper coaches in Ontario but at THECOMPLETE 90 we have one of the best. The latest modern goalkeeper training methods and drills are so beneficial and fun that all our coaches jump into net from time to time.
+
+                            What you will improve on with our UEFA “B” licensed coach:
+                            
+                            •Positional awareness
+                            •Shot stopping
+                            •1v1 situations
+                            •Communication
+                            •Reflexes
+                            •Foot work
+                            •Distribution       </p>
+                        <div class="row programs-rates">
+                            <div class="col-md-12">
+                                <h4>Rates</h4>
+                                <p>
+                                    $60 - 1 Hour Session<br>
+$80 - 1.5 Hour Session<br>
+$100 - 2 Hour Sessio
+                                </p>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a [routerLink]="['/contact']" class="events-btn float-right">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
             </div>
         </div>
 

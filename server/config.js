@@ -7,6 +7,11 @@ var config = {
             publicKey: "dbjq885pxh7f5y36",
             privateKey: "7fdc7de1f79fc4652d7411ab69edfb18"
         },
+        // braintree: {
+        //     merchantId: "y3xkmxb3xzzw2xkn",
+        //     publicKey: "y4pdj3b3r7yfkrrb",
+        //     privateKey: "ed56424f5bd2785cac0b37c8d02ef482"
+        // },
         aws: {
             PRIVATE_KEY: "APKAJDTCMHD6IPBCKGDQ",
             PK_FILE: "pk-APKAJDTCMHD6IPBCKGDQ.pem",
@@ -35,6 +40,11 @@ var config = {
             publicKey: "db9j7d8kpm8j8ybj",
             privateKey: "02015303a86d48d9a3badb0b8b5d81f8"
         },
+        // braintree: {
+        //     merchantId: "y3xkmxb3xzzw2xkn",
+        //     publicKey: "y4pdj3b3r7yfkrrb",
+        //     privateKey: "ed56424f5bd2785cac0b37c8d02ef482"
+        // },
         aws: {
             PRIVATE_KEY: "APKAJMPYCKBXNVYFUIHA",
             PK_FILE: "pk-APKAJMPYCKBXNVYFUIHA.pem",

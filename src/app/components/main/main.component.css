@@ -426,7 +426,7 @@ video {
 }
 
 .step i {
-	font-size: 62px;
+	font-size: 50px;
 	text-align: center;
 	display: block;
 }
@@ -441,7 +441,6 @@ video {
 
 .step-number, .features-title {
 	font-weight: bold;
-	font-style: italic;
 	font-weight: bold;
 	font-size: 20px;
 	display: block;
@@ -451,7 +450,6 @@ video {
 }
 
 .step-des, .features-desc {
-	font-style: italic;
 	color: #3b90c7;
 	font-size: 16px;
 	font-weight: bold;
@@ -467,7 +465,6 @@ video {
 
 .features h1 span {
 	color: #262624;
-	font-style: italic;
 	/* background: #8f989f; */
 	padding: 0px 10px;
 }
@@ -480,7 +477,7 @@ video {
 
 .features-details .fa {
 	color: #262624;
-	font-size: 62px;
+	font-size: 36px;
 	margin-top: 25px;
 	margin-bottom: 15px;
 }
