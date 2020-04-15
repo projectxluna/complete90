@@ -198,7 +198,7 @@ export class LoginSignupComponent implements OnInit {
         plans.forEach(f => {
             this.plans[f.id] = f;
         });
-        this.setCycle('monthly');
+        //this.setCycle('monthly');
     }
 
     setTrial() {
