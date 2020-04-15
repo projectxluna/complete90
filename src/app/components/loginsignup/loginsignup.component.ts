@@ -37,7 +37,6 @@ export class LoginSignupComponent implements OnInit {
             this.dataService.getClient().subscribe((res) => {
                 if (res) {
                     this.processPlans(res.plans);
-                    this.setCycle('monthly');
                     console.log(this.plans);
                     this.disabled = false;
                 }
