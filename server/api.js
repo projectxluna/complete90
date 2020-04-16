@@ -133,13 +133,8 @@ module.exports = function (app) {
         var data = {
             to: req.body.email,
             from: mailer.email,
-            template: 'contact-form',
             subject: 'Coach Signup Form',
-            context: {
-                message: message,
-                name: name,
-                from: from
-            }
+            html: message
         };
 
         mailer.smtpTransport().sendMail(data, (err) => {
