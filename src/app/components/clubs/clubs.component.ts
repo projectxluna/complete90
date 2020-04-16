@@ -142,7 +142,7 @@ export class ClubsComponent implements OnInit {
     }
     this.authenticationService.clubSignup(this.model).subscribe(result => {
       if (!result.success) {
-        console.log(result.err);
+        console.log("Email Error: ", result.err);
         this.error = 'An error occured while sending your request. Please try again soon or contact us directly at support@thecomplete90.com';
       } else {
         this.error = '';
