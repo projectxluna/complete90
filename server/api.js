@@ -71,7 +71,7 @@ module.exports = function (app) {
         var message = req.body.message;
 
         var data = {
-            to: 'vick@nly.media',
+            to: 'support@thecomplete90.com',
             from: mailer.email,
             template: 'contact-form',
             subject: 'New Contact Request',
@@ -126,15 +126,22 @@ module.exports = function (app) {
 
 
 
-        var from = 'support@thecomplete90.com';
+        var from = 'projectxluna@gmail.com';
         var name = 'The Complete 90';
         var message = "Send this email to coach for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
 
+        console.log(req.body.club['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
+
         var data = {
-            to: req.body.email,
+            to: req.body.club['email'],
             from: mailer.email,
+            template: 'club-form',
             subject: 'Coach Signup Form',
-            html: message
+            context: {
+                message: message,
+                name: name,
+                from: from
+            }
         };
 
         mailer.smtpTransport().sendMail(data, (err) => {
