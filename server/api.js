@@ -150,7 +150,8 @@ module.exports = function (app) {
             } else {
                 console.log(err);
                 return res.json({
-                    success: false
+                    success: false,
+                    error: err
                 });
             }
         });
