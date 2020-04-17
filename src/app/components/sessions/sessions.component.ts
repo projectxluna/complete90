@@ -111,10 +111,11 @@ declare var jQuery: any;
         let category = this.selectedFilter.category;
         let exercise = this.selectedExercisesCategories.exerciseName;
         let exerciseCat = this.selectedExercisesCategories.category;
-        console.log('Ex', exerciseCat);
+        console.log('Ex', session);
         if(exercise != undefined) {
-          if(session.exercises === exercise && session.exercisesCat.indexOf(exerciseCat) != -1 ) {
-          
+          console.log("1");
+          if(session.exercises == exercise && session.exercisesCat.indexOf(exerciseCat) != -1 ) {
+            console.log("2");
             var totalDisplaying = 0;
             session.display.forEach(function(d){
               totalDisplaying += d.length;
