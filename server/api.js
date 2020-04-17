@@ -120,7 +120,7 @@ module.exports = function (app) {
        
         newPromo.code = 'cm90' + randomize('*', 4);
         newPromo.profileType = 'MANAGER';
-        newPromo.club = req.body.club['_id'];
+        newPromo.club = req.body['_id'];
         newPromo.activated = false;
         newPromo.save();
 
@@ -130,10 +130,10 @@ module.exports = function (app) {
         var name = 'The Complete 90';
         var message = "Send this email to coach for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
 
-        console.log(req.body.club['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
+        console.log(req.body['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
 
         var data = {
-            to: req.body.club['email'],
+            to: req.body['email'],
             from: mailer.email,
             template: 'club-form',
             subject: 'Coach Signup Form',

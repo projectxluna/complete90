@@ -40,7 +40,7 @@
 				<div class="row quoteStyle text-center">
 					<div class="col-md-8">
 						<div class="form-group">
-						  <select class="form-control" [(ngModel)]="model.club" id="sel1"> 
+						  <select class="form-control" [(ngModel)]="model" id="sel1"> 
 							<option selected="">-----Select Clubs-----</option>
 							<option *ngFor="let x of allClubs" [ngValue]="x" >{{x.name}}</option>
 						  </select>
