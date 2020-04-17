@@ -2,7 +2,7 @@
     "sessions": 
     [
         {
-            "name": "Featured Weekly Sessions",
+            "name": "Featured Exercise",
             "alwaysActive": true,
             "free": true,
             "content" : 
@@ -31,74 +31,36 @@
                     "name": "Sitting Juggle Alternating",
                     "description": "",
                     "link": "/videos/Juggling/Sitting+Juggle+Alternating+(Juggling).mp4",
-                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Juggling/Sitting+Juggle+Alternating+(Juggling)+Thumbnail-min+(1).jpg"
-                },
-                {
-                    "id": "abbd7532-f222-47b0-b3a5-9a5e211cbac5",
-                    "name": "Lateral Movement Ball Plank",
-                    "description": "",
-                    "link": "/videos/Core/Lateral+Movement+Ball+Plank+(Core).mp4",
-                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Core/lateral_movement_bal_33D15.jpg"
-                },
-                {
-                    "id": "94c2e5d8-9bbb-4edf-8dfd-8a48318fe06d",
-                    "name": "One Bounce - Laces Volley",
-                    "description": "",
-                    "link": "/videos/Wall+Work/One+Bounce+-+Laces+Volley.mp4",
-                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Wall+Work/One+Bounce+-+Laces+Volley+(Wall+Work)+-+Thumbnail-min.jpg"
-                },
-                {
-                    "id": "ba1250e5-2792-4dc0-85a9-e945914082e7",
-                    "name": "Yoga For Legs",
-                    "description": "",
-                    "link": "/videos/Yoga/Yoga+for+Legs.mp4",
-                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Yoga/Yoga+For+Legs+(Thumbnail).jpg"
-                }
-            ]
-        },
-        {
-            "name": "Train Like a Pro",
-            "alwaysActive": true,
-            "free": true,
-            "content" : 
-            [
-                {
-                    "id": "fe71e181-13ca-4725-80ce-6840df169e6b",
-                    "name": "Double Sole Drag",
-                    "description": "",
-                    "link": "/videos/Ball+Mastery/4+Cone/Double+Sole+Drag+(4+Cone).mp4",
-                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/double+sole+drag.jpg",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Juggling/Sitting+Juggle+Alternating+(Juggling)+Thumbnail-min+(1).jpg",
                     "alwaysActive": true,
                     "free": true
                 },
                 {
-                    "id": "2c6ac5d7-d0c4-4422-82be-fc39560d98c7",
-                    "name": "Sitting Juggle Alternating",
-                    "description": "",
-                    "link": "/videos/Juggling/Sitting+Juggle+Alternating+(Juggling).mp4",
-                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Juggling/Sitting+Juggle+Alternating+(Juggling)+Thumbnail-min+(1).jpg"
-
-                },
-                {
                     "id": "abbd7532-f222-47b0-b3a5-9a5e211cbac5",
                     "name": "Lateral Movement Ball Plank",
                     "description": "",
                     "link": "/videos/Core/Lateral+Movement+Ball+Plank+(Core).mp4",
-                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Core/lateral_movement_bal_33D15.jpg"
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Core/lateral_movement_bal_33D15.jpg",
+                    "alwaysActive": true,
+                    "free": true
                 },
                 {
                     "id": "94c2e5d8-9bbb-4edf-8dfd-8a48318fe06d",
                     "name": "One Bounce - Laces Volley",
                     "description": "",
                     "link": "/videos/Wall+Work/One+Bounce+-+Laces+Volley.mp4",
-                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Wall+Work/One+Bounce+-+Laces+Volley+(Wall+Work)+-+Thumbnail-min.jpg"
+                    "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Wall+Work/One+Bounce+-+Laces+Volley+(Wall+Work)+-+Thumbnail-min.jpg",
+                    "alwaysActive": true,
+                    "free": true
                 },
                 {
                     "id": "ba1250e5-2792-4dc0-85a9-e945914082e7",
                     "name": "Yoga For Legs",
                     "description": "",
                     "link": "/videos/Yoga/Yoga+for+Legs.mp4",
-                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Yoga/Yoga+For+Legs+(Thumbnail).jpg"
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Yoga/Yoga+For+Legs+(Thumbnail).jpg",
+                    "alwaysActive": true,
+                    "free": true
                 }
             ]
         },
@@ -107,7 +69,7 @@
             "alwaysActive": true,
             "defaultView": 6,
             "exercises": "Individual",
-            "exercisesCat": ["Technical 1", "Strength 1"],
+            "exercisesCat": ["Ball Mastery"],
             "content" : 
             [
                 {		
@@ -117,7 +79,8 @@
                     "link": "/videos/Ball+Mastery/4+Cone/Toe+Touches+(4+Cone).mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/toe_touches__4_cone__UqqzC.jpg",
                     "tags":["Beginner","Dribbling", "Control"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Toe Touches",
@@ -673,7 +636,7 @@
         {
             "name": "Juggling",
             "exercises": "Individual",
-            "exercisesCat": ["Prehab 1", "Finishing 1"],
+            "exercisesCat": ["Juggling"],
             "alwaysActive": true,
             "content" : 
             [
@@ -684,7 +647,8 @@
                     "link": "/videos/Juggling/Ball+Toss+(Juggling).mp4",
                     "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Juggling/Ball+Toss+(Juggling)+Thumbnail-min.jpg",
                     "tags":["Beginner","Control"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Ball Toss",
@@ -1150,6 +1114,8 @@
         {
             "name": "Dribbling",
             "alwaysActive": true,
+            "exercises": "Individual",
+            "exercisesCat": ["Dribbling"],
             "content" : 
             [
                 {		
@@ -1159,7 +1125,8 @@
                     "link": "",
                     "thumbnail": "",
                     "tags":["Beginner","Dribbling"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Body Faint",
@@ -1517,6 +1484,8 @@
         {    
             "name": "Wall Work",
             "alwaysActive": true,
+            "exercises": "Individual",
+            "exercisesCat": ["Wall Work"],
             "content" : 
             [
                 {		
@@ -1526,7 +1495,8 @@
                     "link": "/videos/Wall+Work/Instep+One+Touch.mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Wall+Work/Intep+One+Touch+(Wall+Work)+-+Thumbnail-min.jpg",
                     "tags":["Beginner","Control", "Passing"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Instep One Touch",
@@ -2045,6 +2015,8 @@
         {
             "name": "Core",
             "alwaysActive": true,
+            "exercises": "Individual",
+            "exercisesCat": ["Core"],
             "content" : 
             [
                 {		
@@ -2054,7 +2026,8 @@
                     "link": "/videos/Core/Mountain+Climbers+(Core).mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Core/mountain_climber__co_IrOuW.jpg",
                     "tags":["Intermediate","Strength", "Speed"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Mountain Climber",
@@ -2591,6 +2564,8 @@
         {
             "name": "Yoga",
             "alwaysActive": true,
+            "exercises": "Individual",
+            "exercisesCat": ["Yoga"],
             "content" : 
             [
                 {		
@@ -2600,7 +2575,8 @@
                     "link": "/videos/Yoga/Yoga+for+Legs.mp4",
                     "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Yoga/Yoga+For+Legs+(Thumbnail).jpg",
                     "tags":["Strength", "Speed"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "",

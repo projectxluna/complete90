@@ -114,7 +114,7 @@ declare var jQuery: any;
         console.log('Ex', session);
         if(exercise != undefined) {
           console.log("1");
-          if(session.exercises == exercise && session.exercisesCat.indexOf(exerciseCat) != -1 ) {
+          if(session.exercise == exercise && session.exercisesCat.indexOf(exerciseCat) != -1 ) {
             console.log("2");
             var totalDisplaying = 0;
             session.display.forEach(function(d){
