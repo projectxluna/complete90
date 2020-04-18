@@ -37,10 +37,11 @@ module.exports = function (apiRoutes) {
      */
     apiRoutes.get('/sessions', Auth.isAuthenticated, function (req, res) {
         let userId = req.decoded.userId;
+        //console.log("Authenticated: ", userId);
         waterfall([
             function (callback) {
                 User.findById(userId, function (err, user) {
-                    if (!user.braintree.subscription && !user.subscription) {
+                    if (!user.braintree.subscription && !user.subscription && user.profiles[0].type == "PLAYER") {
                         callback('User does not have subscription');
                     } else {
                         callback(null);
@@ -147,7 +148,7 @@ module.exports = function (apiRoutes) {
         let content = req.body.content;
         let userId = req.decoded.userId;
         let sessionId = req.body.id;
- 
+        console.log("Session Id: ", sessionId + " " + name);
         if (!name) return res.status(422).send({ success: false });
 
         if (sessionId) {
@@ -419,7 +420,7 @@ module.exports = function (apiRoutes) {
         for (let session of contentStructure.sessions) {
             for (let content of session.content) {
                 try {
-                    if (!session.free) {
+                    //if (!session.free) {
                         if (session.defaultView) {
                             content.defaultView = session.defaultView;
                         }
@@ -428,7 +429,7 @@ module.exports = function (apiRoutes) {
                         content.exercisesCat = session.exercisesCat;     
                         content.link = AWS.signUrl(content.link);
                         contents.push(content);
-                    }
+                    //}
                 }
                 catch (error) {
                     console.log(error);
@@ -457,8 +458,10 @@ module.exports = function (apiRoutes) {
             }
         });
 
+        //console.log("Contents", contents[0]);
+
         let userPlan = plans.map(plan => {return mapPlanToContent(plan, contents)});
-        console.log("User Plans", userPlan);
+        //console.log("User Plans", userPlan);
         callback(null, contents, userPlan, assignments);
     }
 
@@ -471,8 +474,11 @@ module.exports = function (apiRoutes) {
             videoContents.push(content);
         });
         (plan.detailedContent || []).forEach(cont => {
+            
             let content = contents.find(function (element) {
-                return element.id === cont.contentId;
+                // if(element.id == 'fe71e181-13ca-4725-80ce-6840df169e6a')
+                    //console.log("Id ", element.id);
+                return element.id == cont.contentId;
             });
             if (content) {
                 content.reps = cont.reps || 0;
@@ -482,6 +488,7 @@ module.exports = function (apiRoutes) {
             }
             videoContents.push(content);
         });
+        //console.log("video: ", videoContents);
         let p = {
             id: plan._id,
             name: plan.name,

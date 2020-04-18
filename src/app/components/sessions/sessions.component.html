@@ -257,7 +257,7 @@
                                 </a>
 
 
-                                <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && hasSubscription() && (user.subscription.planId=='player-monthly-amateur' || user.subscription.planId=='coach-monthly-amateur') && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && !adminProfile && !coachProfile && hasSubscription() && (user.subscription.planId=='player-monthly-amateur' || user.subscription.planId=='coach-monthly-amateur') && content.alwaysActive !== true" class="signup-to-view">
                                     <i class="fa fa-lock"></i>
                                     <span>Upgrade your account to pro for full access</span>  
                                 </a>
@@ -289,18 +289,18 @@
                                     <span class="fa fa-play-circle fa-3x" aria-hidden="true"></span>
                                 </a>
 
-                                <a [routerLink]="['/login_signup']" *ngIf="!isLoggedIn() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <a [routerLink]="['/login_signup']" *ngIf="!isLoggedIn() && !adminProfile && !coachProfile && content.alwaysActive !== true" class="signup-to-view">
                                     <i class="fa fa-lock"></i>
                                     <span>Signup to View</span>  
                                 </a>
 
-                                <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && !hasSubscription() && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && !adminProfile && !coachProfile && !hasSubscription() && content.alwaysActive !== true" class="signup-to-view">
                                     <i class="fa fa-lock"></i>
                                     <span>Please buy subscription to have full access.</span>  
                                 </a>
 
 
-                                <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && hasSubscription() && (user.subscription.planId=='player-monthly-amateur' || user.subscription.planId=='coach-monthly-amateur') && content.alwaysActive !== true && !adminProfile && !coachProfile" class="signup-to-view">
+                                <a [routerLink]="['/pricing']" *ngIf="isLoggedIn() && !adminProfile && !coachProfile && hasSubscription() && (user.subscription.planId=='player-monthly-amateur' || user.subscription.planId=='coach-monthly-amateur') && content.alwaysActive !== true" class="signup-to-view">
                                     <i class="fa fa-lock"></i>
                                     <span>Upgrade your account to pro for full access</span>  
                                 </a>
