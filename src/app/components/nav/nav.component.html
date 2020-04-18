@@ -25,7 +25,7 @@
 
 					<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/sessions']" (click)="collapse()">SESSIONS</a></li>
 
-					<li *ngIf="!isLoggedIn() || !userProfile.subscription" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/pricing']" (click)="collapse()">PRICING/PLANS</a></li>
+					<li *ngIf="(!isLoggedIn() || !userProfile.subscription) && !coachProfile" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/pricing']" (click)="collapse()">PRICING/PLANS</a></li>
 
 					<li *ngIf="isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/dashboard']" (click)="collapse()">DASHBOARD</a></li>
 
