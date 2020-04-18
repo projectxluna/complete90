@@ -111,11 +111,10 @@ declare var jQuery: any;
         let category = this.selectedFilter.category;
         let exercise = this.selectedExercisesCategories.exerciseName;
         let exerciseCat = this.selectedExercisesCategories.category;
-        console.log('Ex', session);
+        //console.log('Ex', session);
         if(exercise != undefined) {
-          console.log("1");
           if(session.exercise == exercise && session.exercisesCat.indexOf(exerciseCat) != -1 ) {
-            console.log("2");
+          
             var totalDisplaying = 0;
             session.display.forEach(function(d){
               totalDisplaying += d.length;
@@ -398,19 +397,19 @@ declare var jQuery: any;
         };
         this.newSession(newSession);
       } else if (result && result.type === 'add') {
-        // let addContent = {
-        //   id: result.id,
-        //   reps: result.session.reps || 0,
-        //   sets: result.session.sets || 0,
-        //   seconds: result.session.seconds || 0,
-        //   minutes: result.session.minutes || 0,
-        //   contentId: contentId
-        // };
-        // this.addToExistingSession(addContent).then(response => {
-        //   this.getSessions();
-        // }).catch(error => {
-        //   console.log(error);
-        // });
+        let addContent = {
+          id: result.id,
+          reps: result.session.reps || 0,
+          sets: result.session.sets || 0,
+          seconds: result.session.seconds || 0,
+          minutes: result.session.minutes || 0,
+          contentId: contentId
+        };
+        this.addToExistingSession(addContent).then(response => {
+          this.getSessions();
+        }).catch(error => {
+          console.log(error);
+        });
       }
     });
   }
@@ -582,7 +581,7 @@ declare var jQuery: any;
       this.collectTagsAndCategories(response.content);
       this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);
-      console.log("Custom Sessions", this.sessions);
+      console.log("Custom Sessions", this.customSessions);
     });
   }
 
