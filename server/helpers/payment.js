@@ -5,7 +5,7 @@ var btConfig = config.braintree;
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'dev') {
     btConfig.environment = braintree.Environment.Sandbox;
 } else {
-    btConfig.environment = braintree.Environment.Production;
+    btConfig.environment = braintree.Environment.Sandbox;
 }
 
 var gateway = braintree.connect(btConfig);

@@ -269,6 +269,7 @@ export class DataService {
   }
 
   getSessions(cache: boolean = true): Observable<any> {
+    console.log("DataService");
     if (cache && this.cachedSessions) {
       return Observable.create((observer) => {
         observer.next(this.cachedSessions);
@@ -277,7 +278,7 @@ export class DataService {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
-
+    
     // get sessions from api
     return this.http.get('/api/sessions', options)
       .map((response: Response) => {
@@ -288,6 +289,30 @@ export class DataService {
         return this.cachedSessions;
       });
   }
+
+
+  getSessionsNotLoggedIn(cache: boolean = true): Observable<any> {
+    if (cache && this.cachedSessions) {
+      return Observable.create((observer) => {
+        observer.next(this.cachedSessions);
+      });
+    }
+    // add authorization header with jwt token
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+    
+    // get sessions from api
+    return this.http.get('/api/sessionsNotLoggedIn', options)
+      .map((response: Response) => {
+        if (!response.json().success) {
+          return response.json();
+        }
+        this.cachedSessions = response.json();
+        return this.cachedSessions;
+      });
+  }
+
+
   getLeaderBoard(timestamp, club): Observable<any> {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });

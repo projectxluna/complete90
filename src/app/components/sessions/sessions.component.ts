@@ -21,7 +21,7 @@ declare var jQuery: any;
 
     constructor(private dataService: DataService, private modalService: BsModalService, public authenticationService: AuthenticationService) {
       this.getFreeSessions();
-
+      
       if(this.isLoggedIn()) {
         this.getSessions();
         this.dataService.getUserProfile().subscribe(res => {
@@ -33,7 +33,9 @@ declare var jQuery: any;
           });
           this.managerProfile = manager ? true : false;
         });
-      } 
+      } else {
+        this.getSessionsNotLoggedIn();
+      }
       
     }
 
@@ -56,7 +58,6 @@ declare var jQuery: any;
       });
 
       this.selectExercise(this.exercisesArray.exercises[0]);
-      this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
 
   }
 
@@ -574,7 +575,6 @@ declare var jQuery: any;
     this.assignments.length = 0;
 
     this.dataService.getSessions(cache).subscribe((response) => {
-      console.log(response);
       if (!response.success) return;
       this.sessions = [];
       this.customSessions = [];
@@ -583,8 +583,28 @@ declare var jQuery: any;
       this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);
       console.log("Custom Sessions", this.customSessions);
+      this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
     });
   }
+
+
+  getSessionsNotLoggedIn(cache: boolean = false) {
+    this.assignments.length = 0;
+
+    this.dataService.getSessionsNotLoggedIn(cache).subscribe((response) => {
+      if (!response.success) return;
+      this.sessions = [];
+      this.customSessions = [];
+      this.assignments = response.assignments;
+      this.collectTagsAndCategories(response.content);
+      this.groupContent(response.content, this.sessions);
+      this.customSessions.push(...response.plans);
+      console.log("Custom Sessions", this.customSessions);
+      this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
+    });
+  }
+
+  
 
   getFreeSessions() {
     this.dataService.getFreeSessions().subscribe((response) => {

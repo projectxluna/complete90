@@ -46,6 +46,10 @@ ul, menu, dir {
 	font-size: 1.5em;
 }
 
+.tik-tok {
+	width: 16px;
+}
+
 /* ----------------------------MEDIA QUERIES------------------------------*/
 
 @media (max-width: 1024px) {
