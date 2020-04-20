@@ -130,33 +130,45 @@ module.exports = function (app) {
         var name = 'The Complete 90';
         var message = "Send this email to coach for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
 
-        console.log(req.body['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
+        //console.log(req.body['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
+        listId = mcConfig.COACH_SIGN_UP_LIST;
 
-        var data = {
-            to: req.body['email'],
-            from: mailer.email,
-            template: 'club-form',
-            subject: 'Coach Signup Form',
-            context: {
-                message: message,
-                name: name,
-                from: from
+        mailchimp.post('/lists/' + listId + '/members', {
+            email_address: req.body['email'],
+            status: 'subscribed',
+            merge_fields: {
+                'FNAME': req.body['name'],
+                'QUERY': newPromo.code
             }
-        };
-
-        mailer.smtpTransport().sendMail(data, (err) => {
-            if (!err) {
-                return res.json({
-                    success: true
-                });
-            } else {
-                console.log(err);
-                return res.json({
-                    success: false,
-                    error: err
-                });
-            }
+        }).catch(err => {
+            console.error(err);
         });
+
+        // var data = {
+        //     to: req.body['email'],
+        //     from: mailer.email,
+        //     template: 'club-form',
+        //     subject: 'Coach Signup Form',
+        //     context: {
+        //         message: message,
+        //         name: name,
+        //         from: from
+        //     }
+        // };
+
+        // mailer.smtpTransport().sendMail(data, (err) => {
+        //     if (!err) {
+        //         return res.json({
+        //             success: true
+        //         });
+        //     } else {
+        //         console.log(err);
+        //         return res.json({
+        //             success: false,
+        //             error: err
+        //         });
+        //     }
+        // });
     });
 
 

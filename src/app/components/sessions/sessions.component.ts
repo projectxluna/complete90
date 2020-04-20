@@ -56,6 +56,7 @@ declare var jQuery: any;
       });
 
       this.selectExercise(this.exercisesArray.exercises[0]);
+      this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
 
   }
 

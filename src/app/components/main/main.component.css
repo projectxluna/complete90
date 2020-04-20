@@ -460,6 +460,9 @@ video {
 .features h1 {
 	text-align: center;
 	margin-top: 0px;
+	position: relative;
+	top: -30px;
+	font-weight: bold;
 }
 
 
@@ -614,7 +617,7 @@ video {
 	.features-title {
 		margin-top: 40px;
 		margin-bottom: 30px;
-		font-size: 36px;
+		font-size: 20px;
 	}
 	.for-players .features-title {
 		margin-top: 60px;

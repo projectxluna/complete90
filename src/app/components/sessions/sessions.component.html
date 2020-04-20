@@ -187,7 +187,7 @@
             </div>
         </div>
     
-        <!-- <div class="container cont-hscroll">
+        <div class="container cont-hscroll">
             <div class="row">
                 <div *ngFor="let assignment of assignments; let i = index" class="col-lg-4 col-md-4 col-sm-8">
                     <div *ngIf="assignment && assignment.plan">
@@ -207,7 +207,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 
     <div class="row" *ngIf="!hasFilter()">
@@ -445,6 +445,10 @@
                     </div>
                 </div>
 
+                <div *ngIf="session.content.length <= 0" class="container box">
+                    <p style="color: black;">There are no exercises in this category that meet your search criteria</p>
+                </div>
+
                 <div class="container">
                     <div [hidden]="session.display.length > 0 || hasFilter()" class="row">
                         <!-- TRAINING VIDEO -->
@@ -521,7 +525,6 @@
                 </div> -->
             </div>
         </div>
-
 
 
 

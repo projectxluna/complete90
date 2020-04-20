@@ -84,12 +84,12 @@
         <div class="col-sm-12 col-md-6"><!-- LEFT SIDE -->
             <profile (profileUpdated)="onProfileUpdated($event)"></profile>
             <player-attributes *ngIf="hasSubscription() && !coachProfile"></player-attributes>
-            <create-assignments *ngIf="hasSubscription() && coachProfile"></create-assignments>
+            <create-assignments *ngIf="coachProfile"></create-assignments>
         </div>
         <div class="col-sm-12 col-md-6"><!-- RIGHT SIDE -->
-            <leader-board *ngIf="hasSubscription() && !coachProfile"></leader-board>
-            <club *ngIf="hasSubscription()"></club>
-            <team-roaster *ngIf="coachProfile"></team-roaster>
+            <club *ngIf="hasSubscription() || coachProfile "></club>
+            <leader-board *ngIf="hasSubscription() || coachProfile"></leader-board>          
+            <team-roaster *ngIf="coachProfile || coachProfile"></team-roaster>
             <amateur *ngIf="hasSubscription() &&!isAuthenticatedToSee() && !adminProfile && !coachProfile"></amateur>
             <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
