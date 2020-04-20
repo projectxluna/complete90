@@ -36,6 +36,7 @@ module.exports = function (apiRoutes) {
      * get all sessions
      */
     apiRoutes.get('/sessions', Auth.isAuthenticated, function (req, res) {
+        
         let userId = req.decoded.userId;
         //console.log("Authenticated: ", userId);
         waterfall([
@@ -69,6 +70,36 @@ module.exports = function (apiRoutes) {
             });
         });
     });
+
+
+
+
+    apiRoutes.get('/sessionsNotLoggedIn', function (req, res) {
+        
+        //let userId = req.decoded.userId;
+        //console.log("Authenticated: ", userId);
+        waterfall([
+            
+            loadSessions,
+            signLinks,
+            function (contents, callback) {
+                callback(null, contents);
+            }
+        ], function (err, contents) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: err
+                });
+            }
+            res.json({
+                success: true,
+                content: contents
+            });
+        });
+    });
+
+
 
     /**
      * Add content to session
