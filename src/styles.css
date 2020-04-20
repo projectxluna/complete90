@@ -3,6 +3,7 @@
 /*@import "../node_modules/bootstrap/dist/css/bootstrap.css";*/
 /*@import 'variables';*/
 @import '../node_modules/font-awesome/css/font-awesome.css';
+/* @import "~owl.carousel2/dist/assets/owl.carousel.css"; */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 @font-face { font-family: Montserrat; src: url('assets/Montserrat-Regular.ttf'); } 
@@ -36,3 +37,18 @@ body {
     vertical-align: middle;
     pointer-events:none;
 } */
+.mb-5 {
+    margin-bottom: 50px;
+}
+.mt-5 {
+    margin-top: 50px;
+}
+
+.site-btn {
+    background-color: #fd1541;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 0px;
+    color: white;
+    border-radius: 0px;
+}

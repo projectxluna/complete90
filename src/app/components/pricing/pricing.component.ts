@@ -26,11 +26,11 @@ export class PricingComponent implements OnInit {
         this.setCycle('monthly');
       }
     });
-    this.dataService.getUserProfile().subscribe(me => {
-      if (me && me.user && me.user.profiles) {
-        this.hasCoachProfile(me.user.profiles);
-      }
-    });
+    // this.dataService.getUserProfile().subscribe(me => {
+    //   if (me && me.user && me.user.profiles) {
+    //     this.hasCoachProfile(me.user.profiles);
+    //   }
+    // });
   }
 
   hasCoachProfile(profiles) {
