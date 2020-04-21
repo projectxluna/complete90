@@ -11,6 +11,10 @@ const SignupPromo = require('./models/signup_promo');
 module.exports = function (apiRoutes) {
     var mailer = require('./helpers/mailer');
     var randomize = require('randomatic');
+
+    var Mailchimp = require('mailchimp-api-v3')
+    var mailchimp = new Mailchimp(mcConfig.API_KEY);
+
     const findTeamPlayer = (teamId) => {
         return new Promise((resolve, reject) => {
             User.find({teamId: mongoose.Types.ObjectId(teamId)}, (err, users) => {
@@ -129,6 +133,7 @@ module.exports = function (apiRoutes) {
     apiRoutes.post('/club/team', Auth.isAuthenticated, (req, res) => {
         let ownerId = req.decoded.userId;
         var newPromo = new SignupPromo();
+        var code = "";
         const {teamName} = req.body;
         if (!teamName) {
             return res.status(422).send({
@@ -173,8 +178,29 @@ module.exports = function (apiRoutes) {
                     newPromo.teamId = mongoose.Types.ObjectId(team._id);
                     newPromo.activated = false;
                     newPromo.save();
+
+                    
+                    listId = mcConfig.PLAYER_LIST;
+
+
+                    User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
+                        mailchimp.post('/lists/' + listId + '/members', {
+                            email_address: user.email,
+                            status: 'subscribed',
+                            merge_fields: {
+                                'FNAME': user.name,
+                                'CODE': newPromo.code
+                            }
+                        }).catch(err => {
+                            console.error(err);
+                        });
+                    });
                 }
             });
+
+
+
+            
             
 
 
