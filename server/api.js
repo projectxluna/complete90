@@ -138,7 +138,7 @@ module.exports = function (app) {
             status: 'subscribed',
             merge_fields: {
                 'FNAME': req.body['name'],
-                'QUERY': newPromo.code
+                'CODE': newPromo.code
             }
         }).catch(err => {
             console.error(err);
