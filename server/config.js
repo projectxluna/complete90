@@ -27,7 +27,7 @@ var config = {
         mailChimp: {
             API_KEY: 'f309557588b98c932fec841057b6e6b8-us12',
             SIGN_UP_LIST: '5b09ab4768',
-            COACH_SIGN_UP_LIST: '3d319353fe',
+            COACH_SIGN_UP_LIST: '2649045',//'3d319353fe',
         },
         URL_EXPIRATION: 5,
     },
@@ -59,7 +59,7 @@ var config = {
         mailChimp: {
             API_KEY: 'apikeyhere-us12',
             SIGN_UP_LIST: 'XXXXXXXXX',
-            COACH_SIGN_UP_LIST: 'XXXXXXXXX',
+            COACH_SIGN_UP_LIST: '2649045',
         },
 
         URL_EXPIRATION: 5,
