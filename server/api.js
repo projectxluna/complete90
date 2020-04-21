@@ -131,7 +131,7 @@ module.exports = function (app) {
         var message = "Send this email to coach for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
 
         //console.log(req.body['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
-        listId = mcConfig.COACH_SIGN_UP_LIST;
+        listId = mcConfig.CLUB_SIGN_UP_LIST;
 
         mailchimp.post('/lists/' + listId + '/members', {
             email_address: req.body['email'],
