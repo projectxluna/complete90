@@ -8,9 +8,12 @@ const im = require('imagemagick');
 const { exposedUserData, CLUB_REQUEST_STATUS } = require('./helpers/pure');
 const SignupPromo = require('./models/signup_promo');
 
+
 module.exports = function (apiRoutes) {
     var mailer = require('./helpers/mailer');
     var randomize = require('randomatic');
+    var config = require('./config').get(process.env.NODE_ENV);
+    var mcConfig = config.mailChimp;
 
     var Mailchimp = require('mailchimp-api-v3')
     var mailchimp = new Mailchimp(mcConfig.API_KEY);
