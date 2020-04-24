@@ -133,7 +133,22 @@ export class CoachSignupComponent implements OnInit {
                     this.signup = false;
                     this.loading = false;
                     this.error = '';
-                    this.router.navigate(['/login_signup']);
+                    //this.router.navigate(['/login_signup']);
+
+                    this.authenticationService.login(this.model.email, this.model.password)
+                    .subscribe(result => {
+                        if (result === true) {
+                            this.dataService.getUserProfile().subscribe((me) => {
+                                this.router.navigate(['/dashboard']);
+                            });
+                        } else {
+                            this.error = 'username or password is incorrect';
+                            this.loading = false;
+                        }
+                    });
+
+
+                    
                 } else if (result && result.success !== true) {
                     switch(result.code) {
                         case 11000:
