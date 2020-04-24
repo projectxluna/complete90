@@ -175,7 +175,7 @@ module.exports = function (apiRoutes) {
 
                     //console.log("Team ID: ", team._id);
                     
-                    newPromo.code = 'cm90' + randomize('*', 4);
+                    newPromo.code = 'cm90' + randomize('Aa0', 4);
                     newPromo.profileType = 'PLAYER';
                     newPromo.club = club._id;
                     newPromo.teamId = mongoose.Types.ObjectId(team._id);
