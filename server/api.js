@@ -118,7 +118,7 @@ module.exports = function (app) {
 
         var newPromo = new SignupPromo();
        
-        newPromo.code = 'cm90' + randomize('*', 4);
+        newPromo.code = 'cm90' + randomize('Aa0', 4);
         newPromo.profileType = 'MANAGER';
         newPromo.club = req.body['_id'];
         newPromo.activated = false;
