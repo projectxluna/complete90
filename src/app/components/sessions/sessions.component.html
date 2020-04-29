@@ -324,7 +324,7 @@
     </div>
 
 <!-- *ngIf="hasSubscription() || adminProfile || coachProfile" -->
-    <div class="row">
+    <div class="row"  *ngIf="!hasFilter()">
         <div class="col-lg-12 exercise-section" >
             <div class="exercise-title">
                 <div class="col-lg-12 catTitle">
@@ -337,10 +337,12 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row"  *ngIf="!hasFilter()">
         <div class="col-lg-12 exercise-cat-section">
-            <div class="row">
-                <div class="col-md-4 exercise-cat-tab" *ngFor="let category of selectedExercisesCategories.exercise['categories']" (click)="selectExerciseCat(category)" [ngClass]="{'active': selectedExercisesCategories.category === category.name}">{{category.name}}</div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 exercise-cat-tab" *ngFor="let category of selectedExercisesCategories.exercise['categories']" (click)="selectExerciseCat(category)" [ngClass]="{'active': selectedExercisesCategories.category === category.name}">{{category.name}}</div>
+                </div>
             </div>
         </div>
     </div>
@@ -453,8 +455,8 @@
             </div>
         </div>
 
-        <div *ngIf="hasFilter() && getFilteredExercises().length > 0">
-            <div *ngFor="let session of getFilteredExercises()" class="col-lg-12 suggVids">
+        <div *ngIf="hasFilter() && getFilteredSessions().length > 0">
+            <div *ngFor="let session of getFilteredSessions()" class="col-lg-12 suggVids suggViddds">
                 <div *ngIf="session.content.length > 0" class="container box">
                     <div class="col-lg-12 catTitle">
                         <h1>{{ session.name }}</h1>
@@ -462,9 +464,9 @@
                     </div>
                 </div>
 
-                <div *ngIf="session.content.length <= 0" class="container box">
+                <!-- <div *ngIf="session.content.length <= 0" class="container box">
                     <p style="color: black; text-align: center; font-size: 18px;">There are no exercises in this category that meet your search criteria</p>
-                </div>
+                </div> -->
 
                 <div class="container">
                     <div [hidden]="session.display.length > 0 || hasFilter()" class="row">

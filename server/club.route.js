@@ -180,6 +180,7 @@ module.exports = function (apiRoutes) {
                     newPromo.club = club._id;
                     newPromo.teamId = mongoose.Types.ObjectId(team._id);
                     newPromo.activated = false;
+                    team_name = team.name;
                     newPromo.save();
 
                     
@@ -192,7 +193,8 @@ module.exports = function (apiRoutes) {
                             status: 'subscribed',
                             merge_fields: {
                                 'FNAME': user.name,
-                                'CODE': newPromo.code
+                                'CODE': newPromo.code,
+                                'TEAM': team_name,
                             }
                         }).catch(err => {
                             console.error(err);

@@ -222,6 +222,7 @@ button:focus{
 
 .catTitle, .exercise-title{
 	margin-bottom: 20px;
+	padding: 0px 15px;
 }
 
 .catTitle h1{
@@ -260,6 +261,11 @@ button:focus{
 
 .exercise-cat-section .row {
 	margin-bottom: 25px;
+}
+
+.exercise-cat-section {
+
+	padding: 0px 30px;
 }
 
 .exercise-cat-tab {
@@ -359,6 +365,10 @@ button:focus{
 
 .suggVids{
 	padding-bottom: 50px;
+}
+
+.suggViddds.suggVids {
+	padding-bottom: 0px;
 }
 
 .allVids{

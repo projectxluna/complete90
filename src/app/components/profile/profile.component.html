@@ -3,7 +3,7 @@
         <h3 class="m-0"><b>PROFILE</b></h3>
     </div>
 
-    <div class="box-tool" (click)="toggleEditMode()" *ngIf="isAuthenticatedToSee()">
+    <div class="box-tool" (click)="toggleEditMode()">
         <ul class="nav">
             <li class="nav-item inline dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -43,12 +43,12 @@
             </a>
             <input class="profile-input" *ngIf="editMode" [(ngModel)]="playerProfile.position" placeholder="Edit Position">
         </div>
-        <!-- <div class="item" *ngIf="profile">
+        <div class="item" *ngIf="profile">
             <a class="title">NATIONALITY:
                 <span *ngIf="!editMode" class="lowkey">{{ profile.nationality || ''}}</span>
             </a>
             <input class="profile-input" *ngIf="editMode" [(ngModel)]="profile.nationality" placeholder="Edit Nationality">
-        </div> -->
+        </div>
         <div class="item" *ngIf="coachProfile">
             <a class="title">COACHING LEVEL:
                 <span *ngIf="!editMode" class="lowkey">{{ coachProfile.level || ''}}</span>
