@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service'
+import { DataService } from '../../services/data.service';
+declare var jQuery: any;
 
 @Component({
   selector: 'leader-board',
@@ -17,6 +18,9 @@ export class LeaderBoardComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(function(){
+      jQuery(document).find(".blurred_content .tab-content").attr("style", "filter: blur(5px);");
+    },100);
   }
 
   generateTestData() {

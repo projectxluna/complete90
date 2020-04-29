@@ -13,27 +13,27 @@ export class PlayerAttributesComponent implements OnInit {
     categories: [
       {
         name: 'Dribbling',
-        value: 0
+        value: 50
       },
       {
         name: 'Control',
-        value: 0
+        value: 50
       },
       {
         name: 'Passing',
-        value: 0
+        value: 50
       },
       {
         name: 'Speed',
-        value: 0
+        value: 50
       },
       {
         name: 'Strength',
-        value: 0
+        value: 50
       },
       {
         name: 'Finishing',
-        value: 0
+        value: 50
       }
     ]
   }

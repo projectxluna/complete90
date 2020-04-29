@@ -29,7 +29,7 @@ var config = {
             SIGN_UP_LIST: '5b09ab4768',
             COACH_SIGN_UP_LIST: '3d319353fe',
             CLUB_SIGN_UP_LIST: '2b409880ea',
-            PLAYER_LIST: 'e4cce77bfd',
+            PLAYER_LIST: 'e4cce77bfd', // The complete 90
         },
         URL_EXPIRATION: 5,
     },
