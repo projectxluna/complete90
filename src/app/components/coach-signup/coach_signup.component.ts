@@ -48,17 +48,17 @@ export class CoachSignupComponent implements OnInit {
 
             this.authenticationService.getSignupPromo(payload)
                 .subscribe(result => {
-                    //console.log(result);
-                    this.clubId = result.club.club;
-                    if(result.club.profileType == 'PLAYER') {
-                        this.createManagerProfile = false;
-                        this.teamId = result.club.teamId;
-                    }
-                    console.log("Clubs: ", result);
+                    //console.log("Payload: ", result);
                     if (!result || result.success == false) {
                         this.router.navigate(['/']);
                         return;
                     }
+                    if(result.club.profileType == 'PLAYER') {
+                        this.createManagerProfile = false;
+                        this.teamId = result.club.teamId;
+                    }
+                    this.clubId = result.club.club;
+                    
             });
 
         }
@@ -119,7 +119,9 @@ export class CoachSignupComponent implements OnInit {
             isManager: this.createManagerProfile,
             clubId: this.clubId,
             clubStatus: 'ACTIVE',
-            teamId: this.teamId
+            teamId: this.teamId,
+            promo: true,
+            promoCode: this.promoCode
         };
         this.authenticationService.signup(payload)
             .subscribe(result => {

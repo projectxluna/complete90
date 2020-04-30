@@ -4,6 +4,7 @@ const {
 module.exports = function (apiRoutes) {
     const Payments = require('./helpers/payment');
     const Auth = require('./helpers/auth');
+    const mongoose = require('mongoose');
     var User = require('./models/user');
 
     var config = require('./config').get(process.env.NODE_ENV);
@@ -40,7 +41,7 @@ module.exports = function (apiRoutes) {
     apiRoutes.post('/braintree/subsribe', function (req, res) {
  
         var paymentPayload = req.body.paymentPayload;
-        var planId = req.body.planId;
+        var planId = req.body.planId; // player-monthly-amateur
         var newUser = new User();
         newUser.name = req.body.user.name;
         newUser.email = req.body.user.email;
@@ -87,16 +88,16 @@ module.exports = function (apiRoutes) {
 
                         
 
-                        // mailchimp.post('/lists/' + listId + '/members', {
-                        //     email_address: req.body.user.email,
-                        //     status: 'subscribed',
-                        //     merge_fields: {
-                        //         'FNAME': name[0],
-                        //         'LNAME': name[1]
-                        //     }
-                        // }).catch(err => {
-                        //     console.error(err);
-                        // });
+                        mailchimp.post('/lists/' + listId + '/members', {
+                            email_address: req.body.user.email,
+                            status: 'subscribed',
+                            merge_fields: {
+                                'FNAME': name[0],
+                                'LNAME': name[1]
+                            }
+                        }).catch(err => {
+                            console.error(err);
+                        });
 
 
 
@@ -156,6 +157,79 @@ module.exports = function (apiRoutes) {
             });
         } catch (err) {
             console.log(err)
+            return res.json({
+                success: false,
+                message: err
+            });
+        }
+
+
+     
+    });
+
+
+
+
+
+    /**
+     * Upgrade Membership to pro
+     */
+    //, Auth.isAuthenticated
+    apiRoutes.post('/braintree/upgrade', function (req, res) {
+ 
+        var upgradeTo = "player-monthly-pro"; // player-monthly-amateur
+        var email = req.body.user.email;
+    
+        try {
+            User.findOne({
+                email: email
+            }, (err, found) => {
+                //console.log("Found User: ", found);
+                var planId = found.braintree.subscription.id;
+                var userId = found._id;
+                //console.log("Plan Id: ", planId);
+                Payments.upgradeSubscription(planId, upgradeTo, function (err, result) {
+                    if (err) {
+                        return res.status(500).send(err);
+                    } 
+                    
+                    if (result.subscription.success) {
+                        let userUpdateField = {braintree: {subscription: {}}};
+                        let sub = {
+                            createdAt: result.subscription['subscription'].createdAt,
+                            billingDayOfMonth: result.subscription['subscription'].billingDayOfMonth,
+                            billingPeriodEndDate: result.subscription['subscription'].billingPeriodEndDate,
+                            updatedAt: result.subscription['subscription'].updatedAt,
+                            currentBillingCycle: result.subscription['subscription'].currentBillingCycle,
+                            firstBillingDate: result.subscription['subscription'].firstBillingDate,
+                            id: result.subscription['subscription'].id,   
+                            merchantAccountId: result.subscription['subscription'].merchantAccountId,
+                            neverExpires: result.subscription['subscription'].neverExpires,
+                            nextBillAmount: result.subscription['subscription'].nextBillAmount,
+                            nextBillingDate: result.subscription['subscription'].nextBillingDate,
+                            paidThroughDate: result.subscription['subscription'].paidThroughDate,
+                            planId: result.subscription['subscription'].planId,
+                            status: result.subscription['subscription'].status,
+                        }
+                        userUpdateField.braintree.subscription = sub;
+
+
+
+                        User.findOneAndUpdate({ _id: mongoose.Types.ObjectId(userId) }, userUpdateField,
+                            {
+                                upsert: true,
+                                new: true
+                            }, function (err, user) {
+                                if (err) return res.status(500).send(err);
+                                return res.json({
+                                    success: true
+                                });
+                            });
+                    } 
+                    
+                });
+            });
+        } catch (err) {
             return res.json({
                 success: false,
                 message: err

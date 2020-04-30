@@ -90,7 +90,6 @@ export class PaymentComponent implements OnInit {
 
   addCard() {
     var user = PaymentComponent.user;
-    console.log("User", PaymentComponent.user);
     if (PaymentComponent.canSubmitPayment && PaymentComponent.dropinInstance) {
       PaymentComponent.canSubmitPayment = !PaymentComponent.canSubmitPayment;
       PaymentComponent.dropinInstance.requestPaymentMethod(function (err, payload) {

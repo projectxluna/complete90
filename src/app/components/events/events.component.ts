@@ -95,8 +95,8 @@ export class EventsComponent implements OnInit {
 
   downloadFile() {
     let link = document.createElement("a");
-        link.download = "Goal Setting Workbook.png";
-        link.href = "../../assets/player-pic.png";
+        link.download = "Complete90 Goal Setting Workbook.pdf";
+        link.href = "../../assets/Complete90 Goal Setting Workbook.pdf";
         link.click();
   }
 

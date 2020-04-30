@@ -209,37 +209,37 @@ module.exports = function (apiRoutes) {
             
 
 
-            // var from = 'support@thecomplete90.com';
-            // var name = 'The Complete 90';
-            // var message = "Send this email to player for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
+            var from = 'support@thecomplete90.com';
+            var name = 'The Complete 90';
+            var message = "Send this email to player for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
 
 
-            // User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
-            //     var data = {
-            //         to: user.email,
-            //         from: mailer.email,
-            //         template: 'contact-form',
-            //         subject: 'Coach Signup Form',
-            //         context: {
-            //             message: message,
-            //             name: name,
-            //             from: from
-            //         }
-            //     };
+            User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
+                var data = {
+                    to: user.email,
+                    from: mailer.email,
+                    template: 'contact-form',
+                    subject: 'Coach Signup Form',
+                    context: {
+                        message: message,
+                        name: name,
+                        from: from
+                    }
+                };
     
-            //     mailer.smtpTransport().sendMail(data, (err) => {
-            //         if (!err) {
-            //             return res.json({
-            //                 success: true
-            //             });
-            //         } else {
-            //             console.log(err);
-            //             return res.json({
-            //                 success: false
-            //             });
-            //         }
-            //     });
-            // });
+                mailer.smtpTransport().sendMail(data, (err) => {
+                    if (!err) {
+                        return res.json({
+                            success: true
+                        });
+                    } else {
+                        console.log(err);
+                        return res.json({
+                            success: false
+                        });
+                    }
+                });
+            });
             
 
 
