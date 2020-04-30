@@ -98,7 +98,7 @@
                             <button *ngIf="session.editMode" (click)="editSession(session)" class="viewSessbtn pull-right">SAVE</button>
                         </div>
                         <div class="col-xs-4" *ngIf="!session.expanded && session.content.length > 0">
-                            <button *ngIf="!session.editMode" (click)="startSession(session)" class="viewSessbtn pull-right">PLAY</button>
+                            <button *ngIf="!session.editMode" (click)="startSession(session)" data-dismiss="modal" aria-label="Close" class="viewSessbtn pull-right">PLAY</button>
                         </div>
                         <div *ngIf="!session.editMode && !session.expanded" class="col-xs-1 deleteSess">
                             <button type="button" class="deleteSess" (click)="deleteUserSession(session.id)">
