@@ -26,10 +26,10 @@ var config = {
         },
         mailChimp: {
             API_KEY: 'f309557588b98c932fec841057b6e6b8-us12',
-            SIGN_UP_LIST: '5b09ab4768',
-            COACH_SIGN_UP_LIST: '3d319353fe',
-            CLUB_SIGN_UP_LIST: '2b409880ea',
-            PLAYER_LIST: 'e4cce77bfd', // The complete 90
+            SIGN_UP_LIST: '5b09ab4768', // The complete90 Website Subscribers
+            COACH_SIGN_UP_LIST: '3d319353fe', // Coach Welcome Emails
+            CLUB_SIGN_UP_LIST: '2b409880ea', // Website coaches accounts
+            PLAYER_LIST: 'e4cce77bfd', // The complete 90 
         },
         URL_EXPIRATION: 5,
     },

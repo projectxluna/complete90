@@ -252,24 +252,20 @@ module.exports = function (app) {
                         var name = req.body.name.split(' ');
                         var listId;
                         console.log("Promo Code: ", promoCode);
-                        if(promoCode != "")
-                            SignupPromo.findOneAndUpdate({ code: promoCode }, {activated: true}, function (err, pr) {
-                                if (err) {
-                                    console.log("Erro", err);
-                                }
+                        // if(promoCode != "")
+                        //     SignupPromo.findOneAndUpdate({ code: promoCode }, {activated: true}, function (err, pr) {
+                        //         if (err) {
+                        //             console.log("Erro", err);
+                        //         }
                                 
-                            });
+                        //     });
 
                         if (req.body.isManager === true) {
                             //await createClub(req.body.clubName, user._id);
                             await updateClub(req.body.clubId, user._id);
                             listId = mcConfig.COACH_SIGN_UP_LIST;
                         } else {
-                            if (req.body.promo) {
-
-                            } else {
-                                listId = mcConfig.SIGN_UP_LIST;
-                            }
+                            listId = mcConfig.SIGN_UP_LIST;
                         }
 
                         mailchimp.post('/lists/' + listId + '/members', {
