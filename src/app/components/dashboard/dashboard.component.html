@@ -40,14 +40,20 @@
         display: flex;
         justify-content: center;
     }
+    .membership_success {
+        display: none;
+    }
 </style>
 <!-- DASHBOARD TILES -->
 <div class="padding">
+    <div class="alert alert-success membership_success text-center" role="alert">
+        Upgraded to pro membership :) 
+    </div>
     <div class="row" *ngIf="!coachProfile">
         <div class="col-xs-12 col-sm-4">
             <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
                 <div *ngIf="hasSubscription() && !isAuthenticatedToSee() && !adminProfile && !coachProfile" class="center_container">
-                    <a class="btn btn-danger upgrade_membership" [routerLink]="['/contact']">Contact to upgrade account</a>  
+                    <a class="btn btn-danger upgrade_membership" (click)="upgrade_membership();">Upgrade for full access</a>  
                 </div>
 
             </div>
@@ -68,7 +74,7 @@
         <div class="col-xs-12 col-sm-4">
             <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
                 <div *ngIf="hasSubscription() && !isAuthenticatedToSee() && !adminProfile && !coachProfile" class="center_container">
-                    <a class="btn btn-danger upgrade_membership" [routerLink]="['/contact']">Contact to upgrade account</a>   
+                    <a class="btn btn-danger upgrade_membership"  (click)="upgrade_membership();">Upgrade for full access</a>   
                 </div>
 
             </div>
@@ -89,7 +95,7 @@
             <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
 
                 <div *ngIf="hasSubscription() && !isAuthenticatedToSee() && !adminProfile && !coachProfile" class="center_container">
-                    <a class="btn btn-danger upgrade_membership" [routerLink]="['/contact']">Contact to upgrade account</a>  
+                    <a class="btn btn-danger upgrade_membership"  (click)="upgrade_membership();">Upgrade for full access</a>
                 </div>
             </div>
             <div class="box p-a stat1">
@@ -121,7 +127,7 @@
                 <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
 
                     <div *ngIf="hasSubscription() && !isAuthenticatedToSee() && !adminProfile && !coachProfile" class="center_container">
-                        <a class="btn btn-danger upgrade_membership" [routerLink]="['/contact']">Contact to upgrade account</a>  
+                        <a class="btn btn-danger upgrade_membership"  (click)="upgrade_membership();">Upgrade for full access</a>  
                     </div>
                 </div>
                 <leader-board *ngIf="hasSubscription() || coachProfile" [ngClass]="{'blurred_content' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}"></leader-board>  
@@ -130,7 +136,7 @@
                 <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
 
                     <div *ngIf="hasSubscription() && !isAuthenticatedToSee() && !adminProfile && !coachProfile" class="center_container">
-                        <a class="btn btn-danger upgrade_membership" [routerLink]="['/contact']">Contact to upgrade account</a>  
+                        <a class="btn btn-danger upgrade_membership"  (click)="upgrade_membership();">Upgrade for full access</a>  
                     </div>
                 </div>     
 

@@ -133,16 +133,16 @@ module.exports = function (app) {
         //console.log(req.body['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
         listId = mcConfig.CLUB_SIGN_UP_LIST;
 
-        mailchimp.post('/lists/' + listId + '/members', {
-            email_address: req.body['email'],
-            status: 'subscribed',
-            merge_fields: {
-                'FNAME': req.body['name'],
-                'CODE': newPromo.code
-            }
-        }).catch(err => {
-            console.error(err);
-        });
+        // mailchimp.post('/lists/' + listId + '/members', {
+        //     email_address: req.body['email'],
+        //     status: 'subscribed',
+        //     merge_fields: {
+        //         'FNAME': req.body['name'],
+        //         'CODE': newPromo.code
+        //     }
+        // }).catch(err => {
+        //     console.error(err);
+        // });
 
         // var data = {
         //     to: req.body['email'],
@@ -213,6 +213,8 @@ module.exports = function (app) {
 
     apiRoutes.post('/signup', (req, res) => {
         var newUser = new User();
+        var newPromo = new SignupPromo();
+        var promoCode = "";
         newUser.name = req.body.name;
         newUser.email = req.body.email;
         newUser.postalcode = req.body.postalcode;
@@ -224,7 +226,10 @@ module.exports = function (app) {
         }
         newUser.password = newUser.generateHash(req.body.password);
         newUser.profiles.push(req.body.isManager ? PROFILES.MANAGER : PROFILES.PLAYER);
-
+        if (req.body.promo) {
+            promoCode = req.body.promoCode;
+            newUser.braintree.subscription = {planId: "player-monthly-pro",status: "Active"};
+        }
         try {
             User.findOne({
                 email: newUser.email
@@ -246,6 +251,14 @@ module.exports = function (app) {
                         });
                         var name = req.body.name.split(' ');
                         var listId;
+                        console.log("Promo Code: ", promoCode);
+                        if(promoCode != "")
+                            SignupPromo.findOneAndUpdate({ code: promoCode }, {activated: true}, function (err, pr) {
+                                if (err) {
+                                    console.log("Erro", err);
+                                }
+                                
+                            });
 
                         if (req.body.isManager === true) {
                             //await createClub(req.body.clubName, user._id);
@@ -265,6 +278,8 @@ module.exports = function (app) {
                         }).catch(err => {
                             console.error(err);
                         });
+
+
                     });
                 } catch (e) {
                     console.log(e);

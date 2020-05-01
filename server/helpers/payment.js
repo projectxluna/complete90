@@ -32,7 +32,7 @@ var paymentController = {
                 return;
             }
             if (response.plans) {
-                console.log(response.plans);
+               // console.log(response.plans);
                 callback(response.plans)
             } else {
                 callback(response)
@@ -49,7 +49,7 @@ var paymentController = {
             email: user.email,
             paymentMethodNonce: paymentMethod.nonce
         }, function (err, result) {
-            console.log("Restul: ", result);
+            //console.log("Restul: ", paymentMethod.nonce);
             if (err) {
                 callback(err);
                 return;
@@ -70,6 +70,23 @@ var paymentController = {
                     response.subscription = result;
                     callback(undefined, response);
                 });
+            }
+        });
+    },
+    upgradeSubscription: function (subscriptionId, upgradeTo, callback) {
+        //Update Membership
+        gateway.subscription.update(subscriptionId, {
+            planId: upgradeTo,
+            price: "25.00"
+          }, function (err, result) {
+            if (err) {
+                callback(err);
+                return;
+            }else {
+                var response = {};
+                console.log("Update Membership: ", result);
+                response.subscription = result;
+                callback(undefined, response);
             }
         });
     },

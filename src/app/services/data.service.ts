@@ -469,4 +469,22 @@ export class DataService {
         }
       });
   }
+
+
+  upgradeMembership(user): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+    // get users from api
+    return this.http.post('api/braintree/upgrade', { user: user }, options)
+      .map((response: Response) => {
+        console.log("Responsive: ", response);
+        if (response.json() && response.json().success) {
+          return response.json();
+        } else {
+          return null;
+        }
+      });
+  }
+
+
 }

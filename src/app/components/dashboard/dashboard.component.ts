@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService, DataService } from '../../services';
 import { Router } from '@angular/router';
+declare var jQuery: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -208,7 +209,19 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  isAuthenticatedToSee() {
+  upgrade_membership() {
+    this.dataService.upgradeMembership(this.user).subscribe((response) => {
+      if(response.success) {
+        jQuery(".membership_success").fadeIn();
+        setTimeout(function(){
+          jQuery(".membership_success").fadeOut();
+        }, 3000);
+      }
+      this.onSubscriptionUpdated();
+    });
+  }
+
+  isAuthenticatedToSee() { 
     if(this.user.subscription != null) {
       if((this.user.subscription.planId == 'player-monthly-amateur' || this.user.subscription.planId == 'player-monthly-amateur-trial') && this.user.subscription.status == 'Active') {
         return false;
