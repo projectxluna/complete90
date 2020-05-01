@@ -180,6 +180,12 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    jQuery(document).ready(function(){
+      jQuery(".upgrade_membership").on("click", function(){
+        jQuery(this).text("Upgrading. Please wait...");
+        jQuery(this).attr("disabled", "disabled");
+      });
+    });
   }
 
   init() {

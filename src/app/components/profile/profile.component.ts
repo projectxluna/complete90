@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../services';
+import { Router, ActivatedRoute } from '@angular/router';
+declare var jQuery: any;
 
 @Component({
   selector: 'profile',
@@ -17,7 +19,7 @@ export class ProfileComponent implements OnInit {
   editMode: boolean;
   loading: boolean;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,private router: Router) {
     this.loadProfile();
   }
 
@@ -53,7 +55,33 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit() {
+    jQuery(document).ready(function(){
+      jQuery(".upgrade_membershipp").on("click", function(){
+        jQuery(this).text("Upgrading. Please wait...");
+        jQuery(this).attr("disabled", "disabled");
+      });
+    });
+    
   }
+
+
+  upgrade_membership() {
+    this.dataService.upgradeMembership(this.profile).subscribe((response) => {
+      if(response.success) {
+        jQuery(".membership_success").fadeIn();
+        setTimeout(function(){
+          jQuery(".membership_success").fadeOut();
+          window.location.href = "/dashboard";
+        }, 3000);
+      }
+      this.onSubscriptionUpdated();
+    });
+  }
+
+  onSubscriptionUpdated() {
+    this.loadProfile();
+  }
+  
 
   getUrl(url) {
     let field = "url('" + url + "')";
