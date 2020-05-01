@@ -126,23 +126,23 @@ module.exports = function (app) {
 
 
 
-        var from = 'projectxluna@gmail.com';
-        var name = 'The Complete 90';
-        var message = "Send this email to coach for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
+        // var from = 'projectxluna@gmail.com';
+        // var name = 'The Complete 90';
+        // var message = "Send this email to coach for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
 
         //console.log(req.body['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
         listId = mcConfig.CLUB_SIGN_UP_LIST;
 
-        // mailchimp.post('/lists/' + listId + '/members', {
-        //     email_address: req.body['email'],
-        //     status: 'subscribed',
-        //     merge_fields: {
-        //         'FNAME': req.body['name'],
-        //         'CODE': newPromo.code
-        //     }
-        // }).catch(err => {
-        //     console.error(err);
-        // });
+        mailchimp.post('/lists/' + listId + '/members', {
+            email_address: req.body['email'],
+            status: 'subscribed',
+            merge_fields: {
+                'FNAME': req.body['name'],
+                'CODE': newPromo.code
+            }
+        }).catch(err => {
+            console.error(err);
+        });
 
         // var data = {
         //     to: req.body['email'],
@@ -265,7 +265,11 @@ module.exports = function (app) {
                             await updateClub(req.body.clubId, user._id);
                             listId = mcConfig.COACH_SIGN_UP_LIST;
                         } else {
-                            listId = mcConfig.SIGN_UP_LIST;
+                            if (req.body.promo) {
+
+                            } else {
+                                listId = mcConfig.SIGN_UP_LIST;
+                            }
                         }
 
                         mailchimp.post('/lists/' + listId + '/members', {
