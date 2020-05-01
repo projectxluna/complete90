@@ -49,6 +49,14 @@ video {
 .m-0 {
 	margin: 0px !important;
 }
+.mt-2 {
+	margin-top: 20px;
+}
+
+.post_card_img {
+	filter: invert(1);
+    width: 64px;
+}
 
 
 /*----------------------------1. HERO IMAGE--------------------------*/
