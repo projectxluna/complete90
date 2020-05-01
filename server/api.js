@@ -265,11 +265,7 @@ module.exports = function (app) {
                             await updateClub(req.body.clubId, user._id);
                             listId = mcConfig.COACH_SIGN_UP_LIST;
                         } else {
-                            if (req.body.promo) {
-
-                            } else {
-                                listId = mcConfig.SIGN_UP_LIST;
-                            }
+                            listId = mcConfig.SIGN_UP_LIST;
                         }
 
                         mailchimp.post('/lists/' + listId + '/members', {
