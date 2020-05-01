@@ -252,13 +252,13 @@ module.exports = function (app) {
                         var name = req.body.name.split(' ');
                         var listId;
                         console.log("Promo Code: ", promoCode);
-                        if(promoCode != "")
-                            SignupPromo.findOneAndUpdate({ code: promoCode }, {activated: true}, function (err, pr) {
-                                if (err) {
-                                    console.log("Erro", err);
-                                }
+                        // if(promoCode != "")
+                        //     SignupPromo.findOneAndUpdate({ code: promoCode }, {activated: true}, function (err, pr) {
+                        //         if (err) {
+                        //             console.log("Erro", err);
+                        //         }
                                 
-                            });
+                        //     });
 
                         if (req.body.isManager === true) {
                             //await createClub(req.body.clubName, user._id);
