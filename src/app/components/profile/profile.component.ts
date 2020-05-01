@@ -45,6 +45,8 @@ export class ProfileComponent implements OnInit {
       } else {
         return true;
       }
+    } else {
+      return false;
     }
   }
 

@@ -29,6 +29,7 @@ export class MainComponent implements OnInit {
         setTimeout(function() {jQuery(".sub-error-msg").slideUp();}, 5000);
         return;
     }
+    this.downloadFile();
     let email = f.value.EMAIL;
     let fname = f.value.FNAME;
     let lname = f.value.LNAME;

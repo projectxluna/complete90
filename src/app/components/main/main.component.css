@@ -521,6 +521,9 @@ video {
 .newsletter-section {
 	background-color: #fbfbff !important;
 }
+#mc_embed_signup input {
+	color: black !important;
+}
 #mc_embed_signup h2, #mc_embed_signup .mc-field-group label {
 	color: #252525;
 }
