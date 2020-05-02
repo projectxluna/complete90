@@ -5,7 +5,6 @@ import { AuthenticationService } from '../../services';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
-    moduleId: module.id,
     templateUrl: 'coach_signup.component.html',
     styleUrls: ['coach_signup.component.css']
 })

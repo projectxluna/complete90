@@ -69,7 +69,6 @@
                 </div>
             </div>
             
-             <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
         <div class="col-xs-12 col-sm-4">
             <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
@@ -89,7 +88,6 @@
                     <h2 class="m-0">Total exercises viewed</h2>
                 </div>
             </div>
-             <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
         <div class="col-xs-12 col-sm-4">
             <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
@@ -110,7 +108,6 @@
                     <h2 class="m-0">Overall Rating</h2>
                 </div>
             </div>
-            <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>
     </div>
     <div class="row" style="margin-top: 20px;">
