@@ -13,6 +13,7 @@ module.exports = function (apiRoutes) {
     var mailer = require('./helpers/mailer');
     var randomize = require('randomatic');
     var config = require('./config').get(process.env.NODE_ENV);
+    var md5 = require('md5');
     var mcConfig = config.mailChimp;
 
     var Mailchimp = require('mailchimp-api-v3')
@@ -132,6 +133,19 @@ module.exports = function (apiRoutes) {
             });
         });
     });
+
+
+    function loopThroughEmails (counter, email) {
+        mailchimp.post(automation[counter], {
+            email_address: email,
+        }).then(function (newResult) {
+            console.log("Success 3");
+            sent = true;
+        }).catch(err => {
+            console.log("Fail 1");
+            console.error(err);
+        });  
+    }
     
     apiRoutes.post('/club/team', Auth.isAuthenticated, (req, res) => {
         let ownerId = req.decoded.userId;
@@ -169,7 +183,7 @@ module.exports = function (apiRoutes) {
                     teams.push(team._id);
                     
                     Club.findOneAndUpdate({_id: club._id}, {teams: teams}, (err, cb) =>{
-                        console.log('updated club with new team id')
+                        // console.log('updated club with new team id')
                     });
 
 
@@ -185,19 +199,89 @@ module.exports = function (apiRoutes) {
 
                     
                     listId = mcConfig.PLAYER_LIST;
-
-
+                    var automation = ['/automations/697ef73121/emails/1e5b51e876/queue', '/automations/697ef73121/emails/cc09160d15/queue','/automations/697ef73121/emails/2e6a28e7d9/queue', '/automations/697ef73121/emails/ebd72bf198/queue', '/automations/697ef73121/emails/40f44b8687/queue', '/automations/697ef73121/emails/30b0c9ec9a/queue', '/automations/697ef73121/emails/a75650d693/queue', '/automations/697ef73121/emails/9f196e0371/queue', '/automations/697ef73121/emails/e4df96bb25/queue', '/automations/697ef73121/emails/ad665d32ac/queue'];
+                    var sent = false;
+// https://us12.api.mailchimp.com/3.0/automations/697ef73121/emails/1e5b51e876/queue
                     User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
-                        mailchimp.post('https://us12.api.mailchimp.com/3.0/automations/697ef73121/emails/1e5b51e876/queue', {
-                            email_address: user.email,
-                            //status: 'unsubscribed',
-                            // merge_fields: {
-                            //     'FNAME': user.name,
-                            //     'CODE': newPromo.code,
-                            //     'TEAM': team_name,
-                            // }
-                        }).catch(err => {
-                            console.error(err);
+
+                        // mailchimp.delete('/lists/' + listId + '/members/' + md5(user.email)).catch(err => {
+                        //     console.error(err);
+                        // });
+                        // mailchimp.post('/lists/' + listId + '/members', {
+                        //     email_address: user.email,
+                        //     status: 'subscribed',
+                        //     merge_fields: {
+                        //         'FNAME': user.name,
+                        //         'CODE': newPromo.code,
+                        //         'TEAM': team_name,
+                        //     }
+                        // }).then(function (res) {
+                        //     console.log("Result: ", res);
+                        //     // mailchimp.delete('/lists/' + listId + '/members', {
+                        //     //     email_address: user.email,
+                        //     // }).catch(err => {
+                        //     //     console.error(err);
+                        //     // });
+                        // });
+
+
+                        // mailchimp.post('/automations/697ef73121/emails/1e5b51e876/queue', {
+                        //     email_address: user.email,
+                        // }).then(function (newResult) {
+                        //     console.log("Success 3");
+                        // }).catch(err => {
+                        //     console.log("Fail 1");
+                        //     console.error(err);
+                        // });
+
+
+                        mailchimp.get('/lists/' + listId + '/members/' + md5(user.email)
+                        ).then(function (result) {
+                            console.log("Succuess 1");
+                            // If already subscribed coach then update team name and code
+                            mailchimp.patch('/lists/' + listId + '/members/' + md5(user.email), {
+                                status: 'subscribed',
+                                merge_fields: {
+                                    'TEAM': team_name,
+                                    'CODE': newPromo.code
+                                }
+                            }).then(function (updateResult) {
+                                console.log("Succuess 2");
+                                //Send email to coach with new team and code
+                                automation.forEach(function(url, i){
+                                    if(sent == false) {
+                                        mailchimp.post(url, {
+                                            email_address: user.email,
+                                        }).then(function (newResult) {
+                                            console.log("Success 3");
+                                            sent = true;
+                                        }).catch(err => {
+                                            console.log("Fail 1: ", i);
+                                            //console.error(err);
+                                        });  
+                                    }
+                                });
+                                       
+                                //}
+
+                            }).catch(err => {
+                                console.log("Fail 2");
+                                console.error(err);
+                            });
+                        }).catch(function (err) {
+                            console.log("API Error: ", err);
+                            //if user not subscribed add him to list
+                            mailchimp.post('/lists/' + listId + '/members', {
+                                email_address: user.email,
+                                status: 'subscribed',
+                                merge_fields: {
+                                    'FNAME': user.name,
+                                    'CODE': newPromo.code,
+                                    'TEAM': team_name,
+                                }
+                            }).catch(err => {
+                                console.error(err);
+                            });
                         });
                     });
                 }
@@ -307,7 +391,7 @@ module.exports = function (apiRoutes) {
                         message: err
                     });
                 }
-                console.log("Users: ", users);
+                //console.log("Users: ", users);
                 let cleanedUsers = users.map(user => exposedUserData(user))
                 res.json({
                     success: true,
