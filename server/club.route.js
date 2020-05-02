@@ -188,14 +188,14 @@ module.exports = function (apiRoutes) {
 
 
                     User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
-                        mailchimp.post('/lists/' + listId + '/members', {
+                        mailchimp.post('https://us12.api.mailchimp.com/3.0/automations/697ef73121/emails/1e5b51e876/queue', {
                             email_address: user.email,
-                            status: 'subscribed',
-                            merge_fields: {
-                                'FNAME': user.name,
-                                'CODE': newPromo.code,
-                                'TEAM': team_name,
-                            }
+                            //status: 'unsubscribed',
+                            // merge_fields: {
+                            //     'FNAME': user.name,
+                            //     'CODE': newPromo.code,
+                            //     'TEAM': team_name,
+                            // }
                         }).catch(err => {
                             console.error(err);
                         });
