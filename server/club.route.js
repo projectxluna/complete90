@@ -201,36 +201,9 @@ module.exports = function (apiRoutes) {
                     listId = mcConfig.PLAYER_LIST;
                     var automation = ['/automations/697ef73121/emails/1e5b51e876/queue', '/automations/697ef73121/emails/cc09160d15/queue','/automations/697ef73121/emails/2e6a28e7d9/queue', '/automations/697ef73121/emails/ebd72bf198/queue', '/automations/697ef73121/emails/40f44b8687/queue', '/automations/697ef73121/emails/30b0c9ec9a/queue', '/automations/697ef73121/emails/a75650d693/queue', '/automations/697ef73121/emails/9f196e0371/queue', '/automations/697ef73121/emails/e4df96bb25/queue', '/automations/697ef73121/emails/ad665d32ac/queue','/automations/697ef73121/emails/74b092cc6a/queue'];
                     var sent = false;
-// https://us12.api.mailchimp.com/3.0/automations/697ef73121/emails/1e5b51e876/queue
                     User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
 
                         // mailchimp.delete('/lists/' + listId + '/members/' + md5(user.email)).catch(err => {
-                        //     console.error(err);
-                        // });
-                        // mailchimp.post('/lists/' + listId + '/members', {
-                        //     email_address: user.email,
-                        //     status: 'subscribed',
-                        //     merge_fields: {
-                        //         'FNAME': user.name,
-                        //         'CODE': newPromo.code,
-                        //         'TEAM': team_name,
-                        //     }
-                        // }).then(function (res) {
-                        //     console.log("Result: ", res);
-                        //     // mailchimp.delete('/lists/' + listId + '/members', {
-                        //     //     email_address: user.email,
-                        //     // }).catch(err => {
-                        //     //     console.error(err);
-                        //     // });
-                        // });
-
-
-                        // mailchimp.post('/automations/697ef73121/emails/1e5b51e876/queue', {
-                        //     email_address: user.email,
-                        // }).then(function (newResult) {
-                        //     console.log("Success 3");
-                        // }).catch(err => {
-                        //     console.log("Fail 1");
                         //     console.error(err);
                         // });
 
@@ -256,7 +229,7 @@ module.exports = function (apiRoutes) {
                                             console.log("Success 3");
                                             sent = true;
                                         }).catch(err => {
-                                            console.log("Fail 1: ", i);
+                                            console.log("Fail: ", i);
                                             //console.error(err);
                                         });  
                                     }
