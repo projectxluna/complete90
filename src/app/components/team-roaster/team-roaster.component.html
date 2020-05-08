@@ -5,7 +5,10 @@
 
   <div class="box-tool">
       <div *ngIf="teams && teams.length" class="tool-controls">
-          <div class="assign-team-btn" (click)="openModal(createTeamModal)">NEW TEAM</div>
+          <div class="assign-team-btn" (click)="openModal(createTeamModal)" *ngIf="teams[teams.length - 1].players !== undefined && teams[teams.length - 1].players.length > 0">NEW TEAM</div>
+
+          <div class="assign-team-btn" (click)="openModal(cantAddTeam)" *ngIf="teams[teams.length - 1].players === undefined || teams[teams.length - 1].players.length <= 0">NEW TEAM</div>
+          
           <div class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN</div>
       </div>
   </div>
@@ -122,6 +125,20 @@
             </div>
             <div class="no_club" (click)="createTeam()">Create Team</div>
         </div>
+    </div>
+</ng-template>
+
+
+<!-- CANT CREATE TEAM -->
+<ng-template #cantAddTeam>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 *ngIf="page === 1" class="modal-title text-center">Can't create new team</h4>
+    </div>
+    <div class="modal-body">
+        <p>Please add players into existing teams first to proceed creating new teams. </p>
     </div>
 </ng-template>
 

@@ -53,6 +53,18 @@ export class TeamRoasterComponent implements OnInit {
       this.teams = res.teams;
       if (this.teams.length) {
         this.selectTeam(this.teams[0]);
+        this.teams.forEach(function(team){
+          
+          this.dataService.getPlayers(team._id).subscribe(res => {
+            team.players = res.players.map(player => {
+              let fullName = player.name.split(' ');
+              player.firstName = fullName[0] || '';
+              player.lastName = fullName[1] || '';
+              player.shortName = fullName[0] + ' ' + (fullName[1] || '').substr(0, 1);
+              return player;
+            });
+          });
+        });
       }
     });
   }
