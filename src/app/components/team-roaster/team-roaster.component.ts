@@ -52,7 +52,7 @@ export class TeamRoasterComponent implements OnInit {
       }
       this.teams = res.teams;
       if (this.teams.length) {
-        this.selectTeam(this.teams[0]);
+        this.selectTeam(this.teams[this.teams.length - 1]);
         this.teams.forEach(function(team){
           
           this.dataService.getPlayers(team._id).subscribe(res => {
