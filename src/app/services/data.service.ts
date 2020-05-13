@@ -114,6 +114,17 @@ export class DataService {
   }
 
 
+  resendTeamEmail(team): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/club/resendTeamEmail', {"team": team}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+
 
 
   updateTeam(team): Observable<any> {

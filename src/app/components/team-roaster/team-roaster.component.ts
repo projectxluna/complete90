@@ -225,6 +225,14 @@ export class TeamRoasterComponent implements OnInit {
     this.openModal(template);
   }
 
+  resendTeamEmail(team) {
+    console.log(team);
+    this.dataService.resendTeamEmail(team).subscribe(res => {
+      this.getTeams();
+      this.closeModal();
+    });
+  }
+
   updateTeam() {
     if (!this.teamModal.team) {
       return;
