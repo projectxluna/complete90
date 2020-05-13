@@ -222,7 +222,7 @@ module.exports = function (apiRoutes) {
                                 to: user.email,
                                 from: mailer.email,
                                 template: 'contact-form',
-                                subject: 'Player Signup Form',
+                                subject: 'Join our team' + team_name,
                                 context: {
                                     message: message,
                                     name: name,
