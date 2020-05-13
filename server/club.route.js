@@ -212,35 +212,74 @@ module.exports = function (apiRoutes) {
                         ).then(function (result) {
                             console.log("Succuess 1");
                             // If already subscribed coach then update team name and code
-                            mailchimp.patch('/lists/' + listId + '/members/' + md5(user.email), {
-                                status: 'subscribed',
-                                merge_fields: {
-                                    'TEAM': team_name,
-                                    'CODE': newPromo.code
-                                }
-                            }).then(function (updateResult) {
-                                console.log("Succuess 2");
-                                //Send email to coach with new team and code
-                                automation.forEach(function(url, i){
-                                    if(sent == false) {
-                                        mailchimp.post(url, {
-                                            email_address: user.email,
-                                        }).then(function (newResult) {
-                                            console.log("Success 3");
-                                            sent = true;
-                                        }).catch(err => {
-                                            console.log("Fail: ", i);
-                                            //console.error(err);
-                                        });  
-                                    }
-                                });
-                                       
-                                //}
 
-                            }).catch(err => {
-                                console.log("Fail 2");
-                                console.error(err);
+
+
+                            var from = 'support@thecomplete90.com';
+                            var name = 'The Complete 90';
+                            var message = "Send this email to player for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
+                
+                
+                   
+                            var data = {
+                                to: user.email,
+                                from: mailer.email,
+                                template: 'contact-form',
+                                subject: 'Player Signup Form',
+                                context: {
+                                    message: message,
+                                    name: name,
+                                    from: from
+                                }
+                            };
+                
+                            mailer.smtpTransport().sendMail(data, (err) => {
+                                if (!err) {
+                                    return res.json({
+                                        success: true
+                                    });
+                                } else {
+                                    console.log(err);
+                                    return res.json({
+                                        success: false
+                                    });
+                                }
                             });
+                     
+
+
+
+
+
+                            // mailchimp.patch('/lists/' + listId + '/members/' + md5(user.email), {
+                            //     status: 'subscribed',
+                            //     merge_fields: {
+                            //         'TEAM': team_name,
+                            //         'CODE': newPromo.code
+                            //     }
+                            // }).then(function (updateResult) {
+                            //     console.log("Succuess 2");
+                            //     //Send email to coach with new team and code
+                            //     automation.forEach(function(url, i){
+                            //         if(sent == false) {
+                            //             mailchimp.post(url, {
+                            //                 email_address: user.email,
+                            //             }).then(function (newResult) {
+                            //                 console.log("Success 3");
+                            //                 sent = true;
+                            //             }).catch(err => {
+                            //                 console.log("Fail: ", i);
+                            //                 //console.error(err);
+                            //             });  
+                            //         }
+                            //     });
+                                       
+                            //     //}
+
+                            // }).catch(err => {
+                            //     console.log("Fail 2");
+                            //     console.error(err);
+                            // });
                         }).catch(function (err) {
                             console.log("API Error: ", err);
                             //if user not subscribed add him to list
@@ -266,37 +305,37 @@ module.exports = function (apiRoutes) {
             
 
 
-            // var from = 'support@thecomplete90.com';
-            // var name = 'The Complete 90';
-            // var message = "Send this email to player for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
+            var from = 'support@thecomplete90.com';
+            var name = 'The Complete 90';
+            var message = "Send this email to player for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
 
 
-            // User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
-            //     var data = {
-            //         to: user.email,
-            //         from: mailer.email,
-            //         template: 'contact-form',
-            //         subject: 'Coach Signup Form',
-            //         context: {
-            //             message: message,
-            //             name: name,
-            //             from: from
-            //         }
-            //     };
+            User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
+                var data = {
+                    to: user.email,
+                    from: mailer.email,
+                    template: 'contact-form',
+                    subject: 'Coach Signup Form',
+                    context: {
+                        message: message,
+                        name: name,
+                        from: from
+                    }
+                };
     
-            //     mailer.smtpTransport().sendMail(data, (err) => {
-            //         if (!err) {
-            //             return res.json({
-            //                 success: true
-            //             });
-            //         } else {
-            //             console.log(err);
-            //             return res.json({
-            //                 success: false
-            //             });
-            //         }
-            //     });
-            // });
+                mailer.smtpTransport().sendMail(data, (err) => {
+                    if (!err) {
+                        return res.json({
+                            success: true
+                        });
+                    } else {
+                        console.log(err);
+                        return res.json({
+                            success: false
+                        });
+                    }
+                });
+            });
             
 
 
