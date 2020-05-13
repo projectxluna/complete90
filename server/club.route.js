@@ -214,7 +214,7 @@ module.exports = function (apiRoutes) {
                             // If already subscribed coach then update team name and code
                             var from = 'The Complete 90';
                             var name = 'The Complete 90';
-                            var message = "Send this email to player for signup. https://staging.thecomplete90.com/coach_signup?id="+newPromo.code;
+                            var message = "Send this email to player for signup. http://staging.thecomplete90.com/coach_signup?id="+newPromo.code;
                 
                 
                    
