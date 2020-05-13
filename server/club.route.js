@@ -222,7 +222,7 @@ module.exports = function (apiRoutes) {
                                 to: user.email,
                                 from: mailer.email,
                                 template: 'contact-form',
-                                subject: 'Join our team' + team_name,
+                                subject: 'Join our team ' + team_name,
                                 context: {
                                     message: message,
                                     name: name,
@@ -330,6 +330,66 @@ module.exports = function (apiRoutes) {
 
         });
     });
+
+
+
+
+    apiRoutes.post('/club/resendTeamEmail', Auth.isAuthenticated, (req, res) => {
+        let ownerId = req.decoded.userId;
+        var teamId = req.body.team['_id'];
+        let team = new Team();
+    
+        listId = mcConfig.PLAYER_LIST;
+        console.log("Team Id: ", teamId);
+        var sent = false;
+        SignupPromo.findOne({teamId: mongoose.Types.ObjectId(teamId)}, (err, newPromo) => {
+            console.log('newPromo: ', newPromo);
+            Team.findOne({_id: mongoose.Types.ObjectId(teamId)}, (err, team) => {
+                console.log('team: ', team);
+                User.findOne({_id: mongoose.Types.ObjectId(ownerId)}, (err, user) => {
+                    console.log('user: ', user);
+                    var from = 'The Complete 90';
+                    var name = 'The Complete 90';
+                    var message = "Send this email to player for signup. http://staging.thecomplete90.com/coach_signup?id="+newPromo.code;
+
+
+            
+                    var data = {
+                        to: user.email,
+                        from: mailer.email,
+                        template: 'contact-form',
+                        subject: 'Join our team ' + team.name,
+                        context: {
+                            message: message,
+                            name: name,
+                            from: from
+                        }
+                    };
+
+                    mailer.smtpTransport().sendMail(data, (err) => {
+                        if (!err) {
+                            return res.json({
+                                success: true
+                            });
+                        } else {
+                            console.log(err);
+                            return res.json({
+                                success: false
+                            });
+                        }
+                    });
+
+                });
+            });
+
+        });
+    });
+
+
+
+
+
+
     
     apiRoutes.delete('/club/team/player', Auth.isAuthenticated, (req, res) => {
         const {playerId} = req.query;

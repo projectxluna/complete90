@@ -18,6 +18,7 @@
             (deselect)="team.active = false">
             <div class="row team-control">
                 <div class="col-sm-3 text-center control" (click)="editTeam(team, editTeamModal)">Edit Team</div>
+                <div class="col-sm-3 text-center control" style="margin-left: 10px;" (click)="resendTeamEmail(team)">Resend Email</div>
             </div>
             <table class="listSquad col-lg-6 col-sm-6" style="margin-top: 20px; width: 100%">
                 <tr *ngFor="let player of team.players">
