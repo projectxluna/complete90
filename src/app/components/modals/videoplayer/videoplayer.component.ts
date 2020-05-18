@@ -144,6 +144,8 @@ export class VideoplayerComponent implements OnInit {
     this.stopTimer();
     this.longTimer.reset();
 
+    this.timerText = '00:00'
+
     this.selectedIndex++;
     this.selectedContent = this.session.content[this.selectedIndex];
     this.removeCuePoits();
@@ -160,6 +162,8 @@ export class VideoplayerComponent implements OnInit {
     }
     this.stopTimer();
     this.longTimer.reset();
+
+    this.timerText = '00:00'
 
     this.selectedIndex--;
     this.selectedContent = this.session.content[this.selectedIndex];
@@ -191,6 +195,7 @@ export class VideoplayerComponent implements OnInit {
     this.timer.stop();
     var watched = this.timer.time();
     this.timer.reset();
+
 
     this.sessionStats.watchedTotal = watched;
     this.sessionStats.currentTime = this.api.getDefaultMedia().currentTime;
@@ -244,15 +249,15 @@ export class VideoplayerComponent implements OnInit {
       }
     );
 
-    setTimeout(() => {
       if (this.userCreated) {
         // Create cue track
-        this.api.addTextTrack('chapters');
+        this.api.addTextTrack('metadata');
         this.track = this.api.textTracks[0];
 
         this.addCuePoints();
       }
-    }, 1000);
+    // setTimeout(() => {
+    // }, 1000);
   }
 
   removeCuePoits() {
@@ -271,8 +276,9 @@ export class VideoplayerComponent implements OnInit {
 
     for (let m of markers) {
       let cue = new VTTCue(m.startTime, m.endTime, m.title)
-      cue.onexit = (textTrack) => {this.onExitCuePoint(textTrack);};
+      cue.onexit = (textTrack) => this.onExitCuePoint(textTrack);
       cue.loop = m.loop;
+      cue.cid = this.selectedContent.id;
       this.track.addCue(cue);
     }
   }
@@ -281,11 +287,13 @@ export class VideoplayerComponent implements OnInit {
   onExitCuePoint(textTrack) {
     let cue = textTrack.currentTarget;
 
+    if (cue.cid !== this.selectedContent.id) {
+      return console.log('Not the same cid');
+    }
     if (cue.loop && this.autoLoop) {
       // Using a timeout here to keep things from breaking on IOS
       this.cuePointTimeout = setTimeout(() => {
-        this.api.seekTime(cue.startTime - 1);
-        // this.api.play();
+        this.api.seekTime(cue.startTime);
         if (!this.originalVolume) this.originalVolume = this.api.volume; // save the old volume
         // turn off music here
         // This does not work on IOS
