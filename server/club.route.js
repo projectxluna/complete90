@@ -223,11 +223,12 @@ module.exports = function (apiRoutes) {
                                 from: mailer.email,
                                 template: 'contact-form',
                                 subject: 'Join our team ' + team_name,
-                                context: {
-                                    message: message,
-                                    name: name,
-                                    from: from
-                                }
+                                html: message,
+                                // context: {
+                                //     message: message,
+                                //     name: name,
+                                //     from: from
+                                // }
                             };
                 
                             mailer.smtpTransport().sendMail(data, (err) => {
@@ -364,11 +365,12 @@ module.exports = function (apiRoutes) {
                         from: mailer.email,
                         template: 'contact-form',
                         subject: 'Join our team ' + team.name,
-                        context: {
-                            message: message,
-                            name: name,
-                            from: from
-                        }
+                        html: message, // html body
+                        // context: {
+                        //     message: message,
+                        //     name: name,
+                        //     from: from
+                        // }
                     };
 
                     mailer.smtpTransport().sendMail(data, (err) => {
