@@ -3,9 +3,9 @@ var braintree = require('braintree');
 var btConfig = config.braintree;
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'dev') {
-    btConfig.environment = braintree.Environment.Sandbox;
+    btConfig.environment = braintree.Environment.Production;
 } else {
-    btConfig.environment = braintree.Environment.Sandbox;
+    btConfig.environment = braintree.Environment.Production;
 }
 
 var gateway = braintree.connect(btConfig);
