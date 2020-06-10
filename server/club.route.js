@@ -48,7 +48,7 @@ module.exports = function (apiRoutes) {
 
         let clubsMapped = [];
         await Promise.all(clubs.map(async club => {
-            let owner = await findUser(club.owner);
+            let owner = await findUser(club.owner[2]);
             if (owner) {
                 club.managerName = owner.name;
             }
