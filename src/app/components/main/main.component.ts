@@ -21,10 +21,13 @@ export class MainComponent implements OnInit {
         link.click();
   }
 
-
+  validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+  }
 
   mailchimpSubmit(f: NgForm){
-    if(f.invalid) {
+    if(f.invalid || !this.validateEmail(f.value.EMAIL)) {
         jQuery(".sub-error-msg").slideDown();
         setTimeout(function() {jQuery(".sub-error-msg").slideUp();}, 5000);
         return;

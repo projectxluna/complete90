@@ -112,7 +112,7 @@
 					<a href="" class="inactiveLink">PLAYER</a>
 					<h1>THE <b>COMPLETE 90</b> for players</h1>
 					<div class="PromoSignbtn">
-						<a [routerLink]="['/login_signup']">SIGN UP</a>
+						<a [routerLink]="['/login_signup']" [queryParams]="{ type: 'signup' }">SIGN UP</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-sm-6 playerPromoImage">
@@ -129,7 +129,7 @@
 					<a href="" class="inactiveLink">CLUB</a>
 					<h1>THE <b>COMPLETE 90</b> for clubs</h1>
 					<div class="PromoSignbtn">
-						<a href="#" onclick="return false;">CONTACT US</a>
+						<a [routerLink]="['/contact']" onclick="return false;">CONTACT US</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-sm-6 coachPromoImage">
@@ -147,7 +147,7 @@
 					<a href="" class="inactiveLink">PLAYER</a>
 					<h1>THE <b>COMPLETE 90</b> for players</h1>
 					<div class="PromoSignbtn">
-						<a [routerLink]="['/login_signup']">SIGN UP</a>
+						<a [routerLink]="['/login_signup']" [queryParams]="{ type: 'signup' }">SIGN UP</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-sm-6 playerPromoImage">
@@ -161,7 +161,7 @@
 					<a href="" class="inactiveLink">CLUB</a>
 					<h1>THE <b>COMPLETE 90</b> for clubs</h1>
 					<div class="PromoSignbtn">
-						<a onclick="return false;">CONTACT US</a>
+						<a [routerLink]="['/contact']">CONTACT US</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-sm-6 coachPromoImage">

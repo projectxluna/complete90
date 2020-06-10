@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { RoutingState, DataService } from './services';
 import { Router, NavigationEnd } from '@angular/router';
+declare var jQuery: any;
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0);
+      //window.scrollTo(0, 0);
+      jQuery("body").animate({ scrollTop: 0 }, 0);
     });
   }
 
