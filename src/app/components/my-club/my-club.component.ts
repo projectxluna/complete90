@@ -88,6 +88,7 @@ export class MyClubComponent implements OnInit {
       if (res.clubs.length) {
         this.page = 2;
         this.clubs = res.clubs;
+        console.log("Clubs", this.clubs);
       }
     });
   }
