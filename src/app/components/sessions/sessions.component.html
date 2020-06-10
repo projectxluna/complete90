@@ -181,8 +181,8 @@
 <div class="container">
     <!-- Assignments -->
     <div *ngIf="assignments && assignments.length > 0 && !hasFilter()">
-        <div class="container">
-            <div class="col-lg-12 catTitle">
+        <div class="">
+            <div class="catTitle">
                 <h1>Assignments</h1>
             </div>
         </div>
@@ -213,13 +213,13 @@
     <div class="row" *ngIf="!hasFilter()">
         <!-- WEEKLY FEATURED/ TRAIN LIKE A PRO DRILLS -->
         <div *ngFor="let session of freeSessions" class="col-lg-12 suggVids">
-            <div *ngIf="session.content.length > 0" class="container">
+            <div *ngIf="session.content.length > 0" class="">
                 <div class="col-lg-12 catTitle">
                     <h1>{{ session.name }}</h1>
                 </div>
             </div>
 
-            <div class="container">
+            <div class="">
                 <div [hidden]="session.display.length > 0 || hasFilter()" class="row">
                     <!-- TRAINING VIDEO -->
                     <div *ngFor="let content of (session.content ? session.content.slice(0, 3) : []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
@@ -315,7 +315,7 @@
                 <!----------- ROWS FOR SEE ALL BUTTON END---------->
             </div>
             <div class="row">
-                <div class="col-lg-12 catTitle">
+                <div class="catTitle">
                     <a *ngIf="session.chunks.length > 0" (click)="showMore(session)"><h2>SHOW MORE ({{ session.remaining }})</h2></a>
                     <a style="padding-left: 15px;" *ngIf="session.display.length" (click)="showLess(session)"><h2>SHOW LESS</h2></a>
                 </div>
@@ -327,7 +327,7 @@
     <div class="row"  *ngIf="!hasFilter()">
         <div class="col-lg-12 exercise-section" >
             <div class="exercise-title">
-                <div class="col-lg-12 catTitle">
+                <div>
                     <h1>Exercises</h1>
                 </div>
             </div>
@@ -339,7 +339,7 @@
 
     <div class="row"  *ngIf="!hasFilter()">
         <div class="col-lg-12 exercise-cat-section">
-            <div class="container">
+            <div class="">
                 <div class="row">
                     <div class="col-md-4 exercise-cat-tab" *ngFor="let category of selectedExercisesCategories.exercise['categories']" (click)="selectExerciseCat(category)" [ngClass]="{'active': selectedExercisesCategories.category === category.name}">{{category.name}}</div>
                 </div>
@@ -354,14 +354,14 @@
     <div class="row">
         <div *ngIf="!hasFilter()">
             <div *ngFor="let session of selectedExerciseCat" class="col-lg-12 suggVids">
-                <div *ngIf="session.content.length > 0" class="container box">
-                    <div class="col-lg-12 catTitle">
+                <div *ngIf="session.content.length > 0" class=" box">
+                    <div class="catTitle">
                         <h1>{{ session.name }}</h1>
                         <!-- <a *ngIf="session.chunks.length > 0" (click)="showMore(session)"><h2>SHOW MORE</h2></a> -->
                     </div>
                 </div>
 
-                <div class="container">
+                <div class="">
                     <div [hidden]="session.display.length > 0 || hasFilter()" class="row">
                         <!-- TRAINING VIDEO -->
                         <div *ngFor="let content of (session.content ? session.content.slice(0, 3) : []); let i = index" class="col-lg-4 col-md-4 col-sm-8">
@@ -447,7 +447,7 @@
                     <!----------- ROWS FOR SEE ALL BUTTON END---------->
                 </div>
                 <div class="row">
-                    <div class="col-lg-12 catTitle">
+                    <div class="catTitle">
                         <a *ngIf="session.chunks.length > 0" (click)="showMore(session)"><h2>SHOW MORE ({{ session.remaining }})</h2></a>
                         <a style="padding-left: 15px;" *ngIf="session.display.length" (click)="showLess(session)"><h2>SHOW LESS</h2></a>
                     </div>
@@ -457,8 +457,8 @@
 
         <div *ngIf="hasFilter() && getFilteredSessions().length > 0">
             <div *ngFor="let session of getFilteredSessions()" class="col-lg-12 suggVids suggViddds">
-                <div *ngIf="session.content.length > 0" class="container box">
-                    <div class="col-lg-12 catTitle">
+                <div *ngIf="session.content.length > 0" class=" box">
+                    <div class="catTitle">
                         <h1>{{ session.name }}</h1>
                         <!-- <a *ngIf="session.chunks.length > 0" (click)="showMore(session)"><h2>SHOW MORE</h2></a> -->
                     </div>

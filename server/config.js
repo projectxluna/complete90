@@ -2,16 +2,16 @@ var config = {
     production: {
         secret: 'whendidwestopbeingus',
         database: 'mongodb://localhost:27017/complete90',
-        braintree: {
-            merchantId: "6f62td8d6yzkn2ry",
-            publicKey: "f766gw4bhqjkkj5h",
-            privateKey: "d833cbdd16b60a51cd2a89f4818d5c73"
-        },
-        // braintree: { Sandbox
-        //     merchantId: "y3xkmxb3xzzw2xkn",
-        //     publicKey: "y4pdj3b3r7yfkrrb",
-        //     privateKey: "ed56424f5bd2785cac0b37c8d02ef482"
+        // braintree: {
+        //     merchantId: "6f62td8d6yzkn2ry",
+        //     publicKey: "jbf66x2y3dp79bt5",
+        //     privateKey: "b8037554429d6e8a679b34450e5876b1"
         // },
+        braintree: { //Sandbox
+            merchantId: "y3xkmxb3xzzw2xkn",
+            publicKey: "y4pdj3b3r7yfkrrb",
+            privateKey: "ed56424f5bd2785cac0b37c8d02ef482"
+        },
         aws: {
             PRIVATE_KEY: "APKAJDTCMHD6IPBCKGDQ",
             PK_FILE: "pk-APKAJDTCMHD6IPBCKGDQ.pem",
@@ -37,16 +37,16 @@ var config = {
     dev: {
         secret: 'whendidwestopbeingus',
         database: 'mongodb://localhost:27017/complete90',
-        braintree: {
-            merchantId: "6f62td8d6yzkn2ry",
-            publicKey: "f766gw4bhqjkkj5h",
-            privateKey: "d833cbdd16b60a51cd2a89f4818d5c73"
-        },
-        // braintree: { Sandbox
-        //     merchantId: "y3xkmxb3xzzw2xkn",
-        //     publicKey: "y4pdj3b3r7yfkrrb",
-        //     privateKey: "ed56424f5bd2785cac0b37c8d02ef482"
+        // braintree: {
+        //     merchantId: "6f62td8d6yzkn2ry",
+        //     publicKey: "jbf66x2y3dp79bt5",
+        //     privateKey: "b8037554429d6e8a679b34450e5876b1"
         // },
+        braintree: { //Sandbox
+            merchantId: "y3xkmxb3xzzw2xkn",
+            publicKey: "y4pdj3b3r7yfkrrb",
+            privateKey: "ed56424f5bd2785cac0b37c8d02ef482"
+        },
         aws: {
             PRIVATE_KEY: "APKAJMPYCKBXNVYFUIHA",
             PK_FILE: "pk-APKAJMPYCKBXNVYFUIHA.pem",

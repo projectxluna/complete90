@@ -11,6 +11,7 @@ import { ConfirmComponent } from '../modals/confirm/confirm.component';
 export class TeamRoasterComponent implements OnInit {
 
   teams: any[];
+  sent = false;
   modalRef: BsModalRef;
   model = {
     teamName: '',
@@ -52,7 +53,7 @@ export class TeamRoasterComponent implements OnInit {
       }
       this.teams = res.teams;
       if (this.teams.length) {
-        this.selectTeam(this.teams[this.teams.length - 1]);
+        this.selectTeam(this.teams[0]);
         this.teams.forEach(function(team){
           
           this.dataService.getPlayers(team._id).subscribe(res => {
@@ -227,9 +228,15 @@ export class TeamRoasterComponent implements OnInit {
 
   resendTeamEmail(team) {
     console.log(team);
+    this.sent = true;
+    setTimeout(function(){
+      this.sent = false;
+    }, 2000);
     this.dataService.resendTeamEmail(team).subscribe(res => {
       this.getTeams();
       this.closeModal();
+      
+      
     });
   }
 

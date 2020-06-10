@@ -120,15 +120,7 @@
             <div class="col-xs-12">
                 <club *ngIf="hasSubscription() || coachProfile "></club>
             </div>
-            <div class="col-xs-12" *ngIf="hasSubscription() || coachProfile">
-                <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
 
-                    <div *ngIf="hasSubscription() && !isAuthenticatedToSee() && !adminProfile && !coachProfile" class="center_container">
-                        <a class="btn btn-danger upgrade_membership"  (click)="upgrade_membership();">Upgrade for full access</a>  
-                    </div>
-                </div>
-                <leader-board *ngIf="hasSubscription() || coachProfile" [ngClass]="{'blurred_content' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}"></leader-board>  
-            </div>
             <div class="col-xs-12" *ngIf="coachProfile || coachProfile">
                 <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
 
@@ -139,6 +131,17 @@
 
                 <team-roaster *ngIf="coachProfile || coachProfile"></team-roaster>
             </div> 
+
+            <div class="col-xs-12" *ngIf="hasSubscription() || coachProfile">
+                <div [ngClass]="{'overlay' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}">
+
+                    <div *ngIf="hasSubscription() && !isAuthenticatedToSee() && !adminProfile && !coachProfile" class="center_container">
+                        <a class="btn btn-danger upgrade_membership"  (click)="upgrade_membership();">Upgrade for full access</a>  
+                    </div>
+                </div>
+                <leader-board *ngIf="hasSubscription() || coachProfile" [ngClass]="{'blurred_content' : (!hasSubscription() || !isAuthenticatedToSee())  && !adminProfile && !coachProfile}"></leader-board>  
+            </div>
+            
             
             <subscription (subscriptionUpdated)="onSubscriptionUpdated($event)" *ngIf="!hasSubscription() && !adminProfile && !coachProfile"></subscription>
         </div>

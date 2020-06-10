@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DataService, RoutingState } from '../../services'
 import { AuthenticationService } from '../../services';
 import { FormControl, Validators } from '@angular/forms';
+declare var jQuery: any;
 
 @Component({
     templateUrl: 'loginsignup.component.html',
@@ -32,7 +33,8 @@ export class LoginSignupComponent implements OnInit {
         private dataService: DataService, 
         private router: Router,
         private authenticationService: AuthenticationService,
-        private routingState: RoutingState) { 
+        private routingState: RoutingState,
+        private route: ActivatedRoute) { 
             this.dataService.getClient().subscribe((res) => {
                 if (res) {
                     console.log("Res: ", res);
@@ -46,6 +48,11 @@ export class LoginSignupComponent implements OnInit {
         }
 
     ngOnInit() {
+
+        let type = this.route.snapshot.queryParams["type"];
+        if( type == "signup" ) {
+            this.signup = !this.signup;
+        }
         // reset login status
         //this.authenticationService.logout();
         this.previousRoute = this.routingState.getPreviousUrl();

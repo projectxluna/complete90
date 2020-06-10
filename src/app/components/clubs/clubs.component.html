@@ -17,6 +17,7 @@
 				<h3 class="text-black" >Create a club</h3>
 				<br>
 				<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+				<div *ngIf="success_msg" class="alert alert-danger">{{success_msg}}</div>
 				<form>
 					<div class="form-group">
 						<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Name" [(ngModel)]="model.name" name="name">

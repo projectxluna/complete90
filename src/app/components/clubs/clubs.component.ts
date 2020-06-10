@@ -14,6 +14,7 @@ export class ClubsComponent implements OnInit {
   user: any;
   emailSent = false;
   error: string = '';
+  success_msg: string = '';
   club;
   allClubs;
   adminProfile: any;
@@ -144,8 +145,10 @@ export class ClubsComponent implements OnInit {
       if (!result.success) {
         console.log(result.err);
         this.error = 'An error occured while sending your request. Please try again soon or contact us directly at support@thecomplete90.com';
+        this.success_msg = '';
       } else {
         this.error = '';
+        this.success_msg = 'Succesfully Sent!';
         this.emailSent = true;
       }
     });
