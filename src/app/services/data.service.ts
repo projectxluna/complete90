@@ -209,11 +209,11 @@ export class DataService {
       });
   }
 
-  requestClubAccess(clubId: string): Observable<any> {
+  requestClubAccess(clubId: string, managerId: string): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post('/api/club/join', {clubId}, options)
+    return this.http.post('/api/club/join', {clubId: clubId, managerId: managerId}, options)
       .map((response: Response) => {
         return response.json();
       });

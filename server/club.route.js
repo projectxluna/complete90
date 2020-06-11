@@ -54,6 +54,7 @@ module.exports = function (apiRoutes) {
                 let owner = await findUser(club.owner[i]);
                 if (owner) {
                     clubClone.managerName = owner.name;
+                    clubClone.managerId = owner._id;
                 }
                 if (!clubClone.logoUrl) {
                     clubClone.logoUrl = '/public/imgs/clubs/default.png'
@@ -94,7 +95,7 @@ module.exports = function (apiRoutes) {
                     message: err
                 });
             }
-            User.find({clubId: club._id, clubStatus: CLUB_REQUEST_STATUS.PENDING }, (err, users) => {
+            User.find({clubId: club._id, managerId: userId, clubStatus: CLUB_REQUEST_STATUS.PENDING }, (err, users) => {
                 if (err) {
                     return res.status(422).send({
                         message: err
@@ -521,20 +522,25 @@ module.exports = function (apiRoutes) {
     });
 
     apiRoutes.post('/club/join', Auth.isAuthenticated, (req, res) => {
-        const { clubId } = req.body;
+        // console.log("Body: ", req.body;
+        var clubIdd  = req.body.clubId;
+        var managerId  = req.body.managerId;
         let userId = req.decoded.userId;
-        if (!clubId) {
-            return res.status(422).send({
-                message: 'Invalid param: club id is required'
-            });
-        }
-        Club.findById(mongoose.Types.ObjectId(clubId), (err, club) => {
+        // if (!clubId) {
+        //     return res.status(422).send({
+        //         message: 'Invalid param: club id is required'
+        //     });
+        // }
+        Club.findById(mongoose.Types.ObjectId(clubIdd), (err, club) => {
             if (err) {
                 return res.status(422).send({
                     message: err
                 });
             }
-            User.findOneAndUpdate({_id: mongoose.Types.ObjectId(userId)}, {clubId: club._id, clubStatus: 'PENDING'}, (err, user) => {
+            // console.log("Club Id", clubIdd);
+            // console.log("Club", club);
+
+            User.findOneAndUpdate({_id: mongoose.Types.ObjectId(userId)}, {clubId: club._id, managerId: managerId, clubStatus: 'PENDING'}, (err, user) => {
                 if (err) {
                     return res.status(422).send({
                         message: err

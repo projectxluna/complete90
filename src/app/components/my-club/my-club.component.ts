@@ -101,7 +101,7 @@ export class MyClubComponent implements OnInit {
       this.error = 'Please select a club to continue';
       return;
     }
-    this.dataService.requestClubAccess(club._id).subscribe(res => {
+    this.dataService.requestClubAccess(club._id, club.managerId).subscribe(res => {
       if (res.success) {
         this.page = 3;
         setTimeout(() => {
