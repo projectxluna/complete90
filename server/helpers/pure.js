@@ -51,7 +51,7 @@ const updateClub = (clubId, owner) => {
     return new Promise((resolve, reject) => {
         var owners = [];
         Club.findOne({_id: clubId}, (err, clubs) =>{
-            owners.push(clubs.owner[0]);
+            owners.push(clubs.owner);
             // clubs.owner.forEach(function(own){
             //     owners.push(own);
             // });
