@@ -45,6 +45,10 @@ var userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         index: true,
     },
+    managerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        index: true,
+    },
     clubStatus: {
         type: CLUB_REQUEST_STATUS,
         index: true

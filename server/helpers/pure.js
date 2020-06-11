@@ -51,13 +51,19 @@ const updateClub = (clubId, owner) => {
     return new Promise((resolve, reject) => {
         var owners = [];
         Club.findOne({_id: clubId}, (err, clubs) =>{
-            owners.push(clubs.owner);
+            
+            
             // clubs.owner.forEach(function(own){
             //     owners.push(own);
             // });
 
-            owners.push(owner);
-            Club.findOneAndUpdate({_id: clubId}, {owner: owners}, (err, club) =>{
+            clubs.owner.push(owner);
+
+            //owners.push(clubs.owner);
+
+            console.log("Owners:", clubs.owner);
+            
+            Club.findOneAndUpdate({_id: clubId}, {owner: clubs.owner}, (err, club) =>{
                 resolve(club);
             });
 
