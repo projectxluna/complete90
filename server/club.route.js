@@ -48,14 +48,18 @@ module.exports = function (apiRoutes) {
 
         let clubsMapped = [];
         await Promise.all(clubs.map(async club => {
-            let owner = await findUser(club.owner[1]);
-            if (owner) {
-                club.managerName = owner.name;
+            
+            for(i = 0; i < club.owner.length; i++) {
+                clubClone = Object.assign({}, club);
+                let owner = await findUser(club.owner[i]);
+                if (owner) {
+                    clubClone.managerName = owner.name;
+                }
+                if (!clubClone.logoUrl) {
+                    clubClone.logoUrl = '/public/imgs/clubs/default.png'
+                }
+                clubsMapped.push(clubClone);
             }
-            if (!club.logoUrl) {
-                club.logoUrl = '/public/imgs/clubs/default.png'
-            }
-            clubsMapped.push(club);
         }));
 
         res.json({
