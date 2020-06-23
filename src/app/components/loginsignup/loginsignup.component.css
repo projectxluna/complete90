@@ -70,6 +70,15 @@ select {
 	height: 100vh;
 }
 
+@media (max-width: 400px) {
+
+	.signup {
+		height: 800px;
+	}
+}
+
+
+
 .loginTitle{
 	padding-bottom: 50px;
 }
