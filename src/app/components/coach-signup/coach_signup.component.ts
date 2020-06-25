@@ -47,7 +47,7 @@ export class CoachSignupComponent implements OnInit {
 
             this.authenticationService.getSignupPromo(payload)
                 .subscribe(result => {
-                    //console.log("Payload: ", result);
+                    console.log("Payload: ", result);
                     if (!result || result.success == false) {
                         this.router.navigate(['/']);
                         return;

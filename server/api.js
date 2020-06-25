@@ -211,6 +211,27 @@ module.exports = function (app) {
     });
 
 
+    apiRoutes.post('/checkUserExists', (req, res) => {
+    var email = req.body.email;
+    User.findOne({
+        email: email
+    }, (err, found) => {
+        if (found || err) {
+            return res.json({
+                success: false,
+                message: err || 'Email already exists!'
+            });
+        } else {
+            return res.json({
+                success: true,
+                message: "No user exists with current email"
+            });
+        }
+
+    });
+});
+
+
     apiRoutes.post('/signup', (req, res) => {
         var newUser = new User();
         var newPromo = new SignupPromo();
