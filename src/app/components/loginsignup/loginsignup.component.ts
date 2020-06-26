@@ -117,6 +117,7 @@ export class LoginSignupComponent implements OnInit {
             this.error = 'Club name is required to create a manager profile';
             return false;
         }
+
         // this.loading = true;
 
         // let payload = {
@@ -221,31 +222,47 @@ export class LoginSignupComponent implements OnInit {
         if (this.signUp() == false ) {
             return;
         }
-    
-        let id = '';
 
-        if (type && type === 'player' && this.isYearly) {
-            id = 'player-yearly'
-        } else if (type && type === 'coach' && this.isYearly) {
-            id = 'coach-yearly';
-        } else if (type && type === 'player' && !this.isYearly) {
-            id = 'player-monthly-' + this.planType + this.isTrial;
-        } else if (type && type === 'coach' && !this.isYearly) {
-            id = 'coach-monthly-' + this.planType + this.isTrial;
-        }
-
-        let payload = {
-            id: id,
-            name: this.model.firstname + ' ' + this.model.lastname,
-            address: this.model.address,
-            postalcode: this.model.postalcode,
-            email: this.model.email,
-            password: this.model.password,
-            isManager: this.createManagerProfile,
-            clubName: this.model.clubName
+        let payloadd = {
+            email: this.model.email
         };
-        console.log("Pay now");
-        this.router.navigate(['/paynow'], { queryParams: payload});
+        this.authenticationService.checkUserExists(payloadd)
+            .subscribe(result => {
+               if (result && result.success !== true) {
+                    this.error = 'Email already exists!';
+                    return false;
+                } else {
+
+                    let id = '';
+
+                    if (type && type === 'player' && this.isYearly) {
+                        id = 'player-yearly'
+                    } else if (type && type === 'coach' && this.isYearly) {
+                        id = 'coach-yearly';
+                    } else if (type && type === 'player' && !this.isYearly) {
+                        id = 'player-monthly-' + this.planType + this.isTrial;
+                    } else if (type && type === 'coach' && !this.isYearly) {
+                        id = 'coach-monthly-' + this.planType + this.isTrial;
+                    }
+
+                    let payload = {
+                        id: id,
+                        name: this.model.firstname + ' ' + this.model.lastname,
+                        address: this.model.address,
+                        postalcode: this.model.postalcode,
+                        email: this.model.email,
+                        password: this.model.password,
+                        isManager: this.createManagerProfile,
+                        clubName: this.model.clubName
+                    };
+                    console.log("Pay now");
+                    this.router.navigate(['/paynow'], { queryParams: payload});
+
+
+                }
+            });
+    
+        
     }
 
 

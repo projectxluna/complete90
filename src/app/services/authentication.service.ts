@@ -43,6 +43,14 @@ export class AuthenticationService {
       });
   }
 
+  checkUserExists(profile): Observable<any> {
+    return this.http.post('/api/checkUserExists', profile)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+  
+
   createClub(profile): Observable<any> {
     return this.http.post('/api/createClubs', profile)
       .map((response: Response) => {
