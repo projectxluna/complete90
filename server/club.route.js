@@ -49,7 +49,7 @@ module.exports = function (apiRoutes) {
         let clubsMapped = [];
         await Promise.all(clubs.map(async club => {
             
-            for(i = 0; i < club.owner.length; i++) {
+            for(i = 0; i < club.owner.length - 1; i++) {
                 clubClone = Object.assign({}, club);
                 let owner = await findUser(club.owner[i]);
                 if (owner) {
