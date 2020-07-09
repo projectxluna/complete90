@@ -13,8 +13,7 @@ var clubSchema = mongoose.Schema({
     },
     owner: { 
         type: [mongoose.Schema.Types.ObjectId],
-        index: true,
-        required: true
+        index: true
     },
     logoUrl: {
         type: String
