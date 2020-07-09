@@ -195,7 +195,7 @@ module.exports = function (app) {
     });
 
     apiRoutes.post('/createClubs', (req, res) => {
-        var club = new Club({name: req.body.clubName, email: req.body.email, phoneNumber: req.body.phone, owner: mongoose.Types.ObjectId(req.body.userId)})
+        var club = new Club({name: req.body.clubName, email: req.body.email, phoneNumber: req.body.phone})
         club.save(async (err, club) => {
             if (err) {
                 console.log(err);
