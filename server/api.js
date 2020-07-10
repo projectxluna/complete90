@@ -18,6 +18,7 @@ module.exports = function (app) {
     var crypto = require('crypto');
     var apiRoutes = express.Router();
     var Auth = require('./helpers/auth');
+    var md5 = require('md5');
 
     var config = require('./config').get(process.env.NODE_ENV);
     var mcConfig = config.mailChimp;
@@ -133,16 +134,31 @@ module.exports = function (app) {
         //console.log(req.body['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
         listId = mcConfig.CLUB_SIGN_UP_LIST;
 
-        mailchimp.post('/lists/' + listId + '/members', {
-            email_address: req.body['email'],
-            status: 'subscribed',
-            merge_fields: {
-                'FNAME': req.body['name'],
-                'CODE': newPromo.code
-            }
-        }).catch(err => {
-            console.error(err);
+        mailchimp.get('/lists/' + listId + '/members/' + md5(req.body['email'])
+        ).then(function (result) {
+            return res.json({
+                success: false
+            });
+        }).catch(function (err) {
+            console.log("Email already sent! ", err);
+            //if user not subscribed add him to list
+            mailchimp.post('/lists/' + listId + '/members', {
+                email_address: req.body['email'],
+                status: 'subscribed',
+                merge_fields: {
+                    'FNAME': req.body['name'],
+                    'CODE': newPromo.code
+                }
+            }).catch(err => {
+                console.error(err);
+            });
+
+            return res.json({
+                success: true
+            });
         });
+
+        
 
         // var data = {
         //     to: req.body['email'],
@@ -230,7 +246,6 @@ module.exports = function (app) {
 
     });
 });
-
 
     apiRoutes.post('/signup', (req, res) => {
         var newUser = new User();
