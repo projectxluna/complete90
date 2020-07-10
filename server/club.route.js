@@ -49,16 +49,16 @@ module.exports = function (apiRoutes) {
         let clubsMapped = [];
         await Promise.all(clubs.map(async club => {
             
-            for(i = 0; i < club.owner.length - 1; i++) {
-                clubClone = Object.assign({}, club);
+            for(i = 0; i < club.owner.length; i++) {          
                 let owner = await findUser(club.owner[i]);
                 if (owner) {
-                    clubClone.managerName = owner.name;
-                    clubClone.managerId = owner._id;
+                    club.managerName = owner.name;
+                    club.managerId = owner._id;
                 }
-                if (!clubClone.logoUrl) {
-                    clubClone.logoUrl = '/public/imgs/clubs/default.png'
+                if (!club.logoUrl) {
+                    club.logoUrl = '/public/imgs/clubs/default.png'
                 }
+                clubClone = Object.assign({}, club);
                 clubsMapped.push(clubClone);
             }
         }));
