@@ -15,9 +15,6 @@
 
 			<div class="col-md-6">
 				<h3 class="text-black" >Create a club</h3>
-				<br>
-				<div *ngIf="error" class="alert alert-danger">{{error}}</div>
-				<div *ngIf="success_msg" class="alert alert-danger">{{success_msg}}</div>
 				<form>
 					<div class="form-group">
 						<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Name" [(ngModel)]="model.name" name="name">
@@ -39,7 +36,7 @@
 			<div class="col-md-6">
 				<h3 class="text-black" >List of Clubs</h3>
 				<div class="row quoteStyle text-center">
-					<div class="col-md-8">
+					<div class="col-md-9">
 						<div class="form-group">
 						  <select class="form-control" [(ngModel)]="model" id="sel1"> 
 							<option selected="">-----Select Clubs-----</option>
@@ -50,6 +47,15 @@
 					<div class="col-md-3">
 						<button class="btn btn-primary"  (click)="clubSignup()">Send Mail</button>
 					</div>
+					<div class="col-md-12" *ngIf="error">
+						<div class="alert alert-danger">{{error}}</div>
+					</div>
+					<div class="col-md-12" *ngIf="emailSent === true">
+						<div class="alert alert-success" role="alert">
+							Email is succesfully sent! Will arive in a few moments!
+						</div>
+					</div>
+
 				</div>
 
 			</div>
