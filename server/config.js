@@ -17,7 +17,7 @@ var config = {
             PK_FILE: "pk-APKAJDTCMHD6IPBCKGDQ.pem",
             CF_DOMAIN: "https://d22hc8s817tx09.cloudfront.net",
             S3_BUCKET: "complete09",
-            VIDEO_STRUCTURE: "https://s3.us-east-2.amazonaws.com/complete09/config/staging_video_structure.json",
+            VIDEO_STRUCTURE: "https://complete09.s3.us-east-2.amazonaws.com/complete09/config/staging_video_structure.json",
         },
         mailer: {
             EMAIL_ID: "projectxluna@gmail.com",
@@ -52,7 +52,7 @@ var config = {
             PK_FILE: "pk-APKAJMPYCKBXNVYFUIHA.pem",
             CF_DOMAIN: "https://dqqdy81dl4r0o.cloudfront.net",
             S3_BUCKET: "complete90",
-            VIDEO_STRUCTURE: "https://s3.us-east-2.amazonaws.com/complete90/config/staging_video_structure.json",
+            VIDEO_STRUCTURE: "https://complete09.s3.us-east-2.amazonaws.com/complete90/config/staging_video_structure.json",
         },
         mailer: {
             EMAIL_ID: "emailhere",
