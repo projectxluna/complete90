@@ -8,8 +8,10 @@
           <div class="assign-team-btn" (click)="openModal(createTeamModal)" *ngIf="teams[teams.length - 1].players !== undefined && teams[teams.length - 1].players.length > 0">NEW TEAM</div>
 
           <div class="assign-team-btn" (click)="openModal(cantAddTeam)" *ngIf="teams[teams.length - 1].players === undefined || teams[teams.length - 1].players.length <= 0">NEW TEAM</div>
+
+          <div class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)"  *ngIf="usersWithoutTeam.length > 0">ASSIGN ({{usersWithoutTeam.length}})</div>
           
-          <div class="assign-team-btn" (click)="openTeamAssignemntModal(assignPlayerModal)">ASSIGN</div>
+          <div class="assign-team-btn" style="opacity: 0.5;" (click)="openTeamAssignemntModal(assignPlayerModal)"  *ngIf="usersWithoutTeam.length == 0">ASSIGN</div>
       </div>
   </div>
   <div class="row" id="sq-pa">

@@ -8,8 +8,9 @@ var mongodb = require('mongodb');
 var config = require('./config').get(process.env.NODE_ENV);
 var path = require('path');
 var PromoJob = require('./jobs/promo.job');
-
-var port = process.env.PORT || 9001;
+var TopPlayerJob = require('./jobs/top_player.job');
+var PlayerAttributeJob = require('./jobs/player_attribute.job');
+var port = process.env.PORT || 9000;
 
 // mongoose config
 const options = {
@@ -51,4 +52,6 @@ app.get('*', (req, res) => {
 });
 
 PromoJob.register();
+PlayerAttributeJob.register();
+TopPlayerJob.register();
 app.listen(port);

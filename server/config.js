@@ -74,9 +74,4 @@ var config = {
 
 exports.get = function (env){
     return config[env] || config.dev;
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> a9ba0a2beb5ed7644a98fb155bb85dfa60137e75
