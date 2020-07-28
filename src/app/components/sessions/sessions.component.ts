@@ -95,7 +95,6 @@ declare var jQuery: any;
   selectExercise(exercise) {
     this.selectedExercisesCategories.exercise = exercise;
     this.selectedExercisesCategories.exerciseName = exercise.name;
-    this.selectedExerciseCat = this.getSelectedExerciseCatSessions();
   }
   selectExerciseCat(category) {
     this.selectedExercisesCategories.category = category.name;
@@ -113,10 +112,10 @@ declare var jQuery: any;
 
         let category = this.selectedFilter.category;
         let exercise = this.selectedExercisesCategories.exerciseName;
-        //let exerciseCat = this.selectedExercisesCategories.category;
+        let exerciseCat = this.selectedExercisesCategories.category;
         //console.log('Ex', session);
-        if(exercise != undefined) {  //&& session.exercisesCat.indexOf(exerciseCat) != -1
-          if(session.exercise == exercise) {
+        if(exercise != undefined) {
+          if(session.exercise == exercise && session.exercisesCat.indexOf(exerciseCat) != -1 ) {
           
             var totalDisplaying = 0;
             session.display.forEach(function(d){
@@ -162,7 +161,7 @@ declare var jQuery: any;
                 "exercises": 
                 [
                   {
-                    "name": 'Technical',
+                    "name": 'Individual',
                     "categories": [
                                     {
                                       "name": "Ball Mastery",
@@ -179,12 +178,7 @@ declare var jQuery: any;
                                     {
                                       "name": "Wall Work",
                                       "subCategories": ["Wall Work"]
-                                    }
-                                  ],
-                  }, 
-                  {
-                    "name": 'Strength',
-                    "categories": [
+                                    },
                                     {
                                       "name": "Core",
                                       "subCategories": ["Core"]
@@ -192,20 +186,54 @@ declare var jQuery: any;
                                     {
                                       "name": "Yoga",
                                       "subCategories": ["Yoga"]
-                                    }
-
-                                  ],
-                  }, 
-                  {
-                    "name": 'Speed',
-                    "categories": [
-                                    {
-                                      "name": "Ladder",
-                                      "subCategories": ["Ladder"]
                                     },
 
                                   ],
-                  }
+                  }, 
+                  // {
+                  //   "name": 'Partner',
+                  //   "categories": [
+                  //                   {
+                  //                     "name": "Prehab 2",
+                  //                     "subCategories": ["Ball Mastery", "Juggling"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Technical 2",
+                  //                     "subCategories": ["Dribbling", "Wall Work"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Finishing 2",
+                  //                     "subCategories": ["Core", "Juggling"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Strength 2",
+                  //                     "subCategories": ["Ball Mastery", "Juggling"]
+                  //                   },
+
+                  //                 ],
+                  // }, 
+                  // {
+                  //   "name": 'Challenge',
+                  //   "categories": [
+                  //                   {
+                  //                     "name": "Prehab 3",
+                  //                     "subCategories": ["Ball Mastery", "Juggling"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Technical 3",
+                  //                     "subCategories": ["Dribbling", "Wall Work"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Finishing 3",
+                  //                     "subCategories": ["Core", "Juggling"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Strength 3",
+                  //                     "subCategories": ["Ball Mastery", "Juggling"]
+                  //                   },
+
+                  //                 ],
+                  // }, 
                 ],
               };
 
