@@ -136,11 +136,9 @@ export class ClubsComponent implements OnInit {
     return re.test(String(email).toLowerCase());
   }
   clubSignup() {
-    this.error = '';
-    this.emailSent = false;
     console.log(this.model);
     if (!this.validateEmail(this.model.email)) {
-      this.error = 'Please enter a valid email';
+      this.error = 'Please enter a valid email' + this.model.email;
       return;
     }
     this.authenticationService.clubSignup(this.model).subscribe(result => {
@@ -148,12 +146,10 @@ export class ClubsComponent implements OnInit {
         console.log(result.err);
         this.error = 'An error occured while sending your request. Please try again soon or contact us directly at support@thecomplete90.com';
         this.success_msg = '';
-        this.model = {};
       } else {
         this.error = '';
-        this.success_msg = 'Email is succesfully sent! Will arive in a few moments!';
+        this.success_msg = 'Succesfully Sent!';
         this.emailSent = true;
-        this.model = {};
       }
     });
   }
