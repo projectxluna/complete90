@@ -13,11 +13,11 @@ var config = {
             privateKey: "ed56424f5bd2785cac0b37c8d02ef482"
         },
         aws: {
-            PRIVATE_KEY: "APKAJMPYCKBXNVYFUIHA",
-            PK_FILE: "pk-APKAJMPYCKBXNVYFUIHA.pem",
+            PRIVATE_KEY: "APKAJDTCMHD6IPBCKGDQ",
+            PK_FILE: "pk-APKAJDTCMHD6IPBCKGDQ.pem",
             CF_DOMAIN: "https://d22hc8s817tx09.cloudfront.net",
             S3_BUCKET: "complete09",
-            VIDEO_STRUCTURE: "https://complete09.s3.us-east-2.amazonaws.com/config/staging_video_structure.json",
+            VIDEO_STRUCTURE: "https://s3.us-east-2.amazonaws.com/complete09/config/staging_video_structure.json",
         },
         mailer: {
             EMAIL_ID: "projectxluna@gmail.com",
