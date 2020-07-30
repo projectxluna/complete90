@@ -406,20 +406,20 @@ module.exports = function (apiRoutes) {
         }
 
         let nodeEnv = process.env.NODE_ENV;
-        if (!nodeEnv || nodeEnv === 'dev') {
+        // if (!nodeEnv || nodeEnv === 'dev') {
             sortSession(require('../staging_video_structure.json'));
-        } else {
-            let resourceLocation = config.aws.VIDEO_STRUCTURE;
-            request(resourceLocation, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    sortSession(JSON.parse(body))
-                }
-                else {
-                    callback(error);
-                }
-            });
+        // } else {
+        //     let resourceLocation = config.aws.VIDEO_STRUCTURE;
+        //     request(resourceLocation, function (error, response, body) {
+        //         if (!error && response.statusCode == 200) {
+        //             sortSession(JSON.parse(body))
+        //         }
+        //         else {
+        //             callback(error);
+        //         }
+        //     });
            
-        }
+        // }
     }
 
     // load sessions json structure
@@ -443,11 +443,11 @@ module.exports = function (apiRoutes) {
 
     // traverse json structure and sign all paid video url
     function signLinks(contentStructure, callback) {
-        console.log("Test");
+        // console.log("Test");
         if (!isValidStructure(contentStructure)) {
             callback(null, contentStructure);
         }
-        console.log("Content: ", contentStructure);
+        //console.log("Content: ", contentStructure);
         contentStructure = JSON.parse(contentStructure);
         
         let contents = [];
