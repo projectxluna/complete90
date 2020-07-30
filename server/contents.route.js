@@ -449,6 +449,7 @@ module.exports = function (apiRoutes) {
         }
         
         contentStructure = JSON.parse(contentStructure);
+        console.log("Content: ", contentStructure);
         let contents = [];
         for (let session of contentStructure.sessions) {
             for (let content of session.content) {
