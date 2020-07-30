@@ -447,9 +447,9 @@ module.exports = function (apiRoutes) {
         if (!isValidStructure(contentStructure)) {
             callback(null, contentStructure);
         }
-        
-        contentStructure = JSON.parse(contentStructure);
         console.log("Content: ", contentStructure);
+        contentStructure = JSON.parse(contentStructure);
+        
         let contents = [];
         for (let session of contentStructure.sessions) {
             for (let content of session.content) {
