@@ -443,9 +443,11 @@ module.exports = function (apiRoutes) {
 
     // traverse json structure and sign all paid video url
     function signLinks(contentStructure, callback) {
+        console.log("Test");
         if (!isValidStructure(contentStructure)) {
             callback(null, contentStructure);
         }
+        
         contentStructure = JSON.parse(contentStructure);
         let contents = [];
         for (let session of contentStructure.sessions) {
