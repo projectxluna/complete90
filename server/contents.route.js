@@ -435,9 +435,8 @@ module.exports = function (apiRoutes) {
                 if (!error && response.statusCode == 200) {
                     console.log("Success");
                     callback(null, body);
-                }
-                else {
-                    console.log("Fail");
+                } else {
+                    console.log("Fail: ", response);
                     callback(error);
                 }
             });
