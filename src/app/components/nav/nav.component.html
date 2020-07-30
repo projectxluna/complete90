@@ -1,6 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
-
+    
      <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" (click)="toggle()" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -20,7 +20,7 @@
 			   <li *ngIf="!isLoggedIn()"   [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']" (click)="collapse()">HOME <span class="sr-only">(current)</span></a></li>
 
 			   		<li *ngIf="isLoggedIn() && adminProfile" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/clubs']" (click)="collapse()">CLUBS</a></li>
-
+			   
 					<li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/events']" (click)="collapse()">EVENTS</a></li>
 
 					<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/sessions']" (click)="collapse()">SESSIONS</a></li>
@@ -34,7 +34,7 @@
 					<!-- <li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/training']" (click)="collapse()">PERS. TRAINING</a></li> -->
 
 		    		<li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/about']" (click)="collapse()">ABOUT US</a></li>
-
+				
 					<li *ngIf="!isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="floated_right"><a [routerLink]="['/login_signup']" (click)="collapse()">LOGIN/SIGNUP</a></li>
 
 					<li *ngIf="isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"  class="floated_right"><a (click)="logout()">LOGOUT</a></li>
@@ -45,7 +45,7 @@
 							<li><a (click)="logout()">LOGOUT</a></li>
 						</ul>
 					</li> -->
-	    	</ul>
+	    	</ul> 
     </div>
   </div>
 </nav>

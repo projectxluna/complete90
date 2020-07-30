@@ -1,11 +1,11 @@
 {
-    "sessions": 
+    "sessions":
     [
         {
-            "name": "Featured Exercise",
+            "name": "Featured",
             "alwaysActive": true,
             "free": true,
-            "content" : 
+            "content" :
             [
                 {
                     "id": "fe71e181-13ca-4725-80ce-6840df169e6a",
@@ -14,17 +14,7 @@
                     "link": "/videos/Ball+Mastery/4+Cone/Double+Sole+Drag+(4+Cone).mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/double+sole+drag.jpg",
                     "alwaysActive": true,
-                    "free": true,
-                    "tags":["Beginner","Dribbling", "Control"],
-                    "markers": [
-                        {
-                            "title": "Double Sole Drag",
-                            "startTime":2.86,
-                            "endTime":5.21,
-                            "description":"A beginner level skill that develops a feel for the ball using the soles of your feet. For an advanced variation refer to: Advanced Toe Touches.",
-                            "loop": true
-                        }
-                    ]
+                    "free": true
                 },
                 {
                     "id": "2c6ac5d7-d0c4-4422-82be-fc39560d98c7",
@@ -64,15 +54,15 @@
                 }
             ]
         },
-        {  
+        {
             "name": "Ball Mastery",
             "alwaysActive": true,
             "defaultView": 6,
-            "exercises": "Individual",
+            "exercises": "Technical",
             "exercisesCat": ["Ball Mastery"],
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "d2941462-48e5-4021-94bb-4e10f2fe9674",
                     "name": "Toe Touches",
                     "description": "A beginner level skill that develops a feel for the ball using the soles of your feet. For an advanced variation refer to: Advanced Toe Touches.",
@@ -98,7 +88,8 @@
                     "link": "/videos/Ball+Mastery/4+Cone/Advanced+Toe+Touches+(4+Cone).mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/advanced+toe+touches.jpg",
                     "tags":["Intermediate","Dribbling", "Control"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Advanced Toe Touches",
@@ -116,7 +107,8 @@
                     "link": "/videos/Ball+Mastery/4+Cone/Instep+Taps+(4+Cone)+.mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Ball+Mastery/4+Cone/instep+taps.jpg",
                     "tags":["Beginner","Dribbling", "Control"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Instep Taps",
@@ -125,7 +117,7 @@
                             "description":"A beginner level skill that develops a feel for the ball using the insteps of your feet.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "85db25f5-b4d8-4cd5-9697-eb0fe0324cdb",
@@ -143,7 +135,7 @@
                             "description":"A beginner level skill that develops good contact with your laces. For an advanced variation refer to: LVL Combo.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "ba58dbbf-36fa-4e14-8c6a-3ef302c88770",
@@ -161,7 +153,7 @@
                             "description":"An intermediate level skill that can be performed to keep your body in-between the ball and the defender. For a more advanced variation refer to: L Turn Rolls.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "d3b9fe8b-5a2b-4686-9328-6ee7d080ab36",
@@ -179,7 +171,7 @@
                             "description":"An expert level skill that develops foot coordination and mental strength. For a simplified variation refer to: Laces or V-Tap or L Turn.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "bc11ef9d-f0dc-4021-ae6d-4dcc677a0ac5",
@@ -197,7 +189,7 @@
                             "description":"An intermediate level skill that can be performed to keep your body in-between the ball and the defender. For a more advanced variation refer to: L Turn Rolls.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "d59bd9da-18ae-4dd0-a90f-a9223444ea79",
@@ -215,7 +207,7 @@
                             "description":"An expert level skill that that can be performed to protect the ball, while at the same time misdirecting a defender. For a simplified version refer to: L Turns. For an advanced variation refer to: LVL Combo.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "b1db769d-73c0-4232-817f-071fae529e2c",
@@ -233,7 +225,7 @@
                             "description":"A beginner level skill that can be performed to manoeuver around a defender's outreached foot. For an advanced variation refer to: V Tap.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "23f75797-b9be-416f-a82a-74c0d73baacd",
@@ -251,7 +243,7 @@
                             "description":"A beginner level skill that can be performed to manoeuver around a defender's outreached foot. For an advanced variation refer to: V Tap Reverse.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "522defbc-d774-4a82-98d5-5b9952a10052",
@@ -269,7 +261,7 @@
                             "description":"An intermediate level skill that can be performed to manoeuver around a defender's outreached foot. For a simplified variation refer to: V Tap. For an advanced variation refer to: LVL Combo.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "7b1bc055-1d4a-49e5-b886-9cbcf41de105",
@@ -287,7 +279,7 @@
                             "description":"An expert level skill that develops balance, stability and foot coordination. For a simplified variation refer to: Advanced Cone Circle.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "5e20ffcf-9f26-4580-8d67-e60924c0d013",
@@ -305,7 +297,7 @@
                             "description":"A beginner level skill that develops lateral agility. This skill can be performed to avoid a defender that is closing you down at a high speed. For an advanced variation refer to: Roll Cut Scissors.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "ffa9c30b-d066-45b8-838d-1f6728a664d8",
@@ -323,7 +315,7 @@
                             "description":"An intermediate level skill that develops lateral agility and coordination. This skill can be performed to avoid a defender that is closing you down at a high speed. For a simplified variation refer to: Roll Cuts.",
                             "loop": true
                         }
-                    ]        
+                    ]
                 },
                 {
                     "id": "ab8db445-f019-4568-af8c-6d5a69c1c10d",
@@ -341,7 +333,7 @@
                             "description":"An expert level skill that is designed to make your defender believe you're are passing the ball to a teammate.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "9727eae0-f2e8-41a7-85d8-e994472d4527",
@@ -359,7 +351,7 @@
                             "description":"A beginner level skill that develops balance, stability and foot coordination. For an advanced variation refer to: Advanced Cone Circle.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "70eab411-3fb3-4cd4-9ee8-89cab47f35f1",
@@ -377,7 +369,7 @@
                             "description":"An intermediate level skill that develops balance, stability and foot coordination. For a simplified variation refer to: Cone Circle. For an advanced variation refer to: Single Foot Cone Circle.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "09d5e094-b564-42a2-944c-39123ee6042a",
@@ -395,7 +387,7 @@
                             "description":"A beginner level skill that can be performed to manouver around a defenders outreached foot. For an advanced variation refer to: Advanced Opposite Drag.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "b93d6b60-fda5-4b18-8570-157441b50284",
@@ -413,7 +405,7 @@
                             "description":"An intermediate level skill that develops balance and a feel for the ball using the soles of your feet. For a simplified variation refer to: Sole Drags. For an advanced variation refer to: Sole Drag Catch.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "ac31b90a-e0d4-492e-be07-9c88398f9a1c",
@@ -431,7 +423,7 @@
                             "description":"An intermediate level skill that is designed to misdirect your opponent. When performing this skill, it is important to drop your shoulder in the direction you are faking.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "acc05825-cc9c-401b-81ff-aa3d520b2c0f",
@@ -449,7 +441,7 @@
                             "description":"A beginner level skill that develops a feel for the ball using the soles of your feet. For an advanced variation refer to: Double Sole Drag.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "cf3deceb-5505-42b8-a6e5-1ee6171de763",
@@ -467,7 +459,7 @@
                             "description":"An intermediate level skill that can be performed to manoeuver around a defender's outreached foot. For a simplified variation refer to: Opposite Drag.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "9a772338-be7a-444f-9325-4a85dd0440c8",
@@ -485,7 +477,7 @@
                             "description":"An expert level skill that develops quick feet. This skill can be performed to misdirect an opponent with a sudden change of direction of the ball.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "7740f55f-38b8-4ef6-b40b-e5a8e5d2461a",
@@ -503,7 +495,7 @@
                             "description":"An expert level skill that is designed to make your defender believe you're are passing the ball to a teammate.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "f0f49b9e-0426-4ea0-9cc1-9ebaf990f273",
@@ -521,7 +513,7 @@
                             "description":"An expert level skill that develops a feel for the ball using the soles of your feet. For a simplified variation refer to: Double Sole Drag.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "34913284-a512-43c3-8e05-1c3ef26e8659",
@@ -539,7 +531,7 @@
                             "description":"An expert level skill that develops balance and foot coordination. For an advanced variation refer to: Sole to Robana Advanced.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "7ff20c6a-6dbd-457c-93b6-ab0020865f82",
@@ -557,7 +549,7 @@
                             "description":"An expert level skill that develops balance and foot coordination. For a simplified variation refer to: Sole to Robana.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {   "id": "4627da17-2dc8-4d42-9d3e-039b9e42599e",
                     "name": "La Croqueta",
@@ -574,7 +566,7 @@
                             "description":"An intermediate level skill that is most effective when attacking a defender with speed and performing the skill the moment a tackle is put in.",
                             "loop": true
                         }
-                    ]  
+                    ]
 
                 },
                 {
@@ -593,7 +585,7 @@
                             "description":"An intermediate level skill that develops lateral agility and coordination. This skill can be performed to avoid a defender that is closing you down at a high speed.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "7d7a1692-765f-4533-a51a-4155df14bcf1",
@@ -611,7 +603,7 @@
                             "description":"An expert level skill that develops creativity on the ball and an understanding of different ways the ball can be manoeuvered.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "55eae466-84b2-43d6-a66e-849e11af175d",
@@ -629,18 +621,18 @@
                             "description":"An expert level skill that develops creativity on the ball and an understanding of different ways the ball can be manoeuvered.",
                             "loop": true
                         }
-                    ]  
+                    ]
                 }
-            ]      
+            ]
         },
         {
             "name": "Juggling",
-            "exercises": "Individual",
-            "exercisesCat": ["Juggling"],
             "alwaysActive": true,
-            "content" : 
+            "exercises": "Technical",
+            "exercisesCat": ["Juggling"],
+            "content" :
             [
-                {		
+                {
                     "id": "16b1c2d9-5a87-4af5-bb35-6232cb2ce996",
                     "name": "Ball Toss",
                     "description": "Before we learn to juggle with our feet it is important to build an relationship with the ball by understanding it's weight, size, bounce, and flight. For an advanced variation refer to: Ball Toss Advanced.",
@@ -666,7 +658,8 @@
                     "link": "/videos/Juggling/Ball+Toss+Advanced+(Juggling).mp4",
                     "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Juggling/Ball+Toss+Advances+(Juggling)+Thumbnail-min.jpg",
                     "tags":["Beginner","Control"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Ball Toss Advanced",
@@ -677,14 +670,15 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "29be0024-571a-4ecf-9e4b-0eecfa794610",
                     "name": "Bounce Kick Up - BIH",
                     "description": "The most basic juggling technique that will allow you to get comfortable with the feel of the ball at your foot. The Ball in Hand Series (BIH) is a great way for beginners to avoid extra difficulties and to focus on their contact with the ball. For an advanced variation refer to: Laces Juggle.",
                     "link": "/videos/Juggling/Bounce+Kick+Up+-+BIH+(Juggling).mp4",
                     "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Juggling/Bounce+Kick+Up+-+BIH+(Juggling)+Thumbnail-min.jpg",
                     "tags":["Beginner","Control"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Bounce Kick Up - BIH",
@@ -713,7 +707,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "81959df1-8859-47e7-b133-956cd179ab7e",
                     "name": "Right Laces Progression - BIH",
                     "description": "This exercise will be a good baseline test for how well your right foot juggling is improving. The key to improving with this exercise is adding one juggle at a time without skipping any numbers as you progress. The Ball in Hand Series (BIH) is a great way for beginners to avoid extra difficulties and to focus on their contact with the ball. To Improve your left foot, refer to: Left Laces Progression. For a simplified variation refer to: Laces Juggle - BIH.",
@@ -749,7 +743,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "0c1bdb8d-7343-4ab1-8b65-6f3d96b1c204",
                     "name": "Thigh Juggle - BIH",
                     "description": "This exercise will improve the contact you make on the ball with your thigh and prepare you for repeated juggling without the use of your hands. The Ball in Hand Series (BIH) is a great way for beginners to avoid extra difficulties and to focus on their contact with the ball. For an advanced variation refer to: Thigh Juggle Alternating.",
@@ -785,7 +779,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "13ff382d-f02b-4e64-8034-10c5504c9d19",
                     "name": "Left Thigh Progression - BIH",
                     "description": "This exercise will be a good baseline test for how well your left thigh juggling is improving. The key to improving with this exercise is adding one juggle at a time without skipping any numbers as you progress. The Ball in Hand Series (BIH) is a great way for beginners to avoid extra difficulties and to focus on their contact with the ball. To Improve your right thigh, refer to: Right Thigh Progression. For a simplified variation refer to: Thigh Juggle - BIH.",
@@ -821,7 +815,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "01092bcb-eb0a-414b-9a62-265ab902a43f",
                     "name": "Outside Trap - BIH",
                     "description": "The trapping technique is one of the most important when it comes to controlling a ball. Trapping will allow you to get a bouncing ball under control in order to perform higher percentage plays. When the ball is not directly in front of you it may be necessary to trap the ball with the outside of your foot.",
@@ -857,7 +851,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "8f218dca-a68f-4239-8592-d685aff17f6e",
                     "name": "Cruyff Trap - BIH",
                     "description": "The trapping technique is one of the most important when it comes to controlling a ball. Trapping will allow you to get a bouncing ball under control in order to perform higher percentage plays. The Cruyff trap is one of the most difficult trapping techniques however is the most effective when under pressure from a defender.",
@@ -893,7 +887,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "eabdfe1a-9f09-4feb-92b2-0411f213178c",
                     "name": "Bounce Juggle",
                     "description": "Improve the contact you make on the ball with your laces in order to prepare yourself for repeated juggling without the use of a bounce.  For a simplified variation refer to: Bounce Kick Up - BIH. For an advanced variation refer to: Bounce Juggle Progression.",
@@ -929,7 +923,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "8a4a4774-9aa1-42ba-a0f1-252d19615199",
                     "name": "Bounce Juggle Progression Alt",
                     "description": "Improve the contact you make on the ball with your laces in order to prepare yourself for repeated juggling without the use of a bounce.  For a simplified variation refer to: Bounce Juggle Progression. For an advanced variation refer to: Laces Juggling Progression.",
@@ -965,7 +959,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "345206b1-830e-4e50-afb6-17fb827eff2c",
                     "name": "Thigh Juggle Alternating",
                     "description": "As your contact with the ball improves, you will need to include a component of finesse to your juggle, making sure to take a touch that will set you up for success in your next juggle. For a simplified variation refer to: Left/Right Thigh Progression. For an advances variation refer to: Sitting Right Foot Juggle.",
@@ -1001,7 +995,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "d51712af-5fa3-498b-821b-c322a2222c81",
                     "name": "Shoulder Juggle",
                     "description": "Juggling with your shoulders requires a great deal of technique and practice. Be sure to get comfortable juggling with your feet, thighs and head before moving on to your shoulders.",
@@ -1037,7 +1031,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "d1cae435-b5f2-4693-a442-3b77b76406ee",
                     "name": "Freestyle Juggle",
                     "description": "After learning and practicing how to juggle with all parts of your body it's time to tie them all together. Be creative and juggle in any and all ways possible.",
@@ -1073,7 +1067,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "37efea5a-bd59-45bc-8685-4ae87688d1a8",
                     "name": "Sitting Left Foot Juggle",
                     "description": "Juggling while sitting down removes your ability to reposition your body behind the ball in order to fix a bad touch. This will give you a great idea of how good your juggling and touch really is.",
@@ -1114,381 +1108,383 @@
         {
             "name": "Dribbling",
             "alwaysActive": true,
-            "exercises": "Individual",
+            "exercises": "Technical",
             "exercisesCat": ["Dribbling"],
-            "content" : 
+            "content" :
             [
-                {		
-                    "id": "",
+                {
+                    "id": "8b24b5a2-55a1-4572-bf6b-ff4fac07d9f0",
                     "name": "Body Faint",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Body Faint is a very versatile skill move as it can be performed at speed or in a stationary position. For the Body Faint to be most effective be sure to drop your shoulder and explode out in the opposite direction. The quicker this is done, the higher percentage of success. For an advanced variation please refer to: Double Body Faint.",
+                    "link": "/videos/Dribbling/Body+Faint.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Body+Faint+(Thumbnail)-min.jpg",
                     "tags":["Beginner","Dribbling"],
                     "alwaysActive": true,
                     "free": true,
                     "markers": [
                         {
                             "title": "Body Faint",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.00,
+                            "endTime":14.55,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "5523dc1c-f20b-46d0-98de-0a8d81c8705f",
                     "name": "Double Body Faint",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Double Body Faint is a very versatile skill move as it can be performed at speed or in a stationary position. For the Double Body Faint to be most effective be sure to drop your shoulder a second time and explode out in the opposite direction. The quicker this is done, the higher percentage of success. For a simplified variation please refer to: Body Faint.",
+                    "link": "/videos/Dribbling/Double+Body+Faint.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Double+Body+Faint+(Thumbnail)-min.jpg",
                     "tags":["Beginner","Dribbling"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Double Body Faint",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.00,
+                            "endTime":14.55,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "f6c1af2e-e5eb-4132-ac2c-04beb1591499",
                     "name": "Scissor",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Scissor is one of the most popular skill moves in the game. The key to success when performing the Scissor is the speed at which you can move your leg around the ball. If you are not fast enough, the defender will have time to recover. For an advanced variation refer to: Double Scissor.",
+                    "link": "/videos/Dribbling/Scissor.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Scissor+(Thumbnail)-min.jpg",
                     "tags":["Beginner","Dribbling"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Scissor",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":2.55,
+                            "endTime":14.45,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "342fed7e-a500-4b74-8b33-a92ee6be1dc2",
                     "name": "Double Scissor",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Double Scissor is one of the most popular skill moves in the game. The key to success when performing the Double Scissor is the speed at which you can move your legs around the ball. If you are not fast enough, the defender will have time to recover. For a simplified variation refer to: Scissor.",
+                    "link": "/videos/Dribbling/Double+Scissor.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Double+Scissor+(Thumbnail)-min.jpg",
                     "tags":["Intermediate","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Double Scissor",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":2.55,
+                            "endTime":15.05,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "3e91344c-b71e-44c5-b673-6eb4e73ac451",
                     "name": "Henry Drag - Scissor",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Henry Drag - Scissor was made popular and perfected by Thierry Henry. Dribbling at speed while keeping your foot on the ball as long as possible will allow a quick transition into the Scissor.",
+                    "link": "/videos/Dribbling/Henry+Drag%2C+Scissor.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Henry+Drag+-+Scissor+(Thumbnail)-min.jpg",
                     "tags":["Intermediate","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Henry Drag - Scissor",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.15,
+                            "endTime":14.05,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "2c549455-6ebd-498a-a593-884485a2ba25",
                     "name": "Henry Drag - Scoop",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Henry Drag - Scoop was made popular and perfected by Thierry Henry. Dribbling at speed while keeping your foot on the ball as long as possible will allow a quick transition into the Scoop.",
+                    "link": "/videos/Dribbling/Henry+Drag%2C+Scoop.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Henry+Drag+-+Scoop+(Thumbnail)-min.jpg",
                     "tags":["Intermediate","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Henry Drag - Scoop",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.15,
+                            "endTime":13.45,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "6867bfc2-8323-47c4-bd55-d62533ce164d",
                     "name": "Rivelino",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Rivellino is most effective at slower speeds and when you can drop your shoulder and explode out in the opposite direction.",
+                    "link": "/videos/Dribbling/Rivelino.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Rivelino+(Thumbnail)-min.jpg",
                     "tags":["Beginner","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Rivelino",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":2.55,
+                            "endTime":16.00,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "30dfb117-876f-487b-a0be-0ebac6e716f6",
                     "name": "Ronaldo Chop",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Ronaldo Chop was made popular and perfected by Cristiano Ronaldo. Players with a quick change and direction and speed will find a lot of success when performing this skill move.",
+                    "link": "/videos/Dribbling/Ronaldo+Chop.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Ronaldo+Chop+(Thumbnail)-min.jpg",
                     "tags":["Beginner","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Ronaldo Chop",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.15,
+                            "endTime":15.05,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "37098237-3d39-4d88-8b0d-31c8fcc09de3",
                     "name": "Roll",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The roll is a fundamental to all skill moves performed with the sole of your foot and more often than not the first step in many combination skill moves. For an advanced variation refer to: Roll - Scissor.",
+                    "link": "/videos/Dribbling/Roll.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Roll+(Thumbnail)-min.jpg",
                     "tags":["Beginner","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Roll",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.23,
+                            "endTime":15.50,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "8c3d62e9-acbe-4a88-ac2f-f14ce58a3896",
                     "name": "Roll - Scissor",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Roll - Scissor adds a secondary component to a very fundamental skill move. The transition from the roll into the scissor needs to be smooth in order for the skill to be effective. For a simplified variation refer to: Roll. For an advanced variation refer to: Roll - Ronaldo Chop.",
+                    "link": "/videos/Dribbling/Roll+Scissor.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Roll+-+Scissor+(Thumbnail)-min.jpg",
                     "tags":["Intermediate","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Roll - Scissor",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.07,
+                            "endTime":14.50,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
-                    "name": "Roll - Ronaldo Chop",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                {
+                    "id": "cd6f3ee1-290b-4c9d-925d-dba84d3c6731",
+                    "name": "The Neymar",
+                    "description": "The Neymar adds a secondary component to a very fundamental skill move. The key to success when performing this skill move is being balanced when changing direction after the Ronaldo - Chop. For a simplified variation refer to: Roll - Scissor.",
+                    "link": "/videos/Dribbling/The+Neymar.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/The+Neymar+(Thumbnail)-min.jpg",
                     "tags":["Expert","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
-                            "title": "Roll - Ronaldo Chop",
-                            "startTime":0,
-                            "endTime":0,
+                            "title": "The Neymar",
+                            "startTime":3.35,
+                            "endTime":16.03,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "b10501d4-7dfa-45f2-abd2-cb6efb68dc6a",
                     "name": "Misdirection",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "Misdirection is a great option when you have players in support for a pass. If you can make your defender believe you are going to make a pass then you will have tons of space once the defender dives in to block the non existent-pass.",
+                    "link": "/videos/Dribbling/Misdirection.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Misdirection+(Thumbnail)-min.jpg",
                     "tags":["Beginner","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Misdirection",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.16,
+                            "endTime":15.25,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "5591d283-f700-4238-b085-0b5c52bdda8b",
                     "name": "Stop And Go",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "Stop & Go is a skill that is fundamental to a wide variety of other skill moves. Improve your change of speed and your dribbling success rate will sky rocket.",
+                    "link": "/videos/Dribbling/Stop+and+Go.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Stop+and+Go+(Thumbnail)-min.jpg",
                     "tags":["Beginner","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Stop and Go",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.20,
+                            "endTime":15.20,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "c571eae2-dfb1-45e7-bc07-5494abff00ef",
                     "name": "Elastico",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Elastico was made popular by Ronaldinho. To this day no player has performed it as effectively and beautifully as Ronaldinho. The Elastico is most effective the longer you can keep the ball on your foot. For an advanced variation refer to: Reverse Elastico.",
+                    "link": "/videos/Dribbling/Elastico.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Elastico+(Thumbnail)-min.jpg",
                     "tags":["Expert","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Elastico",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.05,
+                            "endTime":13.35,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "68b85afd-9e30-4c9a-9be9-91b53308a0ce",
                     "name": "Reverse Elastico",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Reverse Elastico is a perfect alternative to a behind the leg pass or flick. If you can make your opponent believe you will be making a pass then the space will be available when you bring the ball back in front of your body. For a simplified variation refer to: Reverse Elastico.",
+                    "link": "/videos/Dribbling/Reverse+Elastico.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Reverse+Elastico+(Thumbnail)-min.jpg",
                     "tags":["Expert","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Reverse Elastico",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.26,
+                            "endTime":14.10,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "bf083a5e-ab67-459e-bd2d-d78b313b1a34",
                     "name": "Hocus Pocus",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Hocus Pocus is a perfect alternative to a behind the leg pass or flick. If you can make your opponent believe you will be making a pass then the space will be available when you bring the ball back in front of your body. For a simplified variation refer to: Reverse Elastico.",
+                    "link": "/videos/Dribbling/Hocus+Pocus.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Hocus+Pocus+(Thumbnail)-min.jpg",
                     "tags":["Expert","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Hocus Pocus",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.15,
+                            "endTime":15.55,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "86698138-c654-4188-b80a-983bb0edbb2e",
                     "name": "Roulette",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Roulette was made popular by Diego Maradona, a legend of the game. The Roulette is a great way to get past a defender in a last-ditch effort to maintain possession of the ball.",
+                    "link": "/videos/Dribbling/Roulette.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/Roulette+(Thumbnail)-min.jpg",
                     "tags":["Intermediate","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Roulette",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.20,
+                            "endTime":15.56,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "4f4d7af3-2c0a-4a64-91de-affb8568ba77",
                     "name": "La Croqueta",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "La Croqueta was made popular by Andres Iniesta. La Croqueta is a perfect option for players with quick reactions. The tighter the space and the more the opponent commits to the challenge the more effective the skill move can be.",
+                    "link": "/videos/Dribbling/La+Croqueta.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/La+Croqueta+(Thumbnail)-min.jpg",
                     "tags":["Beginner","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "La Croqueta",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.05,
+                            "endTime":15.45,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "2d76f48a-7197-45e2-814d-c4b3553007e2",
                     "name": "The Knock",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Knock is a complicated skill move because if you don’t perform the skill fast then it won't be effective and if you don’t take a near perfect touch you will lose control of the ball.",
+                    "link": "/videos/Dribbling/The+Kock.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/The+Knock+(Thumbnail)-min.jpg",
                     "tags":["Expert","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "The Knock",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.05,
+                            "endTime":14.20,
                             "description":"",
                             "loop": true
                         }
                     ]
                 },
-                {		
-                    "id": "",
+                {
+                    "id": "af6f620d-41a1-4b50-8032-dec11ff4d305",
                     "name": "Manji",
-                    "description": "",
-                    "link": "",
-                    "thumbnail": "",
+                    "description": "The Manji is open to creativity. Feel free to take as many instep touches as required in order get your opponent off balance.",
+                    "link": "/videos/Dribbling/Manji.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Dribbling/manji+(Thumbnail)-min.jpg",
                     "tags":["Intermediate","Dribbling"],
                     "alwaysActive":true,
                     "markers": [
                         {
                             "title": "Manji",
-                            "startTime":0,
-                            "endTime":0,
+                            "startTime":3.05,
+                            "endTime":14.30,
                             "description":"",
                             "loop": true
                         }
                     ]
                 }
-            ]        
+            ]
         },
-        {    
+        {
             "name": "Wall Work",
             "alwaysActive": true,
-            "exercises": "Individual",
+            "exercises": "Technical",
             "exercisesCat": ["Wall Work"],
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "1bb9afd8-5f75-4b89-8184-8106fdc4b5e8",
                     "name": "Instep One Touch",
                     "description": "A beginner level technique that develops accurate passing with the instep of your foot. For an advanced variation refer to: Instep Alternating.",
@@ -1514,7 +1510,8 @@
                     "link": "/videos/Wall+Work/Instep+Alternating+.mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Wall+Work/Instep+Alternating+(Wall+Work)+-+Thumbnail-min.jpg",
                     "tags":["Beginner","Control", "Passing"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Instep Alternating",
@@ -1532,7 +1529,8 @@
                     "link": "/videos/Wall+Work/Laces+One+Touch.mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Wall+Work/Laces+Once+Touch+(Wall+Work)+-+Thumbnail-min.jpg",
                     "tags":["Beginner","Control", "Passing"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Laces One Touch",
@@ -2013,13 +2011,728 @@
             ]
         },
         {
+            "name": "Ladder",
+            "alwaysActive": true,
+            "exercises": "Speed",
+            "exercisesCat": ["Ladder"],
+            "content" :
+            [
+                {
+                    "id": "1022b0df-f972-4823-9566-c8eb350ec02b",
+                    "name": "Single Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Single+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Single+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive": true,
+                    "free": true,
+                    "markers": [
+                        {
+                            "title": "Single Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "5809980c-89d1-4cc4-acb5-47e4f7adc6bc",
+                    "name": "Double Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Double+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Double+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive": true,
+                    "free": true,
+                    "markers": [
+                        {
+                            "title": "Double Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "1b799d9f-94ca-46a3-8d1e-fb322268e329",
+                    "name": "Triple Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Triple+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Triple+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive": true,
+                    "free": true,
+                    "markers": [
+                        {
+                            "title": "Triple Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "21f8fb99-cca1-4528-8d88-2225ee2b3182",
+                    "name": "Hop - Backwards, Right Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Hop+-+Backwards+Right+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Hop+-+Backwards%2C+Right+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Hop - Backwards, Right Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "430a6aa9-0b70-466d-916c-3a7710b05a23",
+                    "name": "Hop - Backwards, Left Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Hop+-+Backwards+Left+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Hop+-+Backwards%2C+Left+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Hop - Backwards, Left Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "6013a9a6-bab2-4310-88e8-5f988bc51ddb",
+                    "name": "Hop - Backwards, Double Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Hop+-+Backwards%2C+Double+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Hop+-+Backwards%2C+Double+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Hop - Backwards, Double Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "5d377e6d-deb4-4484-902b-8e0e80ec3ec6",
+                    "name": "Weave - Backwards, Right Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Weave+-+Backwards%2C+Right+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Weave+-+Backwards%2C+Right+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Weave - Backwards, Right Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "652d8566-9dfb-47a3-aeef-f4455bf7c2a8",
+                    "name": "Weave - Backwards, Left Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Weave+-+Backwards%2C+Left+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Weave+-+Backwards%2C+Left+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Weave - Backwards, Left Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "a3355b94-743e-44d7-b017-c417ee9e5bcb",
+                    "name": "Weave & Skip - Right Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Weave+%26+Skip+-+Right+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Weave+%26+Skip+-+Right+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Weave & Skip - Right Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "ac4b7bf6-63dd-45df-9d3a-c860b298c74e",
+                    "name": "Weave & Skip - Left Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Weave+%26+Skip+-+Left+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Weave+%26+Skip+-+Left+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Weave & Skip - Leftt Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "b9dbdac2-20ba-4044-b37f-d245131d62d5",
+                    "name": "2 Forward, 1 Back - Right Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/2+Forward+1+Back+-+Right+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/2+Forward%2C+1+Back+-+Right+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "2 Forward, 1 Back - Right Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "bf58af34-f1d8-4064-bdb9-c082fcce7306",
+                    "name": "2 Forward, 1 Back - Left Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/2+Forward+1+Back+-+Left+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/2+Forward%2C+1+Back+-+Left+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "2 Forward, 1 Back - Left Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "52796e4d-1dac-49bf-b40d-60d484cf7a96",
+                    "name": "High Knees - Lateral Right Side",
+                    "description": "",
+                    "link": "/videos/Ladder/High+Knees+-+Lateral+Right+Side.mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/High+Knees+-+Lateral+Right+Side+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "High Knees - Lateral Right Side",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "02248670-dc04-4197-a843-88160c0b4e1d",
+                    "name": "High Knees - Lateral Left Side",
+                    "description": "",
+                    "link": "videos/Ladder/High+Knees+-+Lateral+Left+Side+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/High+Knees+-+Lateral+Left+Side+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "High Knees - Lateral Left Side",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "6a1f6503-8a34-4444-9b74-96bf68a87958",
+                    "name": "Icky Shuffle",
+                    "description": "",
+                    "link": "/videos/Ladder/Icky+Shuffle+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Icky+Shuffle+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Icky Shuffle",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "2af58719-90cf-46bf-b066-fb363748f69e",
+                    "name": "Icky Shuffle - Backwards",
+                    "description": "",
+                    "link": "/videos/Ladder/Icky+Shuffle+-+Backwards+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Icky+Shuffle+-+Backwards+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Expert","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Icky Shuffle - Backwards",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "2fd7f28b-22e5-415b-b35d-6e252d2a6660",
+                    "name": "Icky Shuffle Advanced",
+                    "description": "",
+                    "link": "/videos/Ladder/Icky+Shuffle+Advanced+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Icky+Shuffle+Advanced+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Icky Shuffle Advanced",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "1b74d78c-d055-4ab8-90c0-615f8660c8e7",
+                    "name": "Icky Shuffle Advanced - Backwards",
+                    "description": "",
+                    "link": "videos/Ladder/Icky+Shuffle+Advanced+-+Backwards+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Icky+Shuffle+Advanced+-+Backwards+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Expert","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Icky Shuffle Advanced - Backwards",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "729fd770-09cd-480a-a076-731f12b971a3",
+                    "name": "Side Straddle Hop",
+                    "description": "",
+                    "link": "/videos/Ladder/Side+Stradle+Hop+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Side+Straddle+Hop+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Side Straddle Hop",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "e21b61bc-64c9-4db0-9b69-c62d0d74aa11",
+                    "name": "Side Straddle Hop - Backwards",
+                    "description": "",
+                    "link": "/videos/Ladder/Side+Straddle+Hop+-+Backwards+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Side+Straddle+Hop+-+Backwards+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Side Straddle Hop - Backwards",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "1f9f55c5-bca6-4606-9f15-656db61565b9",
+                    "name": "Double Trouble",
+                    "description": "",
+                    "link": "/videos/Ladder/Double+Trouble+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Double+Trouble+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Double Trouble",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "8eb91490-5bdc-489d-8b70-2b4f7dd21ea3",
+                    "name": "Hip Twist - Right Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Hip+Twist+-+Right+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Hip+Twist+-+Right+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Hip Twist - Right Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "2e1eee58-cf8b-41f7-a8f6-690d71a57f98",
+                    "name": "Hip Twist - Left Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/Hip+Twist+-+Left+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Hip+Twist+-+Left+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Hip Twist - Left Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "36fb0cc1-8ed1-4cb1-9b82-f17a454a2d53",
+                    "name": "Scissors - Right Side",
+                    "description": "",
+                    "link": "/videos/Ladder/Scissor+-+Right+Side+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Scissors+-+Right+Side+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Scissors - Right Side",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "d660066f-a6dd-4e0c-a03b-84d2a9f92761",
+                    "name": "Scissors - Left Side",
+                    "description": "",
+                    "link": "/videos/Ladder/Scissor+-+Left+Side+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Scissors+-+Left+Side+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Scissors - Left Side",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "7f9d6312-6712-4509-8bcd-f4ed7ee6c659",
+                    "name": "Front Foot Karaoke",
+                    "description": "",
+                    "link": "/videos/Ladder/Front+Foot+Karaoke+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Front+Foot+Karaoke+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Expert","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Front Foot Karaoke",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "8b3490d0-411e-4326-9981-169259a79ef7",
+                    "name": "Front Foot Karaoke - Backwards",
+                    "description": "",
+                    "link": "/videos/Ladder/Front+Foot+Karaokee+-+Backwards+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Front+Foot+karaoke+-+Backwards+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Expert","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Front Foot Karaoke - Karaoke",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "7d8bc880-0c65-4d2b-8d24-55cd1381fe4f",
+                    "name": "Back Foot Karaoke",
+                    "description": "",
+                    "link": "/videos/Ladder/Back+Foot+Karookee+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Back+Foot+Karaoke+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Expert","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Back Foot Karaoke",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "65a34c6a-e795-431c-8d0a-32bd1565440a",
+                    "name": "Back Foot Karaoke - Backwards",
+                    "description": "",
+                    "link": "/videos/Ladder/Back+Foot+Karaoke+-+Backwards+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Back+Foot+Karaoke+-+Backwards+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Expert","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Back Foot Karaoke - Backwards",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "71378251-aa20-409e-a867-a89255393803",
+                    "name": "In & Out - Right Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/In+%26+Out+-+Right+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/In+%26+Out+-+Right+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "In & Out - Right Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "381f16b3-059c-48cd-afbb-46a18b194b8c",
+                    "name": "In & Out - Backwards, Right Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/In+%26+Out+-+Backwards%2C+Right+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/In+%26+Out+-+Backwards%2C+Right+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "In & Out - Backwards, Right Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "356a556a-66d9-40b2-b8c7-c7c9906c0e87",
+                    "name": "In & Out - Left Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/In+%26+Out+-+Left+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/In+%26+Out+-+Left+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Beginner","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "In & Out - Left Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "94b6d922-4995-4a65-b2b3-20b6c08d709e",
+                    "name": "In & Out - Backwards, Left Foot",
+                    "description": "",
+                    "link": "/videos/Ladder/In+%26+Out+-+Backwards%2C+Left+Foot+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/In+%26+Out+-+Backwards%2C+Left+Foot+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "In & Out - Backwards, Left Foot",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "fca8e8b6-6ab8-4382-ae6e-07b3cb2ebc54",
+                    "name": "In & Out - Lateral Right Side",
+                    "description": "",
+                    "link": "/videos/Ladder/In+%26+Out+-+Lateral+Right+Side+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/In+%26+Out+-+Lateral+Right+Side+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "In & Out - Lateral Right Side",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "b3c1224c-ffcb-4846-bfe4-847e39b30d43",
+                    "name": "In & Out - Lateral Left Side",
+                    "description": "",
+                    "link": "/videos/Ladder/In+%26+Out+-+Lateral+Left+Side+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/In+%26+Out+-+Lateral+Left+Side+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "In & Out - Lateral Left Side",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "7502a47f-32de-47b6-9174-0df8118e4cbf",
+                    "name": "Back & Forth - Right Side",
+                    "description": "",
+                    "link": "/videos/Ladder/Back+%26+Forth+-+Right+Side+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Back+%26+Forth+-+Right+Side+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Back & Forth - Right Side",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "40112e93-1281-46f6-9591-569b207f5267",
+                    "name": "Back & Forth - Left Side",
+                    "description": "",
+                    "link": "/videos/Ladder/Back+%26+Forth+-+Left+Side+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/Back+%26+Forth+-+Left+Side+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Intermediate","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "Back & Forth - Left Side",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "efecf3cf-21a5-40a6-af85-a894a362291b",
+                    "name": "In & Out, Weave ",
+                    "description": "",
+                    "link": "/videos/Ladder/In+%26+Out+-+Weave+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/In+%26+Out%2C+Weave+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Expert","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "In & Out, Weave",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                },
+                {
+                    "id": "a8134bc1-6122-45f5-a252-08d6c7223ee2",
+                    "name": "In & Out, Back Foot Karaoke",
+                    "description": "",
+                    "link": "/videos/Ladder/In+%26+Out+-+Back+Foot+Karaoke+(Ladder).mp4",
+                    "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Ladder/In+%26+Out%2C+Back+Foot+Karaoke+(Ladder)+Thumbnail-min.jpg",
+                    "tags":["Expert","Speed"],
+                    "alwaysActive":true,
+                    "markers": [
+                        {
+                            "title": "In & Out, Back Foot Karaoke",
+                            "startTime":0,
+                            "endTime":0,
+                            "description":"",
+                            "loop": true
+                        }
+                    ]
+                }
+
+            ]
+        },
+        {
             "name": "Core",
             "alwaysActive": true,
-            "exercises": "Individual",
+            "exercises": "Strength",
             "exercisesCat": ["Core"],
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "f7daa3a6-8e06-4309-9e5f-1386c8146b27",
                     "name": "Mountain Climber",
                     "description": "progressions: mountain climber, pike up, frog",
@@ -2044,7 +2757,8 @@
                     "link": "/videos/Core/Pike+Up+(Core).mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Core/pike_up__core____thu_abHOo.jpg",
                     "tags":["Intermediate","Strength", "Speed"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Pike Up",
@@ -2062,7 +2776,8 @@
                     "link": "/videos/Core/Frog+(Core).mp4",
                     "thumbnail": "https://s3.us-east-2.amazonaws.com/complete09/photos/Core/frog__core____thumbn_8LjiP.jpg",
                     "tags":["Expert","Strength", "Speed"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "Frog",
@@ -2449,7 +3164,7 @@
                             "description":"",
                             "loop": true
                         }
-                    ]  
+                    ]
                 },
                 {
                     "id": "063eddc7-b6c1-499e-80b5-448087436fd7",
@@ -2564,14 +3279,14 @@
         {
             "name": "Yoga",
             "alwaysActive": true,
-            "exercises": "Individual",
+            "exercises": "Strength",
             "exercisesCat": ["Yoga"],
-            "content" : 
+            "content" :
             [
-                {		
+                {
                     "id": "98174670-1864-4fe8-bc4a-797afdd5e5e5",
                     "name": "Yoga For Legs",
-                    "description": "Leg-strengthening yoga poses for beginners. Your legs support you in everyday activity and need to be strong to power through competition. Standing yoga poses will build lower-body power and flexibility in your quadriceps, hamstrings, and calves.",
+                    "description": "Leg-strengthening yoga poses for beginners. Your legs support you in everyday activity and need to be strong to power through competition. Standing yoga poses will build lower-body power and flexibility in your quadriceps, hamstrings, and calves.",
                     "link": "/videos/Yoga/Yoga+for+Legs.mp4",
                     "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Yoga/Yoga+For+Legs+(Thumbnail).jpg",
                     "tags":["Strength", "Speed"],
@@ -2587,14 +3302,15 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "52da8fb6-40e9-434d-8059-9706b09da037",
                     "name": "Yoga For Hips",
-                    "description": "Hip-opening yoga poses for beginners. Sitting for extensive periods will cause the muscles to relax and deactivate resulting in tight hips and shorter running strides when the time come to play. These poses will loosen tight hips, improve your range of motion and circulation, and alleviate back pain.",
+                    "description": "Hip-opening yoga poses for beginners. Sitting for extensive periods will cause the muscles to relax and deactivate resulting in tight hips and shorter running strides when the time come to play. These poses will loosen tight hips, improve your range of motion and circulation, and alleviate back pain.",
                     "link": "/videos/Yoga/Yoga+for+Hips.mp4",
                     "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Yoga/Yoga+For+Hips+(Thumbnail).jpg",
                     "tags":["Strength", "Speed"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "",
@@ -2605,14 +3321,15 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "0108dfdb-c307-40da-b105-e27b9c2bfa51",
                     "name": "Yoga For Back",
-                    "description": "Back-strengthening yoga poses for beginners. Back pain often occurs because something is off in the way your spinal joints, muscles, discs, and nerves fit together and move. These poses are great for pain relief but are significantly more important for preventative care for these types of issues.",
+                    "description": "Back-strengthening yoga poses for beginners. Back pain often occurs because something is off in the way your spinal joints, muscles, discs, and nerves fit together and move. These poses are great for pain relief but are significantly more important for preventative care for these types of issues.",
                     "link": "/videos/Yoga/Yoga+for+Back.mp4",
                     "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Yoga/Yoga+For+Back+(Thumbnail).jpg",
                     "tags":["Strength", "Speed"],
-                    "alwaysActive":true,
+                    "alwaysActive": true,
+                    "free": true,
                     "markers": [
                         {
                             "title": "",
@@ -2623,7 +3340,7 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "4c1d7b91-8eb7-4a18-abba-0c5fe915090e",
                     "name": "Yoga For Hamstrings",
                     "description": "Hamstring-stretching yoga poses for beginners. Hamstrings can get shorter or “tight” when you sit too much or when you over train your quads without counter stretching. When this happens, the hamstrings begin to pull down on the “sit” bones, making the pelvis and hips tight while flattening the low back curvature in your lumbar area. These poses will help to counter act these effects and prolong your career as an athlete.",
@@ -2641,10 +3358,10 @@
                         }
                     ]
                 },
-                {		
+                {
                     "id": "18020b7a-2fcf-4ad9-a151-2a7edb80e571",
                     "name": "Yoga For Shoulders",
-                    "description": "Shoulder-relief yoga poses for beginners. Pain in the shoulder can have many potential causes, including muscle injury and torn ligaments. Shoulder stretches are an amazing way to release tension in your head and neck while rehabbing any injuries or pain.",
+                    "description": "Shoulder-relief yoga poses for beginners. Pain in the shoulder can have many potential causes, including muscle injury and torn ligaments. Shoulder stretches are an amazing way to release tension in your head and neck while rehabbing any injuries or pain.",
                     "link": "/videos/Yoga/Yoga+for+Shoulders.mp4",
                     "thumbnail": "https://complete09.s3.us-east-2.amazonaws.com/photos/Yoga/Yoga+For+Shoulders+(Thumbnail).jpg",
                     "tags":["Strength", "Speed"],
@@ -2660,6 +3377,6 @@
                     ]
                 }
             ]
-        }        
+        }
     ]
 }
