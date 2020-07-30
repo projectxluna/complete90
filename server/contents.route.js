@@ -425,20 +425,20 @@ module.exports = function (apiRoutes) {
     // load sessions json structure
     function loadSessions(callback) {
         let nodeEnv = process.env.NODE_ENV;
-        if (!nodeEnv || nodeEnv === 'dev') {
+        // if (!nodeEnv || nodeEnv === 'dev') {
             callback(null, JSON.stringify(require('../staging_video_structure.json')));
-        }
-        else {
-            let resourceLocation = config.aws.VIDEO_STRUCTURE;
-            request(resourceLocation, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    callback(null, body);
-                }
-                else {
-                    callback(error);
-                }
-            });
-        }
+        // }
+        // else {
+        //     let resourceLocation = config.aws.VIDEO_STRUCTURE;
+        //     request(resourceLocation, function (error, response, body) {
+        //         if (!error && response.statusCode == 200) {
+        //             callback(null, body);
+        //         }
+        //         else {
+        //             callback(error);
+        //         }
+        //     });
+        // }
     }
 
     // traverse json structure and sign all paid video url
