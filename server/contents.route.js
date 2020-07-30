@@ -426,15 +426,18 @@ module.exports = function (apiRoutes) {
     function loadSessions(callback) {
         let nodeEnv = process.env.NODE_ENV;
         if (!nodeEnv || nodeEnv === 'dev') {
+            console.log("DEV");
             callback(null, JSON.stringify(require('../staging_video_structure.json')));
         }
         else {
             let resourceLocation = config.aws.VIDEO_STRUCTURE;
             request(resourceLocation, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
+                    console.log("Success");
                     callback(null, body);
                 }
                 else {
+                    console.log("Fail");
                     callback(error);
                 }
             });
