@@ -61,7 +61,6 @@ button:focus{
 }
 
 .exercises-main-filter {
-	display: none;
     margin-bottom: 0px !important;
     border-bottom: 1px solid #eee;
 }
@@ -264,6 +263,8 @@ button:focus{
 }
 
 .exercise-cat-section {
+
+	display: none !important;
 
 	padding: 0px 30px;
 }

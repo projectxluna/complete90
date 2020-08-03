@@ -22,20 +22,20 @@ declare var jQuery: any;
     constructor(private dataService: DataService, private modalService: BsModalService, public authenticationService: AuthenticationService) {
       this.getFreeSessions();
       
-      if(this.isLoggedIn()) {
-        this.getSessions();
-        this.dataService.getUserProfile().subscribe(res => {
-          if (!res.success) {
-            return;
-          }
-          var manager = res.user.profiles.find(profile => {
-            return profile.type === 'MANAGER';
-          });
-          this.managerProfile = manager ? true : false;
-        });
-      } else {
-        this.getSessionsNotLoggedIn();
-      }
+      // if(this.isLoggedIn()) {
+      //   this.getSessions();
+      //   this.dataService.getUserProfile().subscribe(res => {
+      //     if (!res.success) {
+      //       return;
+      //     }
+      //     var manager = res.user.profiles.find(profile => {
+      //       return profile.type === 'MANAGER';
+      //     });
+      //     this.managerProfile = manager ? true : false;
+      //   });
+      // } else {
+      //   this.getSessionsNotLoggedIn();
+      // }
       
     }
 
@@ -95,6 +95,7 @@ declare var jQuery: any;
   selectExercise(exercise) {
     this.selectedExercisesCategories.exercise = exercise;
     this.selectedExercisesCategories.exerciseName = exercise.name;
+    this.selectedExerciseCat = this.getSelectedExerciseCatSessions();
   }
   selectExerciseCat(category) {
     this.selectedExercisesCategories.category = category.name;
@@ -112,10 +113,10 @@ declare var jQuery: any;
 
         let category = this.selectedFilter.category;
         let exercise = this.selectedExercisesCategories.exerciseName;
-        let exerciseCat = this.selectedExercisesCategories.category;
+        //let exerciseCat = this.selectedExercisesCategories.category;
         //console.log('Ex', session);
-        if(exercise != undefined) {
-          if(session.exercise == exercise && session.exercisesCat.indexOf(exerciseCat) != -1 ) {
+        if(exercise != undefined) {  //&& session.exercisesCat.indexOf(exerciseCat) != -1
+          if(session.exercise == exercise) {
           
             var totalDisplaying = 0;
             session.display.forEach(function(d){
@@ -161,7 +162,7 @@ declare var jQuery: any;
                 "exercises": 
                 [
                   {
-                    "name": 'Individual',
+                    "name": 'Technical',
                     "categories": [
                                     {
                                       "name": "Ball Mastery",
@@ -178,7 +179,12 @@ declare var jQuery: any;
                                     {
                                       "name": "Wall Work",
                                       "subCategories": ["Wall Work"]
-                                    },
+                                    }
+                                  ],
+                  }, 
+                  {
+                    "name": 'Strength',
+                    "categories": [
                                     {
                                       "name": "Core",
                                       "subCategories": ["Core"]
@@ -186,54 +192,20 @@ declare var jQuery: any;
                                     {
                                       "name": "Yoga",
                                       "subCategories": ["Yoga"]
-                                    },
+                                    }
 
                                   ],
                   }, 
-                  // {
-                  //   "name": 'Partner',
-                  //   "categories": [
-                  //                   {
-                  //                     "name": "Prehab 2",
-                  //                     "subCategories": ["Ball Mastery", "Juggling"]
-                  //                   },
-                  //                   {
-                  //                     "name": "Technical 2",
-                  //                     "subCategories": ["Dribbling", "Wall Work"]
-                  //                   },
-                  //                   {
-                  //                     "name": "Finishing 2",
-                  //                     "subCategories": ["Core", "Juggling"]
-                  //                   },
-                  //                   {
-                  //                     "name": "Strength 2",
-                  //                     "subCategories": ["Ball Mastery", "Juggling"]
-                  //                   },
+                  {
+                    "name": 'Speed',
+                    "categories": [
+                                    {
+                                      "name": "Ladder",
+                                      "subCategories": ["Ladder"]
+                                    },
 
-                  //                 ],
-                  // }, 
-                  // {
-                  //   "name": 'Challenge',
-                  //   "categories": [
-                  //                   {
-                  //                     "name": "Prehab 3",
-                  //                     "subCategories": ["Ball Mastery", "Juggling"]
-                  //                   },
-                  //                   {
-                  //                     "name": "Technical 3",
-                  //                     "subCategories": ["Dribbling", "Wall Work"]
-                  //                   },
-                  //                   {
-                  //                     "name": "Finishing 3",
-                  //                     "subCategories": ["Core", "Juggling"]
-                  //                   },
-                  //                   {
-                  //                     "name": "Strength 3",
-                  //                     "subCategories": ["Ball Mastery", "Juggling"]
-                  //                   },
-
-                  //                 ],
-                  // }, 
+                                  ],
+                  }
                 ],
               };
 
@@ -248,8 +220,6 @@ declare var jQuery: any;
   managerProfile = false;
 
   bsModalRef: BsModalRef;
-
-  
 
   hasFilter() {
     return this.selectedFilter.tag != '' || this.selectedFilter.category != '' || this.selectedFilter.skillLevel != '';
@@ -599,7 +569,7 @@ declare var jQuery: any;
       this.collectTagsAndCategories(response.content);
       this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);
-      console.log("Custom Sessions", this.customSessions);
+      //console.log("Custom Sessions", this.customSessions);
       this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
     });
   }
@@ -625,7 +595,7 @@ declare var jQuery: any;
         // });
 
       });
-      console.log("Free Sessions", this.freeSessions);;
+      //console.log("Free Sessions", this.freeSessions);;
     });
   }
 
