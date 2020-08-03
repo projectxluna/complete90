@@ -182,30 +182,30 @@ declare var jQuery: any;
                                     }
                                   ],
                   }, 
-                  {
-                    "name": 'Strength',
-                    "categories": [
-                                    {
-                                      "name": "Core",
-                                      "subCategories": ["Core"]
-                                    },
-                                    {
-                                      "name": "Yoga",
-                                      "subCategories": ["Yoga"]
-                                    }
+                  // {
+                  //   "name": 'Strength',
+                  //   "categories": [
+                  //                   {
+                  //                     "name": "Core",
+                  //                     "subCategories": ["Core"]
+                  //                   },
+                  //                   {
+                  //                     "name": "Yoga",
+                  //                     "subCategories": ["Yoga"]
+                  //                   }
 
-                                  ],
-                  }, 
-                  {
-                    "name": 'Speed',
-                    "categories": [
-                                    {
-                                      "name": "Ladder",
-                                      "subCategories": ["Ladder"]
-                                    },
+                  //                 ],
+                  // }, 
+                  // {
+                  //   "name": 'Speed',
+                  //   "categories": [
+                  //                   {
+                  //                     "name": "Ladder",
+                  //                     "subCategories": ["Ladder"]
+                  //                   },
 
-                                  ],
-                  }
+                  //                 ],
+                  // }
                 ],
               };
 
@@ -220,8 +220,6 @@ declare var jQuery: any;
   managerProfile = false;
 
   bsModalRef: BsModalRef;
-
-  
 
   hasFilter() {
     return this.selectedFilter.tag != '' || this.selectedFilter.category != '' || this.selectedFilter.skillLevel != '';
