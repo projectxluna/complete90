@@ -22,20 +22,20 @@ declare var jQuery: any;
     constructor(private dataService: DataService, private modalService: BsModalService, public authenticationService: AuthenticationService) {
       this.getFreeSessions();
       
-      // if(this.isLoggedIn()) {
-      //   this.getSessions();
-      //   this.dataService.getUserProfile().subscribe(res => {
-      //     if (!res.success) {
-      //       return;
-      //     }
-      //     var manager = res.user.profiles.find(profile => {
-      //       return profile.type === 'MANAGER';
-      //     });
-      //     this.managerProfile = manager ? true : false;
-      //   });
-      // } else {
-      //   this.getSessionsNotLoggedIn();
-      // }
+      if(this.isLoggedIn()) {
+        this.getSessions();
+        this.dataService.getUserProfile().subscribe(res => {
+          if (!res.success) {
+            return;
+          }
+          var manager = res.user.profiles.find(profile => {
+            return profile.type === 'MANAGER';
+          });
+          this.managerProfile = manager ? true : false;
+        });
+      } else {
+        this.getSessionsNotLoggedIn();
+      }
       
     }
 
