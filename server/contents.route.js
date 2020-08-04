@@ -579,4 +579,10 @@ module.exports = function (apiRoutes) {
     function isValidStructure(structure) {
         return true;
     }
+
+    setInterval(function(){
+        const used = process.memoryUsage().heapUsed / 1024 / 1024;
+        console.log(`The script uses approximately ${used} MB`);
+    }, 1000);
+
 }
