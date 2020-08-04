@@ -30,6 +30,7 @@ module.exports = function (apiRoutes) {
                 content: result
             });
         });
+
     });
 
     /**
@@ -69,6 +70,9 @@ module.exports = function (apiRoutes) {
                 assignments: managerPlans
             });
         });
+
+        
+
     });
 
 
@@ -97,6 +101,7 @@ module.exports = function (apiRoutes) {
                 content: contents
             });
         });
+
     });
 
 
@@ -474,6 +479,8 @@ module.exports = function (apiRoutes) {
             }
         }
         callback(null, contents);
+        
+        
     }
 
     async function getUserPlans(contents, userId, callback) {
@@ -584,5 +591,4 @@ module.exports = function (apiRoutes) {
         const used = process.memoryUsage().heapUsed / 1024 / 1024;
         console.log(`The script uses approximately ${used} MB`);
     }, 1000);
-
 }
