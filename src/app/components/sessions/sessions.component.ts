@@ -41,25 +41,25 @@ declare var jQuery: any;
 
 
 
-//     ngOnInit() {
-//       this.init();
-//     }
+    ngOnInit() {
+      this.init();
+    }
 
-//     init() {
-//       // if(this.isLoggedIn()){
-//       //   this.loadProfile();
-//       // }
+    init() {
+      // if(this.isLoggedIn()){
+      //   this.loadProfile();
+      // }
       
-//       // jQuery(document).ready(function(){
-//       //   jQuery(".purchase-sub").on("click", function(){
-//       //     jQuery(".modal-backdrop").remove();
-//       //     jQuery("body").removeClass("modal-open");
-//       //   });
-//       // });
+      // jQuery(document).ready(function(){
+      //   jQuery(".purchase-sub").on("click", function(){
+      //     jQuery(".modal-backdrop").remove();
+      //     jQuery("body").removeClass("modal-open");
+      //   });
+      // });
 
-//       // this.selectExercise(this.exercisesArray.exercises[0]);
+      // this.selectExercise(this.exercisesArray.exercises[0]);
 
-//   }
+  }
 
 
 //   encryptSecretKey = "abc123zyx654";
