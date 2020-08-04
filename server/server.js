@@ -10,7 +10,7 @@ var path = require('path');
 var PromoJob = require('./jobs/promo.job');
 var TopPlayerJob = require('./jobs/top_player.job');
 var PlayerAttributeJob = require('./jobs/player_attribute.job');
-var port = process.env.PORT || 9000;
+var port = process.env.PORT || 9001;
 
 // mongoose config
 const options = {
