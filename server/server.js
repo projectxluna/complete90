@@ -52,6 +52,6 @@ app.get('*', (req, res) => {
 });
 
 PromoJob.register();
-// PlayerAttributeJob.register();
+PlayerAttributeJob.register();
 TopPlayerJob.register();
 app.listen(port);
