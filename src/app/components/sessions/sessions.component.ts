@@ -20,22 +20,22 @@ declare var jQuery: any;
   export class SessionsComponent implements OnInit {
 
     constructor(private dataService: DataService, private modalService: BsModalService, public authenticationService: AuthenticationService) {
-      this.getFreeSessions();
+      // this.getFreeSessions();
       
-      if(this.isLoggedIn()) {
-        this.getSessions();
-        this.dataService.getUserProfile().subscribe(res => {
-          if (!res.success) {
-            return;
-          }
-          var manager = res.user.profiles.find(profile => {
-            return profile.type === 'MANAGER';
-          });
-          this.managerProfile = manager ? true : false;
-        });
-      } else {
-        this.getSessionsNotLoggedIn();
-      }
+      // if(this.isLoggedIn()) {
+      //   this.getSessions();
+      //   this.dataService.getUserProfile().subscribe(res => {
+      //     if (!res.success) {
+      //       return;
+      //     }
+      //     var manager = res.user.profiles.find(profile => {
+      //       return profile.type === 'MANAGER';
+      //     });
+      //     this.managerProfile = manager ? true : false;
+      //   });
+      // } else {
+      //   this.getSessionsNotLoggedIn();
+      // }
       
     }
 
@@ -46,18 +46,18 @@ declare var jQuery: any;
     }
 
     init() {
-      if(this.isLoggedIn()){
-        this.loadProfile();
-      }
+      // if(this.isLoggedIn()){
+      //   this.loadProfile();
+      // }
       
-      jQuery(document).ready(function(){
-        jQuery(".purchase-sub").on("click", function(){
-          jQuery(".modal-backdrop").remove();
-          jQuery("body").removeClass("modal-open");
-        });
-      });
+      // jQuery(document).ready(function(){
+      //   jQuery(".purchase-sub").on("click", function(){
+      //     jQuery(".modal-backdrop").remove();
+      //     jQuery("body").removeClass("modal-open");
+      //   });
+      // });
 
-      this.selectExercise(this.exercisesArray.exercises[0]);
+      // this.selectExercise(this.exercisesArray.exercises[0]);
 
   }
 
@@ -234,68 +234,68 @@ declare var jQuery: any;
   }
 
   getFilteredSessions() {
-    if (this.hasFilter()) {
-      let clone = _.cloneDeep(this.sessions);
-      let filtered = clone.filter(session => {
-        let tag = this.selectedFilter.tag;
-        let skillLevel = this.selectedFilter.skillLevel;
+    // if (this.hasFilter()) {
+    //   let clone = _.cloneDeep(this.sessions);
+    //   let filtered = clone.filter(session => {
+    //     let tag = this.selectedFilter.tag;
+    //     let skillLevel = this.selectedFilter.skillLevel;
 
-        let category = this.selectedFilter.category;
+    //     let category = this.selectedFilter.category;
 
 
-        if (tag) {
-          if (skillLevel){
-            session.content = session.content.filter(f => {
-              return f.tags && f.tags.indexOf(tag) != -1  && f.tags.indexOf(skillLevel) != -1;
-            });
-          } else {
-            session.content = session.content.filter(f => {
-              return f.tags && f.tags.indexOf(tag) != -1 ;
-            });
-          }
-        } else {
-          if (skillLevel){
-            session.content = session.content.filter(f => {
-              return f.tags && f.tags.indexOf(skillLevel) != -1 ;
-            });
-          }
-        }
-        session.chunks.length = 0;
-        session.chunks = this.getChunks(session.content, 3);
+    //     if (tag) {
+    //       if (skillLevel){
+    //         session.content = session.content.filter(f => {
+    //           return f.tags && f.tags.indexOf(tag) != -1  && f.tags.indexOf(skillLevel) != -1;
+    //         });
+    //       } else {
+    //         session.content = session.content.filter(f => {
+    //           return f.tags && f.tags.indexOf(tag) != -1 ;
+    //         });
+    //       }
+    //     } else {
+    //       if (skillLevel){
+    //         session.content = session.content.filter(f => {
+    //           return f.tags && f.tags.indexOf(skillLevel) != -1 ;
+    //         });
+    //       }
+    //     }
+    //     session.chunks.length = 0;
+    //     session.chunks = this.getChunks(session.content, 3);
 
-        session.display.length = 0;
-        session.display.push(...session.chunks);
+    //     session.display.length = 0;
+    //     session.display.push(...session.chunks);
         
 
-        if (category) {
-          return session.name === this.selectedFilter.category;
-        }
-        return true;
-      });
-      return filtered;
-    }
-    return this.sessions;
+    //     if (category) {
+    //       return session.name === this.selectedFilter.category;
+    //     }
+    //     return true;
+    //   });
+    //   return filtered;
+    // }
+    // return this.sessions;
   }
 
 
 
   getFilteredExercises() {
-    var sess = this.getFilteredSessions();
-    if(this.selectedExerciseCat != undefined) {
-      let clonedSelectedExercise = _.cloneDeep(this.selectedExerciseCat);
-      let returnSession = [];
-      sess.forEach(function(s){
-        //console.log("Session name: ", session.name.trim());
-        if(s.name.trim() == clonedSelectedExercise[0].name.trim()) {
-          returnSession.push(s);
-          console.log(returnSession);
-        }
-      });
-      return returnSession;
-      //console.log(clonedSelectedExercise[0].name.trim());
-    } else {
-      return [];
-    }
+    // var sess = this.getFilteredSessions();
+    // if(this.selectedExerciseCat != undefined) {
+    //   let clonedSelectedExercise = _.cloneDeep(this.selectedExerciseCat);
+    //   let returnSession = [];
+    //   sess.forEach(function(s){
+    //     //console.log("Session name: ", session.name.trim());
+    //     if(s.name.trim() == clonedSelectedExercise[0].name.trim()) {
+    //       returnSession.push(s);
+    //       console.log(returnSession);
+    //     }
+    //   });
+    //   return returnSession;
+    //   //console.log(clonedSelectedExercise[0].name.trim());
+    // } else {
+    //   return [];
+    // }
   }
 
   
@@ -542,101 +542,101 @@ declare var jQuery: any;
   }
 
   getSessions(cache: boolean = false) {
-    this.assignments.length = 0;
+    // this.assignments.length = 0;
 
-    this.dataService.getSessions(cache).subscribe((response) => {
-      if (!response.success) return;
-      this.sessions = [];
-      this.customSessions = [];
-      this.assignments = response.assignments;
-      this.collectTagsAndCategories(response.content);
-      this.groupContent(response.content, this.sessions);
-      this.customSessions.push(...response.plans);
-      console.log("Custom Sessions", this.customSessions);
-      this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
-    });
+    // this.dataService.getSessions(cache).subscribe((response) => {
+    //   if (!response.success) return;
+    //   this.sessions = [];
+    //   this.customSessions = [];
+    //   this.assignments = response.assignments;
+    //   this.collectTagsAndCategories(response.content);
+    //   this.groupContent(response.content, this.sessions);
+    //   this.customSessions.push(...response.plans);
+    //   console.log("Custom Sessions", this.customSessions);
+    //   this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
+    // });
   }
 
 
   getSessionsNotLoggedIn(cache: boolean = false) {
-    this.assignments.length = 0;
+    // this.assignments.length = 0;
 
-    this.dataService.getSessionsNotLoggedIn(cache).subscribe((response) => {
-      if (!response.success) return;
-      this.sessions = [];
-      this.customSessions = [];
-      this.assignments = response.assignments;
-      this.collectTagsAndCategories(response.content);
-      this.groupContent(response.content, this.sessions);
-      this.customSessions.push(...response.plans);
-      //console.log("Custom Sessions", this.customSessions);
-      this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
-    });
+    // this.dataService.getSessionsNotLoggedIn(cache).subscribe((response) => {
+    //   if (!response.success) return;
+    //   this.sessions = [];
+    //   this.customSessions = [];
+    //   this.assignments = response.assignments;
+    //   this.collectTagsAndCategories(response.content);
+    //   this.groupContent(response.content, this.sessions);
+    //   this.customSessions.push(...response.plans);
+    //   //console.log("Custom Sessions", this.customSessions);
+    //   this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
+    // });
   }
 
   
 
   getFreeSessions() {
-    this.dataService.getFreeSessions().subscribe((response) => {
-      if (!response.success) return;
+    // this.dataService.getFreeSessions().subscribe((response) => {
+    //   if (!response.success) return;
 
-      this.freeSessions = [];
-      //this.collectTagsAndCategories(response.content);
-      this.groupContent(response.content, this.freeSessions);
-      this.freeSessions.forEach(function(session){
-        var totalDisplaying = 0;
-        session.display.forEach(function(d){
-          totalDisplaying += d.length;
-        });
-        session.remaining = session.content.length - session.defaultView - totalDisplaying;
+    //   this.freeSessions = [];
+    //   //this.collectTagsAndCategories(response.content);
+    //   this.groupContent(response.content, this.freeSessions);
+    //   this.freeSessions.forEach(function(session){
+    //     var totalDisplaying = 0;
+    //     session.display.forEach(function(d){
+    //       totalDisplaying += d.length;
+    //     });
+    //     session.remaining = session.content.length - session.defaultView - totalDisplaying;
 
-        // session.content.forEach(function(s){
-        //   s.link = this.encryptData(s.link);
-        // });
+    //     // session.content.forEach(function(s){
+    //     //   s.link = this.encryptData(s.link);
+    //     // });
 
-      });
-      //console.log("Free Sessions", this.freeSessions);;
-    });
+    //   });
+    //   //console.log("Free Sessions", this.freeSessions);;
+    // });
   }
 
   groupContent(contentList, fill) {
-    let sessions = {};
+    // let sessions = {};
 
-    for (let content of contentList) {
-      if (sessions[content.group]) {
-        sessions[content.group].exercise = content.exercise;
-        sessions[content.group].exercisesCat = content.exercisesCat;
-        sessions[content.group].content.push(content);
-        sessions[content.group].defaultView = content.defaultView ? content.defaultView : 3
-      } else {
-        sessions[content.group] = {
-          exercise: content.exercise,
-          exercisesCat: content.exercisesCat,
-          content: [content],
-          defaultView: content.defaultView ? content.defaultView : 3
-        }
-      }
-    }
+    // for (let content of contentList) {
+    //   if (sessions[content.group]) {
+    //     sessions[content.group].exercise = content.exercise;
+    //     sessions[content.group].exercisesCat = content.exercisesCat;
+    //     sessions[content.group].content.push(content);
+    //     sessions[content.group].defaultView = content.defaultView ? content.defaultView : 3
+    //   } else {
+    //     sessions[content.group] = {
+    //       exercise: content.exercise,
+    //       exercisesCat: content.exercisesCat,
+    //       content: [content],
+    //       defaultView: content.defaultView ? content.defaultView : 3
+    //     }
+    //   }
+    // }
 
-    for (var session in sessions) {
-      if (!sessions.hasOwnProperty(session)) continue;
+    // for (var session in sessions) {
+    //   if (!sessions.hasOwnProperty(session)) continue;
 
-      var exercise = sessions[session].exercise;
-      var exercisesCat = sessions[session].exercisesCat;
-      var contents = sessions[session];
-      var chunks = this.getChunks(contents.content, 3);
-      var defaultView = contents.defaultView ;
+    //   var exercise = sessions[session].exercise;
+    //   var exercisesCat = sessions[session].exercisesCat;
+    //   var contents = sessions[session];
+    //   var chunks = this.getChunks(contents.content, 3);
+    //   var defaultView = contents.defaultView ;
 
-      fill.push({
-        name: session,
-        exercise: exercise,
-        exercisesCat: exercisesCat,
-        display: [],
-        content: contents.content,
-        defaultView: defaultView,
-        chunks: chunks || []
-      });
-    }
+    //   fill.push({
+    //     name: session,
+    //     exercise: exercise,
+    //     exercisesCat: exercisesCat,
+    //     display: [],
+    //     content: contents.content,
+    //     defaultView: defaultView,
+    //     chunks: chunks || []
+    //   });
+    // }
   }
 
   showMore(session) {
