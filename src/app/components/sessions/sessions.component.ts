@@ -234,6 +234,7 @@ declare var jQuery: any;
   }
 
   getFilteredSessions() {
+    return [];
     // if (this.hasFilter()) {
     //   let clone = _.cloneDeep(this.sessions);
     //   let filtered = clone.filter(session => {
