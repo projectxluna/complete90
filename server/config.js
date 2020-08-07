@@ -8,9 +8,9 @@ var config = {
         //     privateKey: "b8037554429d6e8a679b34450e5876b1"
         // },
         braintree: { //Production
-            merchantId: "6f62td8d6yzkn2ry",
-            publicKey: "f766gw4bhqjkkj5h",
-            privateKey: "d833cbdd16b60a51cd2a89f4818d5c73"
+            merchantId: "6f62td8d6ydf13123",
+            publicKey: "f766gw4bhqjkkkk232",
+            privateKey: "d833cbdd16123123gd2a89f4818d5c73"
         },
         aws: {
             PRIVATE_KEY: "APKAJDTCMHD6IPBCKGDQ",
@@ -25,7 +25,7 @@ var config = {
             SERVICE_PROVIDER: "Gmail"
         },
         mailChimp: {
-            API_KEY: 'f309557588b98c932fec841057b6e6b8-us12',
+            API_KEY: 'f309557588b123125932fec8411231b6e6b8-us12',
             SIGN_UP_LIST: '5b09ab4768', // The complete90 Website Subscribers
             COACH_SIGN_UP_LIST: '3d319353fe', // Coach Welcome Emails
             CLUB_SIGN_UP_LIST: '2b409880ea', // Website coaches accounts
