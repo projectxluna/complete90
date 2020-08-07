@@ -128,12 +128,20 @@ export class TeamRoasterComponent implements OnInit {
 
     this.dataService.getPlayers(team._id).subscribe(res => {
       team.players = res.players.map(player => {
-        let fullName = player.name.split(' ');
-        player.firstName = fullName[0] || '';
-        player.lastName = fullName[1] || '';
-        player.shortName = fullName[0] + ' ' + (fullName[1] || '').substr(0, 1);
+        try {
+          if (!player || !player.name) {
+            return null;
+          }
+          let fullName = (player.name || 'Unknown Name').split(' ');
+          player.firstName = fullName[0] || '';
+          player.lastName = fullName[1] || '';
+          player.shortName = fullName[0] + ' ' + (fullName[1] || '').substr(0, 1);
+        } catch (err) {
+          console.error(err);
+          return null;
+        }
         return player;
-      });
+      }).filter(player => {return player != null});
     });
   }
 

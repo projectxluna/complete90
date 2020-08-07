@@ -47,7 +47,7 @@
     "owl.carousel2": "^2.2.1",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.2",
-    "videogular2": "^6.0.8",
+    "videogular2": "6.4.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

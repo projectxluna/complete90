@@ -9,11 +9,11 @@ var userSchema = mongoose.Schema({
     },
     address: {
         type: String,
-        required: true,
+        required: false,
     },
     postalcode: {
         type: String,
-        required: true,
+        required: false,
     },
     email: {
         type: String,

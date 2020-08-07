@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { VgAPI } from 'videogular2/core';
 import { DataService } from '../../../services';
@@ -66,13 +66,12 @@ export class Timer {
   styleUrls: ['./videoplayer.component.less']
 })
 export class VideoplayerComponent implements OnInit {
-  static api: VgAPI;
+  api: VgAPI;
   track: TextTrack;
   timer: Timer;
   longTimer: Timer;
   mediaLength = 0;
-
-  static autoLoop: boolean = true;
+  autoLoop: boolean = true;
   userCreated;
   session;
   sessionStats = {
@@ -85,7 +84,9 @@ export class VideoplayerComponent implements OnInit {
   selectedIndex;
   selectedContent;
   assignmentId;
-  static originalVolume: any;
+  originalVolume: any;
+
+  interval: any;
 
   constructor(public bsModalRef: BsModalRef, public dataService: DataService) {
   }
@@ -97,16 +98,8 @@ export class VideoplayerComponent implements OnInit {
     this.longTimer = new Timer();
   }
 
-  toggleAutoLoop() {
-    VideoplayerComponent.autoLoop = !VideoplayerComponent.autoLoop;
-  }
-
-  canAutoLoop() {
-    return VideoplayerComponent.autoLoop;
-  }
-
-  timerText = '0:00'
-  getTimerText() {
+  timerText = '00:00'
+  updateTimeText() {
     let t = this.longTimer.formatTime();
     if (t) {
       this.timerText = t;
@@ -143,33 +136,51 @@ export class VideoplayerComponent implements OnInit {
   playNext() {
     if (this.selectedIndex + 1 === this.session.content.length) return;
 
+
+    if (this.cuePointTimeout) {
+      clearTimeout(this.cuePointTimeout);
+    }
+
     this.stopTimer();
     this.longTimer.reset();
+
+    this.timerText = '00:00'
 
     this.selectedIndex++;
     this.selectedContent = this.session.content[this.selectedIndex];
     this.removeCuePoits();
     this.addCuePoints();
-    VideoplayerComponent.originalVolume = undefined;
-    this.mediaLength = VideoplayerComponent.api.getMasterMedia().duration;
+    this.originalVolume = undefined;
+    this.mediaLength = this.api.getMasterMedia().duration;
   }
 
   playPrevious() {
     if (this.selectedIndex === 0) return;
 
+    if (this.cuePointTimeout) {
+      clearTimeout(this.cuePointTimeout);
+    }
     this.stopTimer();
     this.longTimer.reset();
+
+    this.timerText = '00:00'
 
     this.selectedIndex--;
     this.selectedContent = this.session.content[this.selectedIndex];
     this.removeCuePoits();
     this.addCuePoints();
-    VideoplayerComponent.originalVolume = undefined;
-    this.mediaLength = VideoplayerComponent.api.getMasterMedia().duration;
+    this.originalVolume = undefined;
+    this.mediaLength = this.api.getMasterMedia().duration;
   }
 
   startTimer() {
     this.timer.start();
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+    this.interval = setInterval(() => {
+      this.updateTimeText();
+    }, 1000);
   }
 
   /**
@@ -177,15 +188,19 @@ export class VideoplayerComponent implements OnInit {
    * for current selected video
    */
   stopTimer() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
     // save user watch progress 
     this.timer.stop();
     var watched = this.timer.time();
     this.timer.reset();
 
+
     this.sessionStats.watchedTotal = watched;
-    this.sessionStats.currentTime = VideoplayerComponent.api.getDefaultMedia().currentTime;
+    this.sessionStats.currentTime = this.api.getDefaultMedia().currentTime;
     this.sessionStats.contentId = this.selectedContent.id;
-    this.sessionStats.contentLength = VideoplayerComponent.api.getDefaultMedia().duration;
+    this.sessionStats.contentLength = this.api.getDefaultMedia().duration;
     // console.log('Watched time:', this.timer.formatTime(), 'Current time:', this.api.getDefaultMedia().currentTime);
     if (watched < 1) {
       return;
@@ -201,66 +216,48 @@ export class VideoplayerComponent implements OnInit {
     });
   }
 
-  /**
-   * 
-   * ToDo: listen for modal close then store users watched status on every video.
-   */
   onPlayerReady(api: VgAPI) {
-    VideoplayerComponent.api = api;
+    this.api = api;
 
     this.mediaLength = api.getMasterMedia().duration;
     // register media events 
-    api.getDefaultMedia().subscriptions.play.subscribe(
+    this.api.getDefaultMedia().subscriptions.play.subscribe(
       () => {
-        // start or create the timer for this particular video if it doesnt exist already
-        // console.log('***PLAY')
         this.startTimer();
         this.longTimer.start();
       }
     );
-    api.getDefaultMedia().subscriptions.ended.subscribe(
+    this.api.getDefaultMedia().subscriptions.ended.subscribe(
       () => {
-        // we save the total watched value
-        // console.log('***ENDED');
         this.stopTimer();
       }
     );
-    api.getDefaultMedia().subscriptions.pause.subscribe(
+    this.api.getDefaultMedia().subscriptions.pause.subscribe(
       () => {
-        // we pause the timer..
-        // console.log('***PAUSED')
         this.stopTimer();
         this.longTimer.stop();
       }
     );
-    api.getDefaultMedia().subscriptions.playing.subscribe(
+    this.api.getDefaultMedia().subscriptions.seeked.subscribe(
       () => {
-        // here we ensure that the timer is still running
-        // console.log('onPlayingUpdated');
-      }
-    );
-    api.getDefaultMedia().subscriptions.seeked.subscribe(
-      () => {
-        // here we want to resume our timer after seeking is completed
-        // console.log('onSeeked');
         this.startTimer();
       }
     );
-    api.getDefaultMedia().subscriptions.seeking.subscribe(
+    this.api.getDefaultMedia().subscriptions.seeking.subscribe(
       () => {
-        // here we want to stop our timer
-        // console.log('onSeeking');
         this.stopTimer();
       }
     );
 
-    if (this.userCreated) {
-      // Create cue track
-      api.addTextTrack('metadata', 'videoAnnotationTrack');
-      this.track = api.textTracks[0];
+      if (this.userCreated) {
+        // Create cue track
+        this.api.addTextTrack('metadata');
+        this.track = this.api.textTracks[0];
 
-      this.addCuePoints();
-    }
+        this.addCuePoints();
+      }
+    // setTimeout(() => {
+    // }, 1000);
   }
 
   removeCuePoits() {
@@ -277,46 +274,34 @@ export class VideoplayerComponent implements OnInit {
     let markers = this.selectedContent.markers;
     if (!markers) return;
 
-    markers.forEach(m => {
+    for (let m of markers) {
       let cue = new VTTCue(m.startTime, m.endTime, m.title)
-      cue.onenter = this.onEnterCuePoint;
-      cue.onexit = this.onExitCuePoint;
+      cue.onexit = (textTrack) => this.onExitCuePoint(textTrack);
       cue.loop = m.loop;
+      cue.cid = this.selectedContent.id;
       this.track.addCue(cue);
-    });
+    }
   }
 
-  onEnterCuePoint(textTrack) {
-  }
-
+  cuePointTimeout = null;
   onExitCuePoint(textTrack) {
     let cue = textTrack.currentTarget;
 
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      if (cue.loop && VideoplayerComponent.autoLoop) {
-
-        // smallest value of time which does not cause recursive buffering on iOS browsers is startTime+0.3s
-        var time = cue.startTime + 0.3;
-        VideoplayerComponent.api.seekTime(time);
-
-        // This volume feature does not work yet, maybe save to a global variable?
-        if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
+    if (cue.cid !== this.selectedContent.id) {
+      return console.log('Not the same cid');
+    }
+    if (cue.loop && this.autoLoop) {
+      // Using a timeout here to keep things from breaking on IOS
+      this.cuePointTimeout = setTimeout(() => {
+        this.api.seekTime(cue.startTime);
+        if (!this.originalVolume) this.originalVolume = this.api.volume; // save the old volume
         // turn off music here
-        VideoplayerComponent.api.volume = 0;
-      } else {
-        // Restore old volume here
-        if (VideoplayerComponent.originalVolume) VideoplayerComponent.api.volume = VideoplayerComponent.originalVolume;
-      }
+        // This does not work on IOS
+        this.api.volume = 0;
+      }, 1000);
     } else {
-      if (cue.loop && VideoplayerComponent.autoLoop) {
-        VideoplayerComponent.api.seekTime(cue.startTime);
-        if (!VideoplayerComponent.originalVolume) VideoplayerComponent.originalVolume = VideoplayerComponent.api.volume; // save the old volume
-        // turn off music here
-        VideoplayerComponent.api.volume = 0;
-      } else {
-        // Restore old volume here
-        if (VideoplayerComponent.originalVolume) VideoplayerComponent.api.volume = VideoplayerComponent.originalVolume;
-      }
+      // Restore old volume here
+      if (this.originalVolume) this.api.volume = this.originalVolume;
     }
   }
 

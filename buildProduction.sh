@@ -3,6 +3,7 @@ set -e
 
 # TODO. build backend code and upload source
 
+npm i
 # angular production build
 ng build --prod
 
