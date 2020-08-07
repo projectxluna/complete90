@@ -21,7 +21,7 @@
         <div class="loop-timer">{{ timerText }}</div>
       </div>
       <!-- <vg-overlay-play></vg-overlay-play> -->
-      <!-- <vg-controls [vgAutohide]="false" vgFor="main-video">
+      <vg-controls [vgAutohide]="false" vgFor="main-video">
         <vg-play-pause></vg-play-pause>
         <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
         <vg-scrub-bar ></vg-scrub-bar>
@@ -64,18 +64,6 @@
         </div>
         <div class="meta_item" *ngIf="selectedContent.difficulty">Difficulty</div>
         <div class="meta_item">
-<<<<<<< HEAD
-          <span>Train Time</span>
-          <span>{{ selectedContent.minutes }}:{{ selectedContent.seconds }}</span>
-        </div>
-        <div class="meta_item" *ngIf="selectedContent.reps">
-          <span>Reps</span>
-          <span>{{ selectedContent.reps }}</span>
-        </div>
-        <div class="meta_item" *ngIf="selectedContent.sets">
-          <span>Sets</span>
-          <span>{{ selectedContent.sets }}</span>
-=======
           <span style="font-weight: 600; border-bottom: grey 1px solid;">Train Time</span> {{ selectedContent.minutes || 0 | number:'2.' }}:{{ selectedContent.seconds || 0 | number:'2.' }}
         </div>
         <div class="meta_item" *ngIf="selectedContent.reps">
@@ -83,7 +71,6 @@
         </div>
         <div class="meta_item" *ngIf="selectedContent.sets">
           <span style="font-weight: 600; border-bottom: grey 1px solid;">Sets</span>{{ selectedContent.sets }}
->>>>>>> 08b9494ac9cff1a1404d5fc9c320ae7e4f4e07eb
         </div>
       </div>
     </div>
