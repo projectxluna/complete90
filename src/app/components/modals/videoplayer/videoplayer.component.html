@@ -34,8 +34,9 @@
         <vg-track-selector></vg-track-selector>
         <vg-mute></vg-mute>
         <vg-fullscreen></vg-fullscreen>
-      </vg-controls>
-      <video [src]="selectedContent.link" [vgMedia]="media" #media id="singleVideo" preload="auto" controlslist="download" download>
+      </vg-controls> -->
+
+      <video #mainVideo id="main-video" [src]="selectedContent.link" [vgMedia]="mainVideo" [vgMaster]="true" preload="true" controls>
       </video>
     </vg-player>
 
@@ -64,7 +65,6 @@
         </div>
         <div class="meta_item" *ngIf="selectedContent.difficulty">Difficulty</div>
         <div class="meta_item">
-<<<<<<< HEAD
           <span>Train Time</span>
           <span>{{ selectedContent.minutes }}:{{ selectedContent.seconds }}</span>
         </div>
@@ -75,15 +75,6 @@
         <div class="meta_item" *ngIf="selectedContent.sets">
           <span>Sets</span>
           <span>{{ selectedContent.sets }}</span>
-=======
-          <span style="font-weight: 600; border-bottom: grey 1px solid;">Train Time</span> {{ selectedContent.minutes || 0 | number:'2.' }}:{{ selectedContent.seconds || 0 | number:'2.' }}
-        </div>
-        <div class="meta_item" *ngIf="selectedContent.reps">
-          <span style="font-weight: 600; border-bottom: grey 1px solid;">Reps</span>{{ selectedContent.reps }}
-        </div>
-        <div class="meta_item" *ngIf="selectedContent.sets">
-          <span style="font-weight: 600; border-bottom: grey 1px solid;">Sets</span>{{ selectedContent.sets }}
->>>>>>> 08b9494ac9cff1a1404d5fc9c320ae7e4f4e07eb
         </div>
       </div>
     </div>
