@@ -1,0 +1,205 @@
+/*--------------------------TABLE OF CONTENTS-------------------------*/
+/*
+0. GLOBAL CCS
+1. BACKGROUND
+2. LOGIN DIV
+3. TERMSOFUSE MODAL
+
+
+
+
+
+*/
+
+/*----------------------------0. GOBAL CSSS--------------------------*/
+
+div{
+	font-family: 'Montserrat';
+}
+
+.inactiveLink{
+   pointer-events: none;
+   cursor: default;
+}
+
+input, select, textarea{
+    color: white;
+}
+
+textarea:focus, input:focus {
+    color: white;
+}
+
+form, span{
+	font-size: 16px;
+}
+
+.alert-danger {
+    color: #fd1541;
+    background-color: transparent;
+    border-color: transparent;
+    text-align: center;
+}
+
+/*----------------------------1. BACKGROUND--------------------------*/
+.loginbg{
+	background-image: url('../../../assets/login-bg.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;	
+}
+
+
+
+
+
+
+
+/*----------------------------2. LOGIN DIV--------------------------*/
+.login, .signup{
+	padding-top: 290px;
+	padding-bottom: 290px;
+	height: 100vh;
+}
+
+.loginTitle{
+	padding-bottom: 50px;
+}
+
+.formbts{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.loginbg input{
+	border: none; 
+	border-width: 0; 
+	box-shadow: none;
+	border-bottom: 1px solid #fd1541;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.loginbg i{
+	color: #777;
+}
+
+#btn1{
+	background-color: #fd1541;
+	border-radius: 0px;
+	border:none;
+}
+
+#btn2{
+	background-color: transparent;
+	border: 1px solid #fd1541;
+	/*border-radius: 0px;*/
+	border:none;	
+}
+
+
+/*----------------------------3. TERMSOFUSE MODAL--------------------------*/
+.modal-content  {
+	/* width:inherit;
+	max-width:inherit;
+	height:inherit;
+    margin: 0 auto;
+	pointer-events:all; */
+
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
+}
+
+#termsModalTitle{
+	font-family: 'Montserrat';
+	color: #333333;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px 25px 15px 25px;
+    max-height: 400px;
+    color: #333333;
+    max-height: calc(100vh - 610px);
+    overflow-y: auto;
+}
+
+.modal-header {
+    padding: 35px 15px 15px 15px;
+    border-bottom: transparent; 
+}
+
+.ter a{
+	text-decoration: none;
+	color: #fd1541;
+}
+
+.modal-footer{
+	border: 0px;
+}
+
+.abtn{
+    background-color: #04c530;
+    border-radius: 0px;
+    border: none;
+}
+
+.dbtn{
+	background-color: #fd1541;
+    border-radius: 0px;
+    border: none;
+}
+
+/* ----------------------------MEDIA QUERIES------------------------------*/
+@media (max-width: 1200px) {
+
+	.modal-body {
+	    max-height: calc(100vh - 210px);
+	}
+
+}
+
+
+
+
+@media (max-width: 1024px) {
+
+	.modal-body {
+	    max-height: calc(100vh - 310px);
+	}
+
+
+}
+
+
+
+
+@media (max-width: 768px) {
+
+	.modal-body {
+	    max-height: calc(100vh - 210px);
+	}
+
+}
+
+
+
+
+
+
+@media (max-width: 414px) {
+
+	.modal-body {
+	    max-height: calc(100vh - 250px);
+	}
+
+	.login, .signup{
+		padding-top: 170px;
+		padding-bottom: 170px;
+		height: 100vh;
+	}
+
+
+}

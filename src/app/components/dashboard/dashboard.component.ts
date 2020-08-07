@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService, DataService } from '../../services';
+import { Router } from '@angular/router';
+declare var jQuery: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +30,7 @@ export class DashboardComponent implements OnInit {
   };
   playerProfile: any;
   coachProfile: any;
+  adminProfile: any;
 
   selectedField;
   drillLayout = {
@@ -39,8 +42,7 @@ export class DashboardComponent implements OnInit {
 
   stats = {
     watched: '',
-    viewedTotal: 0,
-    overallRating: 0
+    viewedTotal: 0
   }
   model: any = {};
   loading: boolean = false;
@@ -71,36 +73,6 @@ export class DashboardComponent implements OnInit {
       img: "assets/line2-icon.png"
     }
   ];
-
-  calculatedAttributes = {
-    overallRating: null,
-    categories: [
-      {
-        name: 'Dribbling',
-        value: 50
-      },
-      {
-        name: 'Control',
-        value: 50
-      },
-      {
-        name: 'Passing',
-        value: 50
-      },
-      {
-        name: 'Speed',
-        value: 50
-      },
-      {
-        name: 'Strength',
-        value: 50
-      },
-      {
-        name: 'Finishing',
-        value: 50
-      }
-    ]
-  };
 
   iconList = {
     isVisible: false,
@@ -169,7 +141,10 @@ export class DashboardComponent implements OnInit {
   }
 
   dragEnd(event, item) {
+    // console.log('Element was dragged', event);
+    // console.log('item', item);
     let rect = this.dropZone.nativeElement.getBoundingClientRect();
+    // console.log('dropZone', JSON.stringify(rect))
 
     let position = this.getPosition(this.dropZone.nativeElement);
 
@@ -199,11 +174,18 @@ export class DashboardComponent implements OnInit {
   }
 
   constructor(private dataService: DataService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private router: Router) {
       this.init();
   }
 
   ngOnInit() {
+    jQuery(document).ready(function(){
+      jQuery(".upgrade_membership").on("click", function(){
+        jQuery(this).text("Upgrading. Please wait...");
+        jQuery(this).attr("disabled", "disabled");
+      });
+    });
   }
 
   init() {
@@ -220,29 +202,39 @@ export class DashboardComponent implements OnInit {
 
       this.groupContent(response.content);
     });
-    this.dataService.getPlayerAttributes().subscribe(res => {
-      if (!res || !res.success) return;
-      let att = res.attributes;
 
-      let overallRating = 0;
-      att.forEach(at => {
-        let found = this.calculatedAttributes.categories.find(a => {
-          return a.name === at.tag;
-        });
-        if (!found) return;
-        let scaled = (at.score/10) * 100;
-        found.value = scaled < 50 ? 50 : scaled;
-        overallRating += found.value;
-      });
-      let avg = (overallRating/(att.length || 1));
-      this.stats.overallRating = avg;
-    });
+
+    
+
   }
 
   loadProfile() {
     this.dataService.getUserProfile(false).subscribe(res => {
       this.onProfileUpdated(res.user);
+      //console.log("User: ", this.user.subscription.planId);
     });
+  }
+
+  upgrade_membership() {
+    this.dataService.upgradeMembership(this.user).subscribe((response) => {
+      if(response.success) {
+        jQuery(".membership_success").fadeIn();
+        setTimeout(function(){
+          jQuery(".membership_success").fadeOut();
+        }, 3000);
+      }
+      this.onSubscriptionUpdated();
+    });
+  }
+
+  isAuthenticatedToSee() { 
+    if(this.user.subscription != null) {
+      if((this.user.subscription.planId == 'player-monthly-amateur' || this.user.subscription.planId == 'player-monthly-amateur-trial') && this.user.subscription.status == 'Active') {
+        return false;
+      } else {
+        return true;
+      }
+    }
   }
 
   groupContent(contentList) {
@@ -282,6 +274,7 @@ export class DashboardComponent implements OnInit {
   }
 
   hasSubscription() {
+  //console.log(this.user.token);
     if (this.user.subscription) {
       return true;
     }
@@ -333,7 +326,6 @@ export class DashboardComponent implements OnInit {
           this.passwordError = 'Password Successfully Updated';
         } else {
           //'please try again. something went wrong';
-          alert('Failed to Update Password');
           this.loading = false;
           this.passwordError = 'Failed to Update Password';
           this.model = {};
@@ -349,11 +341,15 @@ export class DashboardComponent implements OnInit {
     if (user) {
       this.user = user;
       this.user.avatarURL = user.avatarURL;
+      console.log(user);
       this.playerProfile = user.profiles.find(profile => {
         return profile.type === 'PLAYER';
       });
       this.coachProfile = user.profiles.find(profile => {
         return profile.type === 'MANAGER';
+      });
+      this.adminProfile = user.profiles.find(profile => {
+        return profile.type === 'admin';
       });
     } else {
       // this.loadProfile();

@@ -2,10 +2,13 @@ const {
     exposedUserData,
     exposedClubData,
     PROFILES,
-    createClub
+    createClub,
+    updateClub
 } = require('./helpers/pure');
 const User = require('./models/user');
 const Club = require('./models/club');
+const SignupPromo = require('./models/signup_promo');
+const mongoose = require('mongoose');
 
 module.exports = function (app) {
     var mailer = require('./helpers/mailer');
@@ -15,12 +18,15 @@ module.exports = function (app) {
     var crypto = require('crypto');
     var apiRoutes = express.Router();
     var Auth = require('./helpers/auth');
+    var md5 = require('md5');
 
     var config = require('./config').get(process.env.NODE_ENV);
     var mcConfig = config.mailChimp;
 
     var Mailchimp = require('mailchimp-api-v3')
     var mailchimp = new Mailchimp(mcConfig.API_KEY);
+
+    var randomize = require('randomatic');
 
     // un-authenticated routes
     apiRoutes.post('/login', (req, res) => {
@@ -91,15 +97,175 @@ module.exports = function (app) {
         });
     });
 
+
+    apiRoutes.post('/getSignupPromo', (req, res) => {
+        //console.log(req.body.code);
+        SignupPromo.findOne({"code": ""+req.body.code, 'activated': false}, (err, club) => {
+            if(club) {
+                return res.json({
+                    success: true,
+                    club: club
+                });
+            } else {
+                return res.json({
+                    success: false,
+                    club: undefined
+                });
+            }
+        });
+    });
+
+    apiRoutes.post('/clubSignup', (req, res) => {
+
+        var newPromo = new SignupPromo();
+       
+        newPromo.code = 'cm90' + randomize('Aa0', 4);
+        newPromo.profileType = 'MANAGER';
+        newPromo.club = req.body['_id'];
+        newPromo.activated = false;
+        newPromo.save();
+
+
+
+        // var from = 'projectxluna@gmail.com';
+        // var name = 'The Complete 90';
+        // var message = "Send this email to coach for signup. <a href='https://staging.thecomplete90.com/coach_signup?id="+newPromo.code+"'>" ;
+
+        //console.log(req.body['email'] + "|" + from + "|" + message + "|" + name + "|" + from);
+        listId = mcConfig.CLUB_SIGN_UP_LIST;
+
+        mailchimp.get('/lists/' + listId + '/members/' + md5(req.body['email'])
+        ).then(function (result) {
+            return res.json({
+                success: false
+            });
+        }).catch(function (err) {
+            console.log("Email already sent! ", err);
+            //if user not subscribed add him to list
+            mailchimp.post('/lists/' + listId + '/members', {
+                email_address: req.body['email'],
+                status: 'subscribed',
+                merge_fields: {
+                    'FNAME': req.body['name'],
+                    'CODE': newPromo.code
+                }
+            }).catch(err => {
+                console.error(err);
+            });
+
+            return res.json({
+                success: true
+            });
+        });
+
+        
+
+        // var data = {
+        //     to: req.body['email'],
+        //     from: mailer.email,
+        //     template: 'club-form',
+        //     subject: 'Coach Signup Form',
+        //     context: {
+        //         message: message,
+        //         name: name,
+        //         from: from
+        //     }
+        // };
+
+        // mailer.smtpTransport().sendMail(data, (err) => {
+        //     if (!err) {
+        //         return res.json({
+        //             success: true
+        //         });
+        //     } else {
+        //         console.log(err);
+        //         return res.json({
+        //             success: false,
+        //             error: err
+        //         });
+        //     }
+        // });
+    });
+
+
+    apiRoutes.post('/getClubs', (req, res) => {
+        Club.find({}, function(err, clubs) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: "Something went wrong!"
+                });
+            }
+
+            var clubsMapped = {};
+        
+            clubs.forEach(function(club, index) {
+                clubsMapped[index] = club;
+            });
+        
+            return res.json({
+                success: true,
+                clubs: clubsMapped
+            }); 
+        });
+    });
+
+    apiRoutes.post('/createClubs', (req, res) => {
+        var club = new Club({name: req.body.clubName, email: req.body.email, phoneNumber: req.body.phone})
+        club.save(async (err, club) => {
+            if (err) {
+                console.log(err);
+                return reject(err);
+            }
+            res.json({
+                id: club._id,
+                success: true
+            });
+        });
+
+
+    });
+
+
+    apiRoutes.post('/checkUserExists', (req, res) => {
+    var email = req.body.email;
+    User.findOne({
+        email: email
+    }, (err, found) => {
+        if (found || err) {
+            return res.json({
+                success: false,
+                message: err || 'Email already exists!'
+            });
+        } else {
+            return res.json({
+                success: true,
+                message: "No user exists with current email"
+            });
+        }
+
+    });
+});
+
     apiRoutes.post('/signup', (req, res) => {
         var newUser = new User();
+        var newPromo = new SignupPromo();
+        var promoCode = "";
         newUser.name = req.body.name;
         newUser.email = req.body.email;
         newUser.postalcode = req.body.postalcode;
         newUser.address = req.body.address;
+        if (!req.body.isManager) {
+            newUser.clubId = req.body.clubId;
+            newUser.clubStatus = req.body.clubStatus;
+            newUser.teamId = req.body.teamId;
+        }
         newUser.password = newUser.generateHash(req.body.password);
         newUser.profiles.push(req.body.isManager ? PROFILES.MANAGER : PROFILES.PLAYER);
-
+        if (req.body.promo) {
+            promoCode = req.body.promoCode;
+            newUser.braintree.subscription = {planId: "player-monthly-pro",status: "Active"};
+        }
         try {
             User.findOne({
                 email: newUser.email
@@ -121,12 +287,23 @@ module.exports = function (app) {
                         });
                         var name = req.body.name.split(' ');
                         var listId;
-                        if (req.body.isManager) {
-                            await createClub(req.body.clubName, user._id);
+                        console.log("Promo Code: ", promoCode);
+                        // if(promoCode != "")
+                        //     SignupPromo.findOneAndUpdate({ code: promoCode }, {activated: true}, function (err, pr) {
+                        //         if (err) {
+                        //             console.log("Erro", err);
+                        //         }
+                                
+                        //     });
+
+                        if (req.body.isManager === true) {
+                            //await createClub(req.body.clubName, user._id);
+                            await updateClub(req.body.clubId, user._id);
                             listId = mcConfig.COACH_SIGN_UP_LIST;
                         } else {
                             listId = mcConfig.SIGN_UP_LIST;
                         }
+
                         mailchimp.post('/lists/' + listId + '/members', {
                             email_address: req.body.email,
                             status: 'subscribed',
@@ -137,6 +314,8 @@ module.exports = function (app) {
                         }).catch(err => {
                             console.error(err);
                         });
+
+
                     });
                 } catch (e) {
                     console.log(e);

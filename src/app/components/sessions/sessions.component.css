@@ -60,6 +60,23 @@ button:focus{
 	margin-right: 0px;
 }
 
+.exercises-main-filter {
+    margin-bottom: 0px !important;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-backdrop {
+	z-index: 0 !important;
+}
+
+#custom_sessions_modal {
+	color: black;
+}
+
+#custom_sessions_modal .modal-body {
+	overflow: hidden !important;
+}
+
 /*----------------------------1. BANNER IMAGE--------------------------*/
 .bannerimage{
 	padding-top: 120px;
@@ -141,7 +158,8 @@ button:focus{
     position: relative;
     padding: 15px 25px 15px 25px;
     overflow: scroll;
-    height: 500px;
+	height: auto;
+	min-height: 200px;
 }
 
 .modal-header {
@@ -201,8 +219,9 @@ button:focus{
  	float: none;
 }
 
-.catTitle{
+.catTitle, .exercise-title{
 	margin-bottom: 20px;
+	padding: 0px 15px;
 }
 
 .catTitle h1{
@@ -210,6 +229,60 @@ button:focus{
 	font-size: 20px;
 	padding-bottom: 15px;
 	border-bottom: 1px solid #0000001a;
+}
+
+.exercise-section .row {
+	margin-bottom: 25px;
+}
+
+.exercise-title h1{
+	color: #fd1541;
+	font-size: 24px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #0000001a;
+} 
+
+.exercise-tab {
+	font-size: 16px;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+	cursor: pointer;
+	padding: 100px 20px;
+	
+}
+
+.exercise-tab:hover, .exercise-tab.active {
+	border-bottom: 1px solid #eee;
+    box-shadow: 0px 24px 40px 0px #eee;
+    color: #000;
+}
+
+.exercise-cat-section .row {
+	margin-bottom: 25px;
+}
+
+.exercise-cat-section {
+
+	display: none !important;
+
+	padding: 0px 30px;
+}
+
+.exercise-cat-tab {
+	font-size: 16px;
+	font-weight: bold;
+	color: #444;
+	text-align: center;
+    cursor: pointer;
+	padding: 100px 20px;
+	border: 1px solid #eee;
+}
+
+.exercise-cat-tab:hover, .exercise-cat-tab.active {
+	border-bottom: 1px solid #eee;
+    box-shadow: 0px 24px 40px 0px #eee;
+    color: #000;
 }
 
 .catTitle h2{
@@ -229,18 +302,31 @@ button:focus{
 }
 
 
+.signup-to-view {
+	display: inline;
+	background: rgba(120, 120, 120, 0.8);
+	font-weight: bold;
+	cursor: pointer;
+}
+
+
 .vid-thumb{
     position: relative;
     /*display: inline-block;*/
 	overflow: hidden;	
 }
 
-.vid-thumb a span{
+.vid-thumb a span, .vid-thumb a i{
     top: 50%;
     position: absolute;
     left: 0;
     right: 0;
     transform: translateY(-50%);	
+}
+
+.vid-thumb a i{
+	top: 36%;
+    font-size: 26px;
 }
 
 .vid-thumb a{
@@ -280,6 +366,10 @@ button:focus{
 
 .suggVids{
 	padding-bottom: 50px;
+}
+
+.suggViddds.suggVids {
+	padding-bottom: 0px;
 }
 
 .allVids{

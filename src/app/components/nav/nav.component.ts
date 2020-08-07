@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { DataService } from '../../services'
 import { AuthenticationService } from '../../services';
 
@@ -9,19 +9,50 @@ import { AuthenticationService } from '../../services';
   styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
-  avatarUrl = '/public/imgs/profile/default.jpg';
+  avatarUrl = "/public/imgs/profile/default.jpg";
   userProfile = {
     subscription: undefined,
   };
+
+
+  user = {
+    name: '',
+    subscription: undefined,
+    nationality: '',
+    creditCards: [],
+    avatarURL: '',
+    clubName: '',
+  };
+  playerProfile: any;
+  coachProfile: any;
+  adminProfile;
+
+
   collapsed = true;
 
   constructor(
     private router: Router,
     public dataService: DataService,
     public authenticationService: AuthenticationService) {
+      this.router.events.subscribe((ev) => {
+        if (ev instanceof NavigationEnd) { 
+          if(this.isLoggedIn()) {
+            this.loadProfile();
+          }
+        }
+      });
+      this.init();
   }
 
   ngOnInit() {
+    
+  }
+
+  init() {
+    if(this.isLoggedIn()) {
+      this.loadProfile();
+    }
+      
   }
 
   hasSubscription(cb) {
@@ -43,11 +74,11 @@ export class NavComponent implements OnInit {
   }
 
   isLoggedIn() {
-    if (this.authenticationService.token) {
+    if (this.authenticationService.token && this.authenticationService.token != null) {
       if(!this.userProfile.subscription && !this.activeRequest) {
         this.activeRequest = true;
         this.hasSubscription((res) => {
-          if (!res || !res.success) {
+          if (!res.success) {
             return;
           }
           this.avatarUrl = res.user.avatarURL;
@@ -65,4 +96,31 @@ export class NavComponent implements OnInit {
     this.dataService.bustCache();
     this.collapse();
   }
+
+  loadProfile() {
+    this.dataService.getUserProfile(true).subscribe(res => {
+      this.onProfileUpdated(res.user);
+      console.log("User: ", this.user.subscription.planId);
+    });
+  }
+
+  onProfileUpdated(user) {
+    if (user) {
+      this.user = user;
+      this.user.avatarURL = user.avatarURL;
+      this.playerProfile = user.profiles.find(profile => {
+        return profile.type === 'PLAYER';
+      });
+      this.coachProfile = user.profiles.find(profile => {
+        return profile.type === 'MANAGER';
+      });
+      this.adminProfile = user.profiles.find(profile => {
+        return profile.type === 'admin';
+      });
+    } else {
+      // this.loadProfile();
+    }
+  }
+
+
 }

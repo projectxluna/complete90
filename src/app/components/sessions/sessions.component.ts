@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from '../../services';
+import { AuthenticationService, DataService } from '../../services';
 import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { VideoplayerComponent } from '../modals/videoplayer/videoplayer.component';
@@ -8,6 +8,8 @@ import { ConfirmComponent } from '../modals/confirm/confirm.component';
 import * as _ from 'lodash';
 import { isUndefined } from 'util';
 import { empty } from 'rxjs';
+declare var jQuery: any;
+
 
 @Component({
   selector: 'app-sessions',
@@ -15,9 +17,60 @@ import { empty } from 'rxjs';
   styleUrls: ['./sessions.component.css'],
   entryComponents: [VideoplayerComponent, AddcontentToSessionComponent]
 })
-export class SessionsComponent implements OnInit {
+  export class SessionsComponent implements OnInit {
 
+    constructor(private dataService: DataService, private modalService: BsModalService, public authenticationService: AuthenticationService) {
+      this.getFreeSessions();
+      
+      if(this.isLoggedIn()) {
+        this.getSessions();
+        this.dataService.getUserProfile().subscribe(res => {
+          if (!res.success) {
+            return;
+          }
+          var manager = res.user.profiles.find(profile => {
+            return profile.type === 'MANAGER';
+          });
+          this.managerProfile = manager ? true : false;
+        });
+      } else {
+        this.getSessionsNotLoggedIn();
+      }
+      
+    }
+
+
+
+    ngOnInit() {
+      this.init();
+    }
+
+    init() {
+      if(this.isLoggedIn()){
+        this.loadProfile();
+      }
+      
+      jQuery(document).ready(function(){
+        jQuery(".purchase-sub").on("click", function(){
+          jQuery(".modal-backdrop").remove();
+          jQuery("body").removeClass("modal-open");
+        });
+      });
+
+      this.selectExercise(this.exercisesArray.exercises[0]);
+
+  }
+
+
+  encryptSecretKey = "abc123zyx654";
+  //CryptoJS = require("crypto-js");
   @ViewChild(ModalDirective) modal: ModalDirective;
+
+
+  userProfile = {
+    subscription: undefined,
+  };
+  activeRequest = false;
 
   filters = {
     tags: [],
@@ -31,10 +84,130 @@ export class SessionsComponent implements OnInit {
     skillLevel: ''
   }
 
+  selectedExercisesCategories = {
+    exercise: '',
+    exerciseName: '',
+    category: ''
+  }
+
+  selectedExerciseCat;
+
+  selectExercise(exercise) {
+    this.selectedExercisesCategories.exercise = exercise;
+    this.selectedExercisesCategories.exerciseName = exercise.name;
+    this.selectedExerciseCat = this.getSelectedExerciseCatSessions();
+  }
+  selectExerciseCat(category) {
+    this.selectedExercisesCategories.category = category.name;
+    this.selectedExerciseCat = this.getSelectedExerciseCatSessions();
+    console.log("Exercises: ", this.selectedExerciseCat);
+  }
+
+
+  getSelectedExerciseCatSessions() {
+    
+      let clone = _.cloneDeep(this.sessions);
+      let filtered = clone.filter(session => {
+        let tag = this.selectedFilter.tag;
+        let skillLevel = this.selectedFilter.skillLevel;
+
+        let category = this.selectedFilter.category;
+        let exercise = this.selectedExercisesCategories.exerciseName;
+        //let exerciseCat = this.selectedExercisesCategories.category;
+        //console.log('Ex', session);
+        if(exercise != undefined) {  //&& session.exercisesCat.indexOf(exerciseCat) != -1
+          if(session.exercise == exercise) {
+          
+            var totalDisplaying = 0;
+            session.display.forEach(function(d){
+              totalDisplaying += d.length;
+            });
+            session.remaining = session.content.length - session.defaultView - totalDisplaying;
+            console.log("S: ", session);
+            return true;
+          }
+      
+        }
+
+          
+
+        // if(exerciseCat) {
+        //   console.log(session.exercisesCat.indexOf(exerciseCat));
+        //   return session.exercisesCat.indexOf(exerciseCat) != -1;
+        // }
+
+        
+      });
+      return filtered;
+  }
+
   sessions = [];
   freeSessions = [];
   customSessions = [];
   assignments = [];
+  user = {
+    name: '',
+    subscription: undefined,
+    nationality: '',
+    creditCards: [],
+    avatarURL: '',
+    clubName: '',
+  };
+
+  playerProfile: any;
+  coachProfile: any;
+  adminProfile: any;
+
+  exercisesArray = {
+                "exercises": 
+                [
+                  {
+                    "name": 'Technical',
+                    "categories": [
+                                    {
+                                      "name": "Ball Mastery",
+                                      "subCategories": ["Ball Mastery"]
+                                    },
+                                    {
+                                      "name": "Juggling",
+                                      "subCategories": ["Juggling"]
+                                    },
+                                    {
+                                      "name": "Dribbling",
+                                      "subCategories": ["Dribbling"]
+                                    },
+                                    {
+                                      "name": "Wall Work",
+                                      "subCategories": ["Wall Work"]
+                                    }
+                                  ],
+                  }, 
+                  {
+                    "name": 'Strength',
+                    "categories": [
+                                    {
+                                      "name": "Core",
+                                      "subCategories": ["Core"]
+                                    },
+                                    {
+                                      "name": "Yoga",
+                                      "subCategories": ["Yoga"]
+                                    }
+
+                                  ],
+                  }, 
+                  {
+                    "name": 'Speed',
+                    "categories": [
+                                    {
+                                      "name": "Ladder",
+                                      "subCategories": ["Ladder"]
+                                    },
+
+                                  ],
+                  }
+                ],
+              };
 
   banner = {
     isActive: false,
@@ -47,9 +220,6 @@ export class SessionsComponent implements OnInit {
   managerProfile = false;
 
   bsModalRef: BsModalRef;
-
-  ngOnInit() {
-  }
 
   hasFilter() {
     return this.selectedFilter.tag != '' || this.selectedFilter.category != '' || this.selectedFilter.skillLevel != '';
@@ -95,6 +265,7 @@ export class SessionsComponent implements OnInit {
 
         session.display.length = 0;
         session.display.push(...session.chunks);
+        
 
         if (category) {
           return session.name === this.selectedFilter.category;
@@ -106,23 +277,34 @@ export class SessionsComponent implements OnInit {
     return this.sessions;
   }
 
-  constructor(private dataService: DataService, private modalService: BsModalService) {
-    this.getFreeSessions();
-    this.getSessions();
 
-    this.dataService.getUserProfile().subscribe(res => {
-      if (!res.success) {
-        return;
-      }
-      var manager = res.user.profiles.find(profile => {
-        return profile.type === 'MANAGER';
+
+  getFilteredExercises() {
+    var sess = this.getFilteredSessions();
+    if(this.selectedExerciseCat != undefined) {
+      let clonedSelectedExercise = _.cloneDeep(this.selectedExerciseCat);
+      let returnSession = [];
+      sess.forEach(function(s){
+        //console.log("Session name: ", session.name.trim());
+        if(s.name.trim() == clonedSelectedExercise[0].name.trim()) {
+          returnSession.push(s);
+          console.log(returnSession);
+        }
       });
-      this.managerProfile = manager ? true : false;
-    });
+      return returnSession;
+      //console.log(clonedSelectedExercise[0].name.trim());
+    } else {
+      return [];
+    }
   }
 
+  
+
   selectTag(tag) {
-    this.selectedFilter.tag = tag;
+    // check these 
+    if (tag != 'Beginner' && tag != 'Intermediate' && tag != 'Expert'){
+      this.selectedFilter.tag = tag;
+    }
   }
 
   closeBanner() {
@@ -165,6 +347,8 @@ export class SessionsComponent implements OnInit {
   addContentToCustomSession(contentId, content) {
     // prompt user to select which existing session they want to add
     // this content to, or let them start a new session
+    console.log(contentId, content);
+
     const initialState = {
       customSession: this.customSessions
     };
@@ -172,6 +356,7 @@ export class SessionsComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
     this.bsModalRef.content.onClose.subscribe(result => {
       if (result && result.type === 'new') {
+        console.log(result);
         let newSession = {
           name: result.name,
           content:  {
@@ -248,23 +433,12 @@ export class SessionsComponent implements OnInit {
   removeFromSession(session, index) {
     if (!session || session.content.length < 1 || isUndefined(index)) return;
 
-    let params;
-
-    if (this.managerProfile){
-      params = {
-        title: 'Delete Session',
-        message: 'Are you sure you want to delete this exercise? (Will remove this video from all related assingments and reports.)',
-        cancelLabel: 'Back',
-        confirmLabel: 'Confirm'
-      };
-    } else {
-      params = {
-        title: 'Delete Session',
-        message: 'Are you sure you want to delete this exercise?',
-        cancelLabel: 'Back',
-        confirmLabel: 'Confirm'
-      };
-    }
+    const params = {
+      title: 'Delete Session',
+      message: 'Are you sure you want to delete this session?',
+      cancelLabel: 'Back',
+      confirmLabel: 'Confirm'
+    };
 
     let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params, class: 'modal-sm' });
     confirmModal.content.onClose.subscribe(result => {
@@ -314,6 +488,8 @@ export class SessionsComponent implements OnInit {
     });
   }
 
+  
+
   selectCategory(category) {
     this.selectedFilter.category = category;
   }
@@ -323,22 +499,12 @@ export class SessionsComponent implements OnInit {
   }
 
   deleteUserSession(sessionId) {
-    var params;
-    if (this.managerProfile){
-      params = {
-        title: 'Delete Session',
-        message: 'Are you sure you want to delete this exercise? (Will remove this video from all related assingments and reports.)',  
-        cancelLabel: 'Back',
-        confirmLabel: 'Confirm'
-      };
-    } else {
-      params = {
-        title: 'Delete Session',
-        message: 'Are you sure you want to delete this exercise?',
-        cancelLabel: 'Back',
-        confirmLabel: 'Confirm'
-      };
-    }
+    const params = {
+      title: 'Delete Session',
+      message: 'Are you sure you want to delete this session?',
+      cancelLabel: 'Back',
+      confirmLabel: 'Confirm'
+    };
 
     let confirmModal = this.modalService.show(ConfirmComponent, { initialState: params, class: 'modal-sm' });
     confirmModal.content.onClose.subscribe(result => {
@@ -364,7 +530,10 @@ export class SessionsComponent implements OnInit {
     }
 
     this.filters.tags = tags.filter(function (value, index, self) {
-      return self.indexOf(value) === index;
+      // check this
+      if (value != 'Beginner' && value != 'Intermediate' && value != 'Expert'){
+       return self.indexOf(value) === index;
+      }
     });
 
     this.filters.categories = categories.filter(function (value, index, self) {
@@ -383,8 +552,29 @@ export class SessionsComponent implements OnInit {
       this.collectTagsAndCategories(response.content);
       this.groupContent(response.content, this.sessions);
       this.customSessions.push(...response.plans);
+      console.log("Custom Sessions", this.customSessions);
+      this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
     });
   }
+
+
+  getSessionsNotLoggedIn(cache: boolean = false) {
+    this.assignments.length = 0;
+
+    this.dataService.getSessionsNotLoggedIn(cache).subscribe((response) => {
+      if (!response.success) return;
+      this.sessions = [];
+      this.customSessions = [];
+      this.assignments = response.assignments;
+      this.collectTagsAndCategories(response.content);
+      this.groupContent(response.content, this.sessions);
+      this.customSessions.push(...response.plans);
+      //console.log("Custom Sessions", this.customSessions);
+      this.selectExerciseCat(this.exercisesArray.exercises[0].categories[0]);
+    });
+  }
+
+  
 
   getFreeSessions() {
     this.dataService.getFreeSessions().subscribe((response) => {
@@ -393,6 +583,19 @@ export class SessionsComponent implements OnInit {
       this.freeSessions = [];
       //this.collectTagsAndCategories(response.content);
       this.groupContent(response.content, this.freeSessions);
+      this.freeSessions.forEach(function(session){
+        var totalDisplaying = 0;
+        session.display.forEach(function(d){
+          totalDisplaying += d.length;
+        });
+        session.remaining = session.content.length - session.defaultView - totalDisplaying;
+
+        // session.content.forEach(function(s){
+        //   s.link = this.encryptData(s.link);
+        // });
+
+      });
+      //console.log("Free Sessions", this.freeSessions);;
     });
   }
 
@@ -401,10 +604,14 @@ export class SessionsComponent implements OnInit {
 
     for (let content of contentList) {
       if (sessions[content.group]) {
+        sessions[content.group].exercise = content.exercise;
+        sessions[content.group].exercisesCat = content.exercisesCat;
         sessions[content.group].content.push(content);
         sessions[content.group].defaultView = content.defaultView ? content.defaultView : 3
       } else {
         sessions[content.group] = {
+          exercise: content.exercise,
+          exercisesCat: content.exercisesCat,
           content: [content],
           defaultView: content.defaultView ? content.defaultView : 3
         }
@@ -414,12 +621,16 @@ export class SessionsComponent implements OnInit {
     for (var session in sessions) {
       if (!sessions.hasOwnProperty(session)) continue;
 
+      var exercise = sessions[session].exercise;
+      var exercisesCat = sessions[session].exercisesCat;
       var contents = sessions[session];
       var chunks = this.getChunks(contents.content, 3);
       var defaultView = contents.defaultView ;
 
       fill.push({
         name: session,
+        exercise: exercise,
+        exercisesCat: exercisesCat,
         display: [],
         content: contents.content,
         defaultView: defaultView,
@@ -436,6 +647,9 @@ export class SessionsComponent implements OnInit {
         session.display.push(session.chunks.shift());
       }
     }
+    session.remaining -= session.defaultView;
+    session.remaining = session.remaining < 0 ? 0 : session.remaining;
+    console.log(session);
   }
 
   showLess(session) {
@@ -444,6 +658,11 @@ export class SessionsComponent implements OnInit {
         session.chunks.unshift(session.display.pop());
       }
     }
+    var totalDisplaying = 0;
+    session.display.forEach(function(d){
+      totalDisplaying += d.length;
+    });
+    session.remaining = session.content.length - session.defaultView - totalDisplaying;
   }
 
   getChunks(arr, len) {
@@ -502,4 +721,61 @@ export class SessionsComponent implements OnInit {
     this.bsModalRef = this.modalService.show(VideoplayerComponent, { initialState, class: 'modal-lg' });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
+
+
+  loadProfile() {
+    this.dataService.getUserProfile(false).subscribe(res => {
+      console.log("User: ", res.user);
+      this.onProfileUpdated(res.user);
+    });
+  }
+  hasSubscription() {
+    if (this.user.subscription) {
+      return true;
+    }
+    return false;
+  }
+getSubscriptionLeft() {
+    if (!this.user.subscription) {
+      return 0;
+    }
+    var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    var firstDate = new Date(this.user.subscription.nextBillingDate);
+    var secondDate = new Date();
+
+    let daysLeft = firstDate.getTime() - secondDate.getTime();
+    return (daysLeft > 0) ? Math.round( daysLeft / oneDay) : 0;
+  }
+onProfileUpdated(user) {
+    if (user) {
+      this.user = user;
+      this.user.avatarURL = user.avatarURL;
+      this.playerProfile = user.profiles.find(profile => {
+        return profile.type === 'PLAYER';
+      });
+      this.coachProfile = user.profiles.find(profile => {
+        return profile.type === 'MANAGER';
+      });
+      this.adminProfile = user.profiles.find(profile => {
+        return profile.type === 'admin';
+      });
+    } else {
+      // this.loadProfile();
+    }
+  }
+
+  onSubscriptionUpdated() {
+    this.loadProfile();
+  }
+
+
+  isLoggedIn() {
+    if (!this.authenticationService.token || this.authenticationService.token == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
 }

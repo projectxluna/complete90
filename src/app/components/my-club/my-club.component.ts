@@ -88,6 +88,7 @@ export class MyClubComponent implements OnInit {
       if (res.clubs.length) {
         this.page = 2;
         this.clubs = res.clubs;
+        console.log("Clubs", this.clubs);
       }
     });
   }
@@ -100,7 +101,7 @@ export class MyClubComponent implements OnInit {
       this.error = 'Please select a club to continue';
       return;
     }
-    this.dataService.requestClubAccess(club._id).subscribe(res => {
+    this.dataService.requestClubAccess(club._id, club.managerId).subscribe(res => {
       if (res.success) {
         this.page = 3;
         setTimeout(() => {
@@ -120,19 +121,6 @@ export class MyClubComponent implements OnInit {
     this.dataService.addPlayerToClub(player.id).subscribe(response => {
       if (response.success) {
         // this.findPendingRequest();
-        this.modalRef.hide();
-        window.location.reload();
-      }
-    });
-  }
-
-
-  removeFromClub(player) {
-    if (!player) {
-      return;
-    }
-    this.dataService.removePlayerFromClub(player.id).subscribe(response => {
-      if (response.success) {
         this.modalRef.hide();
         window.location.reload();
       }

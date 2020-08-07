@@ -6,6 +6,21 @@
 	font-weight: 700;
 }
 
+#main-nav {
+	width: 70%;
+    margin-left: auto;
+    float: right;
+}
+
+.loggedIn#main-nav {
+	width: 58%;
+}
+
+
+.floated_right {
+	float: right;
+}
+
 .navbar-header{
 	position: absolute;
 }
@@ -58,9 +73,13 @@
 
 .logoTxt{
 	text-decoration: none;
-	color: white;
+	color: white !important;
 	font-size: 14px;
 	font-weight: 300;
+}
+
+.logoTxt b {
+	font-weight: bold;
 }
 
 .avatar {
@@ -80,6 +99,18 @@
 
 
 /* ----------------------------MEDIA QUERIES------------------------------*/
+
+@media (max-width: 1350px) {
+	#main-nav {
+		width: auto;
+		margin-left: auto;
+		float: right;
+	}
+
+	.floated_right {
+		float: left;
+	}
+}
 
 @media (max-width: 1200px) {
 
@@ -140,6 +171,12 @@
 		/*background-color:transparent;*/
 		background-color: #000000b8;
 		margin-bottom: 0px;
+	}
+
+	#main-nav {
+		width: auto;
+		margin-left: auto;
+		float: none;
 	}
 
 

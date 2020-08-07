@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DataService } from '../../services';
 
 @Component({
   selector: 'player-attributes',
@@ -7,8 +8,49 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PlayerAttributesComponent implements OnInit {
 
-  @Input('attributes') attributes;
-  constructor() {
+  @Input() attributes = {
+    overallRating: null,
+    categories: [
+      {
+        name: 'Dribbling',
+        value: 50
+      },
+      {
+        name: 'Control',
+        value: 50
+      },
+      {
+        name: 'Passing',
+        value: 50
+      },
+      {
+        name: 'Speed',
+        value: 50
+      },
+      {
+        name: 'Strength',
+        value: 50
+      },
+      {
+        name: 'Finishing',
+        value: 50
+      }
+    ]
+  }
+  constructor(dataService: DataService) {
+    dataService.getPlayerAttributes().subscribe(res => {
+      if (!res || !res.success) return;
+      let att = res.attributes;
+
+      att.forEach(at => {
+        let found = this.attributes.categories.find(a => {
+          return a.name === at.tag;
+        });
+        if (!found) return;
+        found.value = (at.score/10) * 100;
+      });
+
+    });
   }
 
   ngOnInit() {

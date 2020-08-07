@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service'
+import { DataService } from '../../services/data.service';
+declare var jQuery: any;
 
 @Component({
   selector: 'leader-board',
@@ -17,52 +18,9 @@ export class LeaderBoardComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  getWeeklyRange() {
-    let currentDate = new Date(); // current date of week
-
-    let currentWeekDay = currentDate.getDay();
-    let lessDays = (currentWeekDay == 0) ? 6 : currentWeekDay - 1;
-
-    let startDate = new Date(new Date(currentDate).setDate(currentDate.getDate() - lessDays));
-    startDate.setUTCHours(0, 0, 0, 0);
-
-    let endDate = new Date(new Date(startDate).setDate(startDate.getDate() + 6));
-    endDate.setUTCHours(0, 0, 0, 0);
-
-    return {
-      startDate: startDate.getTime(),
-      endDate: endDate.getTime()
-    };
-  }
-
-  getMonthRange() {
-    let currentDate = new Date();
-
-    let startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    startDate.setUTCHours(0, 0, 0, 0);
-
-    let endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-    endDate.setUTCHours(0, 0, 0, 0);
-
-    return {
-      startDate: startDate.getTime(),
-      endDate: endDate.getTime()
-    };
-  }
-
-  getAllTimeRange() {
-    let startDate = new Date(0);
-    startDate.setUTCHours(0, 0, 0, 0);
-
-    let endDate = new Date();
-    endDate.setUTCHours(0, 0, 0, 0);
-
-    return {
-      startDate: startDate.getTime(),
-      endDate: endDate.getTime()
-    };
+    setTimeout(function(){
+      jQuery(document).find(".blurred_content .tab-content").attr("style", "filter: blur(5px);");
+    },100);
   }
 
   generateTestData() {
@@ -70,17 +28,23 @@ export class LeaderBoardComponent implements OnInit {
       { 
         name: 'Weekly',
         active: true,
-        filter: this.getWeeklyRange()
+        filter: {
+          timestamp: 1000 * 60 * 60 * 24 * 7,
+        }
       },
       { 
         name: 'Monthly',
         active: false,
-        filter: this.getMonthRange()
+        filter: {
+          timestamp: 1000 * 60 * 60 * 24 * 30,
+        }
       },
       { 
         name: 'All Time',
         active: false,
-        filter: this.getAllTimeRange()
+        filter: {
+          timestamp: 0,
+        }
       },
       { 
         name: 'My Club',
@@ -92,16 +56,8 @@ export class LeaderBoardComponent implements OnInit {
     ];
   }
 
-  loading: boolean = false;
-
   fetchLeaderBoard(filter) {
-    if (this.loading) {
-      return;
-    }
-    this.loading = true;
-
-    this.dataService.getLeaderBoard(filter).subscribe(response => {
-      this.loading = false;
+    this.dataService.getLeaderBoard(filter.timestamp, filter.club).subscribe(response => {
       this.players.length = 0;
       this.players = response.leaderboard || [];
       this.players.sort((a, b) => {

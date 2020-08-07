@@ -11,7 +11,7 @@ import { ConfirmComponent } from '../modals/confirm/confirm.component';
 export class TeamRoasterComponent implements OnInit {
 
   teams: any[];
-  players: number;
+  sent = false;
   modalRef: BsModalRef;
   model = {
     teamName: '',
@@ -54,18 +54,29 @@ export class TeamRoasterComponent implements OnInit {
       this.teams = res.teams;
       if (this.teams.length) {
         this.selectTeam(this.teams[0]);
+        this.teams.forEach(function(team){
+          
+          this.dataService.getPlayers(team._id).subscribe(res => {
+            team.players = res.players.map(player => {
+              let fullName = player.name.split(' ');
+              player.firstName = fullName[0] || '';
+              player.lastName = fullName[1] || '';
+              player.shortName = fullName[0] + ' ' + (fullName[1] || '').substr(0, 1);
+              return player;
+            });
+          });
+        });
       }
     });
   }
 
   getUsersWithoutTeam() {
     this.dataService.getUsersWithoutTeam().subscribe(res => {
+      console.log("Team: ", res);
       if (!res || !res.success) {
         return;
       }
       this.usersWithoutTeam = res.users;
-      this.players = 0;
-      this.players = this.usersWithoutTeam.length;
     });
   }
 
@@ -103,10 +114,9 @@ export class TeamRoasterComponent implements OnInit {
   }
 
   deselectUser() {
-    // if (this.selectedUser) {
-    //   this.selectedUser.active = false;
-    // }
-    this.selectedUser = null;
+    if (this.selectedUser) {
+      this.selectedUser.active = false;
+    }
   }
 
   selectTeam(team) {
@@ -222,6 +232,20 @@ export class TeamRoasterComponent implements OnInit {
   editTeam(team, template) {
     this.teamModal.team = team;
     this.openModal(template);
+  }
+
+  resendTeamEmail(team) {
+    console.log(team);
+    this.sent = true;
+    setTimeout(function(){
+      this.sent = false;
+    }, 2000);
+    this.dataService.resendTeamEmail(team).subscribe(res => {
+      this.getTeams();
+      this.closeModal();
+      
+      
+    });
   }
 
   updateTeam() {

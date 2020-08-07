@@ -31,7 +31,7 @@ const collectTags = (contentStructure) => {
 const loadContent = () => {
     return new Promise((resolve, reject) => {
         if (!ENV || ENV === 'dev' || ENV === 'development') {
-            const devContentStructure = require('../../video_structure.json');
+            const devContentStructure = require('../../staging_video_structure.json');
             resolve(collectTags(devContentStructure));
         }
         else {
@@ -44,6 +44,7 @@ const loadContent = () => {
                     reject(error);
                 }
             });
+     
         }
     });
 }
@@ -167,8 +168,8 @@ const callback = async () => {
 
 var PlayerAttributeJob = {
     register: function () {
-        var cronJob = cron.job('0 */12 * * 0-6', callback); // For prod. Every 12 hrs
-        // var cronJob = cron.job('0-59 * * * *', callback); // For Dev. Runs every 1 minute
+        // var cronJob = cron.job('0 */12 * * 0-6', callback); // For prod. Every 12 hrs
+        var cronJob = cron.job('0-59 * * * *', callback); // For Dev. Runs every 1 minute
         cronJob.start();
     }
 }

@@ -1,326 +1,329 @@
-/*--------------------------TABLE OF CONTENTS-------------------------*/
-/*
-0. GLOBAL CCS
-1. BANNER IMAGE
-2. PRICING SECTION
-3. COMAPRE SECTION
-4. QUOTE SECTION
-
-
-
-*/
-
-
-
-/*----------------------------0. GOBAL CSSS--------------------------*/
-
+html body{
+	overflow-x: hidden;
+}
 div{
 	font-family: 'Montserrat';
 }
-
-.inactiveLink{
-   pointer-events: none;
-   cursor: default;
+.tabs-container{
+	padding: 120px 0px;
+}
+h3{
+	color:#212529;
+}
+.py-5{
+	padding: 48px 0px;
+}
+.py-4{
+	padding: 1.5rem 0px;
+}
+.p-0{
+	padding: 0 !important;
 }
 
-.ph{
-	margin: 0px;
+.nav-tabs {
+	border-bottom: 0px;
+}
+	.pricing-tabs .nav-item img{
+		height: 100px;
+	}
+	.pricing-tabs .nav-item.active .nav-link{
+		border-bottom: 1px solid #eee;
+		box-shadow: 0px 24px 40px 0px #eee;
+    	color: #000;
+	}
+	.free-trial{
+		margin: auto !important;
+		float: none;
+	}
+	.btns-row{
+		margin-top: 40px;
+	}
+	.price-tag h2{
+		margin-top: 0px !important;
+	}
+	.pricing-tabs .nav-item.active .nav-link h3{
+		color: #000;
+	}
+	.pricing-tabs .nav-item .nav-link{
+		border:none;
+	}
+	.pricing-tabs .nav-item .nav-link:hover{
+		border-bottom: 1px solid #eee;
+		box-shadow: 0px 24px 40px 0px #eee;
+    	color: #000;
+	}
+	.pricing-tabs .nav-item.active .nav-link:hover{
+		border-bottom: 1px solid #eee;
+		box-shadow: 0px 0px 0px #000;
+	}
+	.pricing-tabs .nav-item {
+		color: white;
+		text-align: center;
+		padding: 0px;
+		/*border:0px;*/
+	}
+	.pricing-tabs .nav-item{
+		width: 48% !important;
+	}
+
+	.pricing-tabs .nav-item:nth-child(1){
+		margin-right: 2%;
+	}
+
+	.pricing-tabs .nav-item .nav-link{
+		margin: 0px;
+		padding: 30px;
+	}
+	.pricing-tabs .nav-item .nav-link h3{
+		font-size: 26px;
+	}
+
+	
+.pricing-tabs-content img{
+    object-fit: cover;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+}
+.pricing-tabs-content a{
+	color: white;
+	padding: 10px 25px;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 500;
+	transition: all 0.5s;
+	display: inline-block;
+	background: #fd1541;
+}
+.pricing-tabs-content a:hover{
+	background: transparent;
+	color: #fd1541;
+	transition: all 0.5s;
+}
+.pricing-tabs-content p{
+	    color: #1e1e1e;
+    font-size: 16px;
+    line-height: 1.7em;
 }
 
+.testimonials p {
+	font-size: 12px;
+}
+
+.testimonials_title {
+	margin-bottom: 30px;
+}
+
+.m-auto {
+	margin: auto;
+	float: none;
+}
+
+.text-dark {
+	color: black;
+}
 
 /*----------------------------1. BANNER IMAGE--------------------------*/
-.bannerimage{
-	padding-top: 120px;
-	background-image: url('../../../assets/pricing-banner.jpg');
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-	min-height: 250px;
-	width: 100%;
-	color: white;
-}
 
-
-/*----------------------------2. PRICING SECTION--------------------------*/
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
-    color: #fff;
-    background-color: #fd1540;
-    border-radius: 0px;
-}
-
-.nav>li>a:hover {
-    text-decoration: none;
-    background-color: #fd1540;
-    border-radius: 0px;
+.bannerimage {
+    padding-top: 120px;
+    background-image: url('../../../assets/dashboard-banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 250px;
+    width: 100%;
     color: white;
 }
 
-.nav-pills > li {
-    float:none;
-    display:inline-block;
-    *display:inline; /* ie7 fix */
-     zoom:1; /* hasLayout ie7 trigger */
-     font-size: 12px;
-}
 
-a{
-	color: #fd1540;
+/*--------pricing table style--------*/
+.section-title h2 {
+    	font-size: 32px;
+    	text-transform: capitalize;
+    	margin: 15px 0;
+    	display: inline-block;
+    	position: relative;
+    	font-weight: 700;
+    	padding-bottom: 15px;
+    	letter-spacing: 1px;
+    	text-transform: uppercase;
+    }
+    .section-title p {
+    	font-weight: 300;
+    	font-size: 14px;
+    }
+    .black-bg .section-title h2, .black-bg .section-title h4, .black-bg .section-title p {
+  color:#fff
 }
-
-.nav-pills {
-    text-align:center;
+.section-title h2:before {
+  position: absolute;
+  content: "";
+  width: 150px;
+  height: 1px;
+  background-color: #777;
+  bottom: 0;
+  left: 50%;
+  margin-left: -75px;
 }
-
-.pricingSect{
-	padding-bottom: 80px;
+.section-title h2:after {
+  position: absolute;
+  content: "";
+  width: 80px;
+  height: 3px;
+  background-color: #e16038;
+  border: darkblue;
+  bottom: -1px;
+  left: 50%;
+  margin-left: -40px;
 }
-
-.pricingTitle p{
-	color: #484848;
-	padding: 100px 0px 50px 0px;
-	line-height: 2.5em;
-	font-size: 15px;
+.section-title {
+  margin-bottom: 70px;
 }
-
-.pricingCont{
-	color: #252525;
-	/*color: white;*/
-	margin-top: 60px;
-	margin-bottom: 60px;
-	/*background-color: #0b1c38;*/
-	/*border: 1px solid #0b1c38;*/
+.single-price {
+	text-align: center;
 }
-
-.pricingCont img{
-	max-width: 30%;
-	padding-bottom: 40px;
+.price-title h4 {
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
-
-.pricingCont button{
-	margin-top: 10px;
-	color: #fd1541;
-	padding: 7px 25px;
-	border: 2px solid #fd1541;
+.price-tag {
+  margin: 30px 0;
 }
-
-.pricingCont button:hover{
-	margin-top: 10px;
-	color: white;
-	padding: 7px 25px;
-	border: 2px solid #fd1541;
+.price-tag {
+    margin: 30px 0;
+    background-color:#f3f1f1;
+    color: #000;
+    height: 120px;
+    line-height: 120px;
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+        flex-wrap: wrap;
+}
+/*.center.price-tag {
 	background-color: #fd1541;
-}
-
-.pricingCont h1,h5{
-	color: #182c4d;
-	/*color: #46a7f9;*/
-}
-
-.pricingCont h4{
-	color: #0e0e0e78;
-}
-
-.pricingCont h2, h3{
-	font-size: 11px;
-	color: #979797;
-}
-
-.pricingCont h4,h3,h2{
-	border-bottom: 1px solid #0000001a;
-	padding-bottom: 20px;
-	margin-bottom: 0px;
-}
-
-.pricingCont h1,h2,h3,h4,h5{
-	margin-left: 110px;
-	margin-right: 110px;
-}
-
-/*#p2{
-	border-left: 1px solid #0000001a;
-	border-right: 1px solid #0000001a;	
+	color:#fff
 }*/
 
-#p1{
-	border-right: .5px solid #0000001a;
+.price-tag h2:nth-child(1) {
+	flex-basis: 100%;
 }
 
-#p3{
-	border-left: .5px solid #0000001a;	
+.price-tag h2 {
+	display: block;
+	font-weight: bold;
+}
+.price-tag h2 span {
+  font-weight: 300;
+  font-size: 16px;
+  font-style: italic;
+}
+.price-item ul {
+margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.price-item ul li {
+	color:#212529;
+  font-size: 14px;
+  padding: 5px 0;
+  border-bottom: 1px dashed #eee;
+  margin: 5px 0;
+}
+.price-item ul li:last-child {
+  border-bottom: 0;
+}
+.single-price a {
+  margin-top: 15px;
+}
+a.box-btn {
+	background-color: tomato;
+	padding: 5px 20px;
+	display: inline-block;
+	color: #fff;
+	text-transform: capitalize;
+	border-radius: 3px;
+	font-size: 15px;
+	transition: .3s;
+}
+a.box-btn:hover, a.border-btn:hover {
+	background-color: #d35400;
+}
+.highlight-text{
+	margin: 48px 0px;
+	text-align: center;
+}
+.highlight-text li{
+    list-style: none;
+    display: inline-block;
+    padding: 7px 20px;
+    color: black;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 500;
+	border-right: 2px solid white;
+	font-weight: bold;
+	width: 50%;
+	background: #eee;
 }
 
+.sticky {
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	bottom: 0;
+  }
 
-/*----------------------------3. COMPARE SECTION--------------------------*/
-.compareSectBG{
-	background-color: #fbfbff;
+.highlight-text li:nth-child(2){
+	border-right: 0px;
+}
+a.purchase-btn{
+	color:#fd1541; 
+}
+.purchase-btn:hover{
+	background:#fd1541 !important;
+	color: white !important; 
+}
+.purchase-btn1{
+	margin-right: 5px;
+}
+.purchase-btn1:hover{
+	color: #fd1541 !important;
+}
+.check-icon{
+	color: green;
+}
+.times-icon{
+	color: red;
+}
+.price-tag h5{
+	margin-bottom: 0px !important;
 }
 
-.compareSectBG h1{
-    margin-top: 80px;
+@media only screen and (max-width: 1200px){
+.tabs-container{
+	max-width: 95%;
+	width: 95%;
+}
+}
+@media only screen and (max-width: 768px){
+	.container.tab-pane{
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+	.price-tag h2 {
     font-size: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    color: #fd1541;
-    margin-bottom: 0px;
-    border-bottom: 1px solid #0000001a;
 }
-
-.compareSect{
-	padding-bottom: 80px;
 }
-
-.compareSect p{
-	padding-top: 15px;
+@media only screen and (max-width: 576px){
+		.price-tag h2,  .price-tag h5{
+    font-size: 14px;
 }
-
-.playerSub{
-	/*color: white;*/
-	color: #484848;
-	padding-bottom: 50px;
+.price-tag h2 span{
+	font-size: 12px;
 }
-
-.coachSub{
-	/*color: white;*/
-	color: #474747;
 }
 
 
-
-
-
-
-
-
-
-/*----------------------------4. QUOTE SECTION---------------------------*/
-.quoteStyle h1{
-	padding-top: 40px;
-	padding-bottom: 40px;
-	font-size: 20px;
-	color: #484848;
-}
-
-
-
-
-
-
-/* ----------------------------MEDIA QUERIES------------------------------*/
-
-@media (max-width: 1024px) {
-	.pricingCont img{
-		max-width: 40%;
-		padding-bottom: 40px;
-	}
-
-	.pricingTitle p{
-		font-size: 13px;
-	}
-
-	.pricingCont h2, h3{
-		font-size: 9px;
-	}
-
-	.pricingCont h1{
-		font-size: 22px;
-	}	
-
-	.pricingCont h1,h2,h3,h4,h5{
-		margin-left: 20px;
-		margin-right: 20px;
-	}	
-
-	.pricingCont button{
-		margin-top: 10px;
-		color: #fd1541;
-		padding: 7px 25px;
-		border: 2px solid #fd1541;
-		background-color: white;
-	}
-
-}
-
-
-
-
-
-
-@media (max-width: 768px) {
-
-	.bannerimage{
-		padding-top: 120px;
-		min-height: 250px;
-	}
-
-	.impcont h1{
-		font-size: 26px;
-	}	
-
-	.pricingCont img{
-		max-width: 70%;
-		padding-bottom: 40px;
-	}
-
-}
-
-
-
-
-
-
-@media (max-width: 414px) {
-
-	.bannerimage{
-		padding-top: 90px;
-		min-height: 200px;
-	}	
-
-	.impcont h1{
-		font-size: 26px;
-	}
-
-
-	.pricingCont{
-		margin-left: 50px;
-		margin-right: 50px;
-	}
-
-	.pricingCont button{
-		margin-bottom: 40px;
-	}
-
-/*	#p1{
-		border-bottom: 1px solid #0000001a;
-	}
-
-	#p2{
-		border-bottom: 1px solid #0000001a;
-		border-right: 0px;
-		border-left: 0px; 
-	}
-
-	#p3{
-		border-bottom: 1px solid #0000001a;	
-		border-right: 0px;
-	}*/
-
-	#p1{
-		border-bottom: 1px solid #0000001a;
-		border-right: 0px;
-	}
-
-	#p3{
-		border-left: 0px;	
-	}
-
-}
-
-
-@media (max-width: 320px) {
-	
-	.pricingCont{
-		margin-left: 10px;
-		margin-right: 10px;
-	}
-
-}

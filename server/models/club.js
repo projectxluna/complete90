@@ -5,10 +5,15 @@ var clubSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String
+    },
+    phoneNumber: {
+        type: String
+    },
     owner: { 
-        type: mongoose.Schema.Types.ObjectId,
-        index: true,
-        required: true
+        type: [mongoose.Schema.Types.ObjectId],
+        index: true
     },
     logoUrl: {
         type: String

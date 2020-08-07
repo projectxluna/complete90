@@ -12,6 +12,9 @@
 */
 
 /*----------------------------0. GOBAL CSSS--------------------------*/
+body {
+	overflow-x: hidden !important;
+}
 
 div{
 	font-family: 'Montserrat';
@@ -51,6 +54,14 @@ div{
 	width: 100%;
 }
 
+.aboutsectBG1 {
+	background-color: #FBFBFF;
+}
+
+.aboutsectBG2 {
+	background-image: url('../../../assets/aboutbg-rotated-pic.png');
+	background-position: right;
+}
 
 .leftDesc{
 	color: #484848;
@@ -80,6 +91,7 @@ div{
 
 .aboutDesc p{
 	padding-top: 25px;
+	padding-bottom: 110px;
 }
 
 .rightDesc img{
@@ -146,6 +158,9 @@ div{
 
 
 /*----------------------------5. AFFILIATES SECTION---------------------------*/
+.affiliates {
+	background-color: #FBFBFF;
+}
 .affDesc h1{
 	font-size: 30px;
     color: #252525;
@@ -158,7 +173,7 @@ div{
 }
 
 .sponLogo1 img{
-    max-width: 40%;
+    max-width: 100px;
 }
 
 .sponLogo2 img{
@@ -193,15 +208,24 @@ div{
 }
 
 .playerPromoText h1{
-	padding-top: 170px;
+	padding-top: 145px;
 	padding-left: 95px;
 	padding-bottom: 20px;
 	font-size: 24px;
+	position: relative;
+    top: -25px;
 }
 
 .playerPromo img{
 	padding-top: 15px;
-	max-width: 70%;
+    max-width: 70%;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+.PromoSignbtn {
+	position: relative;
+    top: -20px;
 }
 
 .PromoSignbtn a{
@@ -218,6 +242,11 @@ div{
 	text-decoration: none;
 	background-color: #fd1541;
 	border: 1px solid #fd1541;
+}
+
+
+.playerPromoImage, .coachPromoImage {
+	padding-top: 400px;
 }
 
 
@@ -240,15 +269,20 @@ div{
 }
 
 .coachPromoText h1{
-	padding-top: 170px;
+	padding-top: 145px;
 	padding-left: 95px;
 	padding-bottom: 20px;
 	font-size: 24px;
+	position: relative;
+    top: -25px;
 }
 
 .coachPromo img{
 	padding-top: 15px;
 	max-width: 100%;
+	position: absolute;
+    bottom: 0px;
+    right: 0px;
 }
 
 .coachPromo .PromoSignbtn a{
@@ -276,6 +310,7 @@ div{
 	flex-wrap: wrap; 
 	overflow: hidden;
 	padding-left: 0px;
+	margin-bottom: 0px;
 }
 
 .flexlist-item{ 
@@ -348,9 +383,12 @@ div{
 
 }
 
+@media (max-width: 991px) {
 
-
-
+	.coachPromo img, .playerPromo img{
+		position: relative;
+	}
+}
 
 
 @media (max-width: 768px) {
@@ -378,6 +416,10 @@ div{
 		padding-bottom: 80px;
 	}
 
+	.playerPromoImage, .coachPromoImage {
+		padding-top: 50px;
+	}
+
 
 }
 
@@ -399,7 +441,8 @@ div{
 	.bannerimage{
 		padding-top: 90px;
 		min-height: 200px;
-	}	
+	}
+
 
 	.playerPromoText h1 {
 	    padding-top: 90px;

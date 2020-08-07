@@ -51,16 +51,6 @@ export class DataService {
       });
   }
 
-  removePlayerFromClub(userId): Observable<any> {
-    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.post('/api/club/cancel-request', {userId}, options)
-      .map((response: Response) => {
-        return response.json();
-      });
-  }
-
   createAssignment(payload): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
@@ -101,6 +91,18 @@ export class DataService {
       });
   }
 
+
+  getClubs(): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/getClubs', {}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+
   createTeam(teamName): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
@@ -110,6 +112,20 @@ export class DataService {
         return response.json();
       });
   }
+
+
+  resendTeamEmail(team): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('/api/club/resendTeamEmail', {"team": team}, options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+
+
 
   updateTeam(team): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
@@ -193,11 +209,11 @@ export class DataService {
       });
   }
 
-  requestClubAccess(clubId: string): Observable<any> {
+  requestClubAccess(clubId: string, managerId: string): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post('/api/club/join', {clubId}, options)
+    return this.http.post('/api/club/join', {clubId: clubId, managerId: managerId}, options)
       .map((response: Response) => {
         return response.json();
       });
@@ -264,6 +280,7 @@ export class DataService {
   }
 
   getSessions(cache: boolean = true): Observable<any> {
+    console.log("DataService");
     if (cache && this.cachedSessions) {
       return Observable.create((observer) => {
         observer.next(this.cachedSessions);
@@ -272,7 +289,7 @@ export class DataService {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
-
+    
     // get sessions from api
     return this.http.get('/api/sessions', options)
       .map((response: Response) => {
@@ -283,10 +300,34 @@ export class DataService {
         return this.cachedSessions;
       });
   }
-  getLeaderBoard(filter): Observable<any> {
+
+
+  getSessionsNotLoggedIn(cache: boolean = true): Observable<any> {
+    if (cache && this.cachedSessions) {
+      return Observable.create((observer) => {
+        observer.next(this.cachedSessions);
+      });
+    }
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
-    let options = new RequestOptions({ headers: headers, params: filter});
+    let options = new RequestOptions({ headers: headers });
+    
+    // get sessions from api
+    return this.http.get('/api/sessionsNotLoggedIn', options)
+      .map((response: Response) => {
+        if (!response.json().success) {
+          return response.json();
+        }
+        this.cachedSessions = response.json();
+        return this.cachedSessions;
+      });
+  }
+
+
+  getLeaderBoard(timestamp, club): Observable<any> {
+    // add authorization header with jwt token
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers, params: {timestamp, club}});
 
     return this.http.get('/api/session/leaderboard', options)
       .map((response: Response) => {
@@ -426,11 +467,11 @@ export class DataService {
       });
   }
 
-  beginSubscription(payload, planId): Observable<any> {
+  beginSubscription(payload, planId, user): Observable<any> {
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
     let options = new RequestOptions({ headers: headers });
     // get users from api
-    return this.http.post('api/braintree/subsribe', { paymentPayload: payload, planId: planId }, options)
+    return this.http.post('api/braintree/subsribe', { paymentPayload: payload, planId: planId, user: user }, options)
       .map((response: Response) => {
         if (response.json() && response.json().success) {
           return response.json();
@@ -439,4 +480,22 @@ export class DataService {
         }
       });
   }
+
+
+  upgradeMembership(user): Observable<any> {
+    let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+    let options = new RequestOptions({ headers: headers });
+    // get users from api
+    return this.http.post('api/braintree/upgrade', { user: user }, options)
+      .map((response: Response) => {
+        console.log("Responsive: ", response);
+        if (response.json() && response.json().success) {
+          return response.json();
+        } else {
+          return null;
+        }
+      });
+  }
+
+
 }

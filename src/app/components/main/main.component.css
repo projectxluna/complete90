@@ -16,6 +16,10 @@
 
 /*----------------------------0. GOBAL CSSS--------------------------*/
 
+body {
+	overflow-x: hidden !important;
+}
+
 div{
 	font-family: 'Montserrat';
 }
@@ -40,6 +44,18 @@ video {
   width: 100%    !important;
   height: auto   !important;
   display: block;
+}
+
+.m-0 {
+	margin: 0px !important;
+}
+.mt-2 {
+	margin-top: 20px;
+}
+
+.post_card_img {
+	filter: invert(1);
+    width: 64px;
 }
 
 
@@ -240,6 +256,11 @@ video {
 
 
 /*-----------------------4. PLAYER/COACH SECTION---------------------------*/
+
+.playerPromoImage, .coachPromoImage {
+	padding-top: 400px;
+}
+
 .playerPromo{
 	background-color: #0e233e;
 }
@@ -266,15 +287,24 @@ video {
 }
 
 .playerPromoText h1{
-	padding-top: 170px;
+	padding-top: 145px;
 	padding-left: 95px;
 	padding-bottom: 20px;
 	font-size: 24px;
+	position: relative;
+    top: -25px;
 }
 
 .playerPromo img{
 	padding-top: 15px;
-	max-width: 70%;
+    max-width: 70%;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+.PromoSignbtn {
+	position: relative;
+    top: -20px;
 }
 
 .PromoSignbtn a{
@@ -313,15 +343,20 @@ video {
 }
 
 .coachPromoText h1{
-	padding-top: 170px;
+	padding-top: 145px;
 	padding-left: 95px;
 	padding-bottom: 20px;
 	font-size: 24px;
+	position: relative;
+    top: -25px;
 }
 
 .coachPromo img{
 	padding-top: 15px;
 	max-width: 100%;
+	position: absolute;
+    bottom: 0px;
+    right: 0px;
 }
 
 .coachPromo .PromoSignbtn a{
@@ -349,6 +384,7 @@ video {
 	flex-wrap: wrap; 
 	overflow: hidden;
 	padding-left: 0px;
+	margin-bottom: 0px;
 }
 
 .flexlist-item{ 
@@ -363,6 +399,110 @@ video {
 	display: none;
 }
 
+/*----------------------------5. POST CARD---------------------------*/
+.post-card {
+	/* background: #2f4054; */
+}
+
+.post-card-title {
+	font-size: 30px;
+	color: #2c2c2c;
+}
+
+.post-card .row {
+	margin: 0px;
+}
+
+.steps-row {
+	/* background: #262626; */
+	padding: 40px 100px;
+}
+
+.post-card-title {
+	font-weight: bold;
+}
+.post-card-title span {
+	color: #3b90c7;
+}
+
+.step {
+	border-right: 1px solid #3b90c7;
+}
+
+.step:last-child {
+	border-right: 0px;
+}
+
+.step i {
+	font-size: 50px;
+	text-align: center;
+	display: block;
+}
+
+.features {
+	margin-bottom: 36px;
+}
+
+.features-details {
+	padding-top: 30px;
+}
+
+.step-number, .features-title {
+	font-weight: bold;
+	font-weight: bold;
+	font-size: 20px;
+	display: block;
+	text-align: center;
+	margin-bottom: 10px;
+	color: #2c2c2c;
+}
+
+.step-des, .features-desc {
+	color: #3b90c7;
+	font-size: 16px;
+	font-weight: bold;
+	display: block;
+	text-align: center;
+}
+
+.features h1 {
+	text-align: center;
+	margin-top: 0px;
+	position: relative;
+	top: -30px;
+	font-weight: bold;
+}
+
+
+.features h1 span {
+	color: #262624;
+	/* background: #8f989f; */
+	padding: 0px 10px;
+}
+
+.features-details {
+	text-align: center;
+	padding-bottom: 25px;
+}
+
+
+.features-details .fa {
+	color: #262624;
+	font-size: 36px;
+	margin-top: 25px;
+	margin-bottom: 15px;
+}
+
+.features-title span {
+	color: #3b90c7;
+}
+
+.features-desc {
+	color: #2c2c2c;
+}
+
+
+
 
 /*----------------------------5. QUOTE SECTION---------------------------*/
 .quoteStyle h1{
@@ -371,6 +511,64 @@ video {
 	font-size: 20px;
 	color: #484848;
 }
+
+
+/* MAILCHIMPS */
+.subscribe-img {
+	width: 80%;
+	margin-top: 15px;
+}
+.newsletter-section {
+	background-color: #fbfbff !important;
+}
+#mc_embed_signup input {
+	color: black;
+}
+
+#mc_embed_signup .button{
+	color: white !important;
+}
+
+#mc_embed_signup h2, #mc_embed_signup .mc-field-group label {
+	color: #252525;
+}
+#mc_embed_signup h2 {
+	font-size: 26px;
+	font-weight: 400;
+	margin-bottom: 30px;
+}
+	
+
+#mc_embed_signup .button {
+	background: #fd1541;
+	border-radius: 0px;
+}
+
+#mc_embed_signup .button:hover {
+	background: #204d74;
+}
+
+#mc_embed_signup {
+	padding: 80px 156px !important;
+	background-color: #fbfbff !important;
+}
+
+.odd {
+	background-color: #fbfbff !important;
+}
+
+#mc_embed_signup form {
+	padding: 0px 14px !important;
+}
+
+#mc_embed_signup .clear {
+	margin-top: 25px;
+}
+
+.sub-succ-msg, .sub-error-msg {
+	display: none;
+}
+
 
 
 /* ----------------------------6. MEDIA QUERIES------------------------------*/
@@ -423,8 +621,34 @@ video {
 	}
 }
 
+@media (max-width: 991px) {
+	.post-card-title {
+		margin-bottom: 50px;
+		text-align: center;
+	}
+	.step {
+		margin-bottom: 40px;
+		border-right: 0px;
+	}
+	.features-title {
+		margin-top: 40px;
+		margin-bottom: 30px;
+		font-size: 20px;
+	}
+	.for-players .features-title {
+		margin-top: 60px;
+	}
+
+	.for-players {
+		margin-bottom: 50px;
+	}
+
+	.coachPromo img, .playerPromo img{
+		position: relative;
+	}
 
 
+}
 
 @media (max-width: 768px) {
 
@@ -436,6 +660,15 @@ video {
 	.impcont h1{
 		font-size: 26px;
 	}	
+
+	#mc_embed_signup {
+		padding: 40px 0px !important;
+	}
+
+	.playerPromoImage, .coachPromoImage {
+		padding-top: 50px;
+	}
+	
 
 }
 
@@ -458,7 +691,8 @@ video {
 	}
 
 	.playerPromoText h1 {
-	    padding-top: 90px;
+		padding-top: 90px;
+		
 	}
 
 	.coachPromoText h1 {

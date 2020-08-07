@@ -40,7 +40,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+notes
 server/config.js
 package-lock.json
 server/helpers/pk-APKAJMPYCKBXNVYFUIHA.pem
+video_structure.json
 server/helpers/env.json

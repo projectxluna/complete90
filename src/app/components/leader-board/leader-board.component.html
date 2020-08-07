@@ -26,8 +26,6 @@
                   </td>
                   <td>
                     <div class="leaderboard__row-txt">{{ player.name | uppercase }}</div>
-                    <div *ngIf="player.clubName" class="leaderboard__row-txt-sm">{{ player.clubName }}</div>
-                    <div *ngIf="player.position" class="leaderboard__row-txt-sm">{{ player.position }}</div>
                   </td>
                   <td>
                     <div class="leaderboard__row-txt">{{ player.watchedTotal | elapsedTimestamp }}</div>

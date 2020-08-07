@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { DataService } from '../../services';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { DataService } from '../../services'
 
 @Component({
   selector: 'create-assignments',
@@ -8,6 +8,7 @@ import { DataService } from '../../services'
   styleUrls: ['./create-assignments.component.less']
 })
 export class CreateAssignmentsComponent implements OnInit {
+
   plans: any[];
   teams: any;
   players: any = [];

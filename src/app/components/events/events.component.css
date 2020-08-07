@@ -362,11 +362,11 @@ input{
     height: 315px;
 }
 
-.vid-pa{
+.vid-pa {
 	margin: auto;
 	float: none;
 	margin-bottom: 26px;
-	z-index: 123123123;
+	z-index: 1;
 }
 
 .gallerypics img{
@@ -389,8 +389,20 @@ input{
 
 
 /* MAILCHIMPS */
+
+.subscribe-img {
+	width: 80%;
+	margin-top: 15px;
+}
+
 .newsletter-section {
 	background-color: #fbfbff !important;
+}
+#mc_embed_signup input {
+	color: black;
+}
+#mc_embed_signup .button{
+	color: white !important;
 }
 #mc_embed_signup h2, #mc_embed_signup .mc-field-group label {
 	color: #252525;
@@ -412,7 +424,7 @@ input{
 }
 
 #mc_embed_signup {
-	padding: 60px 156px !important;
+	padding: 60px 100px !important;
 	background-color: #fbfbff !important;
 }
 
@@ -495,10 +507,6 @@ input{
 
 	.vid-pa {
 		float: left;
-	}
-
-	#mc_embed_signup {
-		padding: 40px 25px;
 	}
 
 	.container.old-events {

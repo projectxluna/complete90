@@ -1,0 +1,10 @@
+{
+  "name" : "complete90-staging-server",
+  "script" : "server/server.js",
+  "env_staging" : {
+    "NODE_ENV": "production"
+  },
+  "env" : {
+    "NODE_ENV": "dev"
+  } 
+}

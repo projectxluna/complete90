@@ -18,10 +18,13 @@ export class PaymentComponent implements OnInit {
     price: 0
   };
 
+  static user = {name: undefined, address: undefined, postalcode: '', email: '', password: '', isManager: '', clubName: ''};
+
   static id;
   static dropinInstance;
   static canSubmitPayment = false;
   static _dataService;
+  static _authenticationService;
   static _error;
   static _router;
 
@@ -31,10 +34,12 @@ export class PaymentComponent implements OnInit {
     private route: ActivatedRoute) {
       PaymentComponent._dataService = dataService;
       PaymentComponent._router = router;
+      PaymentComponent._authenticationService = authenticationService;
 
       // Get our braintree token and avaialable plans
       this.dataService.getClient().subscribe((res) => {
         if (res) {
+          console.log(res.plans);
           this.processPlans(res.plans);
 
           // setup braintree dropin
@@ -56,6 +61,14 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit() {
     let planId = this.route.snapshot.queryParams["id"];
+    PaymentComponent.user.name =  this.route.snapshot.queryParams["name"];
+    PaymentComponent.user.address =  this.route.snapshot.queryParams["address"];
+    PaymentComponent.user.postalcode =  this.route.snapshot.queryParams["postalcode"];
+    PaymentComponent.user.email =  this.route.snapshot.queryParams["email"];
+    PaymentComponent.user.password =  this.route.snapshot.queryParams["password"];
+    PaymentComponent.user.isManager =  this.route.snapshot.queryParams["isManager"];
+    PaymentComponent.user.clubName =  this.route.snapshot.queryParams["clubName"];
+
     if (!planId || planId === '') {
       this.router.navigate(['/pricing']);
       return;
@@ -70,7 +83,13 @@ export class PaymentComponent implements OnInit {
     this.selectedPlan = this.plans[PaymentComponent.id];
   }
 
+
+  login() {
+    
+  }
+
   addCard() {
+    var user = PaymentComponent.user;
     if (PaymentComponent.canSubmitPayment && PaymentComponent.dropinInstance) {
       PaymentComponent.canSubmitPayment = !PaymentComponent.canSubmitPayment;
       PaymentComponent.dropinInstance.requestPaymentMethod(function (err, payload) {
@@ -79,9 +98,23 @@ export class PaymentComponent implements OnInit {
           return;
         }
         // Send payload.nonce to your server
-        PaymentComponent._dataService.beginSubscription(payload, PaymentComponent.id).subscribe((res) => {
+        PaymentComponent._dataService.beginSubscription(payload, PaymentComponent.id, user).subscribe((res) => {
           if (res && res.success) {
-            PaymentComponent._router.navigate(['/dashboard']);
+            //PaymentComponent._router.navigate(['/dashboard']);
+            PaymentComponent._authenticationService.login(PaymentComponent.user.email, PaymentComponent.user.password)
+            .subscribe(result => {
+                if (result === true) {
+                  PaymentComponent._dataService.getUserProfile().subscribe((me) => {
+                    setTimeout(function(){
+                      window.location.href = "/sessions";
+                      //PaymentComponent._router.navigate(['/sessions']);
+                    }, 1500);
+                      
+                    });
+                } else {
+                    this.error = 'username or password is incorrect';
+                }
+            });
           } else {
             // sorry we are unable to process your transaction right now
             PaymentComponent._error = 'sorry we are unable to process your transaction right now';
