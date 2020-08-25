@@ -38,8 +38,8 @@ export class PaymentComponent implements OnInit {
 
       // Get our braintree token and avaialable plans
       this.dataService.getClient().subscribe((res) => {
+        console.log("Plans: ", res);
         if (res) {
-          console.log(res.plans);
           this.processPlans(res.plans);
 
           // setup braintree dropin
