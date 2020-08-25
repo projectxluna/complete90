@@ -36,8 +36,9 @@ export class LoginSignupComponent implements OnInit {
         private routingState: RoutingState,
         private route: ActivatedRoute) { 
             this.dataService.getClient().subscribe((res) => {
+                console.log("Plans: ", res);
                 if (res) {
-                    console.log("Res: ", res);
+                    
                     this.processPlans(res.plans);
                     console.log(this.plans);
                     this.disabled = false;
