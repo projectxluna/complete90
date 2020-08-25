@@ -88,16 +88,16 @@ module.exports = function (apiRoutes) {
 
                         
 
-                        // mailchimp.post('/lists/' + listId + '/members', {
-                        //     email_address: req.body.user.email,
-                        //     status: 'subscribed',
-                        //     merge_fields: {
-                        //         'FNAME': name[0],
-                        //         'LNAME': name[1]
-                        //     }
-                        // }).catch(err => {
-                        //     console.error(err);
-                        // });
+                        mailchimp.post('/lists/' + listId + '/members', {
+                            email_address: req.body.user.email,
+                            status: 'subscribed',
+                            merge_fields: {
+                                'FNAME': name[0],
+                                'LNAME': name[1]
+                            }
+                        }).catch(err => {
+                            console.error(err);
+                        });
 
 
 
