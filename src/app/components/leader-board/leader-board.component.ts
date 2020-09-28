@@ -14,7 +14,7 @@ export class LeaderBoardComponent implements OnInit {
 
   constructor(private dataService: DataService) {
     this.generateTestData();
-    this.fetchLeaderBoard(this.categories[0].filter);
+    this.fetchLeaderBoard(this.categories[0]);
   }
 
   ngOnInit() {
@@ -27,48 +27,37 @@ export class LeaderBoardComponent implements OnInit {
     this.categories = [
       { 
         name: 'Weekly',
+        type: 'weekly',
         active: true,
-        filter: {
-          timestamp: 1000 * 60 * 60 * 24 * 7,
-        }
       },
       { 
         name: 'Monthly',
+        type: 'monthly',
         active: false,
-        filter: {
-          timestamp: 1000 * 60 * 60 * 24 * 30,
-        }
       },
       { 
         name: 'All Time',
+        type: 'alltime',
         active: false,
-        filter: {
-          timestamp: 0,
-        }
       },
       { 
         name: 'My Club',
+        type: 'myclub',
         active: false,
-        filter: {
-          club: true
-        }
       },
     ];
   }
 
-  fetchLeaderBoard(filter) {
-    this.dataService.getLeaderBoard(filter.timestamp, filter.club).subscribe(response => {
+  fetchLeaderBoard(category) {
+    this.dataService.getLeaderBoard(category.type).subscribe(response => {
       this.players.length = 0;
       this.players = response.leaderboard || [];
-      this.players.sort((a, b) => {
-        return b.watchedTotal - a.watchedTotal;
-      })
     });
   }
 
   changeTab(category) {
     if (!category) return;
     category.active = !category.active;
-    this.fetchLeaderBoard(category.filter);
+    this.fetchLeaderBoard(category);
   }
 }

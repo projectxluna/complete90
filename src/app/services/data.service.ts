@@ -324,10 +324,10 @@ export class DataService {
   }
 
 
-  getLeaderBoard(timestamp, club): Observable<any> {
+  getLeaderBoard(daterange): Observable<any> {
     // add authorization header with jwt token
     let headers = new Headers({ 'x-access-token': this.authenticationService.token });
-    let options = new RequestOptions({ headers: headers, params: {timestamp, club}});
+    let options = new RequestOptions({ headers: headers, params: {daterange}});
 
     return this.http.get('/api/session/leaderboard', options)
       .map((response: Response) => {

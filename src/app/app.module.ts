@@ -61,6 +61,7 @@ import { CreateAssignmentsComponent } from './components/create-assignments/crea
 import { GetSubscriptionComponent } from './components/get-subscription/get-subscription.component';
 import { GetAmateurSubscriptionComponent } from './components/get-amateur-subscription/get-amateur-subscription.component';
 import { ElapsedTimestampPipe } from './pipes/elapsed-timestamp.pipe';
+import { ElapsedTimestampPipe2 } from './pipes/elapsed-timestamp-2.pipe';
 import { TimeSincePipe } from './pipes/time-since.pipe';
 
 @NgModule({
@@ -97,6 +98,7 @@ import { TimeSincePipe } from './pipes/time-since.pipe';
     GetSubscriptionComponent,
     GetAmateurSubscriptionComponent,
     ElapsedTimestampPipe,
+    ElapsedTimestampPipe2,
     TimeSincePipe,
     ProgramComponent
   ],

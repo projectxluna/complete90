@@ -4,6 +4,7 @@
 - node.js v8.15.0 (install from nvm)
 - angular-cli
 - home brew (https://brew.sh/)
+- redis
 
 ### Backend Stack
 - Node JS express server managed with pm2 (process manager)

@@ -10,6 +10,8 @@ var Assignment = require('./models/assignment');
 var UserStats = require('./models/stats');
 var mongoose = require('mongoose');
 const { CLUB_REQUEST_STATUS } = require('./helpers/pure');
+const redis = require('redis');
+const redisClient = redis.createClient();
 
 module.exports = function (apiRoutes) {
 
@@ -326,17 +328,56 @@ module.exports = function (apiRoutes) {
         });
     }
 
+    const dateRanges = {
+        weekly: 1000 * 60 * 60 * 24 * 7,
+        monthly: 1000 * 60 * 60 * 24 * 30,
+    };
+
+    const supportedRanges = ['weekly', 'monthly'];
+
+    const getLeaderBoardCached = (daterange) => {
+        return new Promise(async (resolve, reject) => {
+            redisClient.get(`leaderboard:${daterange}`, (err, reply) => {
+                if (err) {
+                    console.error(err);
+                    return resolve();
+                }
+                reply = reply ? reply.toString() : reply;
+                resolve(reply);
+            });
+        });
+    };
+
+    const saveLeaderBoard = (daterange, result) => {
+        redisClient.set(`leaderboard:${daterange}`, JSON.stringify(result), 'EX', 60 * 30);
+    };
+
     apiRoutes.get('/session/leaderboard', Auth.isAuthenticated, async (req, res) => {
-        const { timestamp, club } = req.query;
+        let { daterange } = req.query;
         let userId = req.decoded.userId;
 
-        let match = {};
-        if (timestamp && timestamp > 0) {
-            match.updatedAt = {
-                $gte: new Date(Date.now() - timestamp),
-            } 
+        let cachedResult;
+        try {
+            cachedResult = await getLeaderBoardCached(daterange);
+        } catch (e) {
+            console.error(e);
         }
-        if (club) {
+        if (cachedResult) {
+            return res.json({
+                success: true,
+                leaderboard: JSON.parse(cachedResult)
+            });
+        }
+        let match = {};
+        let saveResult = true;
+
+        daterange = daterange ? daterange.replace(/\s/g,'').toLowerCase() : null;
+        if (daterange && supportedRanges.indexOf(daterange) > -1) {
+            match.updatedAt = {
+                $gte: new Date(Date.now() - dateRanges[daterange]),
+            }
+        } else if (daterange === 'myclub') {
+            saveResult = false;
             try {
                 let user = await findUser(userId);
                 if (user && user.clubId && user.clubStatus === CLUB_REQUEST_STATUS.ACTIVE) {
@@ -350,7 +391,8 @@ module.exports = function (apiRoutes) {
                 console.log(err);
             }
         }
-        if (Object.keys(match).length == 0 && !timestamp) {
+
+        if (Object.keys(match).length == 0 && !daterange) {
             return res.json({
                 success: true,
                 leaderboard: []
@@ -365,7 +407,9 @@ module.exports = function (apiRoutes) {
                     watchedTotal: { $sum: '$content.watchedTotal' },
                     count: { $sum: 1 }
                 }
-            }
+            },
+            { $sort: { watchedTotal: -1 } },
+            { $limit : 20 }
         ], async (err, stats) => {
             if (err) {
                 return res.json({
@@ -385,7 +429,14 @@ module.exports = function (apiRoutes) {
                 };
             });
             const mapped = await Promise.all(pArray);
-            let sorted = mapped.filter((a) => {return a != null && a != undefined }).sort((a, b) => {return b.watchedTotal - a.watchedTotal});
+            let sorted = mapped.filter((a) => {return a != null && a != undefined });
+            try {
+                if (saveResult) {
+                    saveLeaderBoard(daterange, sorted);
+                }
+            } catch (e) {
+                console.error(e);
+            }
             res.json({
                 success: true,
                 leaderboard: sorted
@@ -586,9 +637,4 @@ module.exports = function (apiRoutes) {
     function isValidStructure(structure) {
         return true;
     }
-
-    setInterval(function(){
-        const used = process.memoryUsage().heapUsed / 1024 / 1024;
-        console.log(`The script uses approximately ${used} MB`);
-    }, 1000);
 }

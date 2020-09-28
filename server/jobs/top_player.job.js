@@ -3,7 +3,7 @@ var UserStats = require('../models/stats');
 var User = require('../models/user');
 var mailer = require('../helpers/mailer');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-  
+
 var range = {
     weekly: 1000 * 60 * 60 * 24 * 7,
     monthly: 1000 * 60 * 60 * 24 * 30,
