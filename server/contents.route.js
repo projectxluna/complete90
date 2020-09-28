@@ -355,6 +355,7 @@ module.exports = function (apiRoutes) {
     apiRoutes.get('/session/leaderboard', Auth.isAuthenticated, async (req, res) => {
         let { daterange } = req.query;
         let userId = req.decoded.userId;
+        daterange = daterange ? daterange.replace(/\s/g,'').toLowerCase() : 'weekly';
 
         /**
          * Attempts to retrieve the leaderboard data from redis cache
@@ -373,7 +374,6 @@ module.exports = function (apiRoutes) {
         let match = {};
         let cacheResult = true;
 
-        daterange = daterange ? daterange.replace(/\s/g,'').toLowerCase() : null;
         if (daterange && supportedRanges.indexOf(daterange) > -1) {
             match.updatedAt = {
                 $gte: new Date(Date.now() - dateRanges[daterange]),
