@@ -356,20 +356,22 @@ module.exports = function (apiRoutes) {
         let { daterange } = req.query;
         let userId = req.decoded.userId;
 
-        let cachedResult;
+        /**
+         * Attempts to retrieve the leaderboard data from redis cache
+         */
         try {
-            cachedResult = await getLeaderBoardCached(daterange);
+            let cachedResult = await getLeaderBoardCached(daterange);
+            if (cachedResult) {
+                return res.json({
+                    success: true,
+                    leaderboard: JSON.parse(cachedResult)
+                });
+            }
         } catch (e) {
             console.error(e);
         }
-        if (cachedResult) {
-            return res.json({
-                success: true,
-                leaderboard: JSON.parse(cachedResult)
-            });
-        }
         let match = {};
-        let saveResult = true;
+        let cacheResult = true;
 
         daterange = daterange ? daterange.replace(/\s/g,'').toLowerCase() : null;
         if (daterange && supportedRanges.indexOf(daterange) > -1) {
@@ -377,7 +379,7 @@ module.exports = function (apiRoutes) {
                 $gte: new Date(Date.now() - dateRanges[daterange]),
             }
         } else if (daterange === 'myclub') {
-            saveResult = false;
+            cacheResult = false;
             try {
                 let user = await findUser(userId);
                 if (user && user.clubId && user.clubStatus === CLUB_REQUEST_STATUS.ACTIVE) {
@@ -431,7 +433,7 @@ module.exports = function (apiRoutes) {
             const mapped = await Promise.all(pArray);
             let sorted = mapped.filter((a) => {return a != null && a != undefined });
             try {
-                if (saveResult) {
+                if (cacheResult) {
                     saveLeaderBoard(daterange, sorted);
                 }
             } catch (e) {
