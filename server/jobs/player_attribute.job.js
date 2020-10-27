@@ -208,30 +208,37 @@ const callback = async () => {
                         }
                     }
                     for (let tag of Object.keys(tagsStats)) {
-                        let curScore = currentPlayerAttribute[tag];
-                        curScore = curScore || curScore < 50 ? 50 : curScore;
-                        let watchedTotals = tagsStats[tag];
-                        let requiredWatchTimeForPoint = Math.round(getIncreaseRule(curScore));
-                        if (watchedTotals > requiredWatchTimeForPoint) {
-                            let pointsInc = Math.round(watchedTotals/requiredWatchTimeForPoint);
-                            let score = curScore + pointsInc;
-                            await updateTagScore(user._id, tag, score);
-                            await updateLastAttributeTimestamp(user._id);
+                        try {
+                            let curScore = currentPlayerAttribute[tag];
+                            curScore = curScore || curScore < 50 ? 50 : curScore;
+                            let watchedTotals = tagsStats[tag];
+                            let requiredWatchTimeForPoint = Math.round(getIncreaseRule(curScore));
+                            if (watchedTotals > requiredWatchTimeForPoint) {
+                                let pointsInc = Math.round(watchedTotals/requiredWatchTimeForPoint);
+                                let score = curScore + pointsInc;
+                                await updateTagScore(user._id, tag, score);
+                                await updateLastAttributeTimestamp(user._id);
+                            }
+                        } catch (e) {
+                            console.error(e);
                         }
                     }
-                    console.log(tagsStats);
                 } else {
                     for (let tag of allowedTags) {
-                        let score = currentPlayerAttribute[tag];
-                        if (score == 50) {
-                            continue;
+                        try {
+                            let score = currentPlayerAttribute[tag];
+                            if (score == 50) {
+                                continue;
+                            }
+                            if (!score || score < 50) {
+                                score = 50;
+                            } else {
+                                score--;
+                            }
+                            await updateTagScore(user._id, tag, score);
+                        } catch (e) {
+                            console.error(e);
                         }
-                        if (!score || score < 50) {
-                            score = 50;
-                        } else {
-                            score--;
-                        }
-                        await updateTagScore(user._id, tag, score);
                     }
                 }
             } catch (error) {
