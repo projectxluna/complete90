@@ -53,16 +53,14 @@ var userSchema = mongoose.Schema({
         type: CLUB_REQUEST_STATUS,
         index: true
     },
-    // clubId: String,
-    // clubStatus: {
-    //     type: CLUB_REQUEST_STATUS,
-    //     index: true
-    // },
     teamId: {
         type: mongoose.Schema.Types.ObjectId,
         index: true,
     },
     subscription: Object,
+    lastAttributeUpdate: {
+        type: Date
+    }
 },
 {
     timestamps: true,
