@@ -47,7 +47,7 @@ export class PlayerAttributesComponent implements OnInit {
           return a.name === at.tag;
         });
         if (!found) return;
-        found.value = (at.score/10) * 100;
+        found.value = at.score;
       });
 
     });
@@ -60,9 +60,9 @@ export class PlayerAttributesComponent implements OnInit {
     if (!item) {
       return 'info'
     }
-    if (item.value < 30) {
+    if (item.value <= 69) {
       return 'warning'
-    } else if (item.value >= 30 && item.value < 60) {
+    } else if (item.value >= 70 && item.value < 80) {
       return 'info'
     } else {
       return 'success'
