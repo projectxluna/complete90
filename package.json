@@ -45,7 +45,7 @@
     "nodemailer-express-handlebars": "^2.0.0",
     "owl.carousel": "^2.3.4",
     "owl.carousel2": "^2.2.1",
-    "redis": "^3.0.2",
+    "redis": "^3.1.1",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.2",
     "videogular2": "6.4.0",
